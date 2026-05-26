@@ -1,0 +1,129 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "@atlas/backend",
+  "targets": {
+    "openapi:generate": {
+      "executor": "nx:run-commands",
+      "cache": true,
+      "outputs": ["{projectRoot}/openapi.json"],
+      "options": {
+        "commands": ["bun swc src -d debug --copy-files", "bun debug/src/generate-openapi.js"],
+        "cwd": "projects/backend",
+        "parallel": false
+      },
+      "metadata": {
+        "description": "Generate OpenAPI schema statically (no running server needed)"
+      }
+    },
+    "db:generate": {
+      "executor": "nx:run-commands",
+      "cache": true,
+      "inputs": ["{projectRoot}/src/db/schema.ts", "{projectRoot}/drizzle.config.ts"],
+      "outputs": ["{projectRoot}/drizzle"],
+      "options": {
+        "command": "drizzle-kit generate",
+        "cwd": "projects/backend"
+      }
+    },
+    "db:migrate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "drizzle-kit migrate",
+        "cwd": "projects/backend"
+      }
+    },
+    "db:push": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "drizzle-kit push",
+        "cwd": "projects/backend"
+      }
+    },
+    "db:studio": {
+      "executor": "nx:run-commands",
+      "continuous": true,
+      "options": {
+        "command": "drizzle-kit studio",
+        "cwd": "projects/backend"
+      }
+    },
+    "db:seed": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["db:migrate"],
+      "options": {
+        "command": "bun run seed.ts",
+        "cwd": "projects/backend"
+      }
+    },
+    "build:dev": {
+      "executor": "@nx/js:swc",
+      "dependsOn": ["db:migrate"],
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "swcrc": "{projectRoot}/.swcrc",
+        "outputPath": "{projectRoot}/debug",
+        "main": "{projectRoot}/src/main.ts",
+        "tsConfig": "{projectRoot}/tsconfig.app.json",
+        "assets": [],
+        "sourceMap": true
+      }
+    },
+    "build:prod": {
+      "executor": "@nx/js:swc",
+      "dependsOn": ["db:migrate"],
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "swcrc": "{projectRoot}/.swcrc",
+        "outputPath": "{projectRoot}/dist",
+        "main": "{projectRoot}/src/main.ts",
+        "tsConfig": "{projectRoot}/tsconfig.app.json",
+        "assets": [],
+        "sourceMap": false,
+        "minify": true
+      }
+    },
+    "prune-lockfile": {
+      "dependsOn": ["build:prod"],
+      "cache": true,
+      "executor": "@nx/js:prune-lockfile",
+      "outputs": ["{projectRoot}/dist/package.json", "{projectRoot}/dist/bun.lock"],
+      "options": {
+        "buildTarget": "build:prod"
+      }
+    },
+    "copy-workspace-modules": {
+      "dependsOn": ["build:prod"],
+      "cache": true,
+      "outputs": ["{workspaceRoot}/projects/backend/dist/workspace_modules"],
+      "executor": "@nx/js:copy-workspace-modules",
+      "options": {
+        "buildTarget": "build:prod"
+      }
+    },
+    "prune": {
+      "dependsOn": ["prune-lockfile", "copy-workspace-modules"],
+      "executor": "nx:noop"
+    },
+    "start:dev": {
+      "continuous": true,
+      "executor": "nx:run-commands",
+      "dependsOn": ["build:dev"],
+      "options": {
+        "cwd": "projects/backend",
+        "parallel": true,
+        "commands": [
+          "bun swc src -d debug/src --copy-files --watch",
+          "watchexec -r -w debug/src -e js,json -- bun debug/src/main.js"
+        ]
+      }
+    },
+    "start:prod": {
+      "continuous": true,
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "bun dist/src/main.js",
+        "cwd": "projects/backend"
+      }
+    }
+  }
+}

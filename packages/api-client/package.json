@@ -1,0 +1,23 @@
+{
+  "name": "@atlas/api-client",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "@atlas/source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "dependencies": {
+    "@atlas/api-types": "workspace:*",
+    "openapi-fetch": "^0.17.0",
+    "tslib": "^2.3.0"
+  }
+}

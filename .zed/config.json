@@ -1,0 +1,24 @@
+{
+  "languages": {
+    "TypeScript": {
+      "language_servers": ["!eslint", "..."],
+      "formatter": {
+        "language_server": { "name": "biome" },
+      },
+      "code_actions_on_format": {
+        "source.fixAll.biome": true,
+        "source.organizeImports.biome": true,
+      },
+    },
+    "TSX": {
+      "language_servers": ["!eslint", "..."],
+      "formatter": {
+        "language_server": { "name": "biome" },
+      },
+      "code_actions_on_format": {
+        "source.fixAll.biome": true,
+        "source.organizeImports.biome": true,
+      },
+    },
+  },
+}
