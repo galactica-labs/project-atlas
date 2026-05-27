@@ -2,17 +2,26 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "dist",
-    "types": [
-      "bun"
-    ],
+    "types": ["node", "bun"],
+    "typeRoots": ["./node_modules/@types", "../../node_modules/@types"],
     "rootDir": "src",
     "tsBuildInfoFile": "dist/tsconfig.app.tsbuildinfo",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "target": "es2021"
+    "target": "ES2023",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "resolvePackageJsonExports": true,
+    "jsx": "react-jsx",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strictPropertyInitialization": false,
+    "emitDeclarationOnly": false,
+    "declaration": true,
+    "composite": false,
+    "noImplicitAny": false,
+    "strictBindCallApply": false
   },
-  "include": [
-    "src/**/*.ts"
-  ],
-  "exclude": []
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": ["eslint.config.js", "eslint.config.cjs", "eslint.config.mjs"]
 }

@@ -1,12 +1,12 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "namedInputs": {
-    "default": [
-      "{projectRoot}/**/*",
-      "sharedGlobals"
-    ],
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "production": [
-      "default"
+      "default",
+      "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
+      "!{projectRoot}/tsconfig.spec.json",
+      "!{projectRoot}/src/test-setup.[jt]s"
     ],
     "sharedGlobals": []
   },
@@ -26,6 +26,14 @@
       }
     },
     {
+      "plugin": "@atlas/biome-plugin",
+      "options": {
+        "lintTargetName": "biome:lint",
+        "checkTargetName": "biome:check",
+        "formatTargetName": "biome:format"
+      }
+    },
+    {
       "plugin": "@nx/next/plugin",
       "options": {
         "startTargetName": "start",
@@ -34,17 +42,6 @@
         "serveStaticTargetName": "serve-static",
         "buildDepsTargetName": "build-deps",
         "watchDepsTargetName": "watch-deps"
-      }
-    },
-    {
-      "plugin": "@nx/webpack/plugin",
-      "options": {
-        "buildTargetName": "build",
-        "serveTargetName": "serve",
-        "previewTargetName": "preview",
-        "buildDepsTargetName": "build-deps",
-        "watchDepsTargetName": "watch-deps",
-        "serveStaticTargetName": "serve-static"
       }
     }
   ],
