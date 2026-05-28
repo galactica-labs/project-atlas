@@ -1,0 +1,8 @@
+Explore the codebase at /Users/pantelis/Desktop/project-atlas and provide a comprehensive overview of:
+1. The overall project structure (apps, libs, etc.)
+2. Any backend simulated scenarios - look for files related to simulation, scenarios, mock data
+3. Any frontend telemetry data - look for hardcoded telemetry values, charts, dashboards
+4. How the frontend and backend communicate (APIs, websockets, etc.)
+5. Any existing streaming/real-time data connections
+
+Please be thorough and look at key files. Return file paths, relevant code snippets, and a clear explanation of what you found.
