@@ -14,22 +14,29 @@ function LayerToggle({ label, active, color, onToggle }: ToggleProps) {
     <button
       type="button"
       onClick={onToggle}
-      className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-lg transition-all duration-150 text-left ${
-        active ? "bg-white/[0.05] ring-1 ring-white/[0.08]" : "opacity-40 hover:opacity-60"
-      }`}
+      className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg transition-all duration-150 text-left"
+      style={{
+        backgroundColor: active ? "rgba(255,255,255,0.04)" : "transparent",
+        border: `1px solid ${active ? "rgba(255,255,255,0.07)" : "transparent"}`,
+        opacity: active ? 1 : 0.45,
+      }}
     >
       <span
-        className="w-2.5 h-2.5 rounded-full flex-shrink-0 transition-opacity"
+        className="w-2 h-2 rounded-full flex-shrink-0"
         style={{ backgroundColor: color, opacity: active ? 1 : 0.4 }}
       />
-      <span className="text-[11px] text-zinc-300 flex-1">{label}</span>
       <span
-        className={`w-7 h-3.5 rounded-full transition-colors duration-200 relative flex-shrink-0 ${
-          active ? "" : "bg-zinc-800"
-        }`}
+        className="text-[11px] flex-1"
+        style={{ color: active ? COLORS.textSecondary : COLORS.textMuted }}
+      >
+        {label}
+      </span>
+      {/* Mini toggle pill */}
+      <span
+        className="w-7 h-3.5 rounded-full relative flex-shrink-0 transition-colors duration-200"
         style={{
-          backgroundColor: active ? `${color}40` : undefined,
-          border: `1px solid ${active ? `${color}60` : "#334155"}`,
+          backgroundColor: active ? `${color}40` : "#1f2937",
+          border: `1px solid ${active ? `${color}60` : "#374151"}`,
         }}
       >
         <span
@@ -59,8 +66,11 @@ export default function LayerControls() {
 
   return (
     <div className="p-3">
-      <p className="text-[9px] font-bold tracking-[0.14em] uppercase text-zinc-600 mb-2 px-1">
-        Layer Controls
+      <p
+        className="text-[8px] font-bold tracking-[0.14em] uppercase mb-2 px-1"
+        style={{ color: COLORS.textMuted }}
+      >
+        Layers
       </p>
       <div className="space-y-0.5">
         {LAYER_DEFS.map((def) => (

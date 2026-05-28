@@ -1,19 +1,24 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useFloorPlanStore } from "./floorPlanStore";
-import { ASSETS, CRAC07_INCIDENT, EDGES } from "./mapData";
+import { CRAC07_INCIDENT, FLOORS } from "./mapData";
 import { COLORS } from "./mapStyles";
 import type { AssetStatus, AssetType, EdgeResource } from "./mapTypes";
 import { getAssetById, getDownstreamDeps, getUpstreamDeps } from "./mapUtils";
 
 const TYPE_LABELS: Record<AssetType, string> = {
   rack: "Server Rack",
-  pdu: "Power Distribution Unit",
+  pdu: "Power Dist. Unit",
   ups: "UPS",
   crac: "CRAC Unit",
   sensor: "Sensor",
   generator: "Generator",
   switch: "Network Switch",
   cooling_unit: "Cooling Unit",
+  firewall: "Firewall",
+  patch_panel: "Patch Panel",
+  chiller: "Chiller",
+  battery: "Battery Bank",
+  switchgear: "Switchgear",
 };
 
 const STATUS_COLORS: Record<AssetStatus, string> = {
@@ -30,6 +35,22 @@ const RESOURCE_COLORS: Record<EdgeResource, string> = {
   dependency: COLORS.dependency,
 };
 
+function Divider() {
+  return <div className="border-b" style={{ borderColor: COLORS.panelBorder }} />;
+}
+
+function ResourceChip({ resource }: { resource: EdgeResource }) {
+  const color = RESOURCE_COLORS[resource];
+  return (
+    <span
+      className="text-[9px] font-mono font-semibold px-1.5 py-0.5 rounded uppercase tracking-wider"
+      style={{ color, backgroundColor: `${color}1A`, border: `1px solid ${color}33` }}
+    >
+      {resource}
+    </span>
+  );
+}
+
 function StatusDot({ status }: { status: AssetStatus }) {
   return (
     <span
@@ -39,112 +60,10 @@ function StatusDot({ status }: { status: AssetStatus }) {
   );
 }
 
-function ResourceChip({ resource }: { resource: EdgeResource }) {
-  return (
-    <span
-      className="text-[9px] font-mono font-semibold px-1.5 py-0.5 rounded uppercase tracking-wider"
-      style={{
-        color: RESOURCE_COLORS[resource],
-        backgroundColor: `${RESOURCE_COLORS[resource]}1A`,
-        border: `1px solid ${RESOURCE_COLORS[resource]}33`,
-      }}
-    >
-      {resource}
-    </span>
-  );
-}
-
-function SiteOverview() {
-  const incidentActive = useFloorPlanStore((s) => s.incidentActive);
-  const overrides = useFloorPlanStore((s) => s.incidentAssetOverrides);
-  const selectAsset = useFloorPlanStore((s) => s.selectAsset);
-
-  const criticalCount = ASSETS.filter((a) => (overrides[a.id] ?? a.status) === "critical").length;
-  const warningCount = ASSETS.filter((a) => (overrides[a.id] ?? a.status) === "warning").length;
-
-  return (
-    <div className="flex flex-col gap-3 p-4">
-      <div className="mb-1">
-        <p className="text-[9px] font-bold tracking-[0.14em] uppercase text-zinc-600 mb-3">
-          Site Overview
-        </p>
-        <div className="grid grid-cols-2 gap-2">
-          {[
-            { label: "Total Assets", value: ASSETS.length, color: "text-zinc-300" },
-            { label: "Zones", value: 6, color: "text-zinc-300" },
-            {
-              label: "Critical",
-              value: criticalCount,
-              color: criticalCount > 0 ? "text-red-400" : "text-zinc-500",
-            },
-            {
-              label: "Warning",
-              value: warningCount,
-              color: warningCount > 0 ? "text-amber-400" : "text-zinc-500",
-            },
-          ].map((kpi) => (
-            <div
-              key={kpi.label}
-              className="bg-white/[0.02] rounded-lg px-3 py-2 ring-1 ring-white/[0.05]"
-            >
-              <p className={`text-[18px] font-semibold leading-none tabular-nums ${kpi.color}`}>
-                {kpi.value}
-              </p>
-              <p className="text-[10px] text-zinc-600 mt-1">{kpi.label}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {incidentActive && (
-        <div className="rounded-xl ring-1 ring-red-500/25 bg-red-500/[0.04] p-3">
-          <p className="text-[9px] font-bold tracking-[0.14em] uppercase text-red-500/80 mb-2">
-            Active Incident
-          </p>
-          <p className="text-[12px] font-semibold text-white mb-1">CRAC-07 Thermal Failure</p>
-          <p className="text-[11px] text-zinc-400">
-            {Object.keys(useFloorPlanStore.getState().incidentAssetOverrides).length} assets
-            affected
-          </p>
-          <button
-            type="button"
-            onClick={() => selectAsset("crac-07")}
-            className="mt-2 text-[10px] text-red-400 hover:text-red-300 transition-colors"
-          >
-            View root cause →
-          </button>
-        </div>
-      )}
-
-      <div className="mt-1">
-        <p className="text-[9px] font-bold tracking-[0.14em] uppercase text-zinc-600 mb-2">
-          Asset List
-        </p>
-        <div className="space-y-1 max-h-48 overflow-y-auto" style={{ scrollbarWidth: "none" }}>
-          {ASSETS.filter((a) => ["crac", "ups", "pdu", "generator"].includes(a.type)).map((a) => {
-            const status = (overrides[a.id] ?? a.status) as AssetStatus;
-            return (
-              <button
-                type="button"
-                key={a.id}
-                onClick={() => selectAsset(a.id)}
-                className="w-full flex items-center gap-2 px-2 py-1.5 rounded-lg hover:bg-white/[0.04] transition-colors text-left"
-              >
-                <StatusDot status={status} />
-                <span className="text-[11px] text-zinc-300 flex-1">{a.name}</span>
-                <span className="text-[9px] text-zinc-600">{TYPE_LABELS[a.type]}</span>
-              </button>
-            );
-          })}
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function BlastRadiusSection() {
   const overrides = useFloorPlanStore((s) => s.incidentAssetOverrides);
   const edgeOverrides = useFloorPlanStore((s) => s.incidentEdgeOverrides);
+  const floorAssets = FLOORS["floor-b"].assets;
 
   const affectedSteps = CRAC07_INCIDENT.filter(
     (s) => s.assetId !== "crac-07" && overrides[s.assetId]
@@ -154,49 +73,51 @@ function BlastRadiusSection() {
 
   return (
     <div className="px-4 pb-4">
-      <p className="text-[9px] font-bold tracking-[0.14em] uppercase text-red-500/70 mb-2">
+      <p
+        className="text-[9px] font-bold tracking-[0.14em] uppercase mb-2"
+        style={{ color: "rgba(239,68,68,0.7)" }}
+      >
         Blast Radius
       </p>
       <div className="space-y-1.5">
         {affectedSteps.map((step) => {
-          const asset = getAssetById(ASSETS, step.assetId);
+          const asset = getAssetById(floorAssets, step.assetId);
           const isEdgeActive = step.edgeIds.some((id) => edgeOverrides[id]);
+          const statusColor =
+            overrides[step.assetId] === "critical" ? COLORS.critical : COLORS.warning;
           return (
             <div
               key={step.assetId}
-              className="flex items-start gap-2 px-2.5 py-2 rounded-lg ring-1 bg-amber-500/[0.03] ring-amber-500/15"
+              className="flex items-start gap-2 px-2.5 py-2 rounded-lg ring-1"
+              style={{
+                backgroundColor: "rgba(245,158,11,0.03)",
+                borderColor: "rgba(245,158,11,0.15)",
+              }}
             >
               <span
                 className="w-1.5 h-1.5 rounded-full mt-1 flex-shrink-0"
-                style={{
-                  backgroundColor:
-                    overrides[step.assetId] === "critical" ? COLORS.critical : COLORS.warning,
-                }}
+                style={{ backgroundColor: statusColor }}
               />
               <div className="flex-1 min-w-0">
-                <p className="text-[11px] font-semibold text-zinc-200">{asset?.name}</p>
+                <p className="text-[11px] font-semibold" style={{ color: COLORS.textSecondary }}>
+                  {asset?.name}
+                </p>
                 {step.minutesToImpact && (
-                  <p className="text-[10px] text-zinc-500">
+                  <p className="text-[10px]" style={{ color: COLORS.textMuted }}>
                     T+
-                    <span className="text-amber-400 font-mono font-semibold">
+                    <span className="font-mono font-semibold" style={{ color: COLORS.warning }}>
                       {step.minutesToImpact}
                     </span>{" "}
                     min
                     {isEdgeActive && (
-                      <span className="text-cyan-400 ml-1">· cooling path active</span>
+                      <span style={{ color: COLORS.cooling }}> · cooling active</span>
                     )}
                   </p>
                 )}
               </div>
               <span
                 className="text-[9px] font-mono uppercase px-1.5 py-0.5 rounded"
-                style={{
-                  color: overrides[step.assetId] === "critical" ? COLORS.critical : COLORS.warning,
-                  backgroundColor:
-                    overrides[step.assetId] === "critical"
-                      ? "rgba(239,68,68,0.1)"
-                      : "rgba(245,158,11,0.1)",
-                }}
+                style={{ color: statusColor, backgroundColor: `${statusColor}1A` }}
               >
                 {overrides[step.assetId]}
               </span>
@@ -204,23 +125,176 @@ function BlastRadiusSection() {
           );
         })}
       </div>
+
+      {/* Recommended action */}
+      <div
+        className="mt-3 p-3 rounded-lg"
+        style={{
+          backgroundColor: "rgba(245,158,11,0.04)",
+          border: "1px solid rgba(245,158,11,0.18)",
+        }}
+      >
+        <p className="text-[9px] font-bold mb-1" style={{ color: COLORS.warning }}>
+          Recommended Action
+        </p>
+        <p className="text-[10px] leading-relaxed" style={{ color: COLORS.textMuted }}>
+          Dispatch technician to Cooling Zone — Floor B. CRAC-07 compressor replacement required.
+          Estimated repair: 45 min. CRAC-08 can carry partial load.
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function SiteOverview() {
+  const { incidentActive, incidentAssetOverrides, selectAsset, activeFloorId } =
+    useFloorPlanStore();
+  const floorAssets = FLOORS[activeFloorId].assets;
+
+  const critical = floorAssets.filter(
+    (a) => (incidentAssetOverrides[a.id] ?? a.status) === "critical"
+  ).length;
+  const warning = floorAssets.filter(
+    (a) => (incidentAssetOverrides[a.id] ?? a.status) === "warning"
+  ).length;
+
+  const kpis = [
+    { label: "Total Assets", value: floorAssets.length, color: COLORS.textSecondary },
+    {
+      label: "Zones",
+      value: FLOORS[activeFloorId].zones.filter((z) => z.type !== "hall").length,
+      color: COLORS.textSecondary,
+    },
+    {
+      label: "Critical",
+      value: critical,
+      color: critical > 0 ? COLORS.critical : COLORS.textMuted,
+    },
+    { label: "Warning", value: warning, color: warning > 0 ? COLORS.warning : COLORS.textMuted },
+  ];
+
+  return (
+    <div className="flex flex-col gap-3 p-4">
+      <div>
+        <p
+          className="text-[9px] font-bold tracking-[0.14em] uppercase mb-3"
+          style={{ color: COLORS.textMuted }}
+        >
+          Site Overview
+        </p>
+        <div className="grid grid-cols-2 gap-2">
+          {kpis.map((kpi) => (
+            <div
+              key={kpi.label}
+              className="rounded-lg px-3 py-2"
+              style={{
+                backgroundColor: "rgba(255,255,255,0.02)",
+                border: "1px solid rgba(255,255,255,0.05)",
+              }}
+            >
+              <p
+                className="text-[18px] font-semibold leading-none tabular-nums"
+                style={{ color: kpi.color }}
+              >
+                {kpi.value}
+              </p>
+              <p className="text-[10px] mt-1" style={{ color: COLORS.textMuted }}>
+                {kpi.label}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {incidentActive && (
+        <div
+          className="rounded-xl p-3"
+          style={{
+            border: "1px solid rgba(239,68,68,0.25)",
+            backgroundColor: "rgba(239,68,68,0.04)",
+          }}
+        >
+          <p
+            className="text-[9px] font-bold tracking-[0.14em] uppercase mb-2"
+            style={{ color: "rgba(239,68,68,0.8)" }}
+          >
+            Active Incident
+          </p>
+          <p className="text-[12px] font-semibold text-white mb-1">CRAC-07 Thermal Failure</p>
+          <p className="text-[11px]" style={{ color: COLORS.textMuted }}>
+            {Object.keys(useFloorPlanStore.getState().incidentAssetOverrides).length} assets
+            affected
+          </p>
+          <button
+            type="button"
+            onClick={() => selectAsset("crac-07")}
+            className="mt-2 text-[10px] transition-colors hover:opacity-80"
+            style={{ color: COLORS.critical }}
+          >
+            View root cause →
+          </button>
+        </div>
+      )}
+
+      {/* Critical asset quick list */}
+      <div>
+        <p
+          className="text-[9px] font-bold tracking-[0.14em] uppercase mb-2"
+          style={{ color: COLORS.textMuted }}
+        >
+          Key Assets
+        </p>
+        <div className="space-y-0.5 max-h-48 overflow-y-auto" style={{ scrollbarWidth: "none" }}>
+          {floorAssets
+            .filter((a) =>
+              ["crac", "ups", "generator", "chiller", "switchgear", "firewall"].includes(a.type)
+            )
+            .map((a) => {
+              const status = (incidentAssetOverrides[a.id] ?? a.status) as AssetStatus;
+              return (
+                <button
+                  key={a.id}
+                  type="button"
+                  onClick={() => selectAsset(a.id)}
+                  className="w-full flex items-center gap-2 px-2 py-1.5 rounded-lg text-left transition-colors hover:bg-white/[0.03]"
+                >
+                  <StatusDot status={status} />
+                  <span className="text-[11px] flex-1" style={{ color: COLORS.textSecondary }}>
+                    {a.name}
+                  </span>
+                  <span className="text-[9px]" style={{ color: COLORS.textMuted }}>
+                    {TYPE_LABELS[a.type]}
+                  </span>
+                </button>
+              );
+            })}
+        </div>
+      </div>
     </div>
   );
 }
 
 export default function AssetDetailsPanel() {
-  const selectedAssetId = useFloorPlanStore((s) => s.selectedAssetId);
-  const incidentActive = useFloorPlanStore((s) => s.incidentActive);
-  const overrides = useFloorPlanStore((s) => s.incidentAssetOverrides);
+  const { selectedAssetId, incidentActive, incidentAssetOverrides, activeFloorId } =
+    useFloorPlanStore();
 
-  const asset = selectedAssetId ? getAssetById(ASSETS, selectedAssetId) : null;
-  const upstream = asset ? getUpstreamDeps(EDGES, asset.id) : [];
-  const downstream = asset ? getDownstreamDeps(EDGES, asset.id) : [];
+  const floorAssets = FLOORS[activeFloorId].assets;
+  const floorEdges = FLOORS[activeFloorId].edges;
+
+  const asset = selectedAssetId ? getAssetById(floorAssets, selectedAssetId) : null;
+  const upstream = asset ? getUpstreamDeps(floorEdges, asset.id) : [];
+  const downstream = asset ? getDownstreamDeps(floorEdges, asset.id) : [];
 
   return (
-    <div className="h-full flex flex-col overflow-hidden bg-[#0E1218] border-l border-[#202A36]">
-      <div className="px-4 py-3 border-b border-[#202A36] flex-shrink-0">
-        <p className="text-[9px] font-bold tracking-[0.14em] uppercase text-zinc-600">
+    <div
+      className="h-full flex flex-col overflow-hidden border-l"
+      style={{ backgroundColor: COLORS.panel, borderColor: COLORS.panelBorder }}
+    >
+      <div className="px-4 py-3 flex-shrink-0 border-b" style={{ borderColor: COLORS.panelBorder }}>
+        <p
+          className="text-[9px] font-bold tracking-[0.14em] uppercase"
+          style={{ color: COLORS.textMuted }}
+        >
           {asset ? "Asset Details" : "Overview"}
         </p>
       </div>
@@ -245,116 +319,159 @@ export default function AssetDetailsPanel() {
               exit={{ opacity: 0, x: 10 }}
               transition={{ duration: 0.15 }}
             >
-              {/* Asset header */}
-              <div className="p-4 border-b border-[#202A36]">
+              {/* Header */}
+              <div className="p-4 border-b" style={{ borderColor: COLORS.panelBorder }}>
                 <div className="flex items-start gap-3">
-                  <div
-                    className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5"
-                    style={{
-                      backgroundColor: `${STATUS_COLORS[(overrides[asset.id] ?? asset.status) as AssetStatus]}15`,
-                      border: `1px solid ${STATUS_COLORS[(overrides[asset.id] ?? asset.status) as AssetStatus]}40`,
-                    }}
-                  >
-                    <span
-                      className="w-2.5 h-2.5 rounded-full"
-                      style={{
-                        backgroundColor:
-                          STATUS_COLORS[(overrides[asset.id] ?? asset.status) as AssetStatus],
-                      }}
-                    />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-[14px] font-semibold text-white leading-tight">
-                      {asset.name}
-                    </p>
-                    <p className="text-[11px] text-zinc-500 mt-0.5">{TYPE_LABELS[asset.type]}</p>
-                  </div>
-                  <span
-                    className="text-[9px] font-mono uppercase px-2 py-1 rounded-md mt-0.5 font-semibold"
-                    style={{
-                      color: STATUS_COLORS[(overrides[asset.id] ?? asset.status) as AssetStatus],
-                      backgroundColor: `${STATUS_COLORS[(overrides[asset.id] ?? asset.status) as AssetStatus]}15`,
-                    }}
-                  >
-                    {overrides[asset.id] ?? asset.status}
-                  </span>
+                  {(() => {
+                    const status = (incidentAssetOverrides[asset.id] ??
+                      asset.status) as AssetStatus;
+                    const sc = STATUS_COLORS[status];
+                    return (
+                      <>
+                        <div
+                          className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5"
+                          style={{ backgroundColor: `${sc}15`, border: `1px solid ${sc}40` }}
+                        >
+                          <span
+                            className="w-2.5 h-2.5 rounded-full"
+                            style={{ backgroundColor: sc }}
+                          />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-[14px] font-semibold leading-tight text-white">
+                            {asset.name}
+                          </p>
+                          <p className="text-[11px] mt-0.5" style={{ color: COLORS.textMuted }}>
+                            {TYPE_LABELS[asset.type]}
+                          </p>
+                        </div>
+                        <span
+                          className="text-[9px] font-mono uppercase px-2 py-1 rounded-md mt-0.5 font-semibold"
+                          style={{ color: sc, backgroundColor: `${sc}15` }}
+                        >
+                          {status}
+                        </span>
+                      </>
+                    );
+                  })()}
                 </div>
               </div>
 
-              {/* Metadata */}
-              <div className="p-4 border-b border-[#202A36]">
-                <p className="text-[9px] font-bold tracking-[0.14em] uppercase text-zinc-600 mb-2">
+              {/* Properties */}
+              <div className="p-4 border-b" style={{ borderColor: COLORS.panelBorder }}>
+                <p
+                  className="text-[9px] font-bold tracking-[0.14em] uppercase mb-2"
+                  style={{ color: COLORS.textMuted }}
+                >
                   Properties
                 </p>
                 <div className="space-y-1.5">
                   <div className="flex justify-between">
-                    <span className="text-[11px] text-zinc-500">Zone</span>
-                    <span className="text-[11px] text-zinc-300">
+                    <span className="text-[11px]" style={{ color: COLORS.textMuted }}>
+                      Zone
+                    </span>
+                    <span className="text-[11px]" style={{ color: COLORS.textSecondary }}>
                       {asset.zoneId.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-[11px] text-zinc-500">Criticality</span>
+                    <span className="text-[11px]" style={{ color: COLORS.textMuted }}>
+                      Criticality
+                    </span>
                     <span
-                      className={`text-[11px] font-semibold ${asset.criticality === "critical" ? "text-red-400" : asset.criticality === "high" ? "text-amber-400" : "text-zinc-400"}`}
+                      className="text-[11px] font-semibold"
+                      style={{
+                        color:
+                          asset.criticality === "critical"
+                            ? COLORS.critical
+                            : asset.criticality === "high"
+                              ? COLORS.warning
+                              : COLORS.textMuted,
+                      }}
                     >
                       {asset.criticality}
                     </span>
                   </div>
                   {Object.entries(asset.metadata).map(([k, v]) => (
                     <div key={k} className="flex justify-between">
-                      <span className="text-[11px] text-zinc-500">{k.replace(/_/g, " ")}</span>
-                      <span className="text-[11px] text-zinc-300 font-mono">{String(v)}</span>
+                      <span className="text-[11px]" style={{ color: COLORS.textMuted }}>
+                        {k.replace(/_/g, " ")}
+                      </span>
+                      <span
+                        className="text-[11px] font-mono"
+                        style={{ color: COLORS.textSecondary }}
+                      >
+                        {String(v)}
+                      </span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              {/* Upstream dependencies */}
+              {/* Upstream */}
               {upstream.length > 0 && (
-                <div className="p-4 border-b border-[#202A36]">
-                  <p className="text-[9px] font-bold tracking-[0.14em] uppercase text-zinc-600 mb-2">
-                    Upstream ({upstream.length})
-                  </p>
-                  <div className="space-y-1.5">
-                    {upstream.map((edge) => {
-                      const src = getAssetById(ASSETS, edge.sourceAssetId);
-                      return (
-                        <div key={edge.id} className="flex items-center gap-2">
-                          <ResourceChip resource={edge.resource} />
-                          <span className="text-[11px] text-zinc-300 flex-1">{src?.name}</span>
-                          <StatusDot
-                            status={
-                              (overrides[edge.sourceAssetId] ??
-                                src?.status ??
-                                "normal") as AssetStatus
-                            }
-                          />
-                        </div>
-                      );
-                    })}
+                <>
+                  <div className="p-4 border-b" style={{ borderColor: COLORS.panelBorder }}>
+                    <p
+                      className="text-[9px] font-bold tracking-[0.14em] uppercase mb-2"
+                      style={{ color: COLORS.textMuted }}
+                    >
+                      Upstream ({upstream.length})
+                    </p>
+                    <div className="space-y-1.5">
+                      {upstream.slice(0, 6).map((edge) => {
+                        const src = getAssetById(floorAssets, edge.sourceAssetId);
+                        const srcStatus = (incidentAssetOverrides[edge.sourceAssetId] ??
+                          src?.status ??
+                          "normal") as AssetStatus;
+                        return (
+                          <div key={edge.id} className="flex items-center gap-2">
+                            <ResourceChip resource={edge.resource} />
+                            <span
+                              className="text-[11px] flex-1"
+                              style={{ color: COLORS.textSecondary }}
+                            >
+                              {src?.name ?? edge.sourceAssetId}
+                            </span>
+                            <StatusDot status={srcStatus} />
+                          </div>
+                        );
+                      })}
+                    </div>
                   </div>
-                </div>
+                  <Divider />
+                </>
               )}
 
-              {/* Downstream dependencies */}
+              {/* Downstream */}
               {downstream.length > 0 && (
-                <div className="p-4 border-b border-[#202A36]">
-                  <p className="text-[9px] font-bold tracking-[0.14em] uppercase text-zinc-600 mb-2">
+                <div className="p-4 border-b" style={{ borderColor: COLORS.panelBorder }}>
+                  <p
+                    className="text-[9px] font-bold tracking-[0.14em] uppercase mb-2"
+                    style={{ color: COLORS.textMuted }}
+                  >
                     Downstream ({downstream.length})
                   </p>
                   <div className="space-y-1.5">
-                    {downstream.map((edge) => {
-                      const tgt = getAssetById(ASSETS, edge.targetAssetId);
-                      const tgtStatus = (overrides[edge.targetAssetId] ??
+                    {downstream.slice(0, 8).map((edge) => {
+                      const tgt = getAssetById(floorAssets, edge.targetAssetId);
+                      const tgtStatus = (incidentAssetOverrides[edge.targetAssetId] ??
                         tgt?.status ??
                         "normal") as AssetStatus;
                       return (
                         <div key={edge.id} className="flex items-center gap-2">
                           <ResourceChip resource={edge.resource} />
-                          <span className="text-[11px] text-zinc-300 flex-1">{tgt?.name}</span>
+                          <span
+                            className="text-[11px] flex-1"
+                            style={{ color: COLORS.textSecondary }}
+                          >
+                            {tgt?.name ?? edge.targetAssetId}
+                          </span>
                           {edge.minutesToImpact && incidentActive && (
-                            <span className="text-[9px] font-mono text-amber-400">
+                            <span
+                              className="text-[9px] font-mono"
+                              style={{ color: COLORS.warning }}
+                            >
                               T+{edge.minutesToImpact}m
                             </span>
                           )}
@@ -362,11 +479,16 @@ export default function AssetDetailsPanel() {
                         </div>
                       );
                     })}
+                    {downstream.length > 8 && (
+                      <p className="text-[10px] px-1" style={{ color: COLORS.textMuted }}>
+                        +{downstream.length - 8} more
+                      </p>
+                    )}
                   </div>
                 </div>
               )}
 
-              {/* Blast radius section (when incident active and this is the root) */}
+              {/* Blast radius — shown when incident active and this is the root */}
               {incidentActive && asset.id === "crac-07" && <BlastRadiusSection />}
             </motion.div>
           )}

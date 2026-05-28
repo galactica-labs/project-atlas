@@ -1,24 +1,23 @@
 import type { GeoJSON } from "geojson";
 import type { Asset, DependencyEdge, Zone } from "./mapTypes";
 
-// Synthetic facility coordinate origin and scale
-// Facility units (0-120 wide, 0-80 tall) map to a small lng/lat area
+// Facility coordinate space: 200 × 100 units
+// Maps to a small synthetic lng/lat region (no real-world geography)
 const ORIGIN_LNG = 23.7275;
 const ORIGIN_LAT = 37.9838;
-const SCALE = 0.00002;
+const SCALE = 0.000018;
 
 export function facilityToLngLat(x: number, y: number): [number, number] {
   return [ORIGIN_LNG + x * SCALE, ORIGIN_LAT + y * SCALE];
 }
 
-export function facilityBounds() {
-  const sw = facilityToLngLat(-5, -5);
-  const ne = facilityToLngLat(125, 85);
-  return [sw, ne] as [[number, number], [number, number]];
+// Bounds with padding so perimeter walls are always visible
+export function facilityBounds(): [[number, number], [number, number]] {
+  return [facilityToLngLat(-15, -12), facilityToLngLat(215, 112)];
 }
 
 export function facilityCenter(): [number, number] {
-  return facilityToLngLat(60, 40);
+  return facilityToLngLat(100, 50);
 }
 
 // Build GeoJSON FeatureCollection for zones
@@ -73,6 +72,8 @@ export function buildAssetsGeoJSON(
 }
 
 // Build GeoJSON FeatureCollection for edges
+// Edges that reference assets not in the provided list are silently skipped
+// (this handles cross-floor edges naturally)
 export function buildEdgesGeoJSON(
   edges: DependencyEdge[],
   assets: Asset[],

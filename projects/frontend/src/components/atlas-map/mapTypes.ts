@@ -1,3 +1,37 @@
+export type FloorId = "floor-b" | "floor-a" | "floor-c";
+
+export interface FloorMeta {
+  id: FloorId;
+  name: string;
+  shortLabel: string;
+  description: string;
+  color: string;
+}
+
+export const FLOOR_META: Record<FloorId, FloorMeta> = {
+  "floor-b": {
+    id: "floor-b",
+    name: "Floor B",
+    shortLabel: "B",
+    description: "Main Data Hall — Ground Level",
+    color: "#334155",
+  },
+  "floor-a": {
+    id: "floor-a",
+    name: "Floor A",
+    shortLabel: "A",
+    description: "Network Ops — Upper Level",
+    color: "#1e3a5f",
+  },
+  "floor-c": {
+    id: "floor-c",
+    name: "Floor C",
+    shortLabel: "C",
+    description: "Mechanical — Basement",
+    color: "#32200a",
+  },
+};
+
 export type AssetType =
   | "rack"
   | "pdu"
@@ -6,7 +40,12 @@ export type AssetType =
   | "sensor"
   | "generator"
   | "switch"
-  | "cooling_unit";
+  | "cooling_unit"
+  | "firewall"
+  | "patch_panel"
+  | "chiller"
+  | "battery"
+  | "switchgear";
 
 export type AssetStatus = "normal" | "warning" | "critical" | "offline";
 
@@ -17,8 +56,9 @@ export interface Asset {
   name: string;
   type: AssetType;
   status: AssetStatus;
-  coordinates: [number, number]; // facility x, y
+  coordinates: [number, number];
   zoneId: string;
+  floorId: FloorId;
   criticality: AssetCriticality;
   metadata: Record<string, string | number>;
 }
@@ -38,19 +78,40 @@ export interface DependencyEdge {
   activeInIncident: boolean;
 }
 
-export type ZoneType = "hall" | "row" | "electrical" | "cooling" | "restricted" | "corridor";
+export type ZoneType =
+  | "hall"
+  | "row"
+  | "electrical"
+  | "cooling"
+  | "restricted"
+  | "corridor"
+  | "network"
+  | "noc"
+  | "ups_room"
+  | "patch_bay"
+  | "generator"
+  | "chiller_plant"
+  | "battery_room"
+  | "switchgear";
 
 export interface Zone {
   id: string;
   name: string;
   type: ZoneType;
-  polygon: [number, number][]; // facility coordinates
+  polygon: [number, number][];
   metadata: Record<string, string | number>;
+}
+
+export interface FloorData {
+  id: FloorId;
+  zones: Zone[];
+  assets: Asset[];
+  edges: DependencyEdge[];
 }
 
 export interface TimelineEvent {
   id: string;
-  timestamp: number; // relative ms from incident start
+  timestamp: number;
   message: string;
   severity: "info" | "warning" | "critical";
 }
@@ -62,13 +123,4 @@ export interface LayerVisibility {
   dependency: boolean;
   labels: boolean;
   criticalPathOnly: boolean;
-}
-
-export interface FloorPlanState {
-  selectedAssetId: string | null;
-  incidentActive: boolean;
-  incidentAssetOverrides: Record<string, AssetStatus>;
-  incidentEdgeOverrides: Record<string, boolean>;
-  layerVisibility: LayerVisibility;
-  timelineEvents: TimelineEvent[];
 }

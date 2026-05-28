@@ -1,60 +1,70 @@
 import { create } from "zustand";
-import { CRAC07_INCIDENT } from "./mapData";
-import type { AssetStatus, LayerVisibility, TimelineEvent } from "./mapTypes";
+import { CRAC07_INCIDENT, FLOORS } from "./mapData";
+import type { AssetStatus, FloorId, LayerVisibility, TimelineEvent } from "./mapTypes";
 
 interface FloorPlanStore {
+  // Floor
+  activeFloorId: FloorId;
+  setFloor: (id: FloorId) => void;
+
+  // Selection
   selectedAssetId: string | null;
+  hoveredAssetId: string | null;
+  selectAsset: (id: string | null) => void;
+  setHoveredAsset: (id: string | null) => void;
+
+  // Incident
   incidentActive: boolean;
   incidentAssetOverrides: Record<string, AssetStatus>;
   incidentEdgeOverrides: Record<string, boolean>;
-  layerVisibility: LayerVisibility;
   timelineEvents: TimelineEvent[];
-  hoveredAssetId: string | null;
-
-  selectAsset: (id: string | null) => void;
-  setHoveredAsset: (id: string | null) => void;
   simulateCrac07Failure: () => void;
   resetIncident: () => void;
+
+  // Layers
+  layerVisibility: LayerVisibility;
   toggleLayer: (key: keyof LayerVisibility) => void;
 }
 
 let cascadeTimers: ReturnType<typeof setTimeout>[] = [];
 
-export const useFloorPlanStore = create<FloorPlanStore>((set) => ({
+export const useFloorPlanStore = create<FloorPlanStore>((set, _get) => ({
+  // Floor
+  activeFloorId: "floor-b",
+  setFloor: (id) =>
+    set((s) => ({
+      activeFloorId: id,
+      // Clear selection when switching floors (selected asset may not exist on new floor)
+      selectedAssetId: FLOORS[id].assets.find((a) => a.id === s.selectedAssetId)
+        ? s.selectedAssetId
+        : null,
+    })),
+
+  // Selection
   selectedAssetId: null,
+  hoveredAssetId: null,
+  selectAsset: (id) => set({ selectedAssetId: id }),
+  setHoveredAsset: (id) => set({ hoveredAssetId: id }),
+
+  // Incident
   incidentActive: false,
   incidentAssetOverrides: {},
   incidentEdgeOverrides: {},
-  layerVisibility: {
-    power: true,
-    cooling: true,
-    network: true,
-    dependency: false,
-    labels: true,
-    criticalPathOnly: false,
-  },
   timelineEvents: [],
-  hoveredAssetId: null,
-
-  selectAsset: (id) => set({ selectedAssetId: id }),
-
-  setHoveredAsset: (id) => set({ hoveredAssetId: id }),
 
   simulateCrac07Failure: () => {
-    // Clear any running cascade
     cascadeTimers.forEach(clearTimeout);
     cascadeTimers = [];
 
-    // Reset to clean incident state first
     set({
       incidentActive: true,
+      activeFloorId: "floor-b",
       incidentAssetOverrides: {},
       incidentEdgeOverrides: {},
       timelineEvents: [],
       selectedAssetId: "crac-07",
     });
 
-    // Schedule cascade steps
     const startTime = Date.now();
     for (const step of CRAC07_INCIDENT) {
       const t = setTimeout(() => {
@@ -74,7 +84,7 @@ export const useFloorPlanStore = create<FloorPlanStore>((set) => ({
               timestamp: Date.now() - startTime,
               message: step.message,
               severity: step.status === "critical" ? "critical" : "warning",
-            },
+            } satisfies TimelineEvent,
           ],
         }));
       }, step.delayMs);
@@ -94,11 +104,17 @@ export const useFloorPlanStore = create<FloorPlanStore>((set) => ({
     });
   },
 
+  // Layers
+  layerVisibility: {
+    power: true,
+    cooling: true,
+    network: true,
+    dependency: false,
+    labels: true,
+    criticalPathOnly: false,
+  },
   toggleLayer: (key) =>
     set((state) => ({
-      layerVisibility: {
-        ...state.layerVisibility,
-        [key]: !state.layerVisibility[key],
-      },
+      layerVisibility: { ...state.layerVisibility, [key]: !state.layerVisibility[key] },
     })),
 }));

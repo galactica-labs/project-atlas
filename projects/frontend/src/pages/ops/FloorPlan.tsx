@@ -1,5 +1,5 @@
-import { CommandCenter3D } from "../../components/atlas-3d/CommandCenter3D";
+import CommandCenterShell from "../../components/atlas-map/CommandCenterShell";
 
 export default function FloorPlan() {
-  return <CommandCenter3D />;
+  return <CommandCenterShell />;
 }
