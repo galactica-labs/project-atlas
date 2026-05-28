@@ -7,6 +7,7 @@ import {
   CheckCircle,
   GitBranch,
   Lock,
+  Package,
   Shield,
   Truck,
   Warning,
@@ -125,6 +126,16 @@ const AGENTS: {
     dot: "bg-cyan-400",
     ring: "ring-cyan-500/20",
     Icon: Brain,
+  },
+  {
+    name: "Genesis",
+    role: "Catalog Ingestion",
+    desc: "Pulls raw hardware inventory from the ingress layer, runs AI-assisted name resolution, and gates every item through technician review before publishing to the live component catalog.",
+    stat: "Human-gated publish",
+    grad: "from-emerald-500/15 to-emerald-950/5",
+    dot: "bg-emerald-400",
+    ring: "ring-emerald-500/20",
+    Icon: Package,
   },
 ];
 
@@ -626,16 +637,12 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* bento: 5 cards, last one spans 2 on medium */}
+          {/* bento: 6 cards, 3-col grid fills evenly */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
             {AGENTS.map((agent, i) => {
               const Icon = agent.Icon;
               return (
-                <div
-                  key={agent.name}
-                  style={rv(agentsRef.inView, i + 1)}
-                  className={i === 4 ? "md:col-span-2 lg:col-span-1" : ""}
-                >
+                <div key={agent.name} style={rv(agentsRef.inView, i + 1)} className="">
                   <div
                     className={`p-[6px] rounded-[1.75rem] bg-gradient-to-br ${agent.grad} ring-1 ${agent.ring} group hover:scale-[1.01] transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] h-full`}
                   >
