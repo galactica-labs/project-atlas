@@ -3,8 +3,9 @@
   "checkpoint_id": "d7fc2f2393c6",
   "strategy": "manual-commit",
   "branch": "main",
-  "checkpoints_count": 4,
+  "checkpoints_count": 8,
   "files_touched": [
+    "projects/frontend/.env.example",
     "projects/frontend/src/components/atlas-3d/CommandCenter3D.tsx",
     "projects/frontend/src/components/atlas-3d/FacilityScene.tsx",
     "projects/frontend/src/components/atlas-3d/FloorStack3D.tsx",
@@ -12,6 +13,9 @@
     "projects/frontend/src/components/atlas-3d/commandCenterStore.ts",
     "projects/frontend/src/components/atlas-3d/sceneData.ts",
     "projects/frontend/src/components/atlas-map/CommandCenterShell.tsx",
+    "projects/frontend/src/components/ops/CommandCenterZoneView.tsx",
+    "projects/frontend/src/components/ops/commandCenterLayout.ts",
+    "projects/frontend/src/pages/ops/CommandCenter.tsx",
     "projects/frontend/src/pages/ops/FloorPlan.tsx"
   ],
   "sessions": [
@@ -20,13 +24,19 @@
       "transcript": "/d7/fc2f2393c6/0/full.jsonl",
       "content_hash": "/d7/fc2f2393c6/0/content_hash.txt",
       "prompt": "/d7/fc2f2393c6/0/prompt.txt"
+    },
+    {
+      "metadata": "/d7/fc2f2393c6/1/metadata.json",
+      "transcript": "/d7/fc2f2393c6/1/full.jsonl",
+      "content_hash": "/d7/fc2f2393c6/1/content_hash.txt",
+      "prompt": "/d7/fc2f2393c6/1/prompt.txt"
     }
   ],
   "token_usage": {
-    "input_tokens": 210,
+    "input_tokens": 151609,
     "cache_creation_tokens": 121489,
-    "cache_read_tokens": 7632293,
-    "output_tokens": 39843,
-    "api_call_count": 79
+    "cache_read_tokens": 12565029,
+    "output_tokens": 64573,
+    "api_call_count": 130
   }
 }
