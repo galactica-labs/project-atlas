@@ -64,7 +64,7 @@
         "outputPath": "{projectRoot}/debug",
         "main": "{projectRoot}/src/main.ts",
         "tsConfig": "{projectRoot}/tsconfig.app.json",
-        "assets": [],
+        "assets": ["{projectRoot}/src/**/*.json"],
         "sourceMap": true
       }
     },
@@ -77,9 +77,30 @@
         "outputPath": "{projectRoot}/dist",
         "main": "{projectRoot}/src/main.ts",
         "tsConfig": "{projectRoot}/tsconfig.app.json",
-        "assets": [],
+        "assets": ["{projectRoot}/src/**/*.json"],
         "sourceMap": false,
         "minify": true
+      }
+    },
+    "rag:embed-tasks": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "bun src/scripts/generate-task-embeddings.ts",
+        "cwd": "projects/backend"
+      }
+    },
+    "rag:build-task-docs": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "bun src/scripts/generate-task-docs-from-text.ts",
+        "cwd": "projects/backend"
+      }
+    },
+    "rag:pdf-to-text": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "bash scripts/pdf-to-text.sh",
+        "cwd": "projects/backend"
       }
     },
     "prune-lockfile": {

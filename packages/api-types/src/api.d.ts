@@ -4,1013 +4,1240 @@
  */
 
 export interface paths {
-  "/api/openapi": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/api/openapi": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["DocsController_getOpenApi"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get: operations["DocsController_getOpenApi"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/api/reference": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/api/reference": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["DocsController_getReference"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get: operations["DocsController_getReference"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/api/import-flows/ingress/pull": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/api/import-flows/ingress/pull": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["ImportFlowController_pullFromIngress"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    post: operations["ImportFlowController_pullFromIngress"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/api/import-flows/{batchId}": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/api/import-flows/{batchId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["ImportFlowController_getBatch"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get: operations["ImportFlowController_getBatch"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/api/import-flows/{batchId}/match": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/api/import-flows/{batchId}/match": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["ImportFlowController_runMatching"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    post: operations["ImportFlowController_runMatching"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/api/import-flows/{batchId}/review": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/api/import-flows/{batchId}/review": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["ImportFlowController_submitReview"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    post: operations["ImportFlowController_submitReview"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/api/import-flows/{batchId}/items/{itemId}/documents": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/api/import-flows/{batchId}/items/{itemId}/documents": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["ImportFlowController_uploadDocument"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    post: operations["ImportFlowController_uploadDocument"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/api/import-flows/{batchId}/commit": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/api/import-flows/{batchId}/commit": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["ImportFlowController_commitBatch"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    post: operations["ImportFlowController_commitBatch"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/api/pipeline/assets": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/api/pipeline/assets": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["PipelineController_listAssets"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get: operations["PipelineController_listAssets"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/api/pipeline/assets/{id}": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/api/pipeline/assets/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["PipelineController_getAsset"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get: operations["PipelineController_getAsset"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/api/pipeline/assets/{id}/blast-radius": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/api/pipeline/assets/{id}/blast-radius": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["PipelineController_blastRadius"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get: operations["PipelineController_blastRadius"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/api/pipeline/assets/{id}/dependencies": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/api/pipeline/assets/{id}/dependencies": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["PipelineController_dependencies"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get: operations["PipelineController_dependencies"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/api/pipeline/incidents/simulate": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/api/pipeline/incidents/simulate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["PipelineController_simulateIncident"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    post: operations["PipelineController_simulateIncident"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/api/pipeline/incidents": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/api/pipeline/incidents": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["PipelineController_listIncidents"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get: operations["PipelineController_listIncidents"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/api/pipeline/incidents/{signalId}/action": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/api/pipeline/incidents/{signalId}/action": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["PipelineController_decideAction"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    post: operations["PipelineController_decideAction"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/api/pipeline/incidents/{signalId}/dispatch": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/api/pipeline/incidents/{signalId}/dispatch": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["PipelineController_dispatch"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    post: operations["PipelineController_dispatch"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/api/pipeline/incidents/{signalId}/approval": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/api/pipeline/incidents/{signalId}/approval": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["PipelineController_submitApproval"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    post: operations["PipelineController_submitApproval"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/api/pipeline/approvals/{requestId}/resolve": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/api/pipeline/approvals/{requestId}/resolve": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["PipelineController_resolveApproval"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    post: operations["PipelineController_resolveApproval"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/api/pipeline/audit/verify": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/api/pipeline/audit/verify": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["PipelineController_auditVerify"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get: operations["PipelineController_auditVerify"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/api/pipeline/audit/report": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/api/pipeline/audit/report": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["PipelineController_auditReport"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get: operations["PipelineController_auditReport"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
+    "/api/technician-assist/manual/tasks": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["TechnicianAssistController_listManualTasks"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/technician-assist/manual/search": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["TechnicianAssistController_searchManualTask"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/technician-assist/realtime/session": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["TechnicianAssistController_createRealtimeSession"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/technician-assist/transcripts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["TechnicianAssistController_listTranscripts"];
+        put?: never;
+        post: operations["TechnicianAssistController_addTranscript"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
-  schemas: {
-    ReasoningCandidateDto: {
-      label: string;
-      confidence: number;
-      notes: string;
+    schemas: {
+        ReasoningCandidateDto: {
+            label: string;
+            confidence: number;
+            notes: string;
+        };
+        ImportDocumentResponseDto: {
+            id: string;
+            title: string;
+            fileName: string;
+            contentType: string;
+            sizeBytes: number;
+            createdAt: string;
+        };
+        ImportItemResponseDto: {
+            id: string;
+            batchId: string;
+            ingressKey: string;
+            sku: string;
+            vendor: string;
+            quantity: number;
+            rawPayload: {
+                [key: string]: unknown;
+            };
+            normalizedName?: Record<string, never> | null;
+            category?: Record<string, never> | null;
+            confidence?: Record<string, never> | null;
+            reasoning?: Record<string, never> | null;
+            candidates: components["schemas"]["ReasoningCandidateDto"][];
+            /** @enum {string} */
+            technicianDecision: "pending" | "confirmed" | "edited" | "needs-doc";
+            technicianNotes?: Record<string, never> | null;
+            documents: components["schemas"]["ImportDocumentResponseDto"][];
+            createdAt: string;
+            updatedAt: string;
+        };
+        ImportBatchResponseDto: {
+            id: string;
+            /** @enum {string} */
+            source: "ingress-controller";
+            sourceLabel: string;
+            /** @enum {string} */
+            status: "ingested" | "matched" | "reviewed" | "committed";
+            createdAt: string;
+            updatedAt: string;
+            items: components["schemas"]["ImportItemResponseDto"][];
+        };
+        ImportItemReviewDto: {
+            /** Format: uuid */
+            itemId: string;
+            /** @enum {string} */
+            technicianDecision: "confirmed" | "edited" | "needs-doc";
+            technicianNotes?: string;
+            normalizedName?: string;
+            category?: string;
+        };
+        ReviewImportBatchDto: {
+            items: components["schemas"]["ImportItemReviewDto"][];
+        };
+        ComponentCatalogEntryResponseDto: {
+            id: string;
+            importItemId: string;
+            sku: string;
+            vendor: string;
+            normalizedName: string;
+            category: string;
+            confidence: number;
+            /** @enum {string} */
+            technicianDecision: "pending" | "confirmed" | "edited" | "needs-doc";
+            documentation: components["schemas"]["ImportDocumentResponseDto"][];
+            createdAt: string;
+        };
+        CommitImportBatchResponseDto: {
+            batch: components["schemas"]["ImportBatchResponseDto"];
+            catalogEntries: components["schemas"]["ComponentCatalogEntryResponseDto"][];
+        };
+        AssetDto: {
+            id: string;
+            asset_type: string;
+            model: string;
+            /** @enum {string} */
+            criticality: "low" | "medium" | "high" | "critical";
+            location: {
+                [key: string]: unknown;
+            };
+            manual_ids: string[];
+        };
+        AssetListDto: {
+            assets: components["schemas"]["AssetDto"][];
+        };
+        BlastRadiusNodeDto: {
+            asset_id: string;
+            hops_from_source: number;
+            estimated_impact_at: string;
+            /** @enum {string} */
+            impact_type: "loss_of_cooling" | "loss_of_power" | "loss_of_capacity" | "degraded";
+        };
+        BlastRadiusDto: {
+            asset_id: string;
+            nodes: components["schemas"]["BlastRadiusNodeDto"][];
+        };
+        DependenciesDto: {
+            asset_id: string;
+            dependencies: string[];
+            dependents: string[];
+        };
+        SimulateIncidentDto: {
+            /** @example CHILLER-A-03 */
+            asset_id: string;
+            /**
+             * @default supply_temperature
+             * @example supply_temperature
+             */
+            metric: string;
+        };
+        AnomalySignalDto: {
+            id: string;
+            asset_id: string;
+            metric: string;
+            current_value: number;
+            baseline_mean: number;
+            baseline_std: number;
+            z_score: number;
+            /** @enum {string} */
+            severity: "info" | "warn" | "critical";
+            detected_at: string;
+        };
+        QuantileForecastDto: {
+            metric: string;
+            horizon_seconds: number;
+            q05: number[];
+            q50: number[];
+            q95: number[];
+            threshold: number;
+            /** @enum {string} */
+            threshold_direction: "above" | "below";
+            time_to_q50_crosses_threshold?: number | null;
+            time_to_q95_crosses_threshold?: number | null;
+            uncertainty_band_width: number;
+        };
+        TriageReportDto: {
+            signal_id: string;
+            failure_mode_hypothesis: string;
+            time_to_failure_seconds: number;
+            confidence: number;
+            quantile_forecast: components["schemas"]["QuantileForecastDto"];
+            blast_radius: components["schemas"]["BlastRadiusNodeDto"][];
+            reasoning: string;
+        };
+        IncidentDto: {
+            signal: components["schemas"]["AnomalySignalDto"];
+            triage: components["schemas"]["TriageReportDto"];
+        };
+        IncidentSummaryDto: {
+            signal_id: string;
+            asset_id: string;
+            metric: string;
+            z_score: number;
+            severity: string;
+            failure_mode: string;
+            confidence: number;
+            time_to_failure_seconds: number;
+            detected_at: string;
+        };
+        IncidentListDto: {
+            incidents: components["schemas"]["IncidentSummaryDto"][];
+        };
+        ProposedActionDto: {
+            id: string;
+            triage_id: string;
+            /** @enum {string} */
+            action_type: "dispatch_tech" | "shutdown" | "throttle" | "wait" | "schedule_maintenance";
+            action_tags: string[];
+            target_asset_id: string;
+            rationale: string;
+            cited_manual_sections: string[];
+            agent_confidence: number;
+            requires_approval: boolean;
+            approval_reason?: string | null;
+        };
+        ActionResultDto: {
+            action: components["schemas"]["ProposedActionDto"];
+            /** @enum {string} */
+            policy_effect: "auto_execute" | "require_approval" | "block";
+            policy_rule?: string | null;
+            approvers: string[];
+        };
+        DispatchDto: {
+            id: string;
+            action_id: string;
+            chosen_tech_id: string;
+            rag_candidates: string[];
+            milp_alternatives: Record<string, never>[];
+            explanation: string;
+            eta_minutes: number;
+            parts_needed: string[];
+            /** @enum {string} */
+            parts_status: "in_van" | "in_warehouse" | "to_order";
+            /** @enum {string} */
+            milp_status: "optimal" | "fallback_rag" | "infeasible";
+        };
+        ApprovalRequestDto: {
+            id: string;
+            action: components["schemas"]["ProposedActionDto"];
+            triage: components["schemas"]["TriageReportDto"];
+            dispatch?: components["schemas"]["DispatchDto"] | null;
+            sent_to: string[];
+            sent_at: string;
+            expires_at: string;
+        };
+        ResolveApprovalDto: {
+            /**
+             * @default ops_manager
+             * @example ops_manager
+             */
+            approver_id: string;
+            /**
+             * @example approve
+             * @enum {string}
+             */
+            decision: "approve" | "reject" | "modify";
+            reason?: string | null;
+        };
+        ApprovalDecisionDto: {
+            request_id: string;
+            approver_id: string;
+            /** @enum {string} */
+            decision: "approve" | "reject" | "modify";
+            reason?: string | null;
+            modified_action?: {
+                [key: string]: unknown;
+            } | null;
+            signature: string;
+            decided_at: string;
+        };
+        AuditVerifyDto: {
+            valid: boolean;
+            n_records: number;
+            issues: Record<string, never>[];
+        };
+        ComplianceReportDto: {
+            generated_at: string;
+            window_start?: string | null;
+            window_end?: string | null;
+            total_events: number;
+            by_action: {
+                [key: string]: unknown;
+            };
+            approval_decisions: Record<string, never>[];
+            /** @enum {string} */
+            chain_integrity: "VERIFIED" | "COMPROMISED";
+            integrity_issues: Record<string, never>[];
+            html_path?: string | null;
+            pdf_path?: string | null;
+        };
+        ManualTaskDto: {
+            id: string;
+            title: string;
+            summary: string;
+            sourceSection: string;
+            keywords: string[];
+            steps: string[];
+        };
+        ManualTaskCatalogResponseDto: {
+            tasks: components["schemas"]["ManualTaskDto"][];
+        };
+        ManualTaskSearchRequestDto: {
+            /** @description Short task phrase like 'reset bios', 'rear ports', or 'upgrade memory'. */
+            description: string;
+        };
+        ManualTaskSearchResponseDto: {
+            found: boolean;
+            title?: string;
+            summary?: string;
+            sourceSection?: string;
+            steps: string[];
+            /** @enum {string} */
+            matchMethod?: "direct" | "keyword" | "token";
+            alternatives?: string[];
+            availableTasks?: string[];
+        };
+        RealtimeSessionRequestDto: {
+            assetName?: string;
+            jobTitle?: string;
+            taskHint?: string;
+        };
+        RealtimeSessionResponseDto: {
+            value: string;
+            expiresAt?: Record<string, never>;
+        };
+        CreateTranscriptEntryDto: {
+            engineerId: string;
+            engineerName: string;
+            /** @enum {string} */
+            role: "user" | "assistant" | "system";
+            text: string;
+            timestamp: string;
+        };
+        TranscriptEntryDto: {
+            engineerId: string;
+            engineerName: string;
+            /** @enum {string} */
+            role: "user" | "assistant" | "system";
+            text: string;
+            timestamp: string;
+        };
+        TranscriptListResponseDto: {
+            items: components["schemas"]["TranscriptEntryDto"][];
+        };
     };
-    ImportDocumentResponseDto: {
-      id: string;
-      title: string;
-      fileName: string;
-      contentType: string;
-      sizeBytes: number;
-      createdAt: string;
-    };
-    ImportItemResponseDto: {
-      id: string;
-      batchId: string;
-      ingressKey: string;
-      sku: string;
-      vendor: string;
-      quantity: number;
-      rawPayload: {
-        [key: string]: unknown;
-      };
-      normalizedName?: Record<string, never> | null;
-      category?: Record<string, never> | null;
-      confidence?: Record<string, never> | null;
-      reasoning?: Record<string, never> | null;
-      candidates: components["schemas"]["ReasoningCandidateDto"][];
-      /** @enum {string} */
-      technicianDecision: "pending" | "confirmed" | "edited" | "needs-doc";
-      technicianNotes?: Record<string, never> | null;
-      documents: components["schemas"]["ImportDocumentResponseDto"][];
-      createdAt: string;
-      updatedAt: string;
-    };
-    ImportBatchResponseDto: {
-      id: string;
-      /** @enum {string} */
-      source: "ingress-controller";
-      sourceLabel: string;
-      /** @enum {string} */
-      status: "ingested" | "matched" | "reviewed" | "committed";
-      createdAt: string;
-      updatedAt: string;
-      items: components["schemas"]["ImportItemResponseDto"][];
-    };
-    ImportItemReviewDto: {
-      /** Format: uuid */
-      itemId: string;
-      /** @enum {string} */
-      technicianDecision: "confirmed" | "edited" | "needs-doc";
-      technicianNotes?: string;
-      normalizedName?: string;
-      category?: string;
-    };
-    ReviewImportBatchDto: {
-      items: components["schemas"]["ImportItemReviewDto"][];
-    };
-    ComponentCatalogEntryResponseDto: {
-      id: string;
-      importItemId: string;
-      sku: string;
-      vendor: string;
-      normalizedName: string;
-      category: string;
-      confidence: number;
-      /** @enum {string} */
-      technicianDecision: "pending" | "confirmed" | "edited" | "needs-doc";
-      documentation: components["schemas"]["ImportDocumentResponseDto"][];
-      createdAt: string;
-    };
-    CommitImportBatchResponseDto: {
-      batch: components["schemas"]["ImportBatchResponseDto"];
-      catalogEntries: components["schemas"]["ComponentCatalogEntryResponseDto"][];
-    };
-    AssetDto: {
-      id: string;
-      asset_type: string;
-      model: string;
-      /** @enum {string} */
-      criticality: "low" | "medium" | "high" | "critical";
-      location: {
-        [key: string]: unknown;
-      };
-      manual_ids: string[];
-    };
-    AssetListDto: {
-      assets: components["schemas"]["AssetDto"][];
-    };
-    BlastRadiusNodeDto: {
-      asset_id: string;
-      hops_from_source: number;
-      estimated_impact_at: string;
-      /** @enum {string} */
-      impact_type: "loss_of_cooling" | "loss_of_power" | "loss_of_capacity" | "degraded";
-    };
-    BlastRadiusDto: {
-      asset_id: string;
-      nodes: components["schemas"]["BlastRadiusNodeDto"][];
-    };
-    DependenciesDto: {
-      asset_id: string;
-      dependencies: string[];
-      dependents: string[];
-    };
-    SimulateIncidentDto: {
-      /** @example CHILLER-A-03 */
-      asset_id: string;
-      /**
-       * @default supply_temperature
-       * @example supply_temperature
-       */
-      metric: string;
-    };
-    AnomalySignalDto: {
-      id: string;
-      asset_id: string;
-      metric: string;
-      current_value: number;
-      baseline_mean: number;
-      baseline_std: number;
-      z_score: number;
-      /** @enum {string} */
-      severity: "info" | "warn" | "critical";
-      detected_at: string;
-    };
-    QuantileForecastDto: {
-      metric: string;
-      horizon_seconds: number;
-      q05: number[];
-      q50: number[];
-      q95: number[];
-      threshold: number;
-      /** @enum {string} */
-      threshold_direction: "above" | "below";
-      time_to_q50_crosses_threshold?: number | null;
-      time_to_q95_crosses_threshold?: number | null;
-      uncertainty_band_width: number;
-    };
-    TriageReportDto: {
-      signal_id: string;
-      failure_mode_hypothesis: string;
-      time_to_failure_seconds: number;
-      confidence: number;
-      quantile_forecast: components["schemas"]["QuantileForecastDto"];
-      blast_radius: components["schemas"]["BlastRadiusNodeDto"][];
-      reasoning: string;
-    };
-    IncidentDto: {
-      signal: components["schemas"]["AnomalySignalDto"];
-      triage: components["schemas"]["TriageReportDto"];
-    };
-    IncidentSummaryDto: {
-      signal_id: string;
-      asset_id: string;
-      metric: string;
-      z_score: number;
-      severity: string;
-      failure_mode: string;
-      confidence: number;
-      time_to_failure_seconds: number;
-      detected_at: string;
-    };
-    IncidentListDto: {
-      incidents: components["schemas"]["IncidentSummaryDto"][];
-    };
-    ProposedActionDto: {
-      id: string;
-      triage_id: string;
-      /** @enum {string} */
-      action_type: "dispatch_tech" | "shutdown" | "throttle" | "wait" | "schedule_maintenance";
-      action_tags: string[];
-      target_asset_id: string;
-      rationale: string;
-      cited_manual_sections: string[];
-      agent_confidence: number;
-      requires_approval: boolean;
-      approval_reason?: string | null;
-    };
-    ActionResultDto: {
-      action: components["schemas"]["ProposedActionDto"];
-      /** @enum {string} */
-      policy_effect: "auto_execute" | "require_approval" | "block";
-      policy_rule?: string | null;
-      approvers: string[];
-    };
-    DispatchDto: {
-      id: string;
-      action_id: string;
-      chosen_tech_id: string;
-      rag_candidates: string[];
-      milp_alternatives: Record<string, never>[];
-      explanation: string;
-      eta_minutes: number;
-      parts_needed: string[];
-      /** @enum {string} */
-      parts_status: "in_van" | "in_warehouse" | "to_order";
-      /** @enum {string} */
-      milp_status: "optimal" | "fallback_rag" | "infeasible";
-    };
-    ApprovalRequestDto: {
-      id: string;
-      action: components["schemas"]["ProposedActionDto"];
-      triage: components["schemas"]["TriageReportDto"];
-      dispatch?: components["schemas"]["DispatchDto"] | null;
-      sent_to: string[];
-      sent_at: string;
-      expires_at: string;
-    };
-    ResolveApprovalDto: {
-      /**
-       * @default ops_manager
-       * @example ops_manager
-       */
-      approver_id: string;
-      /**
-       * @example approve
-       * @enum {string}
-       */
-      decision: "approve" | "reject" | "modify";
-      reason?: string | null;
-    };
-    ApprovalDecisionDto: {
-      request_id: string;
-      approver_id: string;
-      /** @enum {string} */
-      decision: "approve" | "reject" | "modify";
-      reason?: string | null;
-      modified_action?: {
-        [key: string]: unknown;
-      } | null;
-      signature: string;
-      decided_at: string;
-    };
-    AuditVerifyDto: {
-      valid: boolean;
-      n_records: number;
-      issues: Record<string, never>[];
-    };
-    ComplianceReportDto: {
-      generated_at: string;
-      window_start?: string | null;
-      window_end?: string | null;
-      total_events: number;
-      by_action: {
-        [key: string]: unknown;
-      };
-      approval_decisions: Record<string, never>[];
-      /** @enum {string} */
-      chain_integrity: "VERIFIED" | "COMPROMISED";
-      integrity_issues: Record<string, never>[];
-      html_path?: string | null;
-      pdf_path?: string | null;
-    };
-  };
-  responses: never;
-  parameters: never;
-  requestBodies: never;
-  headers: never;
-  pathItems: never;
+    responses: never;
+    parameters: never;
+    requestBodies: never;
+    headers: never;
+    pathItems: never;
 }
 export type $defs = Record<string, never>;
 export interface operations {
-  DocsController_getOpenApi: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
+    DocsController_getOpenApi: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-        content?: never;
-      };
-    };
-  };
-  DocsController_getReference: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
         };
-        content?: never;
-      };
     };
-  };
-  ImportFlowController_pullFromIngress: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      201: {
-        headers: {
-          [name: string]: unknown;
+    DocsController_getReference: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-        content: {
-          "application/json": components["schemas"]["ImportBatchResponseDto"];
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
         };
-      };
     };
-  };
-  ImportFlowController_getBatch: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        batchId: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
+    ImportFlowController_pullFromIngress: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-        content: {
-          "application/json": components["schemas"]["ImportBatchResponseDto"];
+        requestBody?: never;
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ImportBatchResponseDto"];
+                };
+            };
         };
-      };
     };
-  };
-  ImportFlowController_runMatching: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        batchId: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      201: {
-        headers: {
-          [name: string]: unknown;
+    ImportFlowController_getBatch: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                batchId: string;
+            };
+            cookie?: never;
         };
-        content: {
-          "application/json": components["schemas"]["ImportBatchResponseDto"];
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ImportBatchResponseDto"];
+                };
+            };
         };
-      };
     };
-  };
-  ImportFlowController_submitReview: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        batchId: string;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["ReviewImportBatchDto"];
-      };
-    };
-    responses: {
-      201: {
-        headers: {
-          [name: string]: unknown;
+    ImportFlowController_runMatching: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                batchId: string;
+            };
+            cookie?: never;
         };
-        content: {
-          "application/json": components["schemas"]["ImportBatchResponseDto"];
+        requestBody?: never;
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ImportBatchResponseDto"];
+                };
+            };
         };
-      };
     };
-  };
-  ImportFlowController_uploadDocument: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        batchId: string;
-        itemId: string;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "multipart/form-data": {
-          /** Format: binary */
-          file: string;
+    ImportFlowController_submitReview: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                batchId: string;
+            };
+            cookie?: never;
         };
-      };
-    };
-    responses: {
-      201: {
-        headers: {
-          [name: string]: unknown;
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ReviewImportBatchDto"];
+            };
         };
-        content: {
-          "application/json": components["schemas"]["ImportBatchResponseDto"];
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ImportBatchResponseDto"];
+                };
+            };
         };
-      };
     };
-  };
-  ImportFlowController_commitBatch: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        batchId: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      201: {
-        headers: {
-          [name: string]: unknown;
+    ImportFlowController_uploadDocument: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                batchId: string;
+                itemId: string;
+            };
+            cookie?: never;
         };
-        content: {
-          "application/json": components["schemas"]["CommitImportBatchResponseDto"];
+        requestBody: {
+            content: {
+                "multipart/form-data": {
+                    /** Format: binary */
+                    file: string;
+                };
+            };
         };
-      };
-    };
-  };
-  PipelineController_listAssets: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ImportBatchResponseDto"];
+                };
+            };
         };
-        content: {
-          "application/json": components["schemas"]["AssetListDto"];
+    };
+    ImportFlowController_commitBatch: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                batchId: string;
+            };
+            cookie?: never;
         };
-      };
-    };
-  };
-  PipelineController_getAsset: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
+        requestBody?: never;
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CommitImportBatchResponseDto"];
+                };
+            };
         };
-        content: {
-          "application/json": components["schemas"]["AssetDto"];
+    };
+    PipelineController_listAssets: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-      };
-    };
-  };
-  PipelineController_blastRadius: {
-    parameters: {
-      query: {
-        hops: string;
-      };
-      header?: never;
-      path: {
-        id: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AssetListDto"];
+                };
+            };
         };
-        content: {
-          "application/json": components["schemas"]["BlastRadiusDto"];
+    };
+    PipelineController_getAsset: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
         };
-      };
-    };
-  };
-  PipelineController_dependencies: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AssetDto"];
+                };
+            };
         };
-        content: {
-          "application/json": components["schemas"]["DependenciesDto"];
+    };
+    PipelineController_blastRadius: {
+        parameters: {
+            query: {
+                hops: string;
+            };
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
         };
-      };
-    };
-  };
-  PipelineController_simulateIncident: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["SimulateIncidentDto"];
-      };
-    };
-    responses: {
-      201: {
-        headers: {
-          [name: string]: unknown;
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BlastRadiusDto"];
+                };
+            };
         };
-        content: {
-          "application/json": components["schemas"]["IncidentDto"];
+    };
+    PipelineController_dependencies: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
         };
-      };
-    };
-  };
-  PipelineController_listIncidents: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DependenciesDto"];
+                };
+            };
         };
-        content: {
-          "application/json": components["schemas"]["IncidentListDto"];
+    };
+    PipelineController_simulateIncident: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-      };
-    };
-  };
-  PipelineController_decideAction: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        signalId: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      201: {
-        headers: {
-          [name: string]: unknown;
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SimulateIncidentDto"];
+            };
         };
-        content: {
-          "application/json": components["schemas"]["ActionResultDto"];
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["IncidentDto"];
+                };
+            };
         };
-      };
     };
-  };
-  PipelineController_dispatch: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        signalId: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      201: {
-        headers: {
-          [name: string]: unknown;
+    PipelineController_listIncidents: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-        content: {
-          "application/json": components["schemas"]["DispatchDto"];
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["IncidentListDto"];
+                };
+            };
         };
-      };
     };
-  };
-  PipelineController_submitApproval: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        signalId: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      201: {
-        headers: {
-          [name: string]: unknown;
+    PipelineController_decideAction: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                signalId: string;
+            };
+            cookie?: never;
         };
-        content: {
-          "application/json": components["schemas"]["ApprovalRequestDto"];
+        requestBody?: never;
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ActionResultDto"];
+                };
+            };
         };
-      };
     };
-  };
-  PipelineController_resolveApproval: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        requestId: string;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["ResolveApprovalDto"];
-      };
-    };
-    responses: {
-      201: {
-        headers: {
-          [name: string]: unknown;
+    PipelineController_dispatch: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                signalId: string;
+            };
+            cookie?: never;
         };
-        content: {
-          "application/json": components["schemas"]["ApprovalDecisionDto"];
+        requestBody?: never;
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DispatchDto"];
+                };
+            };
         };
-      };
     };
-  };
-  PipelineController_auditVerify: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
+    PipelineController_submitApproval: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                signalId: string;
+            };
+            cookie?: never;
         };
-        content: {
-          "application/json": components["schemas"]["AuditVerifyDto"];
+        requestBody?: never;
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApprovalRequestDto"];
+                };
+            };
         };
-      };
     };
-  };
-  PipelineController_auditReport: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
+    PipelineController_resolveApproval: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                requestId: string;
+            };
+            cookie?: never;
         };
-        content: {
-          "application/json": components["schemas"]["ComplianceReportDto"];
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ResolveApprovalDto"];
+            };
         };
-      };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApprovalDecisionDto"];
+                };
+            };
+        };
     };
-  };
+    PipelineController_auditVerify: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AuditVerifyDto"];
+                };
+            };
+        };
+    };
+    PipelineController_auditReport: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ComplianceReportDto"];
+                };
+            };
+        };
+    };
+    TechnicianAssistController_listManualTasks: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ManualTaskCatalogResponseDto"];
+                };
+            };
+        };
+    };
+    TechnicianAssistController_searchManualTask: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ManualTaskSearchRequestDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ManualTaskSearchResponseDto"];
+                };
+            };
+        };
+    };
+    TechnicianAssistController_createRealtimeSession: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["RealtimeSessionRequestDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RealtimeSessionResponseDto"];
+                };
+            };
+        };
+    };
+    TechnicianAssistController_listTranscripts: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TranscriptListResponseDto"];
+                };
+            };
+        };
+    };
+    TechnicianAssistController_addTranscript: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateTranscriptEntryDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        ok?: boolean;
+                    };
+                };
+            };
+        };
+    };
 }

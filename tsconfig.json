@@ -4,13 +4,16 @@
   "files": [],
   "references": [
     {
-      "path": "./projects/frontend"
-    },
-    {
-      "path": "./projects/backend-e2e"
-    },
-    {
       "path": "./projects/backend"
+    },
+    {
+      "path": "./packages/api-client"
+    },
+    {
+      "path": "./packages/api-types"
+    },
+    {
+      "path": "./tools/biome-plugin"
     }
   ]
 }

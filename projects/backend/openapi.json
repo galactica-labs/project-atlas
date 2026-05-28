@@ -579,6 +579,144 @@
           "Pipeline"
         ]
       }
+    },
+    "/api/technician-assist/manual/tasks": {
+      "get": {
+        "operationId": "TechnicianAssistController_listManualTasks",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManualTaskCatalogResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Technician Assist"
+        ]
+      }
+    },
+    "/api/technician-assist/manual/search": {
+      "post": {
+        "operationId": "TechnicianAssistController_searchManualTask",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ManualTaskSearchRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManualTaskSearchResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Technician Assist"
+        ]
+      }
+    },
+    "/api/technician-assist/realtime/session": {
+      "post": {
+        "operationId": "TechnicianAssistController_createRealtimeSession",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RealtimeSessionRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RealtimeSessionResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Technician Assist"
+        ]
+      }
+    },
+    "/api/technician-assist/transcripts": {
+      "post": {
+        "operationId": "TechnicianAssistController_addTranscript",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTranscriptEntryDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ok": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Technician Assist"
+        ]
+      },
+      "get": {
+        "operationId": "TechnicianAssistController_listTranscripts",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TranscriptListResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Technician Assist"
+        ]
+      }
     }
   },
   "info": {
@@ -1603,6 +1741,222 @@
           "approval_decisions",
           "chain_integrity",
           "integrity_issues"
+        ]
+      },
+      "ManualTaskDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "sourceSection": {
+            "type": "string"
+          },
+          "keywords": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "steps": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "summary",
+          "sourceSection",
+          "keywords",
+          "steps"
+        ]
+      },
+      "ManualTaskCatalogResponseDto": {
+        "type": "object",
+        "properties": {
+          "tasks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ManualTaskDto"
+            }
+          }
+        },
+        "required": [
+          "tasks"
+        ]
+      },
+      "ManualTaskSearchRequestDto": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "Short task phrase like 'reset bios', 'rear ports', or 'upgrade memory'."
+          }
+        },
+        "required": [
+          "description"
+        ]
+      },
+      "ManualTaskSearchResponseDto": {
+        "type": "object",
+        "properties": {
+          "found": {
+            "type": "boolean"
+          },
+          "title": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "sourceSection": {
+            "type": "string"
+          },
+          "steps": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "matchMethod": {
+            "type": "string",
+            "enum": [
+              "direct",
+              "keyword",
+              "token"
+            ]
+          },
+          "alternatives": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "availableTasks": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "found",
+          "steps"
+        ]
+      },
+      "RealtimeSessionRequestDto": {
+        "type": "object",
+        "properties": {
+          "assetName": {
+            "type": "string"
+          },
+          "jobTitle": {
+            "type": "string"
+          },
+          "taskHint": {
+            "type": "string"
+          }
+        }
+      },
+      "RealtimeSessionResponseDto": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string"
+          },
+          "expiresAt": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "value"
+        ]
+      },
+      "CreateTranscriptEntryDto": {
+        "type": "object",
+        "properties": {
+          "engineerId": {
+            "type": "string"
+          },
+          "engineerName": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "user",
+              "assistant",
+              "system"
+            ]
+          },
+          "text": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "engineerId",
+          "engineerName",
+          "role",
+          "text",
+          "timestamp"
+        ]
+      },
+      "TranscriptEntryDto": {
+        "type": "object",
+        "properties": {
+          "engineerId": {
+            "type": "string"
+          },
+          "engineerName": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "user",
+              "assistant",
+              "system"
+            ]
+          },
+          "text": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "engineerId",
+          "engineerName",
+          "role",
+          "text",
+          "timestamp"
+        ]
+      },
+      "TranscriptListResponseDto": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TranscriptEntryDto"
+            }
+          }
+        },
+        "required": [
+          "items"
         ]
       }
     }

@@ -1,0 +1,151 @@
+[
+  {
+    "id": "front-panel-components",
+    "title": "Identify front panel components",
+    "keywords": [
+      "front panel",
+      "front ports",
+      "usb front",
+      "headphone jack",
+      "power button",
+      "sd card reader"
+    ],
+    "category": "product-features",
+    "content": "## Identify front panel components\n\nSource: HP EliteDesk 800 G3 SFF Maintenance and Service Guide (Front panel components).\n\nFront panel components ........................................................................................................................................ 2"
+  },
+  {
+    "id": "rear-panel-components",
+    "title": "Identify rear panel components",
+    "keywords": [
+      "rear panel",
+      "rear ports",
+      "displayport",
+      "rj45",
+      "network jack",
+      "power cord connector"
+    ],
+    "category": "product-features",
+    "content": "## Identify rear panel components\n\nSource: HP EliteDesk 800 G3 SFF Maintenance and Service Guide (Rear panel components).\n\nRear panel components ......................................................................................................................................... 3"
+  },
+  {
+    "id": "remove-access-panel",
+    "title": "Remove access panel",
+    "keywords": [
+      "access panel",
+      "open case",
+      "open chassis",
+      "remove side panel",
+      "service cover"
+    ],
+    "category": "removal-and-replacement",
+    "content": "## Remove access panel\n\nSource: HP EliteDesk 800 G3 SFF Maintenance and Service Guide (Access panel).\n\nAccess panel ......................................................................................................................................................... 21"
+  },
+  {
+    "id": "remove-front-bezel",
+    "title": "Remove front bezel",
+    "keywords": [
+      "front bezel",
+      "remove bezel",
+      "front cover",
+      "bezel blank",
+      "dust filter"
+    ],
+    "category": "removal-and-replacement",
+    "content": "## Remove front bezel\n\nSource: HP EliteDesk 800 G3 SFF Maintenance and Service Guide (Front bezel).\n\nFront bezel ........................................................................................................................................................... 21"
+  },
+  {
+    "id": "upgrade-memory",
+    "title": "Upgrade or reseat DDR4 memory",
+    "keywords": [
+      "memory",
+      "ram",
+      "dimm",
+      "reseat memory",
+      "upgrade memory",
+      "dimm1"
+    ],
+    "category": "removal-and-replacement",
+    "content": "## Upgrade or reseat DDR4 memory\n\nSource: HP EliteDesk 800 G3 SFF Maintenance and Service Guide (Memory).\n\nMemory ................................................................................................................................................................ 25\nPopulating DIMM sockets .................................................................................................................. 25\nRemoving and installing DIMMs ........................................................................................................ 26"
+  },
+  {
+    "id": "install-expansion-card",
+    "title": "Remove or install expansion card",
+    "keywords": [
+      "expansion card",
+      "pcie",
+      "graphics card",
+      "add card",
+      "remove card",
+      "low profile"
+    ],
+    "category": "removal-and-replacement",
+    "content": "## Remove or install expansion card\n\nSource: HP EliteDesk 800 G3 SFF Maintenance and Service Guide ( Expansion card).\n\nExpansion card ..................................................................................................................................................... 28"
+  },
+  {
+    "id": "replace-3-5-drive",
+    "title": "Replace 3.5-inch hard drive",
+    "keywords": [
+      "hard drive",
+      "3.5 drive",
+      "sata drive",
+      "replace drive",
+      "sata0",
+      "primary drive"
+    ],
+    "category": "drives",
+    "content": "## Replace 3.5-inch hard drive\n\nSource: HP EliteDesk 800 G3 SFF Maintenance and Service Guide (Removing a 3.5-inch hard drive).\n\nRemoving a 3.5-inch hard drive ...................................................................................... 35"
+  },
+  {
+    "id": "install-m2-ssd",
+    "title": "Install or replace M.2 SSD",
+    "keywords": [
+      "m2",
+      "ssd",
+      "nvme",
+      "storage card",
+      "2280",
+      "2230"
+    ],
+    "category": "drives",
+    "content": "## Install or replace M.2 SSD\n\nSource: HP EliteDesk 800 G3 SFF Maintenance and Service Guide (Removing and installing an M.2 SSD storage card).\n\nRemoving and installing an M.2 SSD storage card ......................................................... 44"
+  },
+  {
+    "id": "reset-password-jumper",
+    "title": "Reset password jumper",
+    "keywords": [
+      "password jumper",
+      "clear password",
+      "pswd",
+      "forgot bios password",
+      "administrator password"
+    ],
+    "category": "security-and-cmos",
+    "content": "## Reset password jumper\n\nSource: HP EliteDesk 800 G3 SFF Maintenance and Service Guide (Resetting the password jumper).\n\nResetting the password jumper ........................................................................................................................ 117"
+  },
+  {
+    "id": "clear-bios-cmos",
+    "title": "Clear and reset BIOS CMOS",
+    "keywords": [
+      "clear cmos",
+      "reset bios",
+      "cmos button",
+      "factory defaults",
+      "bios reset"
+    ],
+    "category": "security-and-cmos",
+    "content": "## Clear and reset BIOS CMOS\n\nSource: HP EliteDesk 800 G3 SFF Maintenance and Service Guide (Clearing and resetting the BIOS).\n\nClearing and resetting the BIOS ........................................................................................................................ 119"
+  },
+  {
+    "id": "run-hp-hardware-diagnostics",
+    "title": "Run HP PC Hardware Diagnostics UEFI",
+    "keywords": [
+      "diagnostics",
+      "uefi diagnostics",
+      "hardware test",
+      "press f2",
+      "press esc"
+    ],
+    "category": "diagnostics",
+    "content": "## Run HP PC Hardware Diagnostics UEFI\n\nSource: HP EliteDesk 800 G3 SFF Maintenance and Service Guide (Using HP PC Hardware Diagnostics (UEFI)).\n\nUsing HP PC Hardware Diagnostics (UEFI) ..................................................................................................... 120"
+  }
+]
