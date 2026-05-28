@@ -1,6 +1,9 @@
 import { Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
 import configurations from "./config";
+import { DatabaseModule } from "./db";
+import { DocsModule } from "./docs";
+import { ImportFlowModule } from "./import-flow";
 
 @Module({
   imports: [
@@ -9,6 +12,9 @@ import configurations from "./config";
       isGlobal: true,
       cache: true,
     }),
+    DatabaseModule,
+    DocsModule,
+    ImportFlowModule,
   ],
   controllers: [],
   providers: [],

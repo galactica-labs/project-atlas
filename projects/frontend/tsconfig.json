@@ -14,7 +14,9 @@
     "strict": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@atlas/api-client": ["../../packages/api-client/src/index.ts"],
+      "@atlas/api-types": ["../../packages/api-types/src/index.ts"]
     },
     "ignoreDeprecations": "6.0"
   },

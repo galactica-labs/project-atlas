@@ -1,0 +1,472 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+Object.defineProperty(exports, "IngressControllerService", {
+    enumerable: true,
+    get: function() {
+        return IngressControllerService;
+    }
+});
+const _ts_decorate = require("@swc/helpers/_/_ts_decorate");
+const _common = require("@nestjs/common");
+let IngressControllerService = class IngressControllerService {
+    pullGenesisPayload() {
+        return {
+            sourceLabel: "Genesis Ingress Controller · Facility Alpha",
+            items: [
+                {
+                    ingressKey: "genesis-mech-electrical-switchgear",
+                    sku: "SCH-PIX-SWG-4800A",
+                    vendor: "Schneider Electric",
+                    quantity: 2,
+                    rawPayload: {
+                        assetFamily: "switchgear lineup",
+                        canonicalName: "Electrical switchgear lineup",
+                        categoryHint: "Power Infrastructure",
+                        expectedAssets: [
+                            "SWG-MAIN",
+                            "SWG-BACKUP"
+                        ],
+                        facility: "Facility Alpha",
+                        floor: "Mechanical",
+                        sourceScreens: [
+                            "/ops",
+                            "/ops/floor-plan"
+                        ],
+                        workflow: "genesis",
+                        zone: "Electrical",
+                        zoneLabel: "Electrical - Switchgear & Transformers",
+                        protocol: "atlas-ingress"
+                    }
+                },
+                {
+                    ingressKey: "genesis-mech-electrical-transformers",
+                    sku: "ABB-DRY-1500KVA-XFMR",
+                    vendor: "ABB",
+                    quantity: 2,
+                    rawPayload: {
+                        assetFamily: "transformers",
+                        canonicalName: "Electrical transformer bank",
+                        categoryHint: "Power Infrastructure",
+                        expectedAssets: [
+                            "XFMR-01",
+                            "XFMR-02"
+                        ],
+                        facility: "Facility Alpha",
+                        floor: "Mechanical",
+                        sourceScreens: [
+                            "/ops",
+                            "/ops/floor-plan"
+                        ],
+                        workflow: "genesis",
+                        zone: "Electrical",
+                        zoneLabel: "Electrical - Switchgear & Transformers",
+                        protocol: "atlas-ingress"
+                    }
+                },
+                {
+                    ingressKey: "genesis-mech-backup-power",
+                    sku: "EAT-93PM-500KW-UPS",
+                    vendor: "Eaton",
+                    quantity: 2,
+                    rawPayload: {
+                        assetFamily: "ups systems",
+                        canonicalName: "UPS ride-through system",
+                        categoryHint: "Power Infrastructure",
+                        expectedAssets: [
+                            "UPS-MAIN",
+                            "UPS-BACKUP",
+                            "BATT-BANK-01"
+                        ],
+                        facility: "Facility Alpha",
+                        floor: "Mechanical",
+                        sourceScreens: [
+                            "/ops",
+                            "/ops/floor-plan"
+                        ],
+                        workflow: "genesis",
+                        zone: "Backup Power",
+                        zoneLabel: "Backup Power - UPS & Generators",
+                        protocol: "atlas-ingress"
+                    }
+                },
+                {
+                    ingressKey: "genesis-mech-generators",
+                    sku: "CAT-C175-2500KW-GEN",
+                    vendor: "Caterpillar",
+                    quantity: 2,
+                    rawPayload: {
+                        assetFamily: "diesel generators",
+                        canonicalName: "Backup generator set",
+                        categoryHint: "Power Infrastructure",
+                        expectedAssets: [
+                            "GEN-01",
+                            "GEN-02"
+                        ],
+                        facility: "Facility Alpha",
+                        floor: "Mechanical",
+                        sourceScreens: [
+                            "/ops",
+                            "/ops/floor-plan"
+                        ],
+                        workflow: "genesis",
+                        zone: "Backup Power",
+                        zoneLabel: "Backup Power - UPS & Generators",
+                        protocol: "atlas-ingress"
+                    }
+                },
+                {
+                    ingressKey: "genesis-mech-chiller-plant",
+                    sku: "TRN-RTAC-450-CHILLER",
+                    vendor: "Trane",
+                    quantity: 5,
+                    rawPayload: {
+                        assetFamily: "centrifugal chillers",
+                        canonicalName: "Primary chiller bank",
+                        categoryHint: "Cooling Infrastructure",
+                        expectedAssets: [
+                            "CHILLER-A-01",
+                            "CHILLER-A-02",
+                            "CHILLER-A-03",
+                            "CHILLER-B-01",
+                            "CHILLER-B-02"
+                        ],
+                        facility: "Facility Alpha",
+                        floor: "Mechanical",
+                        sourceScreens: [
+                            "/ops",
+                            "/ops/floor-plan"
+                        ],
+                        workflow: "genesis",
+                        zone: "Chiller Plant",
+                        zoneLabel: "Chiller Plant - Chillers, Towers & Pumps",
+                        protocol: "atlas-ingress"
+                    }
+                },
+                {
+                    ingressKey: "genesis-mech-cooling-towers",
+                    sku: "BAC-VXT-3000-TWR",
+                    vendor: "Baltimore Aircoil",
+                    quantity: 2,
+                    rawPayload: {
+                        assetFamily: "cooling towers",
+                        canonicalName: "Cooling tower cell",
+                        categoryHint: "Cooling Infrastructure",
+                        expectedAssets: [
+                            "COOL-TWR-01",
+                            "COOL-TWR-02"
+                        ],
+                        facility: "Facility Alpha",
+                        floor: "Mechanical",
+                        sourceScreens: [
+                            "/ops",
+                            "/ops/floor-plan"
+                        ],
+                        workflow: "genesis",
+                        zone: "Chiller Plant",
+                        zoneLabel: "Chiller Plant - Chillers, Towers & Pumps",
+                        protocol: "atlas-ingress"
+                    }
+                },
+                {
+                    ingressKey: "genesis-mech-pumps",
+                    sku: "BGP-E1510-CHW-PUMP",
+                    vendor: "Bell & Gossett",
+                    quantity: 4,
+                    rawPayload: {
+                        assetFamily: "chilled water pumps",
+                        canonicalName: "Chilled water pump train",
+                        categoryHint: "Cooling Infrastructure",
+                        expectedAssets: [
+                            "PUMP-CHW-01",
+                            "PUMP-CHW-02",
+                            "PUMP-CHW-03",
+                            "PUMP-CHW-04"
+                        ],
+                        facility: "Facility Alpha",
+                        floor: "Mechanical",
+                        sourceScreens: [
+                            "/ops",
+                            "/ops/floor-plan"
+                        ],
+                        workflow: "genesis",
+                        zone: "Chiller Plant",
+                        zoneLabel: "Chiller Plant - Chillers, Towers & Pumps",
+                        protocol: "atlas-ingress"
+                    }
+                },
+                {
+                    ingressKey: "genesis-hall-a-crah",
+                    sku: "VRT-CRAH-120-A",
+                    vendor: "Vertiv",
+                    quantity: 5,
+                    rawPayload: {
+                        assetFamily: "crah units",
+                        canonicalName: "Hall A CRAH unit bank",
+                        categoryHint: "Cooling Infrastructure",
+                        expectedAssets: [
+                            "CRAH-A-01",
+                            "CRAH-A-02",
+                            "CRAH-A-03",
+                            "CRAH-A-04",
+                            "CRAH-A-05"
+                        ],
+                        facility: "Facility Alpha",
+                        floor: "Hall A",
+                        sourceScreens: [
+                            "/ops",
+                            "/ops/floor-plan"
+                        ],
+                        workflow: "genesis",
+                        zone: "Cooling Bay A",
+                        zoneLabel: "Cooling Bay A - CRAH Units",
+                        protocol: "atlas-ingress"
+                    }
+                },
+                {
+                    ingressKey: "genesis-hall-a-cpu-racks",
+                    sku: "DLL-R760-42U-CPU",
+                    vendor: "Dell",
+                    quantity: 8,
+                    rawPayload: {
+                        assetFamily: "cpu server racks",
+                        canonicalName: "Hall A CPU rack row",
+                        categoryHint: "Rack Compute",
+                        expectedAssets: [
+                            "RACK-A01",
+                            "RACK-A02",
+                            "RACK-A03",
+                            "RACK-A04",
+                            "RACK-A05",
+                            "RACK-A06",
+                            "RACK-A07",
+                            "RACK-A08"
+                        ],
+                        facility: "Facility Alpha",
+                        floor: "Hall A",
+                        sourceScreens: [
+                            "/ops",
+                            "/ops/floor-plan"
+                        ],
+                        workflow: "genesis",
+                        zone: "Compute Row A",
+                        zoneLabel: "Compute Row A - CPU Server Racks",
+                        protocol: "atlas-ingress"
+                    }
+                },
+                {
+                    ingressKey: "genesis-hall-a-gpu-row",
+                    sku: "SMC-HGX-H100-8GPU",
+                    vendor: "Supermicro",
+                    quantity: 3,
+                    rawPayload: {
+                        assetFamily: "gpu pods and racks",
+                        canonicalName: "Hall A GPU pod row",
+                        categoryHint: "Accelerated Compute",
+                        expectedAssets: [
+                            "RACK-B01",
+                            "RACK-B02",
+                            "RACK-B03"
+                        ],
+                        facility: "Facility Alpha",
+                        floor: "Hall A",
+                        sourceScreens: [
+                            "/ops",
+                            "/ops/floor-plan"
+                        ],
+                        workflow: "genesis",
+                        zone: "Compute Row B",
+                        zoneLabel: "Compute Row B - GPU Pods & Racks",
+                        protocol: "atlas-ingress"
+                    }
+                },
+                {
+                    ingressKey: "genesis-hall-a-power-network",
+                    sku: "APC-G3-PDU-24C13",
+                    vendor: "APC",
+                    quantity: 2,
+                    rawPayload: {
+                        assetFamily: "floor pdu",
+                        canonicalName: "Hall A floor PDU pair",
+                        categoryHint: "Power Infrastructure",
+                        expectedAssets: [
+                            "PDU-A",
+                            "PDU-B"
+                        ],
+                        facility: "Facility Alpha",
+                        floor: "Hall A",
+                        sourceScreens: [
+                            "/ops",
+                            "/ops/floor-plan"
+                        ],
+                        workflow: "genesis",
+                        zone: "Power & Network A",
+                        zoneLabel: "Power & Network A - PDUs & Core Switches",
+                        protocol: "atlas-ingress"
+                    }
+                },
+                {
+                    ingressKey: "genesis-hall-a-core-switches",
+                    sku: "CSC-N9K-9336C-FX2",
+                    vendor: "Cisco",
+                    quantity: 2,
+                    rawPayload: {
+                        assetFamily: "core switches",
+                        canonicalName: "Hall A core switch pair",
+                        categoryHint: "Network Fabric",
+                        expectedAssets: [
+                            "CORE-SW-01",
+                            "CORE-SW-02"
+                        ],
+                        facility: "Facility Alpha",
+                        floor: "Hall A",
+                        sourceScreens: [
+                            "/ops",
+                            "/ops/floor-plan"
+                        ],
+                        workflow: "genesis",
+                        zone: "Power & Network A",
+                        zoneLabel: "Power & Network A - PDUs & Core Switches",
+                        protocol: "atlas-ingress"
+                    }
+                },
+                {
+                    ingressKey: "genesis-hall-b-crah",
+                    sku: "VRT-CRAH-120-B",
+                    vendor: "Vertiv",
+                    quantity: 4,
+                    rawPayload: {
+                        assetFamily: "crah units",
+                        canonicalName: "Hall B CRAH unit bank",
+                        categoryHint: "Cooling Infrastructure",
+                        expectedAssets: [
+                            "CRAH-B-01",
+                            "CRAH-B-02",
+                            "CRAH-B-03",
+                            "CRAH-B-04"
+                        ],
+                        facility: "Facility Alpha",
+                        floor: "Hall B",
+                        sourceScreens: [
+                            "/ops",
+                            "/ops/floor-plan"
+                        ],
+                        workflow: "genesis",
+                        zone: "Cooling Bay B",
+                        zoneLabel: "Cooling Bay B - CRAH Units",
+                        protocol: "atlas-ingress"
+                    }
+                },
+                {
+                    ingressKey: "genesis-hall-b-gpu-pods",
+                    sku: "NVL-HGX-H200-8GPU",
+                    vendor: "NVIDIA",
+                    quantity: 3,
+                    rawPayload: {
+                        assetFamily: "gpu pods",
+                        canonicalName: "Hall B GPU pod row",
+                        categoryHint: "Accelerated Compute",
+                        expectedAssets: [
+                            "POD-04",
+                            "POD-05",
+                            "POD-06"
+                        ],
+                        facility: "Facility Alpha",
+                        floor: "Hall B",
+                        sourceScreens: [
+                            "/ops",
+                            "/ops/floor-plan"
+                        ],
+                        workflow: "genesis",
+                        zone: "Compute Row C",
+                        zoneLabel: "Compute Row C - GPU Pods",
+                        protocol: "atlas-ingress"
+                    }
+                },
+                {
+                    ingressKey: "genesis-hall-b-rack-compute",
+                    sku: "HPE-DL380-42U-RACK",
+                    vendor: "HPE",
+                    quantity: 6,
+                    rawPayload: {
+                        assetFamily: "rack compute",
+                        canonicalName: "Hall B rack compute row",
+                        categoryHint: "Rack Compute",
+                        expectedAssets: [
+                            "RACK-C01",
+                            "RACK-C02",
+                            "RACK-C03",
+                            "RACK-C04",
+                            "RACK-C05",
+                            "RACK-C06"
+                        ],
+                        facility: "Facility Alpha",
+                        floor: "Hall B",
+                        sourceScreens: [
+                            "/ops",
+                            "/ops/floor-plan"
+                        ],
+                        workflow: "genesis",
+                        zone: "Compute Row D",
+                        zoneLabel: "Compute Row D - Rack Compute",
+                        protocol: "atlas-ingress"
+                    }
+                },
+                {
+                    ingressKey: "genesis-hall-b-power-network",
+                    sku: "APC-G3-PDU-30A-B",
+                    vendor: "APC",
+                    quantity: 2,
+                    rawPayload: {
+                        assetFamily: "floor pdu",
+                        canonicalName: "Hall B floor PDU pair",
+                        categoryHint: "Power Infrastructure",
+                        expectedAssets: [
+                            "PDU-C",
+                            "PDU-D"
+                        ],
+                        facility: "Facility Alpha",
+                        floor: "Hall B",
+                        sourceScreens: [
+                            "/ops",
+                            "/ops/floor-plan"
+                        ],
+                        workflow: "genesis",
+                        zone: "Power & Network B",
+                        zoneLabel: "Power & Network B - PDUs & Dist. Switches",
+                        protocol: "atlas-ingress"
+                    }
+                },
+                {
+                    ingressKey: "genesis-hall-b-dist-switches",
+                    sku: "CSC-C9500-DIST",
+                    vendor: "Cisco",
+                    quantity: 2,
+                    rawPayload: {
+                        assetFamily: "distribution switches",
+                        canonicalName: "Hall B distribution switch pair",
+                        categoryHint: "Network Fabric",
+                        expectedAssets: [
+                            "DIST-SW-01",
+                            "DIST-SW-02"
+                        ],
+                        facility: "Facility Alpha",
+                        floor: "Hall B",
+                        sourceScreens: [
+                            "/ops",
+                            "/ops/floor-plan"
+                        ],
+                        workflow: "genesis",
+                        zone: "Power & Network B",
+                        zoneLabel: "Power & Network B - PDUs & Dist. Switches",
+                        protocol: "atlas-ingress"
+                    }
+                }
+            ]
+        };
+    }
+};
+IngressControllerService = _ts_decorate._([
+    (0, _common.Injectable)()
+], IngressControllerService);

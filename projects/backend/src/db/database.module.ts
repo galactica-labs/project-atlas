@@ -2,6 +2,7 @@ import { Global, Inject, Module, type OnApplicationShutdown } from "@nestjs/comm
 import type { ConfigType } from "@nestjs/config";
 import { dbConfig } from "../config";
 import { createClient, createDrizzle, type DatabaseClient } from "./drizzle";
+import { ComponentCatalogRepository, ImportBatchRepository } from "./repositories";
 import { DRIZZLE } from "./tokens";
 
 @Global()
@@ -16,14 +17,11 @@ import { DRIZZLE } from "./tokens";
       provide: DRIZZLE,
       useFactory: (client: DatabaseClient) => createDrizzle(client),
       inject: ["DATABASE_CLIENT"],
-      // Repository factories go here
     },
+    ImportBatchRepository,
+    ComponentCatalogRepository,
   ],
-  exports: [
-    "DATABASE_CLIENT",
-    DRIZZLE,
-    // Repository factories go here
-  ],
+  exports: ["DATABASE_CLIENT", DRIZZLE, ImportBatchRepository, ComponentCatalogRepository],
 })
 export class DatabaseModule implements OnApplicationShutdown {
   constructor(

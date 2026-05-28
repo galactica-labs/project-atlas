@@ -24,7 +24,7 @@ const opLinks = [
   { to: "/ops", icon: SquaresFour, label: "Command Center" },
   { to: "/ops/floor-plan", icon: MapTrifold, label: "Floor Plan" },
   { to: "/ops/incidents", icon: Warning, label: "Incidents" },
-  { to: "/ops/import", icon: ArrowsClockwise, label: "Import Pipeline" },
+  { to: "/ops/import", icon: ArrowsClockwise, label: "Genesis Flow" },
   { to: "/ops/ingress", icon: Pulse, label: "Ingress Data" },
   { to: "/ops/assets", icon: Desktop, label: "Assets" },
   { to: "/ops/query", icon: MagnifyingGlass, label: "NL Query" },

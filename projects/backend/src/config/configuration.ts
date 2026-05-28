@@ -12,8 +12,13 @@ const dbConfig = registerAs("db", () => ({
   url: process.env.DATABASE_URL,
 }));
 
-const configuration = [appConfig, dbConfig];
+const aiConfig = registerAs("ai", () => ({
+  model: process.env.AI_MODEL || "openai/gpt-oss-120b",
+  openRouterApiKey: process.env.OPENROUTER_API_KEY,
+}));
 
-export { appConfig, dbConfig };
+const configuration = [appConfig, dbConfig, aiConfig];
+
+export { aiConfig, appConfig, dbConfig };
 
 export default configuration;

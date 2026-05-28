@@ -1,0 +1,556 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/api/openapi": {
+      "get": {
+        "operationId": "DocsController_getOpenApi",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Docs"
+        ]
+      }
+    },
+    "/api/reference": {
+      "get": {
+        "operationId": "DocsController_getReference",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Docs"
+        ]
+      }
+    },
+    "/api/import-flows/ingress/pull": {
+      "post": {
+        "operationId": "ImportFlowController_pullFromIngress",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportBatchResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Genesis"
+        ]
+      }
+    },
+    "/api/import-flows/{batchId}": {
+      "get": {
+        "operationId": "ImportFlowController_getBatch",
+        "parameters": [
+          {
+            "name": "batchId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportBatchResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Genesis"
+        ]
+      }
+    },
+    "/api/import-flows/{batchId}/match": {
+      "post": {
+        "operationId": "ImportFlowController_runMatching",
+        "parameters": [
+          {
+            "name": "batchId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportBatchResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Genesis"
+        ]
+      }
+    },
+    "/api/import-flows/{batchId}/review": {
+      "post": {
+        "operationId": "ImportFlowController_submitReview",
+        "parameters": [
+          {
+            "name": "batchId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReviewImportBatchDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportBatchResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Genesis"
+        ]
+      }
+    },
+    "/api/import-flows/{batchId}/items/{itemId}/documents": {
+      "post": {
+        "operationId": "ImportFlowController_uploadDocument",
+        "parameters": [
+          {
+            "name": "batchId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "itemId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                },
+                "required": [
+                  "file"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportBatchResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Genesis"
+        ]
+      }
+    },
+    "/api/import-flows/{batchId}/commit": {
+      "post": {
+        "operationId": "ImportFlowController_commitBatch",
+        "parameters": [
+          {
+            "name": "batchId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommitImportBatchResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Genesis"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Porject ATLAS Backend API",
+    "description": "The API used to power the Project ATLAS' backend.",
+    "version": "0.0.1",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "ReasoningCandidateDto": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "confidence": {
+            "type": "number"
+          },
+          "notes": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "label",
+          "confidence",
+          "notes"
+        ]
+      },
+      "ImportDocumentResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "fileName": {
+            "type": "string"
+          },
+          "contentType": {
+            "type": "string"
+          },
+          "sizeBytes": {
+            "type": "number"
+          },
+          "createdAt": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "fileName",
+          "contentType",
+          "sizeBytes",
+          "createdAt"
+        ]
+      },
+      "ImportItemResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "batchId": {
+            "type": "string"
+          },
+          "ingressKey": {
+            "type": "string"
+          },
+          "sku": {
+            "type": "string"
+          },
+          "vendor": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "number"
+          },
+          "rawPayload": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "normalizedName": {
+            "type": "object",
+            "nullable": true
+          },
+          "category": {
+            "type": "object",
+            "nullable": true
+          },
+          "confidence": {
+            "type": "object",
+            "nullable": true
+          },
+          "reasoning": {
+            "type": "object",
+            "nullable": true
+          },
+          "candidates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReasoningCandidateDto"
+            }
+          },
+          "technicianDecision": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "confirmed",
+              "edited",
+              "needs-doc"
+            ]
+          },
+          "technicianNotes": {
+            "type": "object",
+            "nullable": true
+          },
+          "documents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ImportDocumentResponseDto"
+            }
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "batchId",
+          "ingressKey",
+          "sku",
+          "vendor",
+          "quantity",
+          "rawPayload",
+          "candidates",
+          "technicianDecision",
+          "documents",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "ImportBatchResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string",
+            "enum": [
+              "ingress-controller"
+            ]
+          },
+          "sourceLabel": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ingested",
+              "matched",
+              "reviewed",
+              "committed"
+            ]
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ImportItemResponseDto"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "source",
+          "sourceLabel",
+          "status",
+          "createdAt",
+          "updatedAt",
+          "items"
+        ]
+      },
+      "ImportItemReviewDto": {
+        "type": "object",
+        "properties": {
+          "itemId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "technicianDecision": {
+            "type": "string",
+            "enum": [
+              "confirmed",
+              "edited",
+              "needs-doc"
+            ]
+          },
+          "technicianNotes": {
+            "type": "string"
+          },
+          "normalizedName": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "itemId",
+          "technicianDecision"
+        ]
+      },
+      "ReviewImportBatchDto": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ImportItemReviewDto"
+            }
+          }
+        },
+        "required": [
+          "items"
+        ]
+      },
+      "ComponentCatalogEntryResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "importItemId": {
+            "type": "string"
+          },
+          "sku": {
+            "type": "string"
+          },
+          "vendor": {
+            "type": "string"
+          },
+          "normalizedName": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "confidence": {
+            "type": "number"
+          },
+          "technicianDecision": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "confirmed",
+              "edited",
+              "needs-doc"
+            ]
+          },
+          "documentation": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ImportDocumentResponseDto"
+            }
+          },
+          "createdAt": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "importItemId",
+          "sku",
+          "vendor",
+          "normalizedName",
+          "category",
+          "confidence",
+          "technicianDecision",
+          "documentation",
+          "createdAt"
+        ]
+      },
+      "CommitImportBatchResponseDto": {
+        "type": "object",
+        "properties": {
+          "batch": {
+            "$ref": "#/components/schemas/ImportBatchResponseDto"
+          },
+          "catalogEntries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ComponentCatalogEntryResponseDto"
+            }
+          }
+        },
+        "required": [
+          "batch",
+          "catalogEntries"
+        ]
+      }
+    }
+  }
+}

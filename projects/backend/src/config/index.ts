@@ -1,4 +1,5 @@
 export {
+  aiConfig,
   appConfig,
   dbConfig,
   default,
