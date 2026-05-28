@@ -1,0 +1,553 @@
+import { ArrowRight, Brain, CaretRight, Cpu, Lightning, TrendUp, X } from "@phosphor-icons/react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import {
+  Area,
+  ComposedChart,
+  Line,
+  ReferenceLine,
+  ResponsiveContainer,
+  Tooltip as ReTooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
+import { assets, cascadeDelays, forecastData } from "../../data/mock";
+import { useApp } from "../../store/appStore";
+
+interface Props {
+  incidentId: string;
+  onClose: () => void;
+}
+
+interface TooltipProps {
+  active?: boolean;
+  payload?: { value: number; name: string; color: string }[];
+  label?: string;
+}
+function ChartTooltip({ active, payload, label }: TooltipProps) {
+  if (!active || !payload?.length) return null;
+  const filtered = payload.filter((p) => p.value != null);
+  return (
+    <div className="bg-[#0c0c0c] border border-white/[0.1] rounded-lg px-2.5 py-1.5 shadow-xl">
+      <p className="text-[9px] text-zinc-600 font-mono mb-1">{label}</p>
+      {filtered.map((p) => (
+        <p key={p.name} className="text-[10px] font-mono font-semibold" style={{ color: p.color }}>
+          {p.name}: {p.value?.toFixed(1)}°C
+        </p>
+      ))}
+    </div>
+  );
+}
+
+// The 5 named reasoning agents
+const agentPipeline = [
+  {
+    id: "sentinel",
+    name: "Sentinel",
+    role: "Anomaly Detection",
+    color: "blue",
+    status: "done",
+    output: "+4.1σ deviation · thermal runaway pattern · 94 prior matches",
+  },
+  {
+    id: "triton",
+    name: "Triton",
+    role: "Quantile Forecast",
+    color: "violet",
+    status: "done",
+    output: "q50 breach in 18m · q95 breach in 11m · LightGBM p=0.94",
+  },
+  {
+    id: "hephaestus",
+    name: "Hephaestus",
+    role: "Impact Analysis",
+    color: "orange",
+    status: "done",
+    output: "PUMP-CHW-03/04 → CRAH-B-01..04 → POD-05, POD-06 · 8 systems at risk",
+  },
+  {
+    id: "hermes",
+    name: "Hermes",
+    role: "RAG → MILP Dispatch",
+    color: "emerald",
+    status: "done",
+    output: "Marcus Chen matched (HVAC-R, on-site) · Parts confirmed in stock",
+  },
+  {
+    id: "mnemos",
+    name: "Mnemos",
+    role: "Training Capture",
+    color: "amber",
+    status: "waiting",
+    output: "Awaiting work order close — training tuple will be captured",
+  },
+];
+
+const agentDot: Record<string, string> = {
+  blue: "bg-blue-500/15 ring-blue-500/40",
+  violet: "bg-violet-500/15 ring-violet-500/35",
+  orange: "bg-orange-500/15 ring-orange-500/30",
+  emerald: "bg-emerald-500/15 ring-emerald-500/30",
+  amber: "bg-amber-500/15 ring-amber-500/25",
+};
+const agentBar: Record<string, string> = {
+  blue: "bg-blue-500",
+  violet: "bg-violet-500",
+  orange: "bg-orange-500",
+  emerald: "bg-emerald-500",
+  amber: "bg-amber-500",
+};
+const agentText: Record<string, string> = {
+  blue: "text-blue-400",
+  violet: "text-violet-400",
+  orange: "text-orange-400",
+  emerald: "text-emerald-400",
+  amber: "text-amber-400",
+};
+
+const cascadeChain = [
+  "pump-chw-03",
+  "pump-chw-04",
+  "crah-b-01",
+  "crah-b-02",
+  "crah-b-03",
+  "crah-b-04",
+  "pod-05",
+  "pod-06",
+];
+
+export default function AnomalyPanel({ incidentId, onClose }: Props) {
+  const { incidents } = useApp();
+  const navigate = useNavigate();
+  const [tick, setTick] = useState(0);
+  const [visible, setVisible] = useState(false);
+  const [showAgents, setShowAgents] = useState(true);
+
+  const incident = incidents.find((i) => i.id === incidentId);
+
+  useEffect(() => {
+    requestAnimationFrame(() => setVisible(true));
+  }, []);
+
+  useEffect(() => {
+    const id = setInterval(() => setTick((n) => n + 1), 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  if (!incident) return null;
+
+  const sourceAsset = assets.find((a) => a.id === incident.assetId);
+  const ttf = Math.max(0, incident.ttf - Math.floor(tick / 60));
+  const confPct = (incident.confidence * 100).toFixed(0);
+  const urgencyPct = Math.min(100, Math.max(0, (1 - ttf / 60) * 100));
+
+  return (
+    <div
+      className={`w-[440px] border-l border-white/[0.05] bg-[#040404] flex flex-col overflow-y-auto flex-shrink-0 transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] ${
+        visible ? "translate-x-0" : "translate-x-full"
+      }`}
+    >
+      {/* ── Header ── */}
+      <div className="relative px-5 pt-5 pb-4 border-b border-white/[0.05] flex-shrink-0 overflow-hidden">
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-red-500/50 to-transparent" />
+        <div className="absolute -top-12 left-1/2 -translate-x-1/2 w-64 h-32 bg-red-500/[0.06] rounded-full blur-3xl pointer-events-none" />
+
+        <div className="relative flex items-start justify-between mb-3">
+          <div className="flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-red-400 status-pulse-red" />
+            <span className="text-[9px] text-red-400 font-bold uppercase tracking-[0.18em]">
+              Critical Anomaly · INC-001
+            </span>
+          </div>
+          <button
+            type="button"
+            onClick={onClose}
+            className="w-7 h-7 rounded-xl bg-white/[0.04] hover:bg-white/[0.09] flex items-center justify-center text-zinc-600 hover:text-white transition-all duration-200"
+          >
+            <X size={11} weight="bold" />
+          </button>
+        </div>
+
+        <div className="relative">
+          <h2 className="text-[18px] font-semibold tracking-tight text-white leading-none font-mono">
+            {sourceAsset?.name}
+          </h2>
+          <p className="text-[11px] text-zinc-600 mt-1 font-mono">
+            {incident.detectedAt} · {sourceAsset?.zone} · CHW Supply Temp
+          </p>
+        </div>
+      </div>
+
+      {/* ── TTF + Confidence Hero ── */}
+      <div className="mx-5 mt-4">
+        <div className="p-[1.5px] rounded-2xl bg-red-500/[0.06] ring-1 ring-red-500/22">
+          <div className="bg-[#070707] rounded-[14px] px-5 py-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
+            <div className="flex items-end justify-between mb-3">
+              <div>
+                <p className="text-[9px] text-zinc-600 uppercase tracking-[0.16em] font-bold mb-1.5">
+                  q50 Time to Threshold
+                </p>
+                <div className="flex items-end gap-2">
+                  <span className="text-[52px] font-semibold tracking-[-0.04em] tabular-nums text-red-400 leading-none">
+                    {ttf}
+                  </span>
+                  <div className="pb-2">
+                    <span className="text-[15px] font-medium text-red-400/50">min</span>
+                  </div>
+                </div>
+              </div>
+              <div className="text-right pb-1">
+                <p className="text-[9px] text-zinc-600 uppercase tracking-[0.16em] font-bold mb-1.5">
+                  Model Confidence
+                </p>
+                <p className="text-[30px] font-semibold tracking-tighter tabular-nums text-white leading-none">
+                  {confPct}%
+                </p>
+              </div>
+            </div>
+
+            {/* Quantile crossing callouts */}
+            <div className="flex items-center gap-2 mb-3">
+              <div className="flex items-center gap-1.5 bg-red-500/10 border border-red-500/20 rounded-lg px-2.5 py-1">
+                <span className="text-[8px] font-mono font-bold text-red-400">q95</span>
+                <span className="text-[8px] text-zinc-500 font-mono">breach</span>
+                <span className="text-[9px] font-mono font-bold text-red-300">+11m</span>
+              </div>
+              <div className="flex items-center gap-1.5 bg-amber-500/10 border border-amber-500/18 rounded-lg px-2.5 py-1">
+                <span className="text-[8px] font-mono font-bold text-amber-400">q50</span>
+                <span className="text-[8px] text-zinc-500 font-mono">breach</span>
+                <span className="text-[9px] font-mono font-bold text-amber-300">+18m</span>
+              </div>
+              <div className="flex items-center gap-1.5 bg-zinc-800/60 border border-white/[0.06] rounded-lg px-2.5 py-1">
+                <span className="text-[8px] font-mono font-bold text-zinc-500">q05</span>
+                <span className="text-[8px] text-zinc-600 font-mono">breach</span>
+                <span className="text-[9px] font-mono font-bold text-zinc-500">+24m</span>
+              </div>
+            </div>
+
+            {/* Urgency bar */}
+            <div className="h-1 bg-white/[0.04] rounded-full overflow-hidden">
+              <div
+                className="h-full rounded-full"
+                style={{
+                  width: `${urgencyPct}%`,
+                  background:
+                    "linear-gradient(90deg, rgba(239,68,68,0.45) 0%, rgba(239,68,68,1) 100%)",
+                  transition: "width 1s ease",
+                }}
+              />
+            </div>
+            <p className="text-[8px] text-zinc-700 font-mono mt-1.5">
+              Thermal runaway pattern · {urgencyPct.toFixed(0)}% urgency
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Quantile Forecast Chart ── */}
+      <div className="px-5 mt-3.5">
+        <div className="p-[1.5px] bg-white/[0.012] rounded-xl ring-1 ring-white/[0.06]">
+          <div className="bg-[#070707] rounded-[10px] shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] overflow-hidden">
+            <div className="px-3 pt-3 pb-1 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <p className="text-[9px] text-zinc-600 font-mono uppercase tracking-[0.14em]">
+                  Quantile Forecast · CHW Supply Temp
+                </p>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="flex items-center gap-1 text-[8px] text-zinc-700 font-mono">
+                  <span className="w-2 h-0.5 bg-red-400/60 rounded inline-block" />
+                  q95
+                </span>
+                <span className="flex items-center gap-1 text-[8px] text-zinc-700 font-mono">
+                  <span className="w-2 h-0.5 bg-amber-400 rounded inline-block" />
+                  q50
+                </span>
+                <span className="flex items-center gap-1 text-[8px] text-zinc-700 font-mono">
+                  <span className="w-2 h-0.5 bg-zinc-600 rounded inline-block" />
+                  q05
+                </span>
+              </div>
+            </div>
+            <ResponsiveContainer width="100%" height={110}>
+              <ComposedChart data={forecastData} margin={{ top: 4, right: 8, left: 0, bottom: 0 }}>
+                <defs>
+                  <linearGradient id="q95Grad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#ef4444" stopOpacity={0.18} />
+                    <stop offset="100%" stopColor="#ef4444" stopOpacity={0} />
+                  </linearGradient>
+                  <linearGradient id="q50Grad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#f59e0b" stopOpacity={0.22} />
+                    <stop offset="100%" stopColor="#f59e0b" stopOpacity={0} />
+                  </linearGradient>
+                </defs>
+                <XAxis
+                  dataKey="time"
+                  tick={{ fontSize: 7, fill: "#3f3f46", fontFamily: "monospace" }}
+                  axisLine={false}
+                  tickLine={false}
+                  tickMargin={3}
+                />
+                <YAxis
+                  domain={[9, 19]}
+                  tick={{ fontSize: 7, fill: "#3f3f46", fontFamily: "monospace" }}
+                  axisLine={false}
+                  tickLine={false}
+                  width={22}
+                  tickFormatter={(v) => `${v}°`}
+                />
+                <ReTooltip
+                  content={<ChartTooltip />}
+                  cursor={{ stroke: "rgba(255,255,255,0.06)", strokeWidth: 1 }}
+                />
+                {/* 12°C threshold line */}
+                <ReferenceLine
+                  y={12.0}
+                  stroke="rgba(239,68,68,0.35)"
+                  strokeDasharray="3 3"
+                  label={{
+                    value: "12°C",
+                    position: "right",
+                    fontSize: 7,
+                    fill: "rgba(239,68,68,0.55)",
+                    fontFamily: "monospace",
+                  }}
+                />
+                {/* q95 band */}
+                <Area
+                  type="monotone"
+                  dataKey="q95"
+                  name="q95"
+                  stroke="rgba(239,68,68,0.55)"
+                  strokeWidth={1}
+                  strokeDasharray="3 2"
+                  fill="url(#q95Grad)"
+                  dot={false}
+                  activeDot={false}
+                  connectNulls
+                />
+                {/* q50 median */}
+                <Area
+                  type="monotone"
+                  dataKey="q50"
+                  name="q50"
+                  stroke="#f59e0b"
+                  strokeWidth={1.5}
+                  fill="url(#q50Grad)"
+                  dot={false}
+                  activeDot={{ r: 2.5, fill: "#f59e0b", strokeWidth: 0 }}
+                  connectNulls
+                />
+                {/* q05 lower bound */}
+                <Area
+                  type="monotone"
+                  dataKey="q05"
+                  name="q05"
+                  stroke="rgba(113,113,122,0.5)"
+                  strokeWidth={1}
+                  strokeDasharray="2 2"
+                  fill="none"
+                  dot={false}
+                  activeDot={false}
+                  connectNulls
+                />
+                {/* Actual (historical) */}
+                <Line
+                  type="monotone"
+                  dataKey="actual"
+                  name="actual"
+                  stroke="#f87171"
+                  strokeWidth={2}
+                  dot={false}
+                  activeDot={{ r: 3, fill: "#f87171", strokeWidth: 0 }}
+                  connectNulls
+                />
+              </ComposedChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Agent Pipeline ── */}
+      <div className="px-5 mt-3.5">
+        <button
+          type="button"
+          onClick={() => setShowAgents((s) => !s)}
+          className="flex items-center gap-2 w-full mb-2 group"
+        >
+          <Brain size={11} weight="light" className="text-zinc-500 flex-shrink-0" />
+          <p className="text-[9px] text-zinc-600 font-mono uppercase tracking-[0.14em] font-bold flex-1 text-left">
+            Agent Pipeline · 5 Agents
+          </p>
+          <ArrowRight
+            size={9}
+            weight="bold"
+            className={`text-zinc-700 transition-transform duration-300 ${showAgents ? "rotate-90" : ""}`}
+          />
+        </button>
+
+        {showAgents && (
+          <div className="p-[1.5px] bg-white/[0.012] rounded-xl ring-1 ring-white/[0.06] fade-up">
+            <div className="bg-[#070707] rounded-[10px] px-4 py-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
+              <div className="relative pl-6">
+                <div className="absolute left-[9px] top-3 bottom-3 w-px bg-white/[0.05]" />
+                <div className="space-y-3.5">
+                  {agentPipeline.map((agent, _i) => (
+                    <div key={agent.id} className="relative flex gap-3">
+                      {/* Timeline dot */}
+                      <div
+                        className={`absolute -left-6 w-4.5 h-4.5 rounded-full ring-1 flex items-center justify-center flex-shrink-0 z-10 ${agentDot[agent.color]}`}
+                        style={{ background: "rgba(0,0,0,0.85)", width: "18px", height: "18px" }}
+                      >
+                        <div
+                          className={`w-1.5 h-1.5 rounded-full ${agentBar[agent.color]} ${agent.status === "waiting" ? "opacity-30" : "opacity-80"}`}
+                        />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-1.5 mb-0.5">
+                          <p
+                            className={`text-[10px] font-bold tracking-[0.1em] uppercase ${agent.status === "waiting" ? "text-zinc-600" : agentText[agent.color]}`}
+                          >
+                            {agent.name}
+                          </p>
+                          <span className="text-[8px] text-zinc-700 font-mono">· {agent.role}</span>
+                          {agent.status === "waiting" && (
+                            <span className="text-[7px] text-amber-600 font-bold uppercase tracking-wide border border-amber-500/20 bg-amber-500/8 px-1.5 py-0.5 rounded">
+                              pending
+                            </span>
+                          )}
+                        </div>
+                        <p
+                          className={`text-[10px] leading-relaxed font-mono ${agent.status === "waiting" ? "text-zinc-700" : "text-zinc-500"}`}
+                        >
+                          {agent.output}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* ── Blast Radius Chain ── */}
+      <div className="px-5 mt-3.5">
+        <div className="flex items-center gap-1.5 mb-2.5">
+          <TrendUp size={11} weight="light" className="text-orange-500" />
+          <p className="text-[9px] text-zinc-600 font-mono uppercase tracking-[0.14em] font-bold">
+            Blast Radius · {cascadeChain.length + 1} systems
+          </p>
+        </div>
+
+        <div className="relative pl-6">
+          <div className="absolute left-[9px] top-4 bottom-4 w-px bg-white/[0.05]" />
+
+          {/* Source */}
+          <div className="relative flex items-center gap-3 py-1.5">
+            <div
+              className="absolute -left-6 w-4.5 h-4.5 rounded-full bg-red-500/15 ring-1 ring-red-500/55 flex items-center justify-center z-10"
+              style={{ width: "18px", height: "18px" }}
+            >
+              <div className="w-1.5 h-1.5 rounded-full bg-red-400 status-pulse-red" />
+            </div>
+            <span className="text-[8px] font-mono font-bold text-red-500 w-9 flex-shrink-0 tabular-nums">
+              now
+            </span>
+            <span className="text-[11px] text-white font-semibold font-mono">
+              {sourceAsset?.name}
+            </span>
+            <span className="ml-auto text-[9px] text-zinc-700 font-mono">{sourceAsset?.zone}</span>
+          </div>
+
+          {cascadeChain.map((id, _idx) => {
+            const a = assets.find((x) => x.id === id);
+            const delay = cascadeDelays[id] ?? 0;
+            const isPump = id.startsWith("pump");
+            const isCrah = id.startsWith("crah-b");
+            const _isPod = id.startsWith("pod");
+            const hotColor = isPump
+              ? "text-orange-600"
+              : isCrah
+                ? "text-amber-600"
+                : "text-red-700";
+            const dotBg = isPump
+              ? "bg-orange-500/10 ring-orange-500/20"
+              : isCrah
+                ? "bg-amber-500/10 ring-amber-500/18"
+                : "bg-red-500/8 ring-red-500/15";
+            const dotFill = isPump
+              ? "bg-orange-500/50"
+              : isCrah
+                ? "bg-amber-500/40"
+                : "bg-red-500/30";
+            return (
+              <div key={id} className="relative flex items-center gap-3 py-1.5">
+                <div
+                  className={`absolute -left-6 rounded-full ring-1 flex items-center justify-center z-10 ${dotBg}`}
+                  style={{ width: "18px", height: "18px" }}
+                >
+                  <div className={`w-1 h-1 rounded-full ${dotFill}`} />
+                </div>
+                <span
+                  className={`text-[8px] font-mono font-bold w-9 flex-shrink-0 tabular-nums ${hotColor}`}
+                >
+                  +{delay}m
+                </span>
+                <span className="text-[10px] text-zinc-400 font-mono">{a?.name}</span>
+                <span className="ml-auto text-[9px] text-zinc-700 font-mono">{a?.zone}</span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* ── Recommended Action ── */}
+      <div className="px-5 mt-3.5">
+        <div className="p-[1.5px] bg-blue-500/[0.04] rounded-xl ring-1 ring-blue-500/14">
+          <div className="bg-[#070707] rounded-[10px] p-3.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
+            <div className="flex items-start gap-2">
+              <Lightning size={12} weight="light" className="text-blue-400 mt-0.5 flex-shrink-0" />
+              <div>
+                <p className="text-[9px] text-zinc-600 font-mono uppercase tracking-[0.14em] mb-1.5">
+                  Hermes Recommendation
+                </p>
+                <p className="text-[11px] text-zinc-200 leading-[1.7]">
+                  {incident.recommendedAction}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ── CTAs ── */}
+      <div className="px-5 mt-4 pb-6 space-y-2">
+        <button
+          type="button"
+          onClick={() => navigate("/ops/dispatch")}
+          className="w-full group flex items-center justify-center gap-2 bg-white text-black text-[13px] font-semibold py-3.5 rounded-xl hover:bg-zinc-100 transition-all duration-200 active:scale-[0.98]"
+        >
+          View Dispatch Plan
+          <span className="w-5 h-5 rounded-lg bg-black/10 flex items-center justify-center group-hover:translate-x-0.5 transition-transform duration-200">
+            <CaretRight size={10} weight="bold" />
+          </span>
+        </button>
+        <button
+          type="button"
+          onClick={() => navigate("/supervisor")}
+          className="w-full flex items-center justify-center gap-2 bg-amber-500/[0.07] border border-amber-500/20 text-amber-300 text-[13px] font-semibold py-3.5 rounded-xl hover:bg-amber-500/[0.12] transition-all duration-200 active:scale-[0.98] group"
+        >
+          <Cpu size={13} weight="light" />
+          Send to Supervisor · HITL Required
+          <ArrowRight
+            size={11}
+            weight="bold"
+            className="group-hover:translate-x-0.5 transition-transform duration-200 ml-auto"
+          />
+        </button>
+      </div>
+    </div>
+  );
+}

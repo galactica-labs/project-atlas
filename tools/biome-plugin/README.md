@@ -14,7 +14,7 @@ This plugin automatically creates three targets for every project in your worksp
 
 ✅ **Automatic target inference** - No manual configuration needed per project  
 ✅ **Proper Nx caching** - Only re-lints changed files  
-✅ **Uses bunx** - Runs Biome via bunx for consistency  
+✅ **Uses Bun** - Runs Biome through the workspace Bun toolchain for consistency  
 ✅ **Project-scoped** - Each command only runs on the specific project directory  
 
 ## Usage
@@ -23,21 +23,21 @@ Once configured in `nx.json`, the plugin automatically adds targets to all proje
 
 ```bash
 # Lint a single project
-bunx nx lint @atlas/frontend
+bun nx run @atlas/frontend:biome:lint
 
 # Format a single project
-bunx nx format @atlas/backend
+bun nx run @atlas/backend:biome:format
 
 # Check (lint + format) a single project
-bunx nx biome:check @atlas/ui
+bun nx run @atlas/ui:biome:check
 
 # Run on all projects
-bunx nx run-many -t lint
-bunx nx run-many -t format
-bunx nx run-many -t biome:check
+bun nx run-many -t biome:lint
+bun nx run-many -t biome:format
+bun nx run-many -t biome:check
 
 # Run on affected projects only
-bunx nx affected -t lint
+bun nx affected -t biome:lint
 ```
 
 ## Configuration

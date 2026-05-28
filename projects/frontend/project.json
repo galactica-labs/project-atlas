@@ -1,0 +1,44 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "@atlas/frontend",
+  "targets": {
+    "dev": {
+      "continuous": true,
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "bun run dev",
+        "cwd": "projects/frontend"
+      }
+    },
+    "build": {
+      "executor": "nx:run-commands",
+      "outputs": ["{projectRoot}/dist"],
+      "options": {
+        "command": "bun run build",
+        "cwd": "projects/frontend"
+      }
+    },
+    "preview": {
+      "continuous": true,
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "bun run preview",
+        "cwd": "projects/frontend"
+      }
+    },
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "bun run test",
+        "cwd": "projects/frontend"
+      }
+    },
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "bun run typecheck",
+        "cwd": "projects/frontend"
+      }
+    }
+  }
+}

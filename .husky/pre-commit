@@ -1,1 +1,15 @@
+#!/usr/bin/env sh
+set -eu
+
+export BUN_INSTALL="${BUN_INSTALL:-$HOME/.bun}"
+if [ -d "$BUN_INSTALL/bin" ]; then
+  export PATH="$BUN_INSTALL/bin:$PATH"
+fi
+
+if ! command -v bun >/dev/null 2>&1; then
+  echo "Bun is required for the pre-commit hook but was not found on PATH." >&2
+  echo "Expected Bun at: $BUN_INSTALL/bin/bun" >&2
+  exit 127
+fi
+
 bun lint-staged

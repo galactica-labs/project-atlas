@@ -21,21 +21,21 @@
       "inputs": ["{projectRoot}/src/db/schema.ts", "{projectRoot}/drizzle.config.ts"],
       "outputs": ["{projectRoot}/drizzle"],
       "options": {
-        "command": "drizzle-kit generate",
+        "command": "bun run drizzle-kit generate",
         "cwd": "projects/backend"
       }
     },
     "db:migrate": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "drizzle-kit migrate",
+        "command": "bun run drizzle-kit migrate",
         "cwd": "projects/backend"
       }
     },
     "db:push": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "drizzle-kit push",
+        "command": "bun run drizzle-kit push",
         "cwd": "projects/backend"
       }
     },
@@ -43,7 +43,7 @@
       "executor": "nx:run-commands",
       "continuous": true,
       "options": {
-        "command": "drizzle-kit studio",
+        "command": "bun run drizzle-kit studio",
         "cwd": "projects/backend"
       }
     },
@@ -113,7 +113,7 @@
         "parallel": true,
         "commands": [
           "bun swc src -d debug/src --copy-files --watch",
-          "watchexec -r -w debug/src -e js,json -- bun debug/src/main.js"
+          "bun --watch debug/src/main.js"
         ]
       }
     },

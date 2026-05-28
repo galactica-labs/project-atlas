@@ -1,0 +1,255 @@
+@import "@fontsource-variable/geist";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Base ─────────────────────────────────────────────── */
+@layer base {
+  :root {
+    --background:        #050505;
+    --foreground:        #fafafa;
+    --border:            rgba(255,255,255,0.07);
+    --input:             rgba(255,255,255,0.10);
+    --ring:              rgba(255,255,255,0.20);
+    --radius:            0.75rem;
+
+    --card:              #0f0f0f;
+    --card-foreground:   #fafafa;
+    --popover:           #0a0a0a;
+    --popover-foreground:#fafafa;
+    --primary:           #fafafa;
+    --primary-foreground:#050505;
+    --secondary:         #1a1a1a;
+    --secondary-foreground:#fafafa;
+    --muted:             #1a1a1a;
+    --muted-foreground:  #71717a;
+    --accent:            #1a1a1a;
+    --accent-foreground: #fafafa;
+    --destructive:       #ef4444;
+  }
+
+  * {
+    border-color: var(--border);
+    box-sizing: border-box;
+  }
+
+  html {
+    font-family: 'Geist Variable', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    margin: 0;
+    padding: 0;
+  }
+}
+
+/* ─── Grain overlay (fixed, GPU layer, pointer-events-none) ─ */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  opacity: 0.022;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+/* ─── Liquid glass surface ─────────────────────────────── */
+.glass {
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.08),
+    0 0 0 1px rgba(255,255,255,0.06);
+}
+
+/* ─── Slide-in from right ──────────────────────────────── */
+@keyframes slide-in-right {
+  from { transform: translateX(100%); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+.slide-in-right {
+  animation: slide-in-right 0.35s cubic-bezier(0.32,0.72,0,1) forwards;
+}
+
+/* ─── Fade-up entry ────────────────────────────────────── */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up {
+  animation: fade-up 0.7s cubic-bezier(0.32,0.72,0,1) forwards;
+  opacity: 0;
+}
+
+/* ─── Fade-in ──────────────────────────────────────────── */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.fade-in {
+  animation: fade-in 0.6s cubic-bezier(0.32,0.72,0,1) forwards;
+  opacity: 0;
+}
+
+/* ─── Status pulse ─────────────────────────────────────── */
+@keyframes status-pulse {
+  0%,100% { opacity: 1; box-shadow: 0 0 0 0 rgba(52,211,153,0.4); }
+  50%      { opacity: 0.7; box-shadow: 0 0 0 5px rgba(52,211,153,0); }
+}
+.status-pulse {
+  animation: status-pulse 2s ease-in-out infinite;
+}
+
+/* ─── Slow drift for orbs ──────────────────────────────── */
+@keyframes drift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(30px, -20px) scale(1.05); }
+  66%       { transform: translate(-20px, 15px) scale(0.97); }
+}
+.drift {
+  animation: drift 18s ease-in-out infinite;
+}
+.drift-slow {
+  animation: drift 28s ease-in-out infinite reverse;
+}
+
+/* ─── Ticker ───────────────────────────────────────────── */
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.ticker-track {
+  animation: ticker 30s linear infinite;
+  will-change: transform;
+}
+.ticker-track:hover {
+  animation-play-state: paused;
+}
+
+/* ─── Glow shimmer ─────────────────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+.shimmer-text {
+  background: linear-gradient(90deg, #ffffff40 0%, #ffffff 40%, #ffffff40 60%, #ffffff40 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s linear infinite;
+}
+
+/* ─── Scroll reveal base ───────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.32,0.72,0,1),
+              transform 0.7s cubic-bezier(0.32,0.72,0,1);
+}
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── Scan line (terminal vibe) ────────────────────────── */
+@keyframes scan {
+  from { transform: translateY(-100%); }
+  to   { transform: translateY(100vh); }
+}
+.scan-line {
+  position: absolute;
+  inset-x: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.04), transparent);
+  animation: scan 8s linear infinite;
+  pointer-events: none;
+}
+
+/* ─── Number counter shimmer ───────────────────────────── */
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.count-in {
+  animation: count-up 0.5s cubic-bezier(0.32,0.72,0,1) forwards;
+}
+
+/* ─── Border glow ─────────────────────────────────────── */
+@keyframes border-glow {
+  0%, 100% { box-shadow: 0 0 0 1px rgba(255,255,255,0.06); }
+  50%       { box-shadow: 0 0 0 1px rgba(255,255,255,0.12), 0 0 20px rgba(255,255,255,0.04); }
+}
+.card-hover-glow:hover {
+  animation: border-glow 2s ease-in-out infinite;
+}
+
+/* ─── Red critical pulse ───────────────────────────────── */
+@keyframes status-pulse-red {
+  0%,100% { opacity: 1; box-shadow: 0 0 0 0 rgba(239,68,68,0.5); }
+  50%      { opacity: 0.85; box-shadow: 0 0 0 8px rgba(239,68,68,0); }
+}
+.status-pulse-red { animation: status-pulse-red 1.4s ease-in-out infinite; }
+
+/* ─── Amber warning pulse ──────────────────────────────── */
+@keyframes status-pulse-amber {
+  0%,100% { opacity: 1; box-shadow: 0 0 0 0 rgba(245,158,11,0.45); }
+  50%      { opacity: 0.85; box-shadow: 0 0 0 7px rgba(245,158,11,0); }
+}
+.status-pulse-amber { animation: status-pulse-amber 2s ease-in-out infinite; }
+
+/* ─── SVG dash flow (cascade lines) ───────────────────── */
+@keyframes dash-flow {
+  to { stroke-dashoffset: -20; }
+}
+.dash-flow      { animation: dash-flow 1s linear infinite; }
+.dash-flow-slow { animation: dash-flow 2.5s linear infinite; }
+
+/* ─── Cursor blink ─────────────────────────────────────── */
+@keyframes cursor-blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+.cursor-blink { animation: cursor-blink 1s step-end infinite; }
+
+/* ─── Wipe in from left ────────────────────────────────── */
+@keyframes wipe-in {
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0% 0 0); }
+}
+.wipe-in { animation: wipe-in 0.7s cubic-bezier(0.32,0.72,0,1) forwards; }
+
+/* ─── Slow rotation (for rings/arcs) ──────────────────── */
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+.spin-slow { animation: spin-slow 8s linear infinite; }
+
+/* ─── Progress bar fill-in ─────────────────────────────── */
+@keyframes bar-fill {
+  from { width: 0%; }
+}
+.bar-fill { animation: bar-fill 1.2s cubic-bezier(0.32,0.72,0,1) forwards; }
+
+/* ─── Breathe (gentle scale pulse) ────────────────────── */
+@keyframes breathe {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%       { transform: scale(1.03); opacity: 0.88; }
+}
+.breathe { animation: breathe 3s ease-in-out infinite; }
+
+/* ─── React Flow overrides ─────────────────────────────── */
+.react-flow__attribution { display: none !important; }
+.react-flow__controls { background: #0a0a0a !important; border: 1px solid rgba(255,255,255,0.08) !important; border-radius: 12px !important; overflow: hidden; box-shadow: none !important; }
+.react-flow__controls-button { background: transparent !important; border: none !important; border-bottom: 1px solid rgba(255,255,255,0.06) !important; color: #71717a !important; fill: #71717a !important; }
+.react-flow__controls-button:hover { background: rgba(255,255,255,0.04) !important; }
+.react-flow__controls-button:last-child { border-bottom: none !important; }
+.react-flow__edge-path { transition: stroke 0.3s ease; }
+.react-flow__handle { opacity: 0 !important; }

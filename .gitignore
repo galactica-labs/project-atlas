@@ -8,6 +8,11 @@ out-tsc
 # dependencies
 node_modules
 
+# non-Bun package-manager lockfiles
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
 # IDEs and editors
 /.idea
 .project

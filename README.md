@@ -4,13 +4,21 @@
 
 ✨ Your new, shiny [Nx workspace](https://nx.dev) is ready ✨.
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/nx-api/js?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+[Learn more about this workspace setup and its capabilities](https://nx.dev/nx-api/js?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or run `bun nx graph` to visually explore what was created. Now, let's get you up to speed!
+
+## Local development
+
+```sh
+bun install
+./start.sh
+```
+
 ## Try the full Nx platform
 🚀 If you haven't connected to Nx Cloud yet, [complete your setup here](https://cloud.nx.app/setup/connect-workspace/guide). Get faster builds with remote caching, distributed task execution, and self-healing CI. [See how your workspace can benefit](#nx-cloud).
 ## Generate a library
 
 ```sh
-npx nx g @nx/js:lib packages/pkg1 --publishable --importPath=@my-org/pkg1
+bun nx g @nx/js:lib packages/pkg1 --publishable --importPath=@my-org/pkg1
 ```
 
 ## Run tasks
@@ -18,13 +26,13 @@ npx nx g @nx/js:lib packages/pkg1 --publishable --importPath=@my-org/pkg1
 To build the library use:
 
 ```sh
-npx nx build pkg1
+bun nx build pkg1
 ```
 
 To run any task with Nx use:
 
 ```sh
-npx nx <target> <project-name>
+bun nx <target> <project-name>
 ```
 
 These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
@@ -36,7 +44,7 @@ These targets are either [inferred automatically](https://nx.dev/concepts/inferr
 To version and release the library use
 
 ```
-npx nx release
+bun nx release
 ```
 
 Pass `--dry-run` to see what would happen without actually releasing the library.
@@ -50,13 +58,13 @@ Nx automatically updates TypeScript [project references](https://www.typescriptl
 To manually trigger the process to sync the project graph dependencies information to the TypeScript project references, run the following command:
 
 ```sh
-npx nx sync
+bun nx sync
 ```
 
 You can enforce that the TypeScript project references are always in the correct state when running in CI by adding a step to your CI job configuration that runs the following command:
 
 ```sh
-npx nx sync:check
+bun nx sync:check
 ```
 
 [Learn more about nx sync](https://nx.dev/reference/nx-commands#sync)
@@ -77,7 +85,7 @@ Nx Cloud ensures a [fast and scalable CI](https://nx.dev/ci/intro/why-nx-cloud?u
 Use the following command to configure a CI workflow for your workspace:
 
 ```sh
-npx nx g ci-workflow
+bun nx g ci-workflow
 ```
 
 [Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
