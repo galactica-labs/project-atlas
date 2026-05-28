@@ -1,0 +1,33 @@
+{
+  "cli_version": "0.6.3",
+  "checkpoint_id": "d55f986a74e4",
+  "strategy": "manual-commit",
+  "branch": "main",
+  "checkpoints_count": 3,
+  "files_touched": [
+    "projects/frontend/src/pages/ops/AnomalyPanel.tsx",
+    "projects/frontend/src/pages/ops/CommandCenter.tsx",
+    "projects/frontend/src/pages/ops/DispatchPlan.tsx",
+    "projects/frontend/src/pages/ops/IngressViz.tsx",
+    "projects/frontend/src/pages/ops/NLQuery.tsx",
+    "projects/frontend/src/pages/ops/Reports.tsx",
+    "projects/frontend/src/pages/tech/ActiveJob.tsx",
+    "projects/frontend/src/pages/tech/JobsList.tsx",
+    "projects/frontend/src/store/appStore.ts"
+  ],
+  "sessions": [
+    {
+      "metadata": "/d5/5f986a74e4/0/metadata.json",
+      "transcript": "/d5/5f986a74e4/0/full.jsonl",
+      "content_hash": "/d5/5f986a74e4/0/content_hash.txt",
+      "prompt": "/d5/5f986a74e4/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 179,
+    "cache_creation_tokens": 159824,
+    "cache_read_tokens": 6045739,
+    "output_tokens": 34947,
+    "api_call_count": 49
+  }
+}

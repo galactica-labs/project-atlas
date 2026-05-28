@@ -1,0 +1,9 @@
+in the /ops file, I need you to clean  up the inconsistencies and add data behind the placeholders. Also check the incosistencies in the ui borders in all pages
+
+---
+
+clean the command center page /ops because there are letters ovelapping
+
+---
+
+in the nl query, make the agent pipeline symmetric

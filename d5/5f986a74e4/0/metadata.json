@@ -1,0 +1,79 @@
+{
+  "cli_version": "0.6.3",
+  "checkpoint_id": "d55f986a74e4",
+  "session_id": "76f1f71d-bf9c-41ac-9665-ddb0cdfcb555",
+  "strategy": "manual-commit",
+  "created_at": "2026-05-28T15:40:40.06212Z",
+  "branch": "main",
+  "checkpoints_count": 3,
+  "files_touched": [
+    "projects/frontend/src/pages/ops/AnomalyPanel.tsx",
+    "projects/frontend/src/pages/ops/CommandCenter.tsx",
+    "projects/frontend/src/pages/ops/DispatchPlan.tsx",
+    "projects/frontend/src/pages/ops/IngressViz.tsx",
+    "projects/frontend/src/pages/ops/NLQuery.tsx",
+    "projects/frontend/src/pages/ops/Reports.tsx",
+    "projects/frontend/src/pages/tech/ActiveJob.tsx",
+    "projects/frontend/src/pages/tech/JobsList.tsx",
+    "projects/frontend/src/store/appStore.ts"
+  ],
+  "agent": "Claude Code",
+  "model": "claude-sonnet-4-6",
+  "turn_id": "9865007c60fe",
+  "token_usage": {
+    "input_tokens": 179,
+    "cache_creation_tokens": 159824,
+    "cache_read_tokens": 6045739,
+    "output_tokens": 34947,
+    "api_call_count": 49
+  },
+  "session_metrics": {
+    "turn_count": 3
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-05-28T15:40:40.039703Z",
+    "agent_lines": 232,
+    "agent_removed": 141,
+    "human_added": 859,
+    "human_modified": 16,
+    "human_removed": 0,
+    "total_committed": 1098,
+    "total_lines_changed": 1252,
+    "agent_percentage": 29.792332268370608,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0
+    },
+    {
+      "checkpoint_number": 2,
+      "user_lines_added": 508,
+      "user_lines_removed": 7,
+      "agent_lines_added": 16,
+      "agent_lines_removed": 24,
+      "user_added_per_file": {
+        "projects/frontend/src/models/hephaestus.ts": 58,
+        "projects/frontend/src/models/hermes.ts": 149,
+        "projects/frontend/src/models/pipeline.ts": 79,
+        "projects/frontend/src/models/sentinel.ts": 121,
+        "projects/frontend/src/models/triton.ts": 75,
+        "projects/frontend/src/store/appStore.ts": 26
+      },
+      "user_removed_per_file": {
+        "projects/frontend/src/store/appStore.ts": 7
+      }
+    },
+    {
+      "checkpoint_number": 3,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 576,
+      "agent_lines_removed": 119
+    }
+  ]
+}
