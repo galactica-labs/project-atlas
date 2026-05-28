@@ -3,7 +3,7 @@
   "checkpoint_id": "d55f986a74e4",
   "strategy": "manual-commit",
   "branch": "main",
-  "checkpoints_count": 8,
+  "checkpoints_count": 11,
   "files_touched": [
     "projects/backend/src/pipeline/pipeline.controller.ts",
     "projects/backend/src/pipeline/pipeline.service.ts",
@@ -57,13 +57,19 @@
       "transcript": "/d5/5f986a74e4/4/full.jsonl",
       "content_hash": "/d5/5f986a74e4/4/content_hash.txt",
       "prompt": "/d5/5f986a74e4/4/prompt.txt"
+    },
+    {
+      "metadata": "/d5/5f986a74e4/5/metadata.json",
+      "transcript": "/d5/5f986a74e4/5/full.jsonl",
+      "content_hash": "/d5/5f986a74e4/5/content_hash.txt",
+      "prompt": "/d5/5f986a74e4/5/prompt.txt"
     }
   ],
   "token_usage": {
-    "input_tokens": 6095,
-    "cache_creation_tokens": 487053,
-    "cache_read_tokens": 16206698,
-    "output_tokens": 126063,
-    "api_call_count": 167
+    "input_tokens": 6163,
+    "cache_creation_tokens": 715255,
+    "cache_read_tokens": 20244467,
+    "output_tokens": 191572,
+    "api_call_count": 229
   }
 }

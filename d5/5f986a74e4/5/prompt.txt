@@ -1,0 +1,1 @@
+I want you to make use of the simulated scenarios from the backend and use that to feed the tlemetry data on the frontend instead of making use of the hardcoded values, use the simulated log and telemetry streams

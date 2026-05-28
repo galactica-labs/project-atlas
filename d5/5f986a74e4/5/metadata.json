@@ -1,0 +1,111 @@
+{
+  "cli_version": "0.6.3",
+  "checkpoint_id": "d55f986a74e4",
+  "session_id": "ses_190dfb838ffea7MxX2l7G93cEi",
+  "strategy": "manual-commit",
+  "created_at": "2026-05-28T15:40:44.84877Z",
+  "branch": "main",
+  "checkpoints_count": 3,
+  "files_touched": [
+    "projects/backend/src/pipeline/pipeline.controller.ts",
+    "projects/backend/src/pipeline/pipeline.service.ts",
+    "projects/frontend/src/lib/streams.ts",
+    "projects/frontend/src/models/hephaestus.ts",
+    "projects/frontend/src/models/hermes.ts",
+    "projects/frontend/src/models/pipeline.ts",
+    "projects/frontend/src/models/sentinel.ts",
+    "projects/frontend/src/models/triton.ts",
+    "projects/frontend/src/pages/ops/AnomalyPanel.tsx",
+    "projects/frontend/src/pages/ops/CommandCenter.tsx",
+    "projects/frontend/src/pages/ops/DispatchPlan.tsx",
+    "projects/frontend/src/pages/ops/IngressViz.tsx",
+    "projects/frontend/src/pages/ops/NLQuery.tsx",
+    "projects/frontend/src/pages/ops/Reports.tsx",
+    "projects/frontend/src/pages/tech/ActiveJob.tsx",
+    "projects/frontend/src/pages/tech/JobsList.tsx",
+    "projects/frontend/src/store/appStore.ts",
+    "projects/frontend/tsconfig.json",
+    "projects/frontend/vite.config.ts",
+    "python/atlas_ml/atlas_ml/service/app.py",
+    "tsconfig.json"
+  ],
+  "agent": "OpenCode",
+  "model": "claude-sonnet-4.6",
+  "turn_id": "ee7889c9d38c",
+  "token_usage": {
+    "input_tokens": 68,
+    "cache_creation_tokens": 228202,
+    "cache_read_tokens": 4037769,
+    "output_tokens": 65509,
+    "api_call_count": 62
+  },
+  "session_metrics": {
+    "turn_count": 3
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-05-28T15:40:44.825406Z",
+    "agent_lines": 230,
+    "agent_removed": 27,
+    "human_added": 101,
+    "human_modified": 158,
+    "human_removed": 0,
+    "total_committed": 468,
+    "total_lines_changed": 516,
+    "agent_percentage": 49.8062015503876,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 584,
+      "user_lines_removed": 126,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0,
+      "user_added_per_file": {
+        "projects/frontend/src/models/hephaestus.ts": 58,
+        "projects/frontend/src/models/hermes.ts": 149,
+        "projects/frontend/src/models/pipeline.ts": 79,
+        "projects/frontend/src/models/sentinel.ts": 121,
+        "projects/frontend/src/models/triton.ts": 75,
+        "projects/frontend/src/pages/ops/AnomalyPanel.tsx": 37,
+        "projects/frontend/src/pages/ops/CommandCenter.tsx": 2,
+        "projects/frontend/src/pages/ops/DispatchPlan.tsx": 17,
+        "projects/frontend/src/pages/ops/IngressViz.tsx": 4,
+        "projects/frontend/src/pages/ops/NLQuery.tsx": 8,
+        "projects/frontend/src/pages/ops/Reports.tsx": 1,
+        "projects/frontend/src/pages/tech/ActiveJob.tsx": 5,
+        "projects/frontend/src/pages/tech/JobsList.tsx": 2,
+        "projects/frontend/src/store/appStore.ts": 26
+      },
+      "user_removed_per_file": {
+        "projects/frontend/src/pages/ops/AnomalyPanel.tsx": 66,
+        "projects/frontend/src/pages/ops/CommandCenter.tsx": 26,
+        "projects/frontend/src/pages/ops/DispatchPlan.tsx": 10,
+        "projects/frontend/src/pages/ops/IngressViz.tsx": 4,
+        "projects/frontend/src/pages/ops/NLQuery.tsx": 7,
+        "projects/frontend/src/pages/ops/Reports.tsx": 1,
+        "projects/frontend/src/pages/tech/ActiveJob.tsx": 3,
+        "projects/frontend/src/pages/tech/JobsList.tsx": 2,
+        "projects/frontend/src/store/appStore.ts": 7
+      }
+    },
+    {
+      "checkpoint_number": 2,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0
+    },
+    {
+      "checkpoint_number": 3,
+      "user_lines_added": 228,
+      "user_lines_removed": 0,
+      "agent_lines_added": 620,
+      "agent_lines_removed": 138,
+      "user_added_per_file": {
+        "projects/backend/src/pipeline/pipeline.service.ts": 80,
+        "python/atlas_ml/atlas_ml/service/app.py": 148
+      }
+    }
+  ]
+}
