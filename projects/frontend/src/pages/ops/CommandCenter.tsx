@@ -1,18 +1,7 @@
-import {
-  Background,
-  BackgroundVariant,
-  Controls,
-  type Edge,
-  type Node,
-  ReactFlow,
-  useEdgesState,
-  useNodesState,
-} from "@xyflow/react";
-import { useEffect, useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "@xyflow/react/dist/style.css";
-import { ArrowRight, ArrowUpRight, Brain, Square, Stack, Warning } from "@phosphor-icons/react";
+import { ArrowRight, ArrowUpRight, Brain, Warning } from "@phosphor-icons/react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Area,
   AreaChart,
@@ -21,9 +10,8 @@ import {
   Tooltip as ReTooltip,
   XAxis,
 } from "recharts";
-import { AssetNode } from "../../components/nodes/AssetNode";
-import { FloorNode } from "../../components/nodes/FloorNode";
-import { type Asset, cascadeDelays, type Incident, telemetryHistory } from "../../data/mock";
+import CommandCenterMap from "../../components/atlas-map/CommandCenterMap";
+import { cascadeDelays, telemetryHistory } from "../../data/mock";
 import { useApp } from "../../store/appStore";
 import AnomalyPanel from "./AnomalyPanel";
 
@@ -148,133 +136,6 @@ const DATACENTER_FLOORS: Record<FloorKey, FloorConfig> = {
   },
 };
 
-const nodeTypes = { assetNode: AssetNode, floorNode: FloorNode };
-
-function buildNodes(
-  assets: Asset[],
-  incident: Incident | undefined,
-  litNodes: Set<string>,
-  ttf: number,
-  activeFloor: FloorKey
-): Node[] {
-  const nodes: Node[] = [];
-  const floorCfg = DATACENTER_FLOORS[activeFloor];
-  const zones = floorCfg.zones;
-
-  const floorAssets = assets.filter((a) => a.floor === activeFloor);
-
-  const byZone: Record<string, Asset[]> = {};
-  for (const a of floorAssets) {
-    if (!byZone[a.zone]) byZone[a.zone] = [];
-    byZone[a.zone].push(a);
-  }
-
-  for (const [zoneName, zoneCfg] of Object.entries(zones)) {
-    const zoneAssets = byZone[zoneName] ?? [];
-    nodes.push({
-      id: `floor-${zoneName}`,
-      type: "floorNode",
-      position: { x: 20, y: zoneCfg.y + 20 },
-      style: { width: 760, height: zoneCfg.height },
-      data: { label: zoneCfg.label, zone: zoneCfg.zone, nodeCount: zoneAssets.length },
-      selectable: false,
-      draggable: false,
-      zIndex: -1,
-    });
-  }
-
-  for (const a of floorAssets) {
-    const zoneCfg = zones[a.zone as keyof typeof zones];
-    if (!zoneCfg) continue;
-
-    const nodeX = 60 + (a.x / 100) * 640;
-    const nodeY = zoneCfg.y + 50 + (a.y / 100) * (zoneCfg.height - 100);
-
-    const isSource = incident?.assetId === a.id;
-    const isBlast = litNodes.has(a.id);
-
-    nodes.push({
-      id: a.id,
-      type: "assetNode",
-      position: { x: nodeX, y: nodeY },
-      data: {
-        name: a.name,
-        type: a.type,
-        status: isSource ? "critical" : isBlast ? "warning" : a.status,
-        telemetry: a.telemetry,
-        isSource,
-        isBlast,
-        ttf: isSource ? ttf : undefined,
-      },
-      zIndex: isSource ? 10 : isBlast ? 8 : 1,
-    });
-  }
-
-  return nodes;
-}
-
-function buildEdges(
-  assets: Asset[],
-  incident: Incident | undefined,
-  litNodes: Set<string>,
-  activeFloor: FloorKey
-): Edge[] {
-  const edges: Edge[] = [];
-
-  const floorAssets = assets.filter((a) => a.floor === activeFloor);
-  const floorIds = new Set(floorAssets.map((a) => a.id));
-
-  for (const a of floorAssets) {
-    for (const dep of a.dependsOn) {
-      if (!floorIds.has(dep)) continue;
-      const isBlastEdge =
-        incident &&
-        (litNodes.has(a.id) || a.id === incident.assetId) &&
-        (litNodes.has(dep) || dep === incident.assetId);
-      edges.push({
-        id: `dep-${a.id}-${dep}`,
-        source: dep,
-        target: a.id,
-        type: "default",
-        animated: !!isBlastEdge,
-        style: isBlastEdge
-          ? { stroke: "rgba(251,146,60,0.55)", strokeWidth: 1.5, strokeDasharray: "5 4" }
-          : { stroke: "rgba(255,255,255,0.05)", strokeWidth: 1 },
-        zIndex: isBlastEdge ? 5 : 0,
-      });
-    }
-  }
-
-  if (incident) {
-    for (const tid of incident.blastRadius) {
-      if (!floorIds.has(tid) || !floorIds.has(incident.assetId)) continue;
-      if (
-        edges.find(
-          (e) =>
-            (e.source === incident.assetId && e.target === tid) ||
-            (e.source === tid && e.target === incident.assetId)
-        )
-      )
-        continue;
-      edges.push({
-        id: `blast-${incident.assetId}-${tid}`,
-        source: incident.assetId,
-        target: tid,
-        type: "default",
-        animated: litNodes.has(tid),
-        style: {
-          stroke: litNodes.has(tid) ? "rgba(239,68,68,0.5)" : "rgba(239,68,68,0.15)",
-          strokeWidth: litNodes.has(tid) ? 1.5 : 1,
-          strokeDasharray: "4 3",
-        },
-        zIndex: 6,
-      });
-    }
-  }
-
-  return edges;
-}
-
 function LiveClock() {
   const [t, setT] = useState(new Date());
   useEffect(() => {
@@ -314,7 +175,6 @@ export default function CommandCenter() {
   const navigate = useNavigate();
   const [litNodes, setLitNodes] = useState<Set<string>>(new Set());
   const [tick, setTick] = useState(0);
-  const [is3D, setIs3D] = useState(window.innerWidth >= 640);
   const [activeFloor, setActiveFloor] = useState<FloorKey>("Mechanical");
 
   const incident = incidents.find((i) => i.id === activeIncidentId);
@@ -352,25 +212,6 @@ export default function CommandCenter() {
 
   const onlineCount = useCountUp(online);
   const incCount = useCountUp(activeInc);
-
-  const nodes = useMemo(
-    () => buildNodes(assets, incident, litNodes, ttf, activeFloor),
-    [assets, incident, litNodes, ttf, activeFloor]
-  );
-  const edges = useMemo(
-    () => buildEdges(assets, incident, litNodes, activeFloor),
-    [assets, incident, litNodes, activeFloor]
-  );
-
-  const [flowNodes, setFlowNodes, onNodesChange] = useNodesState(nodes);
-  const [flowEdges, setFlowEdges, onEdgesChange] = useEdgesState(edges);
-
-  useEffect(() => {
-    setFlowNodes(nodes);
-  }, [nodes, setFlowNodes]);
-  useEffect(() => {
-    setFlowEdges(edges);
-  }, [edges, setFlowEdges]);
 
   const kpis = [
     { label: "Online", value: `${onlineCount}/${assets.length}`, color: "emerald" },
@@ -425,22 +266,6 @@ export default function CommandCenter() {
             </div>
             <div className="flex items-center gap-2">
               <LiveClock />
-              <div className="hidden sm:flex items-center gap-1 p-1 bg-white/[0.03] rounded-lg ring-1 ring-white/[0.06]">
-                <button
-                  type="button"
-                  onClick={() => setIs3D(true)}
-                  className={`flex items-center gap-1 px-2 py-1 rounded-md text-[10px] font-medium transition-all duration-200 ${is3D ? "bg-white/[0.08] text-white" : "text-zinc-600 hover:text-zinc-400"}`}
-                >
-                  <Stack size={10} weight="light" /> 3D
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setIs3D(false)}
-                  className={`flex items-center gap-1 px-2 py-1 rounded-md text-[10px] font-medium transition-all duration-200 ${!is3D ? "bg-white/[0.08] text-white" : "text-zinc-600 hover:text-zinc-400"}`}
-                >
-                  <Square size={10} weight="light" /> 2D
-                </button>
-              </div>
               <button
                 type="button"
                 onClick={() => navigate("/ops/incidents")}
@@ -516,7 +341,7 @@ export default function CommandCenter() {
               ][]
             ).map(([key, cfg]) => {
               const isActive = activeFloor === key;
-              const hasAlert = key === "Mechanical" && criticalIncident ? true : false;
+              const hasAlert = !!(key === "Mechanical" && criticalIncident);
               return (
                 <button
                   key={key}
@@ -544,96 +369,40 @@ export default function CommandCenter() {
           className="flex-1 flex flex-col lg:grid min-h-0 mt-2.5 mx-4 md:mx-5 mb-4 md:mb-5 gap-3 overflow-hidden"
           style={{ gridTemplateColumns: "1fr 320px" }}
         >
-          {/* Canvas */}
+          {/* Mapbox canvas */}
           <div
             className="relative rounded-2xl overflow-hidden ring-1 ring-white/[0.05] bg-[#060606]"
             style={{ minHeight: "300px" }}
           >
-            {/* 3D perspective wrapper */}
-            <div
-              className="w-full h-full transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)]"
-              style={is3D ? { perspective: "1400px", perspectiveOrigin: "50% 20%" } : {}}
-            >
-              <div
-                className="w-full h-full transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)]"
-                style={
-                  is3D
-                    ? {
-                        transform: "rotateX(32deg) rotateZ(-6deg) scale(0.82)",
-                        transformStyle: "preserve-3d",
-                        transformOrigin: "50% 30%",
-                      }
-                    : { transform: "none" }
-                }
-              >
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={activeFloor}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.25 }}
-                    className="w-full h-full"
-                  >
-                    <ReactFlow
-                      nodes={flowNodes}
-                      edges={flowEdges}
-                      onNodesChange={onNodesChange}
-                      onEdgesChange={onEdgesChange}
-                      nodeTypes={nodeTypes}
-                      onNodeClick={(_, node) => {
-                        const inc = incidents.find(
-                          (i) => i.assetId === node.id || i.blastRadius.includes(node.id)
-                        );
-                        if (inc) setActiveIncident(inc.id);
-                      }}
-                      fitView
-                      fitViewOptions={{ padding: 0.12 }}
-                      panOnDrag={!is3D}
-                      zoomOnScroll={!is3D}
-                      zoomOnPinch={!is3D}
-                      nodesDraggable={false}
-                      nodesConnectable={false}
-                      defaultEdgeOptions={{ type: "default" }}
-                      proOptions={{ hideAttribution: true }}
-                    >
-                      <Background
-                        variant={BackgroundVariant.Dots}
-                        gap={20}
-                        size={0.5}
-                        color="rgba(255,255,255,0.04)"
-                      />
-                      {!is3D && (
-                        <Controls className="!bg-[#0a0a0a] !border-white/[0.08] !shadow-none" />
-                      )}
-                    </ReactFlow>
-                  </motion.div>
-                </AnimatePresence>
-              </div>
-            </div>
+            <CommandCenterMap
+              assets={assets}
+              incident={incident}
+              litNodes={litNodes}
+              activeFloor={activeFloor}
+              onAssetClick={(id) => {
+                const inc = incidents.find((i) => i.assetId === id || i.blastRadius.includes(id));
+                if (inc) setActiveIncident(inc.id);
+              }}
+            />
 
-            {/* Floor label overlay */}
+            {/* Floor label */}
             <div className="absolute top-3 left-3 pointer-events-none">
-              <div className="flex items-center gap-2">
-                <span className="text-[9px] font-mono font-bold text-zinc-600 uppercase tracking-widest">
-                  {DATACENTER_FLOORS[activeFloor].label}
-                </span>
-              </div>
+              <span className="text-[9px] font-mono font-bold text-zinc-600 uppercase tracking-widest">
+                {DATACENTER_FLOORS[activeFloor].label}
+              </span>
             </div>
 
-            {/* Zone legend — bottom left */}
-            {is3D && (
-              <div className="absolute bottom-3 left-3 flex flex-col gap-1 pointer-events-none">
-                {floorZones.map(([zoneName, zoneCfg]) => (
-                  <div key={zoneName} className="flex items-center gap-1.5">
-                    <div
-                      className={`w-1 h-1 rounded-full ${zoneIndicatorColors[zoneCfg.zone] ?? "bg-zinc-500"} opacity-60`}
-                    />
-                    <span className="text-[7px] font-mono text-zinc-700">{zoneName}</span>
-                  </div>
-                ))}
-              </div>
-            )}
+            {/* Zone legend */}
+            <div className="absolute bottom-3 left-3 flex flex-col gap-1 pointer-events-none">
+              {floorZones.map(([zoneName, zoneCfg]) => (
+                <div key={zoneName} className="flex items-center gap-1.5">
+                  <div
+                    className={`w-1 h-1 rounded-full ${zoneIndicatorColors[zoneCfg.zone] ?? "bg-zinc-500"} opacity-60`}
+                  />
+                  <span className="text-[7px] font-mono text-zinc-700">{zoneName}</span>
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* Right panel */}
