@@ -1,4 +1,4 @@
-import { Desktop, Gauge, Lightning, Shield, Thermometer } from "@phosphor-icons/react";
+import { Desktop, Gauge, Lightning, Network, Shield, Thermometer } from "@phosphor-icons/react";
 import { Handle, type NodeProps, Position } from "@xyflow/react";
 import { memo } from "react";
 
@@ -6,6 +6,7 @@ const typeIcon: Record<string, React.ElementType> = {
   Cooling: Thermometer,
   Power: Lightning,
   Compute: Desktop,
+  Network: Network,
   Safety: Shield,
   Controls: Gauge,
 };

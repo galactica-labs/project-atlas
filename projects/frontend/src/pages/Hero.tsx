@@ -18,11 +18,11 @@ import { useNavigate } from "react-router-dom";
 const HERO_VIDEO =
   "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260403_050628_c4e32401-fab4-4a27-b7a8-6e9291cd5959.mp4";
 
-// Taylor Vick — Unsplash (free commercial use)
+// Taylor Vick - Unsplash (free commercial use)
 const DC_PHOTO =
   "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=2400&q=80";
 
-// imgix — Unsplash circuit board
+// imgix - Unsplash circuit board
 const CIRCUIT_PHOTO =
   "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=2400&q=80";
 
@@ -62,22 +62,6 @@ function useInView(options?: IntersectionObserverInit) {
   return { ref, inView };
 }
 
-function useCounter(target: number, duration = 1800, active = false) {
-  const [val, setVal] = useState(0);
-  useEffect(() => {
-    if (!active) return;
-    const start = performance.now();
-    const tick = (now: number) => {
-      const p = Math.min((now - start) / duration, 1);
-      const ease = 1 - (1 - p) ** 3; // ease-out-cubic
-      setVal(Math.round(ease * target));
-      if (p < 1) requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
-  }, [target, duration, active]);
-  return val;
-}
-
 // ─── data ─────────────────────────────────────────────────────────────
 const NAV_LINKS = ["Platform", "Industries", "Security", "Docs"];
 const navLinkHref = (link: string) => `#${link.toLowerCase()}`;
@@ -95,8 +79,8 @@ const AGENTS: {
   {
     name: "Sentinel",
     role: "Anomaly Detection",
-    desc: "Watches every sensor in real time. When something starts to go wrong, it knows — in milliseconds, not hours. False alarms reduce with every retraining cycle.",
-    stat: "23ms detection",
+    desc: "Watches every sensor in real time. When something starts to drift, it surfaces the signal early and reduces false alarms with every review cycle.",
+    stat: "Live signal",
     grad: "from-orange-500/15 to-orange-950/5",
     dot: "bg-orange-400",
     ring: "ring-orange-500/20",
@@ -115,8 +99,8 @@ const AGENTS: {
   {
     name: "Hephaestus",
     role: "Decision Engine",
-    desc: "Weighs every option against your rules and risk tolerance. Recommends the right action — repair, dispatch, or hold — with a full explanation every time.",
-    stat: "99.1% policy match",
+    desc: "Weighs every option against your rules and risk tolerance. Recommends the right action: repair, dispatch, or hold, with a full explanation every time.",
+    stat: "Policy aware",
     grad: "from-violet-500/15 to-violet-950/5",
     dot: "bg-violet-400",
     ring: "ring-violet-500/20",
@@ -125,8 +109,8 @@ const AGENTS: {
   {
     name: "Hermes",
     role: "Smart Dispatch",
-    desc: "Finds the best technician for every job — matching skills, location, and parts availability — in seconds. No manual coordination, no guesswork.",
-    stat: "<2s assignment",
+    desc: "Finds the best technician for every job by matching skills, location, and parts availability. No manual coordination, no guesswork.",
+    stat: "Context routing",
     grad: "from-blue-500/15 to-blue-950/5",
     dot: "bg-blue-400",
     ring: "ring-blue-500/20",
@@ -135,7 +119,7 @@ const AGENTS: {
   {
     name: "Mnemos",
     role: "Continuous Learning",
-    desc: "Learns from every incident your team closes. The more Atlas works with you, the better it gets at predicting — and preventing — the next failure.",
+    desc: "Learns from every incident your team closes. The more Atlas works with you, the better it gets at predicting and preventing the next failure.",
     stat: "Always improving",
     grad: "from-cyan-500/15 to-cyan-950/5",
     dot: "bg-cyan-400",
@@ -148,7 +132,7 @@ const HOW_IT_WORKS = [
   {
     n: "01",
     title: "Connect",
-    body: "Atlas connects to your existing sensors and equipment. Every device is discovered and catalogued automatically — no manual setup required.",
+    body: "Atlas connects to your existing sensors and equipment. Every device is discovered and catalogued automatically. No manual setup required.",
   },
   {
     n: "02",
@@ -163,12 +147,12 @@ const HOW_IT_WORKS = [
   {
     n: "04",
     title: "Detect",
-    body: "Anomalies surface in milliseconds, not hours. The longer Atlas runs, the fewer false alarms your team has to deal with.",
+    body: "Anomalies surface early with enough context for the team to act. The longer Atlas runs, the fewer false alarms your team has to deal with.",
   },
   {
     n: "05",
     title: "Predict",
-    body: "When something starts to fail, Atlas maps the full picture — which other systems are at risk, in what order, and how much time you have.",
+    body: "When something starts to fail, Atlas maps the full picture: which other systems are at risk, in what order, and how much time you have.",
   },
   {
     n: "06",
@@ -191,25 +175,44 @@ const GOVERNANCE = [
   {
     Icon: GitBranch,
     title: "Autonomy expansion via decision memory",
-    body: "Approve the same class of action five times and Atlas proposes auto-approving it — with HITL sign-off on the promotion itself.",
+    body: "Approve the same class of action five times and Atlas proposes auto-approving it, with HITL sign-off on the promotion itself.",
   },
 ];
 
 const COMPLIANCE = ["ISO 55000", "NERC CIP", "SEMI S2", "SOC 2 Type II", "ISO 27001"];
 
 const TICKER_ITEMS = [
-  "23ms mean detection latency",
-  "94.2% dispatch accuracy",
-  "847 global deployments",
-  "$9M max outage cost prevented",
-  "73% reduction in unplanned downtime",
-  "<90s mean time-to-dispatch",
-  "50+ federated learning sites",
-  "NERC CIP compliant",
+  "Sensor-aware anomaly detection",
+  "Dependency-aware blast-radius mapping",
+  "Policy-gated autonomy",
+  "Technician dispatch orchestration",
+  "Incident memory and training tuples",
+  "Hash-chained audit ledger",
+  "Human approval for risky actions",
+  "Built for AI era data centers",
 ];
 const TICKER_LOOP_ITEMS = [
   ...TICKER_ITEMS.map((item) => ({ key: `first-${item}`, item })),
   ...TICKER_ITEMS.map((item) => ({ key: `second-${item}`, item })),
+];
+
+const ECONOMIC_VALUE = [
+  {
+    title: "Outage risk",
+    body: "See which assets are failing and what depends on them before a cascade starts.",
+  },
+  {
+    title: "Maintenance spend",
+    body: "Focus work on assets showing real degradation instead of replacing healthy parts on a calendar.",
+  },
+  {
+    title: "Dispatch time",
+    body: "Route the right technician with the right context, parts, and approval state.",
+  },
+  {
+    title: "Decision memory",
+    body: "Turn repeated human approvals into governed automation proposals your team can inspect.",
+  },
 ];
 
 // ─── sub-components ───────────────────────────────────────────────────
@@ -244,48 +247,6 @@ function BezelCard({
       >
         {children}
       </div>
-    </div>
-  );
-}
-
-// ─── ROI counter block ────────────────────────────────────────────────
-function RoiCounter({
-  target,
-  prefix,
-  suffix,
-  label,
-  active,
-  delay,
-}: {
-  target: number;
-  prefix: string;
-  suffix: string;
-  label: string;
-  active: boolean;
-  delay: number;
-}) {
-  const val = useCounter(target, 2000, active);
-  const [visible, setVisible] = useState(false);
-  useEffect(() => {
-    if (!active) return;
-    const t = setTimeout(() => setVisible(true), delay);
-    return () => clearTimeout(t);
-  }, [active, delay]);
-
-  return (
-    <div
-      className="transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)]"
-      style={{
-        opacity: visible ? 1 : 0,
-        transform: visible ? "translateY(0)" : "translateY(20px)",
-      }}
-    >
-      <p className="text-[clamp(2.5rem,5vw,4rem)] font-semibold tracking-[-0.05em] leading-none tabular-nums">
-        {prefix}
-        {val.toLocaleString()}
-        <span className="text-white/30">{suffix}</span>
-      </p>
-      <p className="text-[13px] text-white/35 leading-snug mt-2 max-w-[180px]">{label}</p>
     </div>
   );
 }
@@ -493,7 +454,7 @@ export default function Hero() {
               </span>
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 status-pulse" />
               <span className="text-[11px] text-emerald-400 font-medium tracking-wide">
-                Live · 847 Facilities
+                Built for critical facilities
               </span>
             </div>
 
@@ -502,11 +463,7 @@ export default function Hero() {
               className="text-[clamp(3rem,8vw,5.5rem)] font-semibold tracking-[-0.04em] leading-[0.93] mb-6 max-w-4xl fade-up"
               style={{ animationDelay: "180ms" }}
             >
-              The infrastructure OS
-              <br />
-              <span className="text-white/30">for AI-era</span>
-              <br />
-              data centers.
+              The infrastructure OS for the <span className="text-white/30">AI era.</span>
             </h1>
 
             {/* subhead + CTAs + stats */}
@@ -517,7 +474,7 @@ export default function Hero() {
                   style={{ animationDelay: "300ms" }}
                 >
                   Predict failures before they cascade. Dispatch the right technician in seconds.
-                  Learn from every incident — automatically.
+                  Learn from every incident automatically.
                 </p>
 
                 <div className="flex flex-wrap gap-3 fade-up" style={{ animationDelay: "400ms" }}>
@@ -546,9 +503,9 @@ export default function Hero() {
               {/* stats */}
               <div className="flex items-end gap-10 fade-up" style={{ animationDelay: "500ms" }}>
                 {[
-                  { val: "23ms", label: "Mean detection latency" },
-                  { val: "94.2%", label: "Dispatch accuracy" },
-                  { val: "847", label: "Global deployments" },
+                  { val: "Detect", label: "Sensor anomalies early" },
+                  { val: "Map", label: "Failure blast radius" },
+                  { val: "Act", label: "Policy-gated dispatch" },
                 ].map((s) => (
                   <div key={s.label} className="text-right">
                     <p className="text-[1.85rem] font-semibold tracking-[-0.04em] leading-none tabular-nums">
@@ -643,10 +600,7 @@ export default function Hero() {
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center px-6">
             <p className="text-[clamp(1.1rem,3vw,1.8rem)] font-semibold tracking-[-0.02em] text-white/70 max-w-2xl mx-auto leading-snug">
-              "One prevented outage pays for a decade of Atlas."
-            </p>
-            <p className="text-[12px] text-white/30 mt-3 font-medium">
-              — Atlas founding pitch deck
+              "Prevent failures before they become outages."
             </p>
           </div>
         </div>
@@ -666,13 +620,13 @@ export default function Hero() {
                 <span className="text-white/30">One autonomous system.</span>
               </h2>
               <p className="text-[14px] text-white/35 max-w-xs leading-relaxed lg:text-right">
-                Each agent specialises in a critical phase of infrastructure intelligence — working
-                together as a seamless, autonomous system.
+                Each agent specialises in a critical phase of infrastructure intelligence and works
+                with the others as a seamless, autonomous system.
               </p>
             </div>
           </div>
 
-          {/* bento — 5 cards, last one spans 2 on medium */}
+          {/* bento: 5 cards, last one spans 2 on medium */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
             {AGENTS.map((agent, i) => {
               const Icon = agent.Icon;
@@ -745,14 +699,14 @@ export default function Hero() {
             <div style={rv(roiRef.inView, 0)}>
               <SectionBadge>The Economics</SectionBadge>
               <h2 className="text-[clamp(2rem,4.5vw,3.25rem)] font-semibold tracking-[-0.035em] leading-[1.07] mb-6">
-                One prevented incident.
+                Turn operational risk.
                 <br />
-                <span className="text-white/30">A decade of Atlas paid.</span>
+                <span className="text-white/30">Into clear action.</span>
               </h2>
               <p className="text-[14px] text-white/40 leading-relaxed mb-8 max-w-sm">
-                A single major outage can cost millions per hour. Atlas converts the hidden costs —
-                over-sized redundancy, unnecessary maintenance, SLA penalties — into a measurable
-                line item, then eliminates them.
+                Atlas makes failure risk, maintenance work, dispatch queues, and policy decisions
+                visible in one operating layer, so teams can act before small signals become major
+                incidents.
               </p>
               <button
                 type="button"
@@ -766,40 +720,18 @@ export default function Hero() {
               </button>
             </div>
 
-            {/* right counters */}
-            <div className="grid grid-cols-2 gap-8">
-              <RoiCounter
-                target={9}
-                prefix="$"
-                suffix="M/hr"
-                label="Max outage cost per hyperscale incident"
-                active={roiRef.inView}
-                delay={100}
-              />
-              <RoiCounter
-                target={73}
-                prefix=""
-                suffix="%"
-                label="Reduction in unplanned downtime — first year"
-                active={roiRef.inView}
-                delay={250}
-              />
-              <RoiCounter
-                target={90}
-                prefix=""
-                suffix="s"
-                label="Mean time-to-dispatch including MILP solve"
-                active={roiRef.inView}
-                delay={400}
-              />
-              <RoiCounter
-                target={847}
-                prefix=""
-                suffix=""
-                label="Deployments globally learning from each other"
-                active={roiRef.inView}
-                delay={550}
-              />
+            {/* right value cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {ECONOMIC_VALUE.map((item, i) => (
+                <div key={item.title} style={rv(roiRef.inView, i + 1)}>
+                  <BezelCard className="p-6 h-full">
+                    <p className="text-[15px] font-semibold text-white/65 mb-2 leading-snug">
+                      {item.title}
+                    </p>
+                    <p className="text-[12px] text-white/32 leading-relaxed">{item.body}</p>
+                  </BezelCard>
+                </div>
+              ))}
             </div>
           </div>
 
@@ -815,7 +747,7 @@ export default function Hero() {
                 desc: "Replacing healthy parts on schedule because you can't tell which are failing",
               },
               { label: "SLA penalties", desc: "When something slips through the cracks" },
-              { label: "Insurance premiums", desc: "Priced for opacity — not actual risk" },
+              { label: "Insurance premiums", desc: "Priced for opacity, not actual risk" },
               { label: "Senior engineer hours", desc: "Triaging alerts a system should triage" },
             ].map((item) => (
               <BezelCard key={item.label} className="p-5">
@@ -827,8 +759,8 @@ export default function Hero() {
             ))}
           </div>
           <p className="text-center text-[12px] text-white/25 mt-4 italic">
-            The customer is already paying for these. Atlas makes them visible, then eliminates
-            them.
+            Atlas gives operators a shared picture of risk, work, and policy before an incident
+            escalates.
           </p>
         </div>
       </section>
@@ -908,7 +840,7 @@ export default function Hero() {
               <span className="text-white/25">unplanned downtime?</span>
             </h2>
             <p className="text-[15px] text-white/38 leading-relaxed mb-10 max-w-md mx-auto">
-              The setup isn't overhead — it's encoding tribal knowledge you're about to lose, and
+              The setup isn't overhead. It's encoding tribal knowledge you're about to lose and
               earning an autonomous system you can actually trust.
             </p>
             <div className="flex flex-wrap justify-center gap-3">
@@ -948,7 +880,7 @@ export default function Hero() {
             <span className="text-[13px] font-semibold">Atlas</span>
           </div>
           <p className="text-[11px] text-white/18">
-            Infrastructure OS for AI-era data centers. © 2026 Atlas Systems, Inc.
+            Infrastructure OS for AI era data centers. © 2026 Atlas Systems, Inc.
           </p>
           <div className="flex gap-6">
             {["Privacy", "Terms", "Security", "Status"].map((link) => (

@@ -27,11 +27,125 @@ import { type Asset, cascadeDelays, type Incident, telemetryHistory } from "../.
 import { useApp } from "../../store/appStore";
 import AnomalyPanel from "./AnomalyPanel";
 
-// Zone floor layout: positions for each zone
-const FLOOR_CONFIGS = {
-  "Zone A": { y: 0, height: 300, zone: "a" as const, label: "Zone A · Cooling Array" },
-  "Zone B": { y: 380, height: 300, zone: "b" as const, label: "Zone B · Compute Array" },
-  Mechanical: { y: 760, height: 300, zone: "mechanical" as const, label: "Mechanical" },
+type ZoneVariant =
+  | "a"
+  | "b"
+  | "mechanical"
+  | "electrical"
+  | "power"
+  | "cooling"
+  | "compute"
+  | "network";
+
+interface ZoneConfig {
+  y: number;
+  height: number;
+  zone: ZoneVariant;
+  label: string;
+}
+
+interface FloorConfig {
+  label: string;
+  subtitle: string;
+  shortLabel: string;
+  indicatorColor: string;
+  zones: Record<string, ZoneConfig>;
+}
+
+type FloorKey = "Mechanical" | "Hall A" | "Hall B";
+
+// ── Datacenter layout: 3 floors, each with named zones ──────────────
+const DATACENTER_FLOORS: Record<FloorKey, FloorConfig> = {
+  Mechanical: {
+    label: "B1 – Mechanical Plant",
+    subtitle: "Power / Cooling Infrastructure",
+    shortLabel: "B1",
+    indicatorColor: "bg-amber-500",
+    zones: {
+      Electrical: {
+        y: 20,
+        height: 200,
+        zone: "electrical",
+        label: "Electrical · Switchgear & Transformers",
+      },
+      "Backup Power": {
+        y: 300,
+        height: 200,
+        zone: "power",
+        label: "Backup Power · UPS & Generators",
+      },
+      "Chiller Plant": {
+        y: 580,
+        height: 400,
+        zone: "cooling",
+        label: "Chiller Plant · Chillers, Towers & Pumps",
+      },
+    },
+  },
+  "Hall A": {
+    label: "F1 – Data Hall A",
+    subtitle: "Primary Compute / CPU",
+    shortLabel: "F1",
+    indicatorColor: "bg-blue-500",
+    zones: {
+      "Cooling Bay A": {
+        y: 20,
+        height: 180,
+        zone: "cooling",
+        label: "Cooling Bay A · CRAH Units",
+      },
+      "Compute Row A": {
+        y: 280,
+        height: 280,
+        zone: "compute",
+        label: "Compute Row A · CPU Server Racks",
+      },
+      "Compute Row B": {
+        y: 640,
+        height: 280,
+        zone: "compute",
+        label: "Compute Row B · GPU Pods & Racks",
+      },
+      "Power & Network A": {
+        y: 1000,
+        height: 160,
+        zone: "network",
+        label: "Power & Network A · PDUs & Core Switches",
+      },
+    },
+  },
+  "Hall B": {
+    label: "F2 – Data Hall B",
+    subtitle: "HPC / GPU Cluster",
+    shortLabel: "F2",
+    indicatorColor: "bg-emerald-500",
+    zones: {
+      "Cooling Bay B": {
+        y: 20,
+        height: 180,
+        zone: "cooling",
+        label: "Cooling Bay B · CRAH Units",
+      },
+      "Compute Row C": {
+        y: 280,
+        height: 280,
+        zone: "compute",
+        label: "Compute Row C · GPU Pods",
+      },
+      "Compute Row D": {
+        y: 640,
+        height: 280,
+        zone: "compute",
+        label: "Compute Row D · Rack Compute",
+      },
+      "Power & Network B": {
+        y: 1000,
+        height: 160,
+        zone: "network",
+        label: "Power & Network B · PDUs & Dist. Switches",
+      },
+    },
+  },
 };
 
 const nodeTypes = { assetNode: AssetNode, floorNode: FloorNode };
@@ -40,36 +154,41 @@ function buildNodes(
   assets: Asset[],
   incident: Incident | undefined,
   litNodes: Set<string>,
-  ttf: number
+  ttf: number,
+  activeFloor: FloorKey
 ): Node[] {
   const nodes: Node[] = [];
+  const floorCfg = DATACENTER_FLOORS[activeFloor];
+  const zones = floorCfg.zones;
+
+  const floorAssets = assets.filter((a) => a.floor === activeFloor);
 
   const byZone: Record<string, Asset[]> = {};
-  for (const a of assets) {
+  for (const a of floorAssets) {
     if (!byZone[a.zone]) byZone[a.zone] = [];
     byZone[a.zone].push(a);
   }
 
-  for (const [zone, cfg] of Object.entries(FLOOR_CONFIGS)) {
-    const zoneAssets = byZone[zone] ?? [];
+  for (const [zoneName, zoneCfg] of Object.entries(zones)) {
+    const zoneAssets = byZone[zoneName] ?? [];
     nodes.push({
-      id: `floor-${zone}`,
+      id: `floor-${zoneName}`,
       type: "floorNode",
-      position: { x: 20, y: cfg.y + 20 },
-      style: { width: 760, height: cfg.height },
-      data: { label: cfg.label, zone: cfg.zone, nodeCount: zoneAssets.length },
+      position: { x: 20, y: zoneCfg.y + 20 },
+      style: { width: 760, height: zoneCfg.height },
+      data: { label: zoneCfg.label, zone: zoneCfg.zone, nodeCount: zoneAssets.length },
       selectable: false,
       draggable: false,
       zIndex: -1,
     });
   }
 
-  for (const a of assets) {
-    const floorCfg = FLOOR_CONFIGS[a.zone as keyof typeof FLOOR_CONFIGS];
-    if (!floorCfg) continue;
+  for (const a of floorAssets) {
+    const zoneCfg = zones[a.zone as keyof typeof zones];
+    if (!zoneCfg) continue;
 
     const nodeX = 60 + (a.x / 100) * 640;
-    const nodeY = floorCfg.y + 50 + (a.y / 100) * (floorCfg.height - 100);
+    const nodeY = zoneCfg.y + 50 + (a.y / 100) * (zoneCfg.height - 100);
 
     const isSource = incident?.assetId === a.id;
     const isBlast = litNodes.has(a.id);
@@ -97,12 +216,17 @@ function buildNodes(
 function buildEdges(
   assets: Asset[],
   incident: Incident | undefined,
-  litNodes: Set<string>
+  litNodes: Set<string>,
+  activeFloor: FloorKey
 ): Edge[] {
   const edges: Edge[] = [];
 
-  for (const a of assets) {
+  const floorAssets = assets.filter((a) => a.floor === activeFloor);
+  const floorIds = new Set(floorAssets.map((a) => a.id));
+
+  for (const a of floorAssets) {
     for (const dep of a.dependsOn) {
+      if (!floorIds.has(dep)) continue;
       const isBlastEdge =
         incident &&
         (litNodes.has(a.id) || a.id === incident.assetId) &&
@@ -112,7 +236,7 @@ function buildEdges(
         source: dep,
         target: a.id,
         type: "default",
-        animated: isBlastEdge,
+        animated: !!isBlastEdge,
         style: isBlastEdge
           ? { stroke: "rgba(251,146,60,0.55)", strokeWidth: 1.5, strokeDasharray: "5 4" }
           : { stroke: "rgba(255,255,255,0.05)", strokeWidth: 1 },
@@ -123,27 +247,28 @@ function buildEdges(
 
   if (incident) {
     for (const tid of incident.blastRadius) {
+      if (!floorIds.has(tid) || !floorIds.has(incident.assetId)) continue;
       if (
-        !edges.find(
+        edges.find(
           (e) =>
             (e.source === incident.assetId && e.target === tid) ||
             (e.source === tid && e.target === incident.assetId)
         )
-      ) {
-        edges.push({
-          id: `blast-${incident.assetId}-${tid}`,
-          source: incident.assetId,
-          target: tid,
-          type: "default",
-          animated: litNodes.has(tid),
-          style: {
-            stroke: litNodes.has(tid) ? "rgba(239,68,68,0.5)" : "rgba(239,68,68,0.15)",
-            strokeWidth: litNodes.has(tid) ? 1.5 : 1,
-            strokeDasharray: "4 3",
-          },
-          zIndex: 6,
-        });
-      }
+      )
+        continue;
+      edges.push({
+        id: `blast-${incident.assetId}-${tid}`,
+        source: incident.assetId,
+        target: tid,
+        type: "default",
+        animated: litNodes.has(tid),
+        style: {
+          stroke: litNodes.has(tid) ? "rgba(239,68,68,0.5)" : "rgba(239,68,68,0.15)",
+          strokeWidth: litNodes.has(tid) ? 1.5 : 1,
+          strokeDasharray: "4 3",
+        },
+        zIndex: 6,
+      });
     }
   }
 
@@ -190,7 +315,7 @@ export default function CommandCenter() {
   const [litNodes, setLitNodes] = useState<Set<string>>(new Set());
   const [tick, setTick] = useState(0);
   const [is3D, setIs3D] = useState(window.innerWidth >= 640);
-  const [activeFloor, setActiveFloor] = useState<string | null>(null);
+  const [activeFloor, setActiveFloor] = useState<FloorKey>("Mechanical");
 
   const incident = incidents.find((i) => i.id === activeIncidentId);
   const criticalIncident = incidents.find((i) => i.severity === "critical");
@@ -199,6 +324,7 @@ export default function CommandCenter() {
     const t = setInterval(() => setTick((n) => n + 1), 1000);
     return () => clearInterval(t);
   }, []);
+
   useEffect(() => {
     if (!incident) {
       setLitNodes(new Set());
@@ -228,10 +354,13 @@ export default function CommandCenter() {
   const incCount = useCountUp(activeInc);
 
   const nodes = useMemo(
-    () => buildNodes(assets, incident, litNodes, ttf),
-    [assets, incident, litNodes, ttf]
+    () => buildNodes(assets, incident, litNodes, ttf, activeFloor),
+    [assets, incident, litNodes, ttf, activeFloor]
   );
-  const edges = useMemo(() => buildEdges(assets, incident, litNodes), [assets, incident, litNodes]);
+  const edges = useMemo(
+    () => buildEdges(assets, incident, litNodes, activeFloor),
+    [assets, incident, litNodes, activeFloor]
+  );
 
   const [flowNodes, setFlowNodes, onNodesChange] = useNodesState(nodes);
   const [flowEdges, setFlowEdges, onEdgesChange] = useEdgesState(edges);
@@ -256,6 +385,19 @@ export default function CommandCenter() {
     amber: "text-amber-300",
     blue: "text-blue-300",
     zinc: "text-zinc-400",
+  };
+
+  const floorZones = Object.entries(DATACENTER_FLOORS[activeFloor].zones);
+
+  const zoneIndicatorColors: Record<string, string> = {
+    electrical: "bg-yellow-400",
+    power: "bg-orange-400",
+    cooling: "bg-sky-400",
+    compute: "bg-emerald-400",
+    network: "bg-violet-400",
+    mechanical: "bg-amber-400",
+    a: "bg-blue-400",
+    b: "bg-emerald-400",
   };
 
   return (
@@ -309,7 +451,7 @@ export default function CommandCenter() {
             </div>
           </div>
 
-          {/* KPIs — 2 cols on mobile, 4 on desktop */}
+          {/* KPIs */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
             {kpis.map((k, i) => (
               <motion.div
@@ -364,45 +506,53 @@ export default function CommandCenter() {
           </motion.button>
         )}
 
-        {/* Main: 3D Flow + right panel — stacks vertically on mobile */}
+        {/* Floor selector tabs */}
+        <div className="mx-4 md:mx-5 mt-2.5 flex-shrink-0">
+          <div className="flex items-center gap-1 p-1 bg-white/[0.02] rounded-xl ring-1 ring-white/[0.05]">
+            {(
+              Object.entries(DATACENTER_FLOORS) as [
+                FloorKey,
+                (typeof DATACENTER_FLOORS)[FloorKey],
+              ][]
+            ).map(([key, cfg]) => {
+              const isActive = activeFloor === key;
+              const hasAlert = key === "Mechanical" && criticalIncident ? true : false;
+              return (
+                <button
+                  key={key}
+                  type="button"
+                  onClick={() => setActiveFloor(key)}
+                  className={`flex-1 flex items-center justify-center gap-2 px-3 py-1.5 rounded-lg text-[10px] font-medium transition-all duration-200 ${
+                    isActive
+                      ? "bg-white/[0.08] text-white ring-1 ring-white/[0.10]"
+                      : "text-zinc-600 hover:text-zinc-400"
+                  }`}
+                >
+                  <span
+                    className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${hasAlert ? "bg-red-400 animate-pulse" : cfg.indicatorColor} opacity-70`}
+                  />
+                  <span className="hidden sm:block font-mono">{cfg.shortLabel}</span>
+                  <span className="hidden md:block text-[9px] opacity-70">{cfg.subtitle}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Main: canvas + right panel */}
         <div
           className="flex-1 flex flex-col lg:grid min-h-0 mt-2.5 mx-4 md:mx-5 mb-4 md:mb-5 gap-3 overflow-hidden"
           style={{ gridTemplateColumns: "1fr 320px" }}
         >
-          {/* 3D Flow Canvas — fixed height on mobile, fills grid cell on desktop */}
+          {/* Canvas */}
           <div
             className="relative rounded-2xl overflow-hidden ring-1 ring-white/[0.05] bg-[#060606]"
             style={{ minHeight: "300px" }}
           >
-            {/* Floor selector */}
-            <div className="absolute top-3 right-3 z-10 flex items-center gap-1">
-              {["Zone A", "Zone B", "Mechanical"].map((f) => (
-                <button
-                  type="button"
-                  key={f}
-                  onClick={() => setActiveFloor(activeFloor === f ? null : f)}
-                  className={`px-2.5 py-1 rounded-lg text-[9px] font-mono font-bold uppercase tracking-wider transition-all duration-200 ${
-                    activeFloor === f
-                      ? "bg-white/[0.10] text-white ring-1 ring-white/[0.15]"
-                      : "text-zinc-700 hover:text-zinc-400"
-                  }`}
-                >
-                  {f === "Zone A" ? "FL-A" : f === "Zone B" ? "FL-B" : "MECH"}
-                </button>
-              ))}
-            </div>
-
             {/* 3D perspective wrapper */}
             <div
               className="w-full h-full transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)]"
-              style={
-                is3D
-                  ? {
-                      perspective: "1400px",
-                      perspectiveOrigin: "50% 20%",
-                    }
-                  : {}
-              }
+              style={is3D ? { perspective: "1400px", perspectiveOrigin: "50% 20%" } : {}}
             >
               <div
                 className="w-full h-full transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)]"
@@ -413,64 +563,80 @@ export default function CommandCenter() {
                         transformStyle: "preserve-3d",
                         transformOrigin: "50% 30%",
                       }
-                    : {
-                        transform: "none",
-                      }
+                    : { transform: "none" }
                 }
               >
-                <ReactFlow
-                  nodes={flowNodes}
-                  edges={flowEdges}
-                  onNodesChange={onNodesChange}
-                  onEdgesChange={onEdgesChange}
-                  nodeTypes={nodeTypes}
-                  onNodeClick={(_, node) => {
-                    const inc = incidents.find(
-                      (i) => i.assetId === node.id || i.blastRadius.includes(node.id)
-                    );
-                    if (inc) setActiveIncident(inc.id);
-                  }}
-                  fitView
-                  fitViewOptions={{ padding: 0.15 }}
-                  panOnDrag={!is3D}
-                  zoomOnScroll={!is3D}
-                  zoomOnPinch={!is3D}
-                  nodesDraggable={false}
-                  nodesConnectable={false}
-                  defaultEdgeOptions={{ type: "default" }}
-                  proOptions={{ hideAttribution: true }}
-                >
-                  <Background
-                    variant={BackgroundVariant.Dots}
-                    gap={20}
-                    size={0.5}
-                    color="rgba(255,255,255,0.04)"
-                  />
-                  {!is3D && (
-                    <Controls className="!bg-[#0a0a0a] !border-white/[0.08] !shadow-none" />
-                  )}
-                </ReactFlow>
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeFloor}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.25 }}
+                    className="w-full h-full"
+                  >
+                    <ReactFlow
+                      nodes={flowNodes}
+                      edges={flowEdges}
+                      onNodesChange={onNodesChange}
+                      onEdgesChange={onEdgesChange}
+                      nodeTypes={nodeTypes}
+                      onNodeClick={(_, node) => {
+                        const inc = incidents.find(
+                          (i) => i.assetId === node.id || i.blastRadius.includes(node.id)
+                        );
+                        if (inc) setActiveIncident(inc.id);
+                      }}
+                      fitView
+                      fitViewOptions={{ padding: 0.12 }}
+                      panOnDrag={!is3D}
+                      zoomOnScroll={!is3D}
+                      zoomOnPinch={!is3D}
+                      nodesDraggable={false}
+                      nodesConnectable={false}
+                      defaultEdgeOptions={{ type: "default" }}
+                      proOptions={{ hideAttribution: true }}
+                    >
+                      <Background
+                        variant={BackgroundVariant.Dots}
+                        gap={20}
+                        size={0.5}
+                        color="rgba(255,255,255,0.04)"
+                      />
+                      {!is3D && (
+                        <Controls className="!bg-[#0a0a0a] !border-white/[0.08] !shadow-none" />
+                      )}
+                    </ReactFlow>
+                  </motion.div>
+                </AnimatePresence>
               </div>
             </div>
 
-            {/* 3D floor depth indicators */}
+            {/* Floor label overlay */}
+            <div className="absolute top-3 left-3 pointer-events-none">
+              <div className="flex items-center gap-2">
+                <span className="text-[9px] font-mono font-bold text-zinc-600 uppercase tracking-widest">
+                  {DATACENTER_FLOORS[activeFloor].label}
+                </span>
+              </div>
+            </div>
+
+            {/* Zone legend — bottom left */}
             {is3D && (
               <div className="absolute bottom-3 left-3 flex flex-col gap-1 pointer-events-none">
-                {[
-                  { label: "FL-A", color: "bg-blue-500" },
-                  { label: "FL-B", color: "bg-emerald-500" },
-                  { label: "MECH", color: "bg-amber-500" },
-                ].map((f) => (
-                  <div key={f.label} className="flex items-center gap-1.5">
-                    <div className={`w-1 h-1 rounded-full ${f.color} opacity-60`} />
-                    <span className="text-[8px] font-mono text-zinc-700">{f.label}</span>
+                {floorZones.map(([zoneName, zoneCfg]) => (
+                  <div key={zoneName} className="flex items-center gap-1.5">
+                    <div
+                      className={`w-1 h-1 rounded-full ${zoneIndicatorColors[zoneCfg.zone] ?? "bg-zinc-500"} opacity-60`}
+                    />
+                    <span className="text-[7px] font-mono text-zinc-700">{zoneName}</span>
                   </div>
                 ))}
               </div>
             )}
           </div>
 
-          {/* Right panel — full width on mobile, fixed 320px on desktop */}
+          {/* Right panel */}
           <div className="flex flex-col gap-2.5 min-h-0 overflow-hidden">
             {/* Telemetry chart */}
             <div
@@ -573,7 +739,7 @@ export default function CommandCenter() {
                             </p>
                           </div>
                           <p className="text-[9px] text-zinc-600 mt-1 leading-none">
-                            {inc.detectedAt} · {asset?.zone}
+                            {inc.detectedAt} · {asset?.zone} · {asset?.floor}
                           </p>
                         </div>
                       </motion.button>
