@@ -3,7 +3,7 @@
   "checkpoint_id": "1bc03aefebb8",
   "strategy": "manual-commit",
   "branch": "main",
-  "checkpoints_count": 4,
+  "checkpoints_count": 5,
   "files_touched": [
     "projects/backend/.env.example",
     "projects/frontend/public/dcenter.mp4",
@@ -22,13 +22,19 @@
       "transcript": "/1b/c03aefebb8/1/full.jsonl",
       "content_hash": "/1b/c03aefebb8/1/content_hash.txt",
       "prompt": "/1b/c03aefebb8/1/prompt.txt"
+    },
+    {
+      "metadata": "/1b/c03aefebb8/2/metadata.json",
+      "transcript": "/1b/c03aefebb8/2/full.jsonl",
+      "content_hash": "/1b/c03aefebb8/2/content_hash.txt",
+      "prompt": "/1b/c03aefebb8/2/prompt.txt"
     }
   ],
   "token_usage": {
-    "input_tokens": 44,
-    "cache_creation_tokens": 72621,
-    "cache_read_tokens": 1022766,
-    "output_tokens": 9742,
-    "api_call_count": 36
+    "input_tokens": 50,
+    "cache_creation_tokens": 106723,
+    "cache_read_tokens": 1115915,
+    "output_tokens": 12756,
+    "api_call_count": 40
   }
 }
