@@ -20,9 +20,7 @@
     },
     "ignoreDeprecations": "6.0"
   },
-  "include": [
-    "src"
-  ],
+  "include": ["src"],
   "references": [
     {
       "path": "../../packages/api-types"

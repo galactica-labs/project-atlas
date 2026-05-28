@@ -11,7 +11,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { assets, cascadeDelays, forecastData } from "../../data/mock";
+import { assets as allAssets } from "../../data/mock";
 import { useApp } from "../../store/appStore";
 
 interface Props {
@@ -39,48 +39,26 @@ function ChartTooltip({ active, payload, label }: TooltipProps) {
   );
 }
 
-const agentPipeline = [
-  {
-    id: "sentinel",
-    name: "Sentinel",
-    role: "Anomaly Detection",
-    color: "blue",
-    status: "done",
-    output: "+4.1σ deviation · thermal runaway pattern · 94 prior matches",
-  },
-  {
-    id: "triton",
-    name: "Triton",
-    role: "Quantile Forecast",
-    color: "violet",
-    status: "done",
-    output: "q50 breach in 18m · q95 breach in 11m · LightGBM p=0.94",
-  },
+const AGENT_META = [
+  { id: "sentinel", name: "Sentinel", role: "Anomaly Detection", color: "blue", status: "done" },
+  { id: "triton", name: "Triton", role: "Quantile Forecast", color: "violet", status: "done" },
   {
     id: "hephaestus",
     name: "Hephaestus",
     role: "Impact Analysis",
     color: "orange",
     status: "done",
-    output: "PUMP-CHW-03/04 → CRAH-B-01..04 → POD-05, POD-06 · 8 systems at risk",
   },
-  {
-    id: "hermes",
-    name: "Hermes",
-    role: "RAG → MILP Dispatch",
-    color: "emerald",
-    status: "done",
-    output: "Marcus Chen matched (HVAC-R, on-site) · Parts confirmed in stock",
-  },
+  { id: "hermes", name: "Hermes", role: "RAG → MILP Dispatch", color: "emerald", status: "done" },
   {
     id: "mnemos",
     name: "Mnemos",
     role: "Training Capture",
     color: "amber",
     status: "waiting",
-    output: "Awaiting work order close — training tuple will be captured",
+    staticOutput: "Awaiting work order close — training tuple will be captured",
   },
-];
+] as const;
 
 const agentDot: Record<string, string> = {
   blue: "bg-blue-500/15 ring-blue-500/40",
@@ -103,17 +81,6 @@ const agentText: Record<string, string> = {
   emerald: "text-emerald-400",
   amber: "text-amber-400",
 };
-
-const cascadeChain = [
-  "pump-chw-03",
-  "pump-chw-04",
-  "crah-b-01",
-  "crah-b-02",
-  "crah-b-03",
-  "crah-b-04",
-  "pod-05",
-  "pod-06",
-];
 
 function SectionLabel({
   icon,
@@ -139,7 +106,7 @@ function SectionLabel({
 }
 
 export default function AnomalyPanel({ incidentId, onClose }: Props) {
-  const { incidents } = useApp();
+  const { incidents, forecastData, cascadeDelays, pipelineOutputs, tritonMeta } = useApp();
   const navigate = useNavigate();
   const [tick, setTick] = useState(0);
   const [visible, setVisible] = useState(false);
@@ -158,14 +125,33 @@ export default function AnomalyPanel({ incidentId, onClose }: Props) {
 
   if (!incident) return null;
 
-  const sourceAsset = assets.find((a) => a.id === incident.assetId);
+  const sourceAsset = allAssets.find((a) => a.id === incident.assetId);
+  const threshold = forecastData[0]?.threshold ?? 12.0;
+
+  // Build agent pipeline with computed outputs from the pipeline run
+  const agentPipeline = AGENT_META.map((m) => ({
+    ...m,
+    output:
+      "staticOutput" in m
+        ? m.staticOutput
+        : (pipelineOutputs[`${incidentId}-${m.id}`] ?? "Analysis complete"),
+  }));
+
+  // Quantile breach labels from Triton
+  const q50Label = `+${tritonMeta.q50BreachMin}m`;
+  const q95Label = `+${tritonMeta.q95BreachMin}m`;
+  const q05BreachMin = forecastData.findIndex((d) => d.q05 !== null && d.q05 >= threshold);
+  const q05Label = q05BreachMin >= 0 ? forecastData[q05BreachMin].time : "+30m";
+
+  // Blast radius chain from computed incident data (sorted by cascade delay)
+  const cascadeChain = incident.blastRadius;
   const ttf = Math.max(0, incident.ttf - Math.floor(tick / 60));
   const confPct = (incident.confidence * 100).toFixed(0);
   const urgencyPct = Math.min(100, Math.max(0, (1 - ttf / 60) * 100));
 
   return (
     <div
-      className={`w-[440px] border-l border-white/[0.05] bg-[#040404] flex flex-col overflow-y-auto flex-shrink-0 transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] ${
+      className={`fixed inset-0 z-50 md:static md:inset-auto md:z-auto md:w-[440px] md:border-l border-white/[0.05] bg-[#040404] flex flex-col overflow-y-auto md:flex-shrink-0 transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] ${
         visible ? "translate-x-0" : "translate-x-full"
       }`}
       style={{ scrollbarWidth: "none" }}
@@ -249,17 +235,17 @@ export default function AnomalyPanel({ incidentId, onClose }: Props) {
               <div className="flex items-center gap-1.5 bg-red-500/[0.09] border border-red-500/20 rounded-lg px-2.5 py-1">
                 <span className="text-[8px] font-mono font-bold text-red-400">q95</span>
                 <span className="text-[8px] text-zinc-600 font-mono">breach</span>
-                <span className="text-[9px] font-mono font-bold text-red-300">+11m</span>
+                <span className="text-[9px] font-mono font-bold text-red-300">{q95Label}</span>
               </div>
               <div className="flex items-center gap-1.5 bg-amber-500/[0.09] border border-amber-500/18 rounded-lg px-2.5 py-1">
                 <span className="text-[8px] font-mono font-bold text-amber-400">q50</span>
                 <span className="text-[8px] text-zinc-600 font-mono">breach</span>
-                <span className="text-[9px] font-mono font-bold text-amber-300">+18m</span>
+                <span className="text-[9px] font-mono font-bold text-amber-300">{q50Label}</span>
               </div>
               <div className="flex items-center gap-1.5 bg-zinc-800/50 border border-white/[0.05] rounded-lg px-2.5 py-1">
                 <span className="text-[8px] font-mono font-bold text-zinc-600">q05</span>
                 <span className="text-[8px] text-zinc-700 font-mono">breach</span>
-                <span className="text-[9px] font-mono font-bold text-zinc-600">+24m</span>
+                <span className="text-[9px] font-mono font-bold text-zinc-600">{q05Label}</span>
               </div>
             </div>
 
@@ -284,14 +270,7 @@ export default function AnomalyPanel({ incidentId, onClose }: Props) {
 
       {/* ── Quantile Forecast Chart ── */}
       <div className="px-5 mt-3.5">
-        <div
-          className="rounded-xl overflow-hidden"
-          style={{
-            background: "#060606",
-            border: "1px solid rgba(255,255,255,0.06)",
-            boxShadow: "inset 0 1px 0 rgba(255,255,255,0.03)",
-          }}
-        >
+        <div className="rounded-xl overflow-hidden border border-white/[0.06] bg-[#060606] shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]">
           <div className="px-3 pt-3 pb-1 flex items-center justify-between">
             <p className="text-[9px] text-zinc-600 font-mono uppercase tracking-[0.14em]">
               Quantile Forecast · CHW Temp
@@ -331,7 +310,7 @@ export default function AnomalyPanel({ incidentId, onClose }: Props) {
                 tickMargin={3}
               />
               <YAxis
-                domain={[9, 19]}
+                domain={["auto", "auto"]}
                 tick={{ fontSize: 7, fill: "#3f3f46", fontFamily: "monospace" }}
                 axisLine={false}
                 tickLine={false}
@@ -343,11 +322,11 @@ export default function AnomalyPanel({ incidentId, onClose }: Props) {
                 cursor={{ stroke: "rgba(255,255,255,0.06)", strokeWidth: 1 }}
               />
               <ReferenceLine
-                y={12.0}
+                y={threshold}
                 stroke="rgba(239,68,68,0.35)"
                 strokeDasharray="3 3"
                 label={{
-                  value: "12°C",
+                  value: `${threshold}°C`,
                   position: "right",
                   fontSize: 7,
                   fill: "rgba(239,68,68,0.55)",
@@ -425,14 +404,7 @@ export default function AnomalyPanel({ incidentId, onClose }: Props) {
         </button>
 
         {showAgents && (
-          <div
-            className="fade-up rounded-xl overflow-hidden"
-            style={{
-              background: "#060606",
-              border: "1px solid rgba(255,255,255,0.06)",
-              boxShadow: "inset 0 1px 0 rgba(255,255,255,0.03)",
-            }}
-          >
+          <div className="fade-up rounded-xl overflow-hidden border border-white/[0.06] bg-[#060606] shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]">
             <div className="px-4 py-4">
               <div className="relative pl-6">
                 <div className="absolute left-[9px] top-3 bottom-3 w-px bg-white/[0.05]" />
@@ -506,7 +478,7 @@ export default function AnomalyPanel({ incidentId, onClose }: Props) {
           </div>
 
           {cascadeChain.map((id) => {
-            const a = assets.find((x) => x.id === id);
+            const a = allAssets.find((x) => x.id === id);
             const delay = cascadeDelays[id] ?? 0;
             const isPump = id.startsWith("pump");
             const isCrah = id.startsWith("crah-b");

@@ -8,18 +8,25 @@ import {
   Wrench,
 } from "@phosphor-icons/react";
 import { useNavigate } from "react-router-dom";
-import { assets, jobs, technicians } from "../../data/mock";
+import { assets, technicians } from "../../data/mock";
+import { getRequiredCerts, scoreMatch } from "../../models/hermes";
+import { useApp } from "../../store/appStore";
 
 export default function DispatchPlan() {
   const navigate = useNavigate();
+  const { jobs, incidents } = useApp();
   const job = jobs[0];
-  const tech = technicians[0];
-  const asset = assets.find((a) => a.id === job.assetId);
+  const asset = assets.find((a) => a.id === job?.assetId);
+  const tech = technicians.find((t) => t.id === job?.technicianId) ?? technicians[0];
+  const incident = incidents.find((i) => i.id === job?.incidentId);
+
+  const required = asset ? getRequiredCerts(asset) : [];
+  const matchScore = Math.round(scoreMatch(tech, required) * 100);
 
   const planStats = [
     { label: "Generated in", value: "0.8s", sub: "automatic" },
-    { label: "Candidates", value: "3", sub: "evaluated" },
-    { label: "Match score", value: "94%", sub: "optimal fit" },
+    { label: "Candidates", value: String(technicians.length), sub: "evaluated" },
+    { label: "Match score", value: `${matchScore}%`, sub: "optimal fit" },
   ];
 
   return (
@@ -40,14 +47,14 @@ export default function DispatchPlan() {
 
       {/* ── Title row ── */}
       <div
-        className="flex items-start justify-between mb-6 fade-up"
+        className="flex items-start justify-between flex-wrap gap-3 mb-6 fade-up"
         style={{ animationDelay: "60ms" }}
       >
         <div>
           <p className="text-[10px] uppercase tracking-[0.18em] font-semibold text-zinc-600 mb-1">
             Dispatch Plan
           </p>
-          <h1 className="text-[22px] font-semibold tracking-tight">Assigned Technician</h1>
+          <h1 className="text-[22px] font-semibold tracking-tight">{job.title}</h1>
           <p className="text-[12px] text-zinc-600 mt-0.5">
             Generated {new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
           </p>
@@ -122,7 +129,7 @@ export default function DispatchPlan() {
             <div className="text-right flex-shrink-0">
               <p className="text-[10px] text-zinc-600 mb-0.5">Match</p>
               <p className="text-[26px] font-semibold text-emerald-400 tabular-nums tracking-tighter leading-none">
-                97%
+                {matchScore}%
               </p>
             </div>
           </div>
@@ -153,7 +160,9 @@ export default function DispatchPlan() {
             </div>
             <div>
               <p className="text-[10px] text-zinc-600 mb-1">SLA window</p>
-              <p className="text-[13px] font-semibold text-amber-300">23 min remaining</p>
+              <p className="text-[13px] font-semibold text-amber-300">
+                {incident?.ttf ?? 23} min remaining
+              </p>
               <p className="text-[11px] text-zinc-600">High criticality</p>
             </div>
           </div>
@@ -210,8 +219,12 @@ export default function DispatchPlan() {
               />
               <circle cx="92%" cy="50%" r="5" fill="#ef4444" />
             </svg>
-            <div className="absolute left-[5%] bottom-0 text-[10px] text-zinc-600">Depot</div>
-            <div className="absolute right-[3%] bottom-0 text-[10px] text-zinc-600">Zone A</div>
+            <div className="absolute left-[5%] bottom-0 text-[10px] text-zinc-600">
+              {tech.location}
+            </div>
+            <div className="absolute right-[3%] bottom-0 text-[10px] text-zinc-600">
+              {asset?.zone ?? "Target"}
+            </div>
             <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-center">
               <span className="font-mono text-[11px] text-zinc-400 block">2.1 km</span>
               <span className="text-[10px] text-zinc-600">ETA {tech.eta}</span>

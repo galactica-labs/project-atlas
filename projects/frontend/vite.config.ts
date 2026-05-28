@@ -25,6 +25,16 @@ export default defineConfig({
       "/api": {
         target: "http://localhost:3123",
         changeOrigin: true,
+        configure: (proxy) => {
+          // Ensure SSE stream responses are not buffered by the dev proxy.
+          proxy.on("proxyRes", (proxyRes, req) => {
+            if (req.url?.includes("/stream")) {
+              proxyRes.headers["cache-control"] = "no-cache";
+              proxyRes.headers["x-accel-buffering"] = "no";
+              proxyRes.headers["connection"] = "keep-alive";
+            }
+          });
+        },
       },
     },
   },
