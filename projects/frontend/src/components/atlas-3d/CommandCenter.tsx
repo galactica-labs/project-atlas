@@ -17,8 +17,8 @@ import {
   ZONE_INDICATOR_COLORS,
 } from "../../components/atlas-3d/commandCenterFloorData";
 import { cascadeDelays, telemetryHistory } from "../../data/mock";
+import AnomalyPanel from "../../pages/ops/AnomalyPanel";
 import { useApp } from "../../store/appStore";
-import AnomalyPanel from "./AnomalyPanel";
 
 function LiveClock() {
   const [t, setT] = useState(new Date());
