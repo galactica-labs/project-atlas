@@ -1,0 +1,7 @@
+Explore the project at /Users/pantelis/Desktop/project-atlas and find:
+1. The main layout or HTML files that contain the page title/tab name (look for "VEX" text)
+2. Any favicon or logo files (look for .ico, .png, .svg files in public/ or assets/)
+3. The package.json to understand what framework is used
+4. Any Next.js or React entry points
+
+Return the file paths and relevant content for all findings.
