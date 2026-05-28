@@ -1,7 +1,14 @@
 # Atlas: Multi-Agent Industrial Monitoring, Reasoning, & Dispatch Platform
 
-Atlas is a state-of-the-art, multi-agent industrial monitoring, reasoning, decision-making, and automated dispatch/compliance platform. It bridges a modern visual operations dashboard, an enterprise orchestration layer, and a Python-based reasoning engine powered by specialized artificial intelligence agents.
+<div align="center">
 
+## 🌐 [atlas.vardalas.com](https://atlas.vardalas.com)
+
+</div>
+
+---
+
+Atlas is a state-of-the-art, multi-agent industrial monitoring, reasoning, decision-making, and automated dispatch/compliance platform. It bridges a modern visual operations dashboard, an enterprise orchestration layer, and a Python-based reasoning engine powered by specialized artificial intelligence agents.
 ---
 
 ## 🏗️ System Architecture & Scope
