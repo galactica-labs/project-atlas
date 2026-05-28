@@ -1,0 +1,1 @@
+I want the web app to take the mock up data along with their mockup specs and health status and then let the models do the rest of the calculations. Is this already happening in the app, or the scenarios are fake? If they are fake, wire the models and create real scenarios with their fake data.

@@ -1,0 +1,65 @@
+{
+  "cli_version": "0.6.3",
+  "checkpoint_id": "d55f986a74e4",
+  "session_id": "9ad0b9c8-d674-4953-8679-e129e405f917",
+  "strategy": "manual-commit",
+  "created_at": "2026-05-28T15:40:40.343454Z",
+  "branch": "main",
+  "checkpoints_count": 1,
+  "files_touched": [
+    "projects/frontend/src/models/hephaestus.ts",
+    "projects/frontend/src/models/hermes.ts",
+    "projects/frontend/src/models/pipeline.ts",
+    "projects/frontend/src/models/sentinel.ts",
+    "projects/frontend/src/models/triton.ts",
+    "projects/frontend/src/pages/ops/AnomalyPanel.tsx",
+    "projects/frontend/src/pages/ops/CommandCenter.tsx",
+    "projects/frontend/src/pages/ops/DispatchPlan.tsx",
+    "projects/frontend/src/pages/ops/IngressViz.tsx",
+    "projects/frontend/src/pages/ops/Reports.tsx",
+    "projects/frontend/src/pages/tech/ActiveJob.tsx",
+    "projects/frontend/src/pages/tech/JobsList.tsx",
+    "projects/frontend/src/store/appStore.ts"
+  ],
+  "agent": "Claude Code",
+  "model": "",
+  "turn_id": "38ba5ba953f9",
+  "token_usage": {
+    "input_tokens": 185,
+    "cache_creation_tokens": 118590,
+    "cache_read_tokens": 6185594,
+    "output_tokens": 56845,
+    "api_call_count": 59
+  },
+  "session_metrics": {
+    "turn_count": 1
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-05-28T15:40:40.325757Z",
+    "agent_lines": 719,
+    "agent_removed": 141,
+    "human_added": 424,
+    "human_modified": 20,
+    "human_removed": 0,
+    "total_committed": 1163,
+    "total_lines_changed": 1315,
+    "agent_percentage": 65.39923954372624,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0
+    },
+    {
+      "checkpoint_number": 2,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 576,
+      "agent_lines_removed": 119
+    }
+  ]
+}

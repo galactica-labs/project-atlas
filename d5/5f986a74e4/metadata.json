@@ -3,8 +3,13 @@
   "checkpoint_id": "d55f986a74e4",
   "strategy": "manual-commit",
   "branch": "main",
-  "checkpoints_count": 3,
+  "checkpoints_count": 4,
   "files_touched": [
+    "projects/frontend/src/models/hephaestus.ts",
+    "projects/frontend/src/models/hermes.ts",
+    "projects/frontend/src/models/pipeline.ts",
+    "projects/frontend/src/models/sentinel.ts",
+    "projects/frontend/src/models/triton.ts",
     "projects/frontend/src/pages/ops/AnomalyPanel.tsx",
     "projects/frontend/src/pages/ops/CommandCenter.tsx",
     "projects/frontend/src/pages/ops/DispatchPlan.tsx",
@@ -21,13 +26,19 @@
       "transcript": "/d5/5f986a74e4/0/full.jsonl",
       "content_hash": "/d5/5f986a74e4/0/content_hash.txt",
       "prompt": "/d5/5f986a74e4/0/prompt.txt"
+    },
+    {
+      "metadata": "/d5/5f986a74e4/1/metadata.json",
+      "transcript": "/d5/5f986a74e4/1/full.jsonl",
+      "content_hash": "/d5/5f986a74e4/1/content_hash.txt",
+      "prompt": "/d5/5f986a74e4/1/prompt.txt"
     }
   ],
   "token_usage": {
-    "input_tokens": 179,
-    "cache_creation_tokens": 159824,
-    "cache_read_tokens": 6045739,
-    "output_tokens": 34947,
-    "api_call_count": 49
+    "input_tokens": 364,
+    "cache_creation_tokens": 278414,
+    "cache_read_tokens": 12231333,
+    "output_tokens": 91792,
+    "api_call_count": 108
   }
 }
