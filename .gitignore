@@ -63,3 +63,13 @@ vite.config.*.timestamp*
 **/.env
 **/.env.local
 !**/.env.example
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# editor swap
+*.swp
