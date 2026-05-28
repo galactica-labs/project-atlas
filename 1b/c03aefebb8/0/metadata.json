@@ -1,0 +1,61 @@
+{
+  "cli_version": "0.6.3",
+  "checkpoint_id": "1bc03aefebb8",
+  "session_id": "843f4ea7-8694-4f14-a54c-0f2881320fce",
+  "strategy": "manual-commit",
+  "created_at": "2026-05-28T14:36:05.881821Z",
+  "branch": "main",
+  "checkpoints_count": 2,
+  "files_touched": [
+    "projects/frontend/public/dcenter.mp4",
+    "projects/frontend/public/factory-line.mp4",
+    "projects/frontend/src/pages/Hero.tsx"
+  ],
+  "agent": "Claude Code",
+  "model": "claude-sonnet-4-6",
+  "turn_id": "2fde66a1c137",
+  "token_usage": {
+    "input_tokens": 19,
+    "cache_creation_tokens": 33484,
+    "cache_read_tokens": 563243,
+    "output_tokens": 5651,
+    "api_call_count": 15
+  },
+  "session_metrics": {
+    "turn_count": 2
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-05-28T14:36:05.871326Z",
+    "agent_lines": 56,
+    "agent_removed": 17,
+    "human_added": 21,
+    "human_modified": 7,
+    "human_removed": 0,
+    "total_committed": 82,
+    "total_lines_changed": 101,
+    "agent_percentage": 72.27722772277228,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 2,
+      "user_lines_removed": 2,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0,
+      "user_added_per_file": {
+        "projects/frontend/src/pages/Hero.tsx": 2
+      },
+      "user_removed_per_file": {
+        "projects/frontend/src/pages/Hero.tsx": 2
+      }
+    },
+    {
+      "checkpoint_number": 2,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 59,
+      "agent_lines_removed": 15
+    }
+  ]
+}

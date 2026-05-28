@@ -1,0 +1,27 @@
+{
+  "cli_version": "0.6.3",
+  "checkpoint_id": "1bc03aefebb8",
+  "strategy": "manual-commit",
+  "branch": "main",
+  "checkpoints_count": 2,
+  "files_touched": [
+    "projects/frontend/public/dcenter.mp4",
+    "projects/frontend/public/factory-line.mp4",
+    "projects/frontend/src/pages/Hero.tsx"
+  ],
+  "sessions": [
+    {
+      "metadata": "/1b/c03aefebb8/0/metadata.json",
+      "transcript": "/1b/c03aefebb8/0/full.jsonl",
+      "content_hash": "/1b/c03aefebb8/0/content_hash.txt",
+      "prompt": "/1b/c03aefebb8/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 19,
+    "cache_creation_tokens": 33484,
+    "cache_read_tokens": 563243,
+    "output_tokens": 5651,
+    "api_call_count": 15
+  }
+}

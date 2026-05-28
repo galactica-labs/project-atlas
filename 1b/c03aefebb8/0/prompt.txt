@@ -1,0 +1,15 @@
+@projects/videos/ and the video behind the landing page, try to stich them up together without any delay
+
+---
+
+Detect
+
+Sensor anomalies early
+
+Map
+
+Failure blast radius
+
+Act
+
+Policy-gated dispatchmake these symmetric
