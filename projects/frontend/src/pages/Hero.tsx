@@ -15,9 +15,7 @@ import {
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-// ─── open-source video & photos (Pexels / Unsplash CC0) ──────────────
-const HERO_VIDEO =
-  "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260403_050628_c4e32401-fab4-4a27-b7a8-6e9291cd5959.mp4";
+const HERO_VIDEOS = ["/dcenter.mp4", "/factory-line.mp4"];
 
 // Taylor Vick - Unsplash (free commercial use)
 const DC_PHOTO =
@@ -262,6 +260,74 @@ function BezelCard({
   );
 }
 
+// ─── seamless video loop ──────────────────────────────────────────────
+function SeamlessVideoLoop({ videos }: { videos: string[] }) {
+  const aRef = useRef<HTMLVideoElement>(null);
+  const bRef = useRef<HTMLVideoElement>(null);
+  const [active, setActive] = useState<0 | 1>(0);
+  const idxRef = useRef(0);
+
+  useEffect(() => {
+    const a = aRef.current;
+    const b = bRef.current;
+    if (!a || !b) return;
+
+    const refs = [a, b] as const;
+
+    function advance(finished: 0 | 1) {
+      const next = (finished === 0 ? 1 : 0) as 0 | 1;
+      const nextIdx = (idxRef.current + 1) % videos.length;
+      idxRef.current = nextIdx;
+      refs[next].src = videos[nextIdx];
+      refs[next].load();
+      refs[next].play().catch(() => {});
+      setActive(next);
+
+      const upcoming = (next === 0 ? 1 : 0) as 0 | 1;
+      const upcomingIdx = (nextIdx + 1) % videos.length;
+      refs[upcoming].src = videos[upcomingIdx];
+      refs[upcoming].load();
+    }
+
+    a.src = videos[0];
+    b.src = videos[1 % videos.length];
+    a.load();
+    b.load();
+    a.play().catch(() => {});
+
+    const onEndA = () => advance(0);
+    const onEndB = () => advance(1);
+    a.addEventListener("ended", onEndA);
+    b.addEventListener("ended", onEndB);
+    return () => {
+      a.removeEventListener("ended", onEndA);
+      b.removeEventListener("ended", onEndB);
+    };
+  }, [videos]);
+
+  const base = "absolute inset-0 w-full h-full object-cover transition-opacity duration-0";
+  return (
+    <>
+      <video
+        ref={aRef}
+        className={base}
+        style={{ opacity: active === 0 ? 0.45 : 0 }}
+        muted
+        playsInline
+        preload="auto"
+      />
+      <video
+        ref={bRef}
+        className={base}
+        style={{ opacity: active === 1 ? 0.45 : 0 }}
+        muted
+        playsInline
+        preload="auto"
+      />
+    </>
+  );
+}
+
 // ─── main component ───────────────────────────────────────────────────
 export default function Hero() {
   const navigate = useNavigate();
@@ -429,16 +495,8 @@ export default function Hero() {
           HERO
       ══════════════════════════════════════════════════════════════ */}
       <section className="relative w-full min-h-[100dvh] flex flex-col overflow-hidden">
-        {/* Video bg */}
-        <video
-          className="absolute inset-0 w-full h-full object-cover"
-          style={{ opacity: 0.45 }}
-          src={HERO_VIDEO}
-          autoPlay
-          loop
-          muted
-          playsInline
-        />
+        {/* Video bg — seamless two-clip loop */}
+        <SeamlessVideoLoop videos={HERO_VIDEOS} />
 
         {/* gradient overlays */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/25 to-transparent" />
@@ -512,17 +570,23 @@ export default function Hero() {
               </div>
 
               {/* stats */}
-              <div className="flex items-end gap-10 fade-up" style={{ animationDelay: "500ms" }}>
+              <div
+                className="flex items-stretch gap-px fade-up"
+                style={{ animationDelay: "500ms" }}
+              >
                 {[
                   { val: "Detect", label: "Sensor anomalies early" },
                   { val: "Map", label: "Failure blast radius" },
                   { val: "Act", label: "Policy-gated dispatch" },
                 ].map((s) => (
-                  <div key={s.label} className="text-right">
-                    <p className="text-[1.85rem] font-semibold tracking-[-0.04em] leading-none tabular-nums">
+                  <div
+                    key={s.label}
+                    className="flex flex-col items-center text-center px-7 first:pl-0 last:pr-0 [&:not(:first-child)]:border-l [&:not(:first-child)]:border-white/10"
+                  >
+                    <p className="text-[1.85rem] font-semibold tracking-[-0.04em] leading-none">
                       {s.val}
                     </p>
-                    <p className="text-[11px] text-white/30 font-medium mt-1.5 max-w-[100px] leading-snug text-right">
+                    <p className="text-[11px] text-white/30 font-medium mt-1.5 w-[90px] leading-snug">
                       {s.label}
                     </p>
                   </div>
@@ -578,8 +642,11 @@ export default function Hero() {
           {/* 6-step bento grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
             {HOW_IT_WORKS.map((item, i) => (
-              <div key={item.n} style={rv(howRef.inView, i + 1)}>
-                <BezelCard className="p-7 flex flex-col gap-5 group hover:bg-[#0d0d0d] transition-colors duration-500">
+              <div key={item.n} style={rv(howRef.inView, i + 1)} className="h-full">
+                <BezelCard
+                  outerClass="h-full"
+                  className="p-7 flex flex-col gap-5 group hover:bg-[#0d0d0d] transition-colors duration-500"
+                >
                   <span className="font-mono text-[10px] text-white/15 tracking-[0.2em]">
                     {item.n}
                   </span>
