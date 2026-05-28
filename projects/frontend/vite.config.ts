@@ -18,11 +18,12 @@ export default defineConfig({
     },
   },
   server: {
-    host: "localhost",
+    host: "0.0.0.0",
     port: 3000,
+    allowedHosts: ["atlas.vardalas.com", ".vardalas.com", "localhost"],
     proxy: {
       "/api": {
-        target: "http://localhost:3001",
+        target: "http://localhost:3123",
         changeOrigin: true,
       },
     },
