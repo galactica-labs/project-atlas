@@ -5,12 +5,15 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Sidebar from "./components/Sidebar";
 import Hero from "./pages/Hero";
 import Login from "./pages/Login";
+import AssetRegistry from "./pages/ops/AssetRegistry";
 import CommandCenter from "./pages/ops/CommandCenter";
 import DispatchPlan from "./pages/ops/DispatchPlan";
 import FloorPlan from "./pages/ops/FloorPlan";
 import ImportFlow from "./pages/ops/ImportFlow";
 import IncidentQueue from "./pages/ops/IncidentQueue";
 import IngressViz from "./pages/ops/IngressViz";
+import NLQuery from "./pages/ops/NLQuery";
+import Reports from "./pages/ops/Reports";
 import ApprovalDetail from "./pages/supervisor/ApprovalDetail";
 import ApprovalInbox from "./pages/supervisor/ApprovalInbox";
 import ActiveJob from "./pages/tech/ActiveJob";
@@ -80,9 +83,9 @@ function AppRoutes() {
             <Route path="/ops/dispatch" element={<DispatchPlan />} />
             <Route path="/ops/import" element={<ImportFlow />} />
             <Route path="/ops/ingress" element={<IngressViz />} />
-            <Route path="/ops/assets" element={<Placeholder title="Asset Registry" />} />
-            <Route path="/ops/query" element={<Placeholder title="Natural Language Query" />} />
-            <Route path="/ops/reports" element={<Placeholder title="Risk Profile Reports" />} />
+            <Route path="/ops/assets" element={<AssetRegistry />} />
+            <Route path="/ops/query" element={<NLQuery />} />
+            <Route path="/ops/reports" element={<Reports />} />
             <Route path="/ops/approvals" element={<Placeholder title="Pending Approvals" />} />
             <Route path="/supervisor" element={<ApprovalInbox />} />
             <Route path="/supervisor/approve/:id" element={<ApprovalDetail />} />
