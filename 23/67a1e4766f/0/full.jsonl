@@ -1,0 +1,104 @@
+{
+  "info": {
+    "id": "ses_190f0280dffeEj2z83Sa27ut5y",
+    "slug": "quick-orchid",
+    "projectID": "76ffef64c3ed1947b143b31b559a8124e45b9857",
+    "directory": "/Users/cllupo/Documents/GitHub/atlaaas/project-atlas",
+    "path": "",
+    "title": "Prevent frontend auto-scroll on new messages",
+    "agent": "build",
+    "model": {
+      "id": "gpt-5.4",
+      "providerID": "github-copilot",
+      "variant": "low"
+    },
+    "version": "1.15.11",
+    "summary": {
+      "additions": 0,
+      "deletions": 0,
+      "files": 0
+    },
+    "cost": 0,
+    "tokens": {
+      "input": 0,
+      "output": 0,
+      "reasoning": 0,
+      "cache": {
+        "read": 0,
+        "write": 0
+      }
+    },
+    "time": {
+      "created": 1779979769843,
+      "updated": 1779979770208
+    }
+  },
+  "messages": [
+    {
+      "info": {
+        "role": "user",
+        "time": {
+          "created": 1779979769887
+        },
+        "agent": "build",
+        "model": {
+          "providerID": "github-copilot",
+          "modelID": "gpt-5.4",
+          "variant": "low"
+        },
+        "summary": {
+          "diffs": []
+        },
+        "id": "msg_e6f0fd803001BM2c2DyQfqoJg6",
+        "sessionID": "ses_190f0280dffeEj2z83Sa27ut5y"
+      },
+      "parts": [
+        {
+          "type": "text",
+          "text": "make the frontend not scroll down when a new message comes",
+          "id": "prt_e6f0fd8030027ae4DqKtd1MNd0",
+          "sessionID": "ses_190f0280dffeEj2z83Sa27ut5y",
+          "messageID": "msg_e6f0fd803001BM2c2DyQfqoJg6"
+        }
+      ]
+    },
+    {
+      "info": {
+        "parentID": "msg_e6f0fd803001BM2c2DyQfqoJg6",
+        "role": "assistant",
+        "mode": "build",
+        "agent": "build",
+        "variant": "low",
+        "path": {
+          "cwd": "/Users/cllupo/Documents/GitHub/atlaaas/project-atlas",
+          "root": "/Users/cllupo/Documents/GitHub/atlaaas/project-atlas"
+        },
+        "cost": 0,
+        "tokens": {
+          "input": 0,
+          "output": 0,
+          "reasoning": 0,
+          "cache": {
+            "read": 0,
+            "write": 0
+          }
+        },
+        "modelID": "gpt-5.4",
+        "providerID": "github-copilot",
+        "time": {
+          "created": 1779979770120,
+          "completed": 1779979772832
+        },
+        "error": {
+          "name": "MessageAbortedError",
+          "data": {
+            "message": "Aborted"
+          }
+        },
+        "id": "msg_e6f0fd908001BKrGHTkHgTVWqz",
+        "sessionID": "ses_190f0280dffeEj2z83Sa27ut5y"
+      },
+      "parts": []
+    }
+  ]
+}

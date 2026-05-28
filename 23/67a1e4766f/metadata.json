@@ -1,0 +1,51 @@
+{
+  "cli_version": "0.6.3",
+  "checkpoint_id": "2367a1e4766f",
+  "strategy": "manual-commit",
+  "branch": "main",
+  "checkpoints_count": 2,
+  "files_touched": [
+    "bun.lock",
+    "c05386798.pdf",
+    "packages/api-types/src/api.d.ts",
+    "packages/api-types/tsconfig.tsbuildinfo",
+    "projects/backend/.env.example",
+    "projects/backend/openapi.json",
+    "projects/backend/package.json",
+    "projects/backend/project.json",
+    "projects/backend/rag/text/c05386798.txt",
+    "projects/backend/scripts/pdf-to-text.sh",
+    "projects/backend/src/app.module.ts",
+    "projects/backend/src/config/configuration.ts",
+    "projects/backend/src/scripts/generate-task-docs-from-text.ts",
+    "projects/backend/src/scripts/generate-task-embeddings.ts",
+    "projects/backend/src/technician-assist/data/task-embeddings.generated.json",
+    "projects/backend/src/technician-assist/data/tasks.json",
+    "projects/backend/src/technician-assist/dto/technician-assist.dto.ts",
+    "projects/backend/src/technician-assist/index.ts",
+    "projects/backend/src/technician-assist/manual-tasks.ts",
+    "projects/backend/src/technician-assist/task-docs.ts",
+    "projects/backend/src/technician-assist/technician-assist.controller.ts",
+    "projects/backend/src/technician-assist/technician-assist.module.ts",
+    "projects/backend/src/technician-assist/technician-assist.service.ts",
+    "projects/frontend/src/hooks/useTechnicianRealtime.ts",
+    "projects/frontend/src/pages/tech/ActiveJob.tsx",
+    "projects/frontend/tsconfig.json",
+    "tsconfig.json"
+  ],
+  "sessions": [
+    {
+      "metadata": "/23/67a1e4766f/0/metadata.json",
+      "transcript": "/23/67a1e4766f/0/full.jsonl",
+      "content_hash": "/23/67a1e4766f/0/content_hash.txt",
+      "prompt": "/23/67a1e4766f/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 0,
+    "cache_creation_tokens": 0,
+    "cache_read_tokens": 0,
+    "output_tokens": 0,
+    "api_call_count": 1
+  }
+}

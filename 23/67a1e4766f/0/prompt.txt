@@ -1,0 +1,1 @@
+make the frontend not scroll down when a new message comes
