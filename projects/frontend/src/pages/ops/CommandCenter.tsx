@@ -10,131 +10,15 @@ import {
   Tooltip as ReTooltip,
   XAxis,
 } from "recharts";
-import CommandCenterMap from "../../components/atlas-map/CommandCenterMap";
+import CommandCenterZoneView from "../../components/ops/CommandCenterZoneView";
+import {
+  DATACENTER_FLOORS,
+  type FloorKey,
+  ZONE_INDICATOR_COLORS,
+} from "../../components/ops/commandCenterLayout";
 import { cascadeDelays, telemetryHistory } from "../../data/mock";
 import { useApp } from "../../store/appStore";
 import AnomalyPanel from "./AnomalyPanel";
-
-type ZoneVariant =
-  | "a"
-  | "b"
-  | "mechanical"
-  | "electrical"
-  | "power"
-  | "cooling"
-  | "compute"
-  | "network";
-
-interface ZoneConfig {
-  y: number;
-  height: number;
-  zone: ZoneVariant;
-  label: string;
-}
-
-interface FloorConfig {
-  label: string;
-  subtitle: string;
-  shortLabel: string;
-  indicatorColor: string;
-  zones: Record<string, ZoneConfig>;
-}
-
-type FloorKey = "Mechanical" | "Hall A" | "Hall B";
-
-// ── Datacenter layout: 3 floors, each with named zones ──────────────
-const DATACENTER_FLOORS: Record<FloorKey, FloorConfig> = {
-  Mechanical: {
-    label: "B1 – Mechanical Plant",
-    subtitle: "Power / Cooling Infrastructure",
-    shortLabel: "B1",
-    indicatorColor: "bg-amber-500",
-    zones: {
-      Electrical: {
-        y: 20,
-        height: 200,
-        zone: "electrical",
-        label: "Electrical · Switchgear & Transformers",
-      },
-      "Backup Power": {
-        y: 300,
-        height: 200,
-        zone: "power",
-        label: "Backup Power · UPS & Generators",
-      },
-      "Chiller Plant": {
-        y: 580,
-        height: 400,
-        zone: "cooling",
-        label: "Chiller Plant · Chillers, Towers & Pumps",
-      },
-    },
-  },
-  "Hall A": {
-    label: "F1 – Data Hall A",
-    subtitle: "Primary Compute / CPU",
-    shortLabel: "F1",
-    indicatorColor: "bg-blue-500",
-    zones: {
-      "Cooling Bay A": {
-        y: 20,
-        height: 180,
-        zone: "cooling",
-        label: "Cooling Bay A · CRAH Units",
-      },
-      "Compute Row A": {
-        y: 280,
-        height: 280,
-        zone: "compute",
-        label: "Compute Row A · CPU Server Racks",
-      },
-      "Compute Row B": {
-        y: 640,
-        height: 280,
-        zone: "compute",
-        label: "Compute Row B · GPU Pods & Racks",
-      },
-      "Power & Network A": {
-        y: 1000,
-        height: 160,
-        zone: "network",
-        label: "Power & Network A · PDUs & Core Switches",
-      },
-    },
-  },
-  "Hall B": {
-    label: "F2 – Data Hall B",
-    subtitle: "HPC / GPU Cluster",
-    shortLabel: "F2",
-    indicatorColor: "bg-emerald-500",
-    zones: {
-      "Cooling Bay B": {
-        y: 20,
-        height: 180,
-        zone: "cooling",
-        label: "Cooling Bay B · CRAH Units",
-      },
-      "Compute Row C": {
-        y: 280,
-        height: 280,
-        zone: "compute",
-        label: "Compute Row C · GPU Pods",
-      },
-      "Compute Row D": {
-        y: 640,
-        height: 280,
-        zone: "compute",
-        label: "Compute Row D · Rack Compute",
-      },
-      "Power & Network B": {
-        y: 1000,
-        height: 160,
-        zone: "network",
-        label: "Power & Network B · PDUs & Dist. Switches",
-      },
-    },
-  },
-};
 
 function LiveClock() {
   const [t, setT] = useState(new Date());
@@ -229,17 +113,6 @@ export default function CommandCenter() {
   };
 
   const floorZones = Object.entries(DATACENTER_FLOORS[activeFloor].zones);
-
-  const zoneIndicatorColors: Record<string, string> = {
-    electrical: "bg-yellow-400",
-    power: "bg-orange-400",
-    cooling: "bg-sky-400",
-    compute: "bg-emerald-400",
-    network: "bg-violet-400",
-    mechanical: "bg-amber-400",
-    a: "bg-blue-400",
-    b: "bg-emerald-400",
-  };
 
   return (
     <div className="flex h-full bg-[#050505] overflow-hidden">
@@ -369,12 +242,12 @@ export default function CommandCenter() {
           className="flex-1 flex flex-col lg:grid min-h-0 mt-2.5 mx-4 md:mx-5 mb-4 md:mb-5 gap-3 overflow-hidden"
           style={{ gridTemplateColumns: "1fr 320px" }}
         >
-          {/* Mapbox canvas */}
+          {/* Zone visualization */}
           <div
             className="relative rounded-2xl overflow-hidden ring-1 ring-white/[0.05] bg-[#060606]"
             style={{ minHeight: "300px" }}
           >
-            <CommandCenterMap
+            <CommandCenterZoneView
               assets={assets}
               incident={incident}
               litNodes={litNodes}
@@ -397,7 +270,7 @@ export default function CommandCenter() {
               {floorZones.map(([zoneName, zoneCfg]) => (
                 <div key={zoneName} className="flex items-center gap-1.5">
                   <div
-                    className={`w-1 h-1 rounded-full ${zoneIndicatorColors[zoneCfg.zone] ?? "bg-zinc-500"} opacity-60`}
+                    className={`w-1 h-1 rounded-full ${ZONE_INDICATOR_COLORS[zoneCfg.zone] ?? "bg-zinc-500"} opacity-60`}
                   />
                   <span className="text-[7px] font-mono text-zinc-700">{zoneName}</span>
                 </div>

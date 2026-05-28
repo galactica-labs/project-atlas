@@ -7,11 +7,12 @@ import { DependencyPath } from "./DependencyPath";
 import { FacilityFloor } from "./FacilityFloor";
 import { FacilityWalls } from "./FacilityWalls";
 import { SceneLighting } from "./SceneLighting";
-import { SCENE_ASSETS, SCENE_EDGES, SCENE_ZONES } from "./sceneData";
+import { FLOORS_3D } from "./sceneData";
 import { ZoneBlock } from "./ZoneBlock";
 
 export function FacilityScene() {
   const {
+    activeFloorId,
     selectedAssetId,
     hoveredAssetId,
     assetStatuses,
@@ -22,7 +23,12 @@ export function FacilityScene() {
     requestCameraFocus,
   } = useCommandCenterStore();
 
-  const assetsById = useMemo(() => Object.fromEntries(SCENE_ASSETS.map((a) => [a.id, a])), []);
+  const { assets: SCENE_ASSETS, edges: SCENE_EDGES, zones: SCENE_ZONES } = FLOORS_3D[activeFloorId];
+
+  const assetsById = useMemo(
+    () => Object.fromEntries(SCENE_ASSETS.map((a) => [a.id, a])),
+    [SCENE_ASSETS]
+  );
 
   const handleClick = useCallback(
     (id: string) => {

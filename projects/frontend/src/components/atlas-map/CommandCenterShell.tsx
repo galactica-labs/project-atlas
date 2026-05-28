@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { lazy, Suspense, useEffect, useState } from "react";
+import { lazy, type ReactNode, Suspense, useEffect, useState } from "react";
 import AssetDetailsPanel from "./AssetDetailsPanel";
 import { useFloorPlanStore } from "./floorPlanStore";
 import IncidentQueue from "./IncidentQueue";
@@ -29,7 +29,7 @@ function LiveClock() {
 
 // ── Top status bar ────────────────────────────────────────────────────────────
 
-function TopStatusBar() {
+function TopStatusBar({ modeSwitcher }: { modeSwitcher?: ReactNode }) {
   const { activeFloorId, incidentActive, incidentAssetOverrides } = useFloorPlanStore();
   const floor = FLOOR_META[activeFloorId];
   const allAssets = FLOORS[activeFloorId].assets;
@@ -128,7 +128,8 @@ function TopStatusBar() {
         )}
       </div>
 
-      <div className="ml-auto">
+      <div className="ml-auto flex items-center gap-2">
+        {modeSwitcher}
         <LiveClock />
       </div>
     </div>
@@ -286,13 +287,13 @@ function IncidentVignette() {
 
 // ── Main shell ────────────────────────────────────────────────────────────────
 
-export default function CommandCenterShell() {
+export default function CommandCenterShell({ modeSwitcher }: { modeSwitcher?: ReactNode }) {
   const incidentActive = useFloorPlanStore((s) => s.incidentActive);
 
   return (
     <div className="h-full overflow-hidden flex flex-col" style={{ backgroundColor: COLORS.bg }}>
       {/* Top bar */}
-      <TopStatusBar />
+      <TopStatusBar modeSwitcher={modeSwitcher} />
 
       {/* Main area */}
       <div className="flex-1 flex overflow-hidden min-h-0">

@@ -9,13 +9,14 @@ import {
 } from "@phosphor-icons/react";
 import { Canvas } from "@react-three/fiber";
 import { AnimatePresence, motion } from "framer-motion";
-import { Suspense, useEffect, useState } from "react";
+import { type ReactNode, Suspense, useEffect, useState } from "react";
 import { AssetDetailsPanel } from "./AssetDetailsPanel";
 import { BottomTimeline } from "./BottomTimeline";
 import { useCommandCenterStore } from "./commandCenterStore";
 import { FacilityScene } from "./FacilityScene";
 import { LayerControls } from "./LayerControls";
-import { SCENE_ASSETS } from "./sceneData";
+import type { FloorId3D } from "./sceneData";
+import { FLOORS_3D } from "./sceneData";
 
 function LiveClock() {
   const [t, setT] = useState(new Date());
@@ -31,12 +32,42 @@ function LiveClock() {
   );
 }
 
-function StatusBar() {
-  const { viewMode, activeIncidentId, assetStatuses } = useCommandCenterStore();
+const FLOOR_ORDER: FloorId3D[] = ["hall-a", "hall-b", "hall-c"];
+
+function FloorTabs() {
+  const { activeFloorId, setActiveFloor } = useCommandCenterStore();
+  return (
+    <div className="flex items-center gap-0.5 p-0.5 rounded-lg bg-white/[0.04] border border-white/[0.06]">
+      {FLOOR_ORDER.map((id) => {
+        const floor = FLOORS_3D[id];
+        const active = activeFloorId === id;
+        return (
+          <button
+            key={id}
+            type="button"
+            onClick={() => setActiveFloor(id)}
+            title={floor.subtitle}
+            className={`px-2.5 py-1 rounded-md text-[10px] font-semibold tracking-wide transition-all duration-150 ${
+              active
+                ? "bg-white/[0.10] text-white"
+                : "text-zinc-600 hover:text-zinc-300 hover:bg-white/[0.04]"
+            }`}
+          >
+            {floor.label}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+function StatusBar({ modeSwitcher }: { modeSwitcher?: ReactNode }) {
+  const { viewMode, activeIncidentId, assetStatuses, activeFloorId } = useCommandCenterStore();
   const critical = Object.values(assetStatuses).filter((s) => s === "critical").length;
   const warning = Object.values(assetStatuses).filter((s) => s === "warning").length;
   const offline = Object.values(assetStatuses).filter((s) => s === "offline").length;
-  const totalAssets = SCENE_ASSETS.length;
+  const totalAssets = FLOORS_3D[activeFloorId].assets.length;
+  const activeFloor = FLOORS_3D[activeFloorId];
 
   return (
     <div className="flex items-center gap-3 px-4 py-2 border-b border-white/[0.05] flex-shrink-0 bg-[#070707]">
@@ -51,9 +82,14 @@ function StatusBar() {
           <Buildings size={9} weight="light" className="text-zinc-600" />
           <span>Data Center Alpha</span>
           <span className="text-zinc-700">·</span>
-          <span className="font-mono text-zinc-600">Hall B</span>
+          <span className="font-mono text-zinc-600">{activeFloor.label}</span>
+          <span className="text-zinc-700">·</span>
+          <span className="text-zinc-700 text-[9px]">{activeFloor.subtitle}</span>
         </div>
       </div>
+
+      {/* Floor tabs */}
+      <FloorTabs />
 
       <div className="w-px h-3 bg-white/[0.06] hidden sm:block" />
 
@@ -108,7 +144,8 @@ function StatusBar() {
       </div>
 
       {/* Clock — right side */}
-      <div className="ml-auto">
+      <div className="ml-auto flex items-center gap-2">
+        {modeSwitcher}
         <LiveClock />
       </div>
     </div>
@@ -227,13 +264,13 @@ function IncidentVignette() {
   );
 }
 
-export function CommandCenter3D() {
+export function CommandCenter3D({ modeSwitcher }: { modeSwitcher?: ReactNode }) {
   const viewMode = useCommandCenterStore((s) => s.viewMode);
 
   return (
     <div className="flex flex-col h-full overflow-hidden bg-[#060606]">
       {/* Top status bar */}
-      <StatusBar />
+      <StatusBar modeSwitcher={modeSwitcher} />
 
       {/* Main: 3D canvas + right panel */}
       <div className="flex-1 flex overflow-hidden min-h-0">

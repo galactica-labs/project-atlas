@@ -1,5 +1,6 @@
 import { create } from "zustand";
-import { CRAC07_BLAST_RADIUS, CRAC07_INCIDENT_EDGES, SCENE_ASSETS } from "./sceneData";
+import type { FloorId3D } from "./sceneData";
+import { CRAC07_BLAST_RADIUS, CRAC07_INCIDENT_EDGES, FLOORS_3D } from "./sceneData";
 import type {
   AssetStatus,
   BlastRadiusItem,
@@ -11,6 +12,7 @@ import type {
 import { formatTimestamp } from "./sceneUtils";
 
 type State = {
+  activeFloorId: FloorId3D;
   selectedAssetId: string | null;
   hoveredAssetId: string | null;
   viewMode: ViewMode;
@@ -24,6 +26,7 @@ type State = {
 };
 
 type Actions = {
+  setActiveFloor: (id: FloorId3D) => void;
   selectAsset: (id: string | null) => void;
   hoverAsset: (id: string | null) => void;
   setViewMode: (mode: ViewMode) => void;
@@ -34,8 +37,8 @@ type Actions = {
   requestCameraFocus: (req: CameraFocusRequest) => void;
 };
 
-const defaultStatuses = (): Record<string, AssetStatus> =>
-  Object.fromEntries(SCENE_ASSETS.map((a) => [a.id, a.status]));
+const defaultStatuses = (floorId: FloorId3D = "hall-b"): Record<string, AssetStatus> =>
+  Object.fromEntries(FLOORS_3D[floorId].assets.map((a) => [a.id, a.status]));
 
 const DEFAULT_LAYERS: VisibleLayers = {
   power: true,
@@ -51,6 +54,7 @@ const DEFAULT_LAYERS: VisibleLayers = {
 let _incidentTimers: ReturnType<typeof setTimeout>[] = [];
 
 export const useCommandCenterStore = create<State & Actions>((set, _get) => ({
+  activeFloorId: "hall-b",
   selectedAssetId: null,
   hoveredAssetId: null,
   viewMode: "overview",
@@ -61,6 +65,23 @@ export const useCommandCenterStore = create<State & Actions>((set, _get) => ({
   timelineEvents: [],
   blastRadiusItems: [],
   cameraFocusRequest: null,
+
+  setActiveFloor: (id) => {
+    _incidentTimers.forEach(clearTimeout);
+    _incidentTimers = [];
+    set({
+      activeFloorId: id,
+      selectedAssetId: null,
+      hoveredAssetId: null,
+      viewMode: "overview",
+      activeIncidentId: null,
+      assetStatuses: defaultStatuses(id),
+      activeEdgeIds: [],
+      blastRadiusItems: [],
+      timelineEvents: [],
+      cameraFocusRequest: { type: "overview" },
+    });
+  },
 
   selectAsset: (id) => set({ selectedAssetId: id }),
   hoverAsset: (id) => set({ hoveredAssetId: id }),
