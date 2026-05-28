@@ -1,0 +1,9 @@
+pydantic>=2.5
+numpy>=1.24
+pandas>=2.1
+pyyaml>=6.0     # policy templates
+lightgbm>=4.3   # optional at runtime: linear fallback engages if unavailable
+pulp>=2.8       # optional at runtime: greedy MILP fallback engages if unavailable
+requests>=2.31  # only for live Telegram delivery; offline mode needs nothing
+mcp>=1.2        # FastMCP servers (the public API surface)
+pyarrow>=15.0   # only for reading parquet telemetry

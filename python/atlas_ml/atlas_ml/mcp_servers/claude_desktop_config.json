@@ -1,0 +1,30 @@
+{
+  "_comment": "Register Atlas's 5 MCP servers in Claude Desktop. Replace /ABS/PATH and the python path with your venv. cwd must be the atlas_ml package root so imports resolve.",
+  "mcpServers": {
+    "atlas-telemetry": {
+      "command": "/ABS/PATH/python/atlas_ml/.venv/bin/python",
+      "args": ["-m", "atlas_ml.mcp_servers.telemetry"],
+      "cwd": "/ABS/PATH/python/atlas_ml"
+    },
+    "atlas-graph": {
+      "command": "/ABS/PATH/python/atlas_ml/.venv/bin/python",
+      "args": ["-m", "atlas_ml.mcp_servers.graph"],
+      "cwd": "/ABS/PATH/python/atlas_ml"
+    },
+    "atlas-parts": {
+      "command": "/ABS/PATH/python/atlas_ml/.venv/bin/python",
+      "args": ["-m", "atlas_ml.mcp_servers.parts"],
+      "cwd": "/ABS/PATH/python/atlas_ml"
+    },
+    "atlas-history": {
+      "command": "/ABS/PATH/python/atlas_ml/.venv/bin/python",
+      "args": ["-m", "atlas_ml.mcp_servers.history"],
+      "cwd": "/ABS/PATH/python/atlas_ml"
+    },
+    "atlas-dispatch": {
+      "command": "/ABS/PATH/python/atlas_ml/.venv/bin/python",
+      "args": ["-m", "atlas_ml.mcp_servers.dispatch"],
+      "cwd": "/ABS/PATH/python/atlas_ml"
+    }
+  }
+}

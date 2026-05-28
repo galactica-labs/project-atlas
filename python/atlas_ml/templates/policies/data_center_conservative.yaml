@@ -1,0 +1,24 @@
+# Conservative (data_center, default for first 30 days)
+# "Atlas asks before doing anything that touches a running asset."
+rules:
+  - id: any_physical_action
+    match: { action_tags: [physical_intervention] }
+    effect: require_approval
+    approvers: [supervisor, ops_manager]
+    reason: "All hands-on work requires supervisor sign-off during shadow period"
+  - id: any_shutdown
+    match: { action_type: shutdown }
+    effect: require_approval
+    approvers: [ops_manager, site_director]
+    reason: "Shutdowns always require ops manager"
+  - id: read_only_diagnostics
+    match: { action_tags: [diagnostic, read_only] }
+    effect: auto_execute
+    reason: "Atlas can always look, never touch unattended"
+  - id: schedule_low_criticality
+    match:
+      action_type: schedule_maintenance
+      asset_criticality: [low, medium]
+      agent_confidence: { min: 0.8 }
+    effect: auto_execute
+    reason: "Routine scheduling on non-critical assets is safe"

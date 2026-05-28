@@ -1,0 +1,26 @@
+# Balanced (data_center, default after shadow period)
+# "Atlas acts on low-stakes things, asks on the rest."
+rules:
+  - id: critical_asset_any_action
+    match: { asset_criticality: [critical] }
+    effect: require_approval
+    approvers: [ops_manager]
+    reason: "Critical assets always have a human in the loop"
+  - id: high_uncertainty_pause
+    match: { uncertainty_band_width: { min: 0.4 } }
+    effect: require_approval
+    approvers: [supervisor]
+    reason: "When the forecast is uncertain, ask"
+  - id: confident_dispatch_medium
+    match:
+      action_type: dispatch_tech
+      asset_criticality: [medium]
+      agent_confidence: { min: 0.85 }
+      uncertainty_band_width: { max: 0.25 }
+    effect: auto_execute
+    reason: "Confident dispatch on medium-criticality is automatic"
+  - id: shutdowns_always
+    match: { action_type: shutdown }
+    effect: require_approval
+    approvers: [ops_manager]
+    reason: "Shutdowns always require ops manager"

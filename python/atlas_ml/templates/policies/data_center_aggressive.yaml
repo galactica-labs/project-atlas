@@ -1,0 +1,23 @@
+# Aggressive (after 90+ days of clean operation, opt-in only)
+# "Atlas acts unless it's unsafe; humans get a digest."
+rules:
+  - id: site_director_only_shutdowns_of_critical
+    match:
+      action_type: shutdown
+      asset_criticality: [critical]
+    effect: require_approval
+    approvers: [site_director]
+    reason: "Shutting down a critical asset still needs the site director"
+  - id: confident_anything
+    match:
+      agent_confidence: { min: 0.9 }
+      uncertainty_band_width: { max: 0.3 }
+    effect: auto_execute
+    reason: "Trusted to act when confident"
+  - id: medium_confidence_digest
+    match:
+      agent_confidence: { min: 0.7, max: 0.9 }
+    effect: auto_execute
+    notify: [supervisor]
+    digest: shift_change
+    reason: "Execute but include in next shift digest"
