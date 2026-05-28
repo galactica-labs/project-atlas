@@ -3,12 +3,16 @@
   "checkpoint_id": "632996ca9d81",
   "strategy": "manual-commit",
   "branch": "main",
-  "checkpoints_count": 2,
+  "checkpoints_count": 6,
   "files_touched": [
+    "projects/frontend/src/App.tsx",
     "projects/frontend/src/components/ops/CommandCenterZoneView.tsx",
     "projects/frontend/src/pages/ops/AnomalyPanel.tsx",
+    "projects/frontend/src/pages/ops/AssetRegistry.tsx",
     "projects/frontend/src/pages/ops/CommandCenter.tsx",
-    "projects/frontend/src/pages/ops/FloorPlan.tsx"
+    "projects/frontend/src/pages/ops/FloorPlan.tsx",
+    "projects/frontend/src/pages/ops/NLQuery.tsx",
+    "projects/frontend/src/pages/ops/Reports.tsx"
   ],
   "sessions": [
     {
@@ -22,13 +26,19 @@
       "transcript": "/63/2996ca9d81/1/full.jsonl",
       "content_hash": "/63/2996ca9d81/1/content_hash.txt",
       "prompt": "/63/2996ca9d81/1/prompt.txt"
+    },
+    {
+      "metadata": "/63/2996ca9d81/2/metadata.json",
+      "transcript": "/63/2996ca9d81/2/full.jsonl",
+      "content_hash": "/63/2996ca9d81/2/content_hash.txt",
+      "prompt": "/63/2996ca9d81/2/prompt.txt"
     }
   ],
   "token_usage": {
-    "input_tokens": 14,
-    "cache_creation_tokens": 99446,
-    "cache_read_tokens": 137561,
-    "output_tokens": 8331,
-    "api_call_count": 10
+    "input_tokens": 166,
+    "cache_creation_tokens": 449482,
+    "cache_read_tokens": 4404992,
+    "output_tokens": 92413,
+    "api_call_count": 75
   }
 }

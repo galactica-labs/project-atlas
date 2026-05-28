@@ -1,0 +1,82 @@
+{
+  "cli_version": "0.6.3",
+  "checkpoint_id": "632996ca9d81",
+  "session_id": "ses_191616431ffeJ7D4iCvVagkE1H",
+  "strategy": "manual-commit",
+  "created_at": "2026-05-28T13:23:00.919751Z",
+  "branch": "main",
+  "checkpoints_count": 4,
+  "files_touched": [
+    "projects/frontend/src/App.tsx",
+    "projects/frontend/src/components/ops/CommandCenterZoneView.tsx",
+    "projects/frontend/src/pages/ops/AnomalyPanel.tsx",
+    "projects/frontend/src/pages/ops/AssetRegistry.tsx",
+    "projects/frontend/src/pages/ops/CommandCenter.tsx",
+    "projects/frontend/src/pages/ops/FloorPlan.tsx",
+    "projects/frontend/src/pages/ops/NLQuery.tsx",
+    "projects/frontend/src/pages/ops/Reports.tsx"
+  ],
+  "agent": "OpenCode",
+  "model": "claude-sonnet-4.6",
+  "turn_id": "e63b562b1b93",
+  "token_usage": {
+    "input_tokens": 152,
+    "cache_creation_tokens": 350036,
+    "cache_read_tokens": 4267431,
+    "output_tokens": 84082,
+    "api_call_count": 65
+  },
+  "session_metrics": {
+    "turn_count": 4
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-05-28T13:23:00.895146Z",
+    "agent_lines": 2373,
+    "agent_removed": 310,
+    "human_added": 0,
+    "human_modified": 11,
+    "human_removed": 408,
+    "total_committed": 2384,
+    "total_lines_changed": 3102,
+    "agent_percentage": 86.49258542875565,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 163,
+      "user_lines_removed": 407,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0,
+      "user_added_per_file": {
+        "projects/frontend/src/components/ops/CommandCenterZoneView.tsx": 161,
+        "projects/frontend/src/pages/ops/FloorPlan.tsx": 2
+      },
+      "user_removed_per_file": {
+        "projects/frontend/src/components/ops/CommandCenterZoneView.tsx": 255,
+        "projects/frontend/src/pages/ops/FloorPlan.tsx": 152
+      }
+    },
+    {
+      "checkpoint_number": 2,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 163,
+      "agent_lines_removed": 407
+    },
+    {
+      "checkpoint_number": 3,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 666,
+      "agent_lines_removed": 718
+    },
+    {
+      "checkpoint_number": 4,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 2572,
+      "agent_lines_removed": 721
+    }
+  ]
+}
