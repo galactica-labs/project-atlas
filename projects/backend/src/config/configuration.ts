@@ -17,8 +17,13 @@ const aiConfig = registerAs("ai", () => ({
   openRouterApiKey: process.env.OPENROUTER_API_KEY,
 }));
 
-const configuration = [appConfig, dbConfig, aiConfig];
+const engineConfig = registerAs("engine", () => ({
+  // atlas_ml FastAPI engine the pipeline bridge proxies to
+  url: process.env.ATLAS_ENGINE_URL || "http://localhost:8000",
+}));
 
-export { aiConfig, appConfig, dbConfig };
+const configuration = [appConfig, dbConfig, aiConfig, engineConfig];
+
+export { aiConfig, appConfig, dbConfig, engineConfig };
 
 export default configuration;
