@@ -1,0 +1,5 @@
+brotha, go on and add an importation flow to the frontend system (talk like a caveman)
+
+additionally load the frontend design and other skills that you may need for the task you need to fulfill
+
+I want you to add an importation flow system into the frontend workflow because currently the components that make up a data center are just already there, there needs to be a panel that will handle the importation of the SKUs and the conversion of them to human-understandable component names too. after that we pass it through a supposed "reasoning layer" that will perform the search and translation part so they can be fully imported to the "database" and have the ability to associate documentation with a specific part and also after the part matching finishes from the model we will hand off the associations to the techinician so that they can confirm and edit them if the ai didn't get something right, this is a new page in the sidebar
