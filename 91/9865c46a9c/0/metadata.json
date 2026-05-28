@@ -1,0 +1,66 @@
+{
+  "cli_version": "0.6.3",
+  "checkpoint_id": "919865c46a9c",
+  "session_id": "ses_19131401affeTH6xULYEAJPy3O",
+  "strategy": "manual-commit",
+  "created_at": "2026-05-28T13:42:59.935444Z",
+  "branch": "main",
+  "checkpoints_count": 1,
+  "files_touched": [
+    "projects/frontend/index.html",
+    "projects/frontend/src/pages/Hero.tsx",
+    "start.sh"
+  ],
+  "agent": "OpenCode",
+  "model": "claude-sonnet-4.6",
+  "turn_id": "9ad349527838",
+  "token_usage": {
+    "input_tokens": 5,
+    "cache_creation_tokens": 15483,
+    "cache_read_tokens": 12899,
+    "output_tokens": 1151,
+    "api_call_count": 3
+  },
+  "session_metrics": {
+    "turn_count": 1
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-05-28T13:42:59.928679Z",
+    "agent_lines": 0,
+    "agent_removed": 0,
+    "human_added": 358,
+    "human_modified": 13,
+    "human_removed": 0,
+    "total_committed": 358,
+    "total_lines_changed": 626,
+    "agent_percentage": 0,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 36,
+      "user_lines_removed": 5,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0,
+      "user_added_per_file": {
+        "projects/frontend/index.html": 3,
+        "projects/frontend/public/favicon.svg": 11,
+        "projects/frontend/src/pages/Hero.tsx": 13,
+        "start.sh": 9
+      },
+      "user_removed_per_file": {
+        "projects/frontend/index.html": 1,
+        "projects/frontend/src/pages/Hero.tsx": 2,
+        "start.sh": 2
+      }
+    },
+    {
+      "checkpoint_number": 2,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 36,
+      "agent_lines_removed": 5
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+In the project at /Users/pantelis/Desktop/project-atlas/projects/frontend/src, find the Hero or landing page component and identify what icon or logo is displayed on it. Look for:
+1. The Hero.tsx or similar landing page component
+2. Any logo/icon - could be an SVG inline, an imported image file, a component like a logo component, or an icon from a library (lucide-react, etc.)
+3. Return the exact code used to render the logo/icon on the landing page, including any SVG paths, component names, or image paths.
+
+Return the full relevant file contents and the exact icon/logo code.

@@ -1,0 +1,409 @@
+{
+  "info": {
+    "id": "ses_19131401affeTH6xULYEAJPy3O",
+    "slug": "quick-cabin",
+    "projectID": "76ffef64c3ed1947b143b31b559a8124e45b9857",
+    "directory": "/Users/pantelis/Desktop/project-atlas",
+    "path": "",
+    "parentID": "ses_1913471b6ffeDTVkEn1LwVvVwr",
+    "title": "Find landing page icon/logo (@explore subagent)",
+    "agent": "explore",
+    "model": {
+      "id": "claude-sonnet-4.6",
+      "providerID": "github-copilot",
+      "variant": "default"
+    },
+    "version": "1.15.11",
+    "summary": {
+      "additions": 0,
+      "deletions": 0,
+      "files": 0
+    },
+    "cost": 0,
+    "tokens": {
+      "input": 5,
+      "output": 1151,
+      "reasoning": 0,
+      "cache": {
+        "read": 12899,
+        "write": 15483
+      }
+    },
+    "permission": [
+      {
+        "permission": "todowrite",
+        "action": "deny",
+        "pattern": "*"
+      },
+      {
+        "permission": "task",
+        "action": "deny",
+        "pattern": "*"
+      }
+    ],
+    "time": {
+      "created": 1779975503845,
+      "updated": 1779975531926
+    }
+  },
+  "messages": [
+    {
+      "info": {
+        "role": "user",
+        "time": {
+          "created": 1779975503851
+        },
+        "tools": {
+          "todowrite": false,
+          "task": false
+        },
+        "agent": "explore",
+        "model": {
+          "providerID": "github-copilot",
+          "modelID": "claude-sonnet-4.6"
+        },
+        "summary": {
+          "diffs": []
+        },
+        "id": "msg_e6ecebfea001Qo29G0lGFfxZzo",
+        "sessionID": "ses_19131401affeTH6xULYEAJPy3O"
+      },
+      "parts": [
+        {
+          "type": "text",
+          "text": "In the project at /Users/pantelis/Desktop/project-atlas/projects/frontend/src, find the Hero or landing page component and identify what icon or logo is displayed on it. Look for:\n1. The Hero.tsx or similar landing page component\n2. Any logo/icon - could be an SVG inline, an imported image file, a component like a logo component, or an icon from a library (lucide-react, etc.)\n3. Return the exact code used to render the logo/icon on the landing page, including any SVG paths, component names, or image paths.\n\nReturn the full relevant file contents and the exact icon/logo code.",
+          "id": "prt_e6ecebfee0018kjf2hhpyO8Kft",
+          "sessionID": "ses_19131401affeTH6xULYEAJPy3O",
+          "messageID": "msg_e6ecebfea001Qo29G0lGFfxZzo"
+        }
+      ]
+    },
+    {
+      "info": {
+        "parentID": "msg_e6ecebfea001Qo29G0lGFfxZzo",
+        "role": "assistant",
+        "mode": "explore",
+        "agent": "explore",
+        "path": {
+          "cwd": "/Users/pantelis/Desktop/project-atlas",
+          "root": "/Users/pantelis/Desktop/project-atlas"
+        },
+        "cost": 0,
+        "tokens": {
+          "total": 4562,
+          "input": 3,
+          "output": 252,
+          "reasoning": 0,
+          "cache": {
+            "write": 463,
+            "read": 3844
+          }
+        },
+        "modelID": "claude-sonnet-4.6",
+        "providerID": "github-copilot",
+        "time": {
+          "created": 1779975504170,
+          "completed": 1779975509419
+        },
+        "finish": "tool-calls",
+        "id": "msg_e6ecec12a001Qw36WuOolPkmkd",
+        "sessionID": "ses_19131401affeTH6xULYEAJPy3O"
+      },
+      "parts": [
+        {
+          "snapshot": "0cea105c6b0e5855107954a49ce1241c10c19109",
+          "type": "step-start",
+          "id": "prt_e6eced11f00143emfdGpaO2E6R",
+          "sessionID": "ses_19131401affeTH6xULYEAJPy3O",
+          "messageID": "msg_e6ecec12a001Qw36WuOolPkmkd"
+        },
+        {
+          "type": "text",
+          "text": "I'll systematically search for the Hero/landing page component and any logo/icon usage in the frontend source directory.",
+          "time": {
+            "start": 1779975508256,
+            "end": 1779975508259
+          },
+          "id": "prt_e6eced120002Q3yGnykNB0ukRm",
+          "sessionID": "ses_19131401affeTH6xULYEAJPy3O",
+          "messageID": "msg_e6ecec12a001Qw36WuOolPkmkd"
+        },
+        {
+          "type": "tool",
+          "tool": "glob",
+          "callID": "toolu_bdrk_019Huy2RGj4AUzdkBbJfpdy4",
+          "state": {
+            "status": "completed",
+            "input": {
+              "pattern": "**/*{Hero,Landing,hero,landing}*",
+              "path": "/Users/pantelis/Desktop/project-atlas/projects/frontend/src"
+            },
+            "output": "/Users/pantelis/Desktop/project-atlas/projects/frontend/src/pages/Hero.tsx",
+            "metadata": {
+              "count": 1,
+              "truncated": false
+            },
+            "title": "projects/frontend/src",
+            "time": {
+              "start": 1779975509207,
+              "end": 1779975509228
+            }
+          },
+          "id": "prt_e6eced124001zEmFUXPAYLWEEl",
+          "sessionID": "ses_19131401affeTH6xULYEAJPy3O",
+          "messageID": "msg_e6ecec12a001Qw36WuOolPkmkd"
+        },
+        {
+          "type": "tool",
+          "tool": "glob",
+          "callID": "toolu_bdrk_01RyuFgKi5ic48nma2Y2cAsw",
+          "state": {
+            "status": "completed",
+            "input": {
+              "pattern": "**/*{Logo,logo,Icon,icon}*",
+              "path": "/Users/pantelis/Desktop/project-atlas/projects/frontend/src"
+            },
+            "output": "No files found",
+            "metadata": {
+              "count": 0,
+              "truncated": false
+            },
+            "title": "projects/frontend/src",
+            "time": {
+              "start": 1779975509212,
+              "end": 1779975509226
+            }
+          },
+          "id": "prt_e6eced4d8001PkRIyxqwyM3Mya",
+          "sessionID": "ses_19131401affeTH6xULYEAJPy3O",
+          "messageID": "msg_e6ecec12a001Qw36WuOolPkmkd"
+        },
+        {
+          "type": "tool",
+          "tool": "read",
+          "callID": "toolu_bdrk_01D3cxjTpTcPgRjQkraCDitZ",
+          "state": {
+            "status": "completed",
+            "input": {
+              "filePath": "/Users/pantelis/Desktop/project-atlas/projects/frontend/src"
+            },
+            "output": "<path>/Users/pantelis/Desktop/project-atlas/projects/frontend/src</path>\n<type>directory</type>\n<entries>\nApp.tsx\ncomponents/\ndata/\nindex.css\nlib/\nmain.tsx\npages/\nstore/\nvite-env.d.ts\n\n(9 entries)\n</entries>",
+            "metadata": {
+              "preview": "App.tsx\ncomponents/\ndata/\nindex.css\nlib/\nmain.tsx\npages/\nstore/\nvite-env.d.ts",
+              "truncated": false,
+              "loaded": []
+            },
+            "title": "projects/frontend/src",
+            "time": {
+              "start": 1779975509272,
+              "end": 1779975509275
+            }
+          },
+          "id": "prt_e6eced4dd0014pQZZeOV7HMZNx",
+          "sessionID": "ses_19131401affeTH6xULYEAJPy3O",
+          "messageID": "msg_e6ecec12a001Qw36WuOolPkmkd"
+        },
+        {
+          "reason": "tool-calls",
+          "snapshot": "0cea105c6b0e5855107954a49ce1241c10c19109",
+          "type": "step-finish",
+          "tokens": {
+            "total": 4562,
+            "input": 3,
+            "output": 252,
+            "reasoning": 0,
+            "cache": {
+              "write": 463,
+              "read": 3844
+            }
+          },
+          "cost": 0,
+          "id": "prt_e6eced56c001eK6tDZum6Cr8NG",
+          "sessionID": "ses_19131401affeTH6xULYEAJPy3O",
+          "messageID": "msg_e6ecec12a001Qw36WuOolPkmkd"
+        }
+      ]
+    },
+    {
+      "info": {
+        "parentID": "msg_e6ecebfea001Qo29G0lGFfxZzo",
+        "role": "assistant",
+        "mode": "explore",
+        "agent": "explore",
+        "path": {
+          "cwd": "/Users/pantelis/Desktop/project-atlas",
+          "root": "/Users/pantelis/Desktop/project-atlas"
+        },
+        "cost": 0,
+        "tokens": {
+          "total": 4878,
+          "input": 1,
+          "output": 129,
+          "reasoning": 0,
+          "cache": {
+            "write": 441,
+            "read": 4307
+          }
+        },
+        "modelID": "claude-sonnet-4.6",
+        "providerID": "github-copilot",
+        "time": {
+          "created": 1779975509421,
+          "completed": 1779975513381
+        },
+        "finish": "tool-calls",
+        "id": "msg_e6eced5ad001mHcNizTa0Bsxj1",
+        "sessionID": "ses_19131401affeTH6xULYEAJPy3O"
+      },
+      "parts": [
+        {
+          "snapshot": "0cea105c6b0e5855107954a49ce1241c10c19109",
+          "type": "step-start",
+          "id": "prt_e6ecee4610016B6sgCvw36TyBr",
+          "sessionID": "ses_19131401affeTH6xULYEAJPy3O",
+          "messageID": "msg_e6eced5ad001mHcNizTa0Bsxj1"
+        },
+        {
+          "type": "tool",
+          "tool": "read",
+          "callID": "toolu_bdrk_014vv7Lf3VWG8BgS5W976beQ",
+          "state": {
+            "status": "completed",
+            "input": {
+              "filePath": "/Users/pantelis/Desktop/project-atlas/projects/frontend/src/pages/Hero.tsx"
+            },
+            "output": "<path>/Users/pantelis/Desktop/project-atlas/projects/frontend/src/pages/Hero.tsx</path>\n<type>file</type>\n<content>\n1: import type { IconProps } from \"@phosphor-icons/react\";\n2: import {\n3:   ArrowRight,\n4:   ArrowUpRight,\n5:   Brain,\n6:   ChartBar,\n7:   CheckCircle,\n8:   GitBranch,\n9:   Lock,\n10:   Package,\n11:   Shield,\n12:   Truck,\n13:   Warning,\n14: } from \"@phosphor-icons/react\";\n15: import { useEffect, useRef, useState } from \"react\";\n16: import { useNavigate } from \"react-router-dom\";\n17: \n18: // ─── open-source video & photos (Pexels / Unsplash CC0) ──────────────\n19: const HERO_VIDEO =\n20:   \"https://d8j0ntlcm91z4.cloudfront.net/REDACTED/hf_20260403_050628_c4e32401-fab4-4a27-b7a8-6e9291cd5959.mp4\";\n21: \n22: // Taylor Vick - Unsplash (free commercial use)\n23: const DC_PHOTO =\n24:   \"https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=2400&q=80\";\n25: \n26: // imgix - Unsplash circuit board\n27: const CIRCUIT_PHOTO =\n28:   \"https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=2400&q=80\";\n29: \n30: // ─── types ────────────────────────────────────────────────────────────\n31: type IconComponent = React.ForwardRefExoticComponent<\n32:   IconProps & React.RefAttributes<SVGSVGElement>\n33: >;\n34: \n35: // ─── hooks ────────────────────────────────────────────────────────────\n36: function useScrolled(threshold = 50) {\n37:   const [scrolled, setScrolled] = useState(false);\n38:   useEffect(() => {\n39:     const handler = () => setScrolled(window.scrollY > threshold);\n40:     window.addEventListener(\"scroll\", handler, { passive: true });\n41:     return () => window.removeEventListener(\"scroll\", handler);\n42:   }, [threshold]);\n43:   return scrolled;\n44: }\n45: \n46: function useInView(options?: IntersectionObserverInit) {\n47:   const ref = useRef<HTMLDivElement>(null);\n48:   const [inView, setInView] = useState(false);\n49:   useEffect(() => {\n50:     if (!ref.current) return;\n51:     const obs = new IntersectionObserver(\n52:       ([e]) => {\n53:         if (e.isIntersecting) {\n54:           setInView(true);\n55:           obs.disconnect();\n56:         }\n57:       },\n58:       { threshold: 0.12, ...options }\n59:     );\n60:     obs.observe(ref.current);\n61:     return () => obs.disconnect();\n62:   }, [options]);\n63:   return { ref, inView };\n64: }\n65: \n66: // ─── data ─────────────────────────────────────────────────────────────\n67: const NAV_LINKS = [\"Platform\", \"Industries\", \"Security\", \"Docs\"];\n68: const navLinkHref = (link: string) => `#${link.toLowerCase()}`;\n69: \n70: const AGENTS: {\n71:   name: string;\n72:   role: string;\n73:   desc: string;\n74:   stat: string;\n75:   grad: string;\n76:   dot: string;\n77:   ring: string;\n78:   Icon: IconComponent;\n79: }[] = [\n80:   {\n81:     name: \"Sentinel\",\n82:     role: \"Anomaly Detection\",\n83:     desc: \"Watches every sensor in real time. When something starts to drift, it surfaces the signal early and reduces false alarms with every review cycle.\",\n84:     stat: \"Live signal\",\n85:     grad: \"from-orange-500/15 to-orange-950/5\",\n86:     dot: \"bg-orange-400\",\n87:     ring: \"ring-orange-500/20\",\n88:     Icon: ChartBar,\n89:   },\n90:   {\n91:     name: \"Triton\",\n92:     role: \"Impact Analysis\",\n93:     desc: \"Maps how a single failure ripples through your infrastructure. Identifies which assets are at risk, in what order, and with how much time left to act.\",\n94:     stat: \"Full cascade map\",\n95:     grad: \"from-red-500/15 to-red-950/5\",\n96:     dot: \"bg-red-400\",\n97:     ring: \"ring-red-500/20\",\n98:     Icon: Warning,\n99:   },\n100:   {\n101:     name: \"Hephaestus\",\n102:     role: \"Decision Engine\",\n103:     desc: \"Weighs every option against your rules and risk tolerance. Recommends the right action: repair, dispatch, or hold, with a full explanation every time.\",\n104:     stat: \"Policy aware\",\n105:     grad: \"from-violet-500/15 to-violet-950/5\",\n106:     dot: \"bg-violet-400\",\n107:     ring: \"ring-violet-500/20\",\n108:     Icon: Shield,\n109:   },\n110:   {\n111:     name: \"Hermes\",\n112:     role: \"Smart Dispatch\",\n113:     desc: \"Finds the best technician for every job by matching skills, location, and parts availability. No manual coordination, no guesswork.\",\n114:     stat: \"Context routing\",\n115:     grad: \"from-blue-500/15 to-blue-950/5\",\n116:     dot: \"bg-blue-400\",\n117:     ring: \"ring-blue-500/20\",\n118:     Icon: Truck,\n119:   },\n120:   {\n121:     name: \"Mnemos\",\n122:     role: \"Continuous Learning\",\n123:     desc: \"Learns from every incident your team closes. The more Atlas works with you, the better it gets at predicting and preventing the next failure.\",\n124:     stat: \"Always improving\",\n125:     grad: \"from-cyan-500/15 to-cyan-950/5\",\n126:     dot: \"bg-cyan-400\",\n127:     ring: \"ring-cyan-500/20\",\n128:     Icon: Brain,\n129:   },\n130:   {\n131:     name: \"Genesis\",\n132:     role: \"Catalog Ingestion\",\n133:     desc: \"Pulls raw hardware inventory from the ingress layer, runs AI-assisted name resolution, and gates every item through technician review before publishing to the live component catalog.\",\n134:     stat: \"Human-gated publish\",\n135:     grad: \"from-emerald-500/15 to-emerald-950/5\",\n136:     dot: \"bg-emerald-400\",\n137:     ring: \"ring-emerald-500/20\",\n138:     Icon: Package,\n139:   },\n140: ];\n141: \n142: const HOW_IT_WORKS = [\n143:   {\n144:     n: \"01\",\n145:     title: \"Connect\",\n146:     body: \"Atlas connects to your existing sensors and equipment. Every device is discovered and catalogued automatically. No manual setup required.\",\n147:   },\n148:   {\n149:     n: \"02\",\n150:     title: \"Understand\",\n151:     body: \"Atlas translates thousands of cryptic sensor names into plain, structured data. Your team only reviews the handful that need a human decision.\",\n152:   },\n153:   {\n154:     n: \"03\",\n155:     title: \"Learn\",\n156:     body: \"A short observation period builds a unique baseline for every asset in your facility. No manual configuration. Atlas learns what normal looks like.\",\n157:   },\n158:   {\n159:     n: \"04\",\n160:     title: \"Detect\",\n161:     body: \"Anomalies surface early with enough context for the team to act. The longer Atlas runs, the fewer false alarms your team has to deal with.\",\n162:   },\n163:   {\n164:     n: \"05\",\n165:     title: \"Predict\",\n166:     body: \"When something starts to fail, Atlas maps the full picture: which other systems are at risk, in what order, and how much time you have.\",\n167:   },\n168:   {\n169:     n: \"06\",\n170:     title: \"Act\",\n171:     body: \"The right technician is dispatched automatically. Anything that carries real risk pauses for a human sign-off before it executes.\",\n172:   },\n173: ];\n174: \n175: const GOVERNANCE = [\n176:   {\n177:     Icon: Lock,\n178:     title: \"Hash-chained audit ledger\",\n179:     body: \"Every agent action, every human decision, every override. SHA-256 chained and tamper-evident. Auto-verified hourly via Postgres trigger.\",\n180:   },\n181:   {\n182:     Icon: CheckCircle,\n183:     title: \"Human-in-the-loop gateway\",\n184:     body: \"Risky actions pause at policy-defined gates. Telegram / Slack approval with full reasoning trace. Mandatory reason for every override.\",\n185:   },\n186:   {\n187:     Icon: GitBranch,\n188:     title: \"Autonomy expansion via decision memory\",\n189:     body: \"Approve the same class of action five times and Atlas proposes auto-approving it, with HITL sign-off on the promotion itself.\",\n190:   },\n191: ];\n192: \n193: const COMPLIANCE = [\"ISO 55000\", \"NERC CIP\", \"SEMI S2\", \"SOC 2 Type II\", \"ISO 27001\"];\n194: \n195: const TICKER_ITEMS = [\n196:   \"Sensor-aware anomaly detection\",\n197:   \"Dependency-aware blast-radius mapping\",\n198:   \"Policy-gated autonomy\",\n199:   \"Technician dispatch orchestration\",\n200:   \"Incident memory and training tuples\",\n201:   \"Hash-chained audit ledger\",\n202:   \"Human approval for risky actions\",\n203:   \"Built for AI era data centers\",\n204: ];\n205: const TICKER_LOOP_ITEMS = [\n206:   ...TICKER_ITEMS.map((item) => ({ key: `first-${item}`, item })),\n207:   ...TICKER_ITEMS.map((item) => ({ key: `second-${item}`, item })),\n208: ];\n209: \n210: const ECONOMIC_VALUE = [\n211:   {\n212:     title: \"Outage risk\",\n213:     body: \"See which assets are failing and what depends on them before a cascade starts.\",\n214:   },\n215:   {\n216:     title: \"Maintenance spend\",\n217:     body: \"Focus work on assets showing real degradation instead of replacing healthy parts on a calendar.\",\n218:   },\n219:   {\n220:     title: \"Dispatch time\",\n221:     body: \"Route the right technician with the right context, parts, and approval state.\",\n222:   },\n223:   {\n224:     title: \"Decision memory\",\n225:     body: \"Turn repeated human approvals into governed automation proposals your team can inspect.\",\n226:   },\n227: ];\n228: \n229: // ─── sub-components ───────────────────────────────────────────────────\n230: \n231: function Orb({ className }: { className: string }) {\n232:   return <div className={`absolute rounded-full pointer-events-none ${className}`} />;\n233: }\n234: \n235: function SectionBadge({ children }: { children: React.ReactNode }) {\n236:   return (\n237:     <span className=\"inline-block px-3 py-1 rounded-full bg-white/5 ring-1 ring-white/10 text-[10px] uppercase tracking-[0.2em] font-semibold text-white/45 mb-5\">\n238:       {children}\n239:     </span>\n240:   );\n241: }\n242: \n243: function BezelCard({\n244:   children,\n245:   className = \"\",\n246:   outerClass = \"\",\n247: }: {\n248:   children: React.ReactNode;\n249:   className?: string;\n250:   outerClass?: string;\n251: }) {\n252:   return (\n253:     <div\n254:       className={`p-[6px] rounded-[1.75rem] bg-white/[0.025] ring-1 ring-white/[0.07] ${outerClass}`}\n255:     >\n256:       <div\n257:         className={`bg-[#080808] rounded-[calc(1.75rem-6px)] shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] h-full ${className}`}\n258:       >\n259:         {children}\n260:       </div>\n261:     </div>\n262:   );\n263: }\n264: \n265: // ─── main component ───────────────────────────────────────────────────\n266: export default function Hero() {\n267:   const navigate = useNavigate();\n268:   const scrolled = useScrolled();\n269:   const [menuOpen, setMenuOpen] = useState(false);\n270: \n271:   // section refs\n272:   const howRef = useInView();\n273:   const agentsRef = useInView();\n274:   const roiRef = useInView();\n275:   const govRef = useInView();\n276:   const ctaRef = useInView();\n277: \n278:   // prevent body scroll when mobile menu open\n279:   useEffect(() => {\n280:     document.body.style.overflow = menuOpen ? \"hidden\" : \"\";\n281:     return () => {\n282:       document.body.style.overflow = \"\";\n283:     };\n284:   }, [menuOpen]);\n285: \n286:   const rv = (inView: boolean, i: number) => ({\n287:     opacity: inView ? 1 : 0,\n288:     transform: inView ? \"translateY(0)\" : \"translateY(24px)\",\n289:     transition: `opacity 0.7s cubic-bezier(0.32,0.72,0,1) ${i * 80}ms, transform 0.7s cubic-bezier(0.32,0.72,0,1) ${i * 80}ms`,\n290:   });\n291: \n292:   return (\n293:     <div className=\"relative w-full bg-[#050505] text-white overflow-x-hidden\">\n294:       {/* ══════════════════════════════════════════════════════════════\n295:           NAVBAR\n296:       ══════════════════════════════════════════════════════════════ */}\n297:       <header className=\"fixed top-0 left-0 right-0 z-50 px-4 md:px-6 pt-4\">\n298:         <nav\n299:           className=\"max-w-6xl mx-auto flex items-center justify-between px-4 py-2.5 rounded-2xl transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)]\"\n300:           style={{\n301:             background: scrolled ? \"rgba(5,5,5,0.85)\" : \"transparent\",\n302:             backdropFilter: scrolled ? \"blur(24px)\" : \"none\",\n303:             WebkitBackdropFilter: scrolled ? \"blur(24px)\" : \"none\",\n304:             boxShadow: scrolled ? \"inset 0 0 0 1px rgba(255,255,255,0.07)\" : \"none\",\n305:           }}\n306:         >\n307:           {/* Logo */}\n308:           <div className=\"flex items-center gap-2.5\">\n309:             <div className=\"w-6 h-6 rounded-[7px] bg-white flex items-center justify-center shrink-0\">\n310:               <div className=\"w-2.5 h-2.5 bg-black rounded-[3px]\" />\n311:             </div>\n312:             <span className=\"text-[15px] font-semibold tracking-tight\">Atlas</span>\n313:           </div>\n314: \n315:           {/* Desktop links */}\n316:           <div className=\"hidden md:flex items-center gap-8\">\n317:             {NAV_LINKS.map((link) => (\n318:               <a\n319:                 key={link}\n320:                 href={navLinkHref(link)}\n321:                 className=\"text-[13px] text-white/45 hover:text-white/90 font-medium transition-colors duration-300\"\n322:               >\n323:                 {link}\n324:               </a>\n325:             ))}\n326:           </div>\n327: \n328:           {/* Desktop CTAs */}\n329:           <div className=\"hidden md:flex items-center gap-2\">\n330:             <button\n331:               type=\"button\"\n332:               onClick={() => navigate(\"/login\")}\n333:               className=\"text-[13px] text-white/45 hover:text-white/80 font-medium px-4 py-2 transition-colors duration-300\"\n334:             >\n335:               Sign in\n336:             </button>\n337:             <button\n338:               type=\"button\"\n339:               onClick={() => navigate(\"/login\")}\n340:               className=\"flex items-center gap-2 bg-white text-black text-[13px] font-semibold px-4 py-2 rounded-full hover:bg-zinc-100 active:scale-[0.97] transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group\"\n341:             >\n342:               Get started\n343:               <span className=\"w-5 h-5 rounded-full bg-black/10 flex items-center justify-center group-hover:translate-x-0.5 group-hover:-translate-y-px transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]\">\n344:                 <ArrowRight size={10} weight=\"bold\" />\n345:               </span>\n346:             </button>\n347:           </div>\n348: \n349:           {/* Hamburger */}\n350:           <button\n351:             type=\"button\"\n352:             className=\"md:hidden w-10 h-10 flex flex-col items-center justify-center gap-[5px] relative z-[60]\"\n353:             onClick={() => setMenuOpen((o) => !o)}\n354:             aria-label=\"Menu\"\n355:           >\n356:             <span\n357:               className=\"block h-px bg-white origin-center transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]\"\n358:               style={{\n359:                 width: 20,\n360:                 transform: menuOpen ? \"rotate(45deg) translateY(3px)\" : \"none\",\n361:               }}\n362:             />\n363:             <span\n364:               className=\"block h-px bg-white transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]\"\n365:               style={{\n366:                 width: 20,\n367:                 opacity: menuOpen ? 0 : 1,\n368:                 transform: menuOpen ? \"scaleX(0)\" : \"none\",\n369:               }}\n370:             />\n371:             <span\n372:               className=\"block h-px bg-white origin-center transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]\"\n373:               style={{\n374:                 width: 20,\n375:                 transform: menuOpen ? \"rotate(-45deg) translateY(-3px)\" : \"none\",\n376:               }}\n377:             />\n378:           </button>\n379:         </nav>\n380: \n381:         {/* Mobile full-screen menu */}\n382:         <div\n383:           className=\"md:hidden fixed inset-0 z-50 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]\"\n384:           style={{ opacity: menuOpen ? 1 : 0, pointerEvents: menuOpen ? \"auto\" : \"none\" }}\n385:         >\n386:           <button\n387:             type=\"button\"\n388:             aria-label=\"Close menu\"\n389:             className=\"absolute inset-0 bg-[#020202]/95\"\n390:             style={{ backdropFilter: \"blur(32px)\", WebkitBackdropFilter: \"blur(32px)\" }}\n391:             onClick={() => setMenuOpen(false)}\n392:           />\n393:           <div className=\"relative z-10 flex flex-col items-center justify-center h-full gap-9\">\n394:             {NAV_LINKS.map((link, i) => (\n395:               <a\n396:                 key={link}\n397:                 href={navLinkHref(link)}\n398:                 onClick={() => setMenuOpen(false)}\n399:                 className=\"text-4xl font-semibold tracking-tight transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]\"\n400:                 style={{\n401:                   opacity: menuOpen ? 1 : 0,\n402:                   transform: menuOpen ? \"translateY(0)\" : \"translateY(20px)\",\n403:                   transitionDelay: menuOpen ? `${i * 60 + 80}ms` : \"0ms\",\n404:                 }}\n405:               >\n406:                 {link}\n407:               </a>\n408:             ))}\n409:             <button\n410:               type=\"button\"\n411:               onClick={() => {\n412:                 setMenuOpen(false);\n413:                 navigate(\"/login\");\n414:               }}\n415:               className=\"mt-4 flex items-center gap-2.5 bg-white text-black text-base font-semibold px-8 py-4 rounded-full transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]\"\n416:               style={{\n417:                 opacity: menuOpen ? 1 : 0,\n418:                 transform: menuOpen ? \"translateY(0)\" : \"translateY(20px)\",\n419:                 transitionDelay: menuOpen ? \"320ms\" : \"0ms\",\n420:               }}\n421:             >\n422:               Get started <ArrowRight size={14} weight=\"bold\" />\n423:             </button>\n424:           </div>\n425:         </div>\n426:       </header>\n427: \n428:       {/* ══════════════════════════════════════════════════════════════\n429:           HERO\n430:       ══════════════════════════════════════════════════════════════ */}\n431:       <section className=\"relative w-full min-h-[100dvh] flex flex-col overflow-hidden\">\n432:         {/* Video bg */}\n433:         <video\n434:           className=\"absolute inset-0 w-full h-full object-cover\"\n435:           style={{ opacity: 0.45 }}\n436:           src={HERO_VIDEO}\n437:           autoPlay\n438:           loop\n439:           muted\n440:           playsInline\n441:         />\n442: \n443:         {/* gradient overlays */}\n444:         <div className=\"absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/25 to-transparent\" />\n445:         <div className=\"absolute inset-0 bg-gradient-to-r from-[#050505]/75 via-transparent to-transparent\" />\n446:         <div className=\"absolute inset-0 bg-gradient-to-b from-[#050505]/40 to-transparent pointer-events-none\" />\n447: \n448:         {/* ambient orbs */}\n449:         <Orb className=\"top-1/4 left-1/3 w-[700px] h-[700px] bg-blue-700/8 blur-[140px] drift\" />\n450:         <Orb className=\"bottom-1/3 right-1/4 w-[500px] h-[500px] bg-violet-700/6 blur-[120px] drift-slow\" />\n451: \n452:         {/* scan line */}\n453:         <div className=\"scan-line\" />\n454: \n455:         {/* content */}\n456:         <div className=\"relative z-10 flex-1 flex flex-col max-w-7xl mx-auto w-full px-6 md:px-10 lg:px-14\">\n457:           <div className=\"flex-1 flex flex-col justify-end pb-16 lg:pb-24\">\n458:             {/* eyebrow */}\n459:             <div\n460:               className=\"inline-flex items-center gap-2.5 mb-6 fade-up\"\n461:               style={{ animationDelay: \"100ms\" }}\n462:             >\n463:               <span className=\"px-3 py-1 rounded-full bg-white/8 ring-1 ring-white/12 text-[10px] uppercase tracking-[0.2em] font-semibold text-white/55\">\n464:                 Infrastructure OS\n465:               </span>\n466:               <span className=\"w-1.5 h-1.5 rounded-full bg-emerald-400 status-pulse\" />\n467:               <span className=\"text-[11px] text-emerald-400 font-medium tracking-wide\">\n468:                 Built for critical facilities\n469:               </span>\n470:             </div>\n471: \n472:             {/* headline */}\n473:             <h1\n474:               className=\"text-[clamp(3rem,8vw,5.5rem)] font-semibold tracking-[-0.04em] leading-[0.93] mb-6 max-w-4xl fade-up\"\n475:               style={{ animationDelay: \"180ms\" }}\n476:             >\n477:               The infrastructure OS for the <span className=\"text-white/30\">AI era.</span>\n478:             </h1>\n479: \n480:             {/* subhead + CTAs + stats */}\n481:             <div className=\"flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10\">\n482:               <div>\n483:                 <p\n484:                   className=\"text-[15px] text-white/45 leading-relaxed max-w-sm mb-8 fade-up\"\n485:                   style={{ animationDelay: \"300ms\" }}\n486:                 >\n487:                   Predict failures before they cascade. Dispatch the right technician in seconds.\n488:                   Learn from every incident automatically.\n489:                 </p>\n490: \n491:                 <div className=\"flex flex-wrap gap-3 fade-up\" style={{ animationDelay: \"400ms\" }}>\n492:                   <button\n493:                     type=\"button\"\n494:                     onClick={() => navigate(\"/login\")}\n495:                     className=\"flex items-center gap-2.5 bg-white text-black text-[13px] font-semibold px-5 py-3 rounded-full hover:bg-zinc-100 active:scale-[0.97] transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group\"\n496:                   >\n497:                     Enter platform\n498:                     <span className=\"w-6 h-6 rounded-full bg-black/10 flex items-center justify-center group-hover:translate-x-0.5 group-hover:-translate-y-px group-hover:scale-105 transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]\">\n499:                       <ArrowRight size={11} weight=\"bold\" />\n500:                     </span>\n501:                   </button>\n502:                   <button\n503:                     type=\"button\"\n504:                     className=\"flex items-center gap-2.5 bg-white/5 ring-1 ring-white/10 text-white text-[13px] font-medium px-5 py-3 rounded-full hover:bg-white/10 active:scale-[0.97] transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group\"\n505:                   >\n506:                     Watch demo\n507:                     <span className=\"w-6 h-6 rounded-full bg-white/8 flex items-center justify-center group-hover:translate-x-0.5 group-hover:-translate-y-px transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]\">\n508:                       <ArrowUpRight size={11} weight=\"light\" />\n509:                     </span>\n510:                   </button>\n511:                 </div>\n512:               </div>\n513: \n514:               {/* stats */}\n515:               <div className=\"flex items-end gap-10 fade-up\" style={{ animationDelay: \"500ms\" }}>\n516:                 {[\n517:                   { val: \"Detect\", label: \"Sensor anomalies early\" },\n518:                   { val: \"Map\", label: \"Failure blast radius\" },\n519:                   { val: \"Act\", label: \"Policy-gated dispatch\" },\n520:                 ].map((s) => (\n521:                   <div key={s.label} className=\"text-right\">\n522:                     <p className=\"text-[1.85rem] font-semibold tracking-[-0.04em] leading-none tabular-nums\">\n523:                       {s.val}\n524:                     </p>\n525:                     <p className=\"text-[11px] text-white/30 font-medium mt-1.5 max-w-[100px] leading-snug text-right\">\n526:                       {s.label}\n527:                     </p>\n528:                   </div>\n529:                 ))}\n530:               </div>\n531:             </div>\n532:           </div>\n533:         </div>\n534: \n535:         {/* scroll cue */}\n536:         <div\n537:           className=\"absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 fade-in\"\n538:           style={{ animationDelay: \"900ms\" }}\n539:         >\n540:           <span className=\"text-[9px] uppercase tracking-[0.25em] text-white/20 font-semibold\">\n541:             Scroll\n542:           </span>\n543:           <div className=\"w-px h-8 bg-gradient-to-b from-white/25 to-transparent\" />\n544:         </div>\n545:       </section>\n546: \n547:       {/* ══════════════════════════════════════════════════════════════\n548:           TICKER\n549:       ══════════════════════════════════════════════════════════════ */}\n550:       <div className=\"relative overflow-hidden border-y border-white/5 py-4 bg-white/[0.015]\">\n551:         <div className=\"ticker-track flex gap-12 w-max\">\n552:           {TICKER_LOOP_ITEMS.map(({ key, item }) => (\n553:             <div key={key} className=\"flex items-center gap-12 shrink-0\">\n554:               <span className=\"text-[11px] font-medium text-white/30 uppercase tracking-[0.15em] whitespace-nowrap\">\n555:                 {item}\n556:               </span>\n557:               <span className=\"w-1 h-1 rounded-full bg-white/15\" />\n558:             </div>\n559:           ))}\n560:         </div>\n561:       </div>\n562: \n563:       {/* ══════════════════════════════════════════════════════════════\n564:           HOW IT WORKS\n565:       ══════════════════════════════════════════════════════════════ */}\n566:       <section ref={howRef.ref} className=\"py-32 lg:py-44\">\n567:         <div className=\"max-w-6xl mx-auto px-6\">\n568:           {/* heading */}\n569:           <div style={rv(howRef.inView, 0)} className=\"mb-20\">\n570:             <SectionBadge>The Platform</SectionBadge>\n571:             <h2 className=\"text-[clamp(2rem,4.5vw,3.25rem)] font-semibold tracking-[-0.035em] leading-[1.07] max-w-lg\">\n572:               From raw telemetry\n573:               <br />\n574:               <span className=\"text-white/30\">to autonomous action.</span>\n575:             </h2>\n576:           </div>\n577: \n578:           {/* 6-step bento grid */}\n579:           <div className=\"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3\">\n580:             {HOW_IT_WORKS.map((item, i) => (\n581:               <div key={item.n} style={rv(howRef.inView, i + 1)}>\n582:                 <BezelCard className=\"p-7 flex flex-col gap-5 group hover:bg-[#0d0d0d] transition-colors duration-500\">\n583:                   <span className=\"font-mono text-[10px] text-white/15 tracking-[0.2em]\">\n584:                     {item.n}\n585:                   </span>\n586:                   <div>\n587:                     <h3 className=\"text-[18px] font-semibold tracking-tight mb-2 group-hover:text-white transition-colors duration-300\">\n588:                       {item.title}\n589:                     </h3>\n590:                     <p className=\"text-[13px] text-white/38 leading-relaxed\">{item.body}</p>\n591:                   </div>\n592:                 </BezelCard>\n593:               </div>\n594:             ))}\n595:           </div>\n596:         </div>\n597:       </section>\n598: \n599:       {/* ══════════════════════════════════════════════════════════════\n600:           DATA CENTER PHOTO BREAK\n601:       ══════════════════════════════════════════════════════════════ */}\n602:       <div className=\"relative w-full h-[40vh] min-h-[280px] overflow-hidden\">\n603:         <img\n604:           src={DC_PHOTO}\n605:           alt=\"Data center infrastructure\"\n606:           className=\"absolute inset-0 w-full h-full object-cover opacity-25\"\n607:           loading=\"lazy\"\n608:         />\n609:         <div className=\"absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-[#050505]\" />\n610:         <div className=\"absolute inset-0 bg-gradient-to-r from-[#050505]/60 via-transparent to-[#050505]/60\" />\n611:         <div className=\"absolute inset-0 flex items-center justify-center\">\n612:           <div className=\"text-center px-6\">\n613:             <p className=\"text-[clamp(1.1rem,3vw,1.8rem)] font-semibold tracking-[-0.02em] text-white/70 max-w-2xl mx-auto leading-snug\">\n614:               \"Prevent failures before they become outages.\"\n615:             </p>\n616:           </div>\n617:         </div>\n618:       </div>\n619: \n620:       {/* ══════════════════════════════════════════════════════════════\n621:           FIVE AGENTS\n622:       ══════════════════════════════════════════════════════════════ */}\n623:       <section ref={agentsRef.ref} className=\"py-32 lg:py-44 border-t border-white/5\">\n624:         <div className=\"max-w-6xl mx-auto px-6\">\n625:           <div style={rv(agentsRef.inView, 0)} className=\"mb-20\">\n626:             <SectionBadge>The Agents</SectionBadge>\n627:             <div className=\"flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6\">\n628:               <h2 className=\"text-[clamp(2rem,4.5vw,3.25rem)] font-semibold tracking-[-0.035em] leading-[1.07] max-w-lg\">\n629:                 Five specialised agents.\n630:                 <br />\n631:                 <span className=\"text-white/30\">One autonomous system.</span>\n632:               </h2>\n633:               <p className=\"text-[14px] text-white/35 max-w-xs leading-relaxed lg:text-right\">\n634:                 Each agent specialises in a critical phase of infrastructure intelligence and works\n635:                 with the others as a seamless, autonomous system.\n636:               </p>\n637:             </div>\n638:           </div>\n639: \n640:           {/* bento: 6 cards, 3-col grid fills evenly */}\n641:           <div className=\"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3\">\n642:             {AGENTS.map((agent, i) => {\n643:               const Icon = agent.Icon;\n644:               return (\n645:                 <div\n646:                   key={agent.name}\n647:                   style={rv(agentsRef.inView, i + 1)}\n648:                   className=\"\"\n649:                 >\n650:                   <div\n651:                     className={`p-[6px] rounded-[1.75rem] bg-gradient-to-br ${agent.grad} ring-1 ${agent.ring} group hover:scale-[1.01] transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] h-full`}\n652:                   >\n653:                     <div className=\"bg-[#070707] rounded-[calc(1.75rem-6px)] p-7 flex flex-col gap-5 h-full shadow-[inset_0_1px_1px_rgba(255,255,255,0.04)] group-hover:bg-[#0c0c0c] transition-colors duration-500\">\n654:                       {/* header row */}\n655:                       <div className=\"flex items-start justify-between\">\n656:                         <div\n657:                           className={`w-10 h-10 rounded-xl bg-gradient-to-br ${agent.grad} ring-1 ${agent.ring} flex items-center justify-center`}\n658:                         >\n659:                           <Icon size={19} weight=\"light\" className=\"text-white/65\" />\n660:                         </div>\n661:                         <div className=\"flex items-center gap-1.5 mt-1\">\n662:                           <span className={`w-1.5 h-1.5 rounded-full ${agent.dot}`} />\n663:                           <span className=\"text-[10px] font-mono text-white/25 tracking-wide\">\n664:                             {agent.stat}\n665:                           </span>\n666:                         </div>\n667:                       </div>\n668: \n669:                       {/* identity */}\n670:                       <div>\n671:                         <p className=\"text-[9px] uppercase tracking-[0.18em] text-white/25 font-semibold mb-0.5\">\n672:                           {agent.role}\n673:                         </p>\n674:                         <h3 className=\"text-[20px] font-semibold tracking-tight\">{agent.name}</h3>\n675:                       </div>\n676: \n677:                       {/* description */}\n678:                       <p className=\"text-[13px] text-white/38 leading-relaxed mt-auto\">\n679:                         {agent.desc}\n680:                       </p>\n681:                     </div>\n682:                   </div>\n683:                 </div>\n684:               );\n685:             })}\n686:           </div>\n687:         </div>\n688:       </section>\n689: \n690:       {/* ══════════════════════════════════════════════════════════════\n691:           ROI\n692:       ══════════════════════════════════════════════════════════════ */}\n693:       <section\n694:         ref={roiRef.ref}\n695:         className=\"relative py-32 lg:py-44 border-t border-white/5 overflow-hidden\"\n696:       >\n697:         {/* circuit board image as bg texture */}\n698:         <img\n699:           src={CIRCUIT_PHOTO}\n700:           alt=\"\"\n701:           className=\"absolute inset-0 w-full h-full object-cover opacity-[0.04] pointer-events-none\"\n702:           loading=\"lazy\"\n703:           aria-hidden\n704:         />\n705:         <div className=\"absolute inset-0 bg-gradient-to-b from-[#050505]/80 to-[#050505]/80 pointer-events-none\" />\n706: \n707:         <div className=\"relative z-10 max-w-6xl mx-auto px-6\">\n708:           <div className=\"grid grid-cols-1 lg:grid-cols-2 gap-20 items-start\">\n709:             {/* left copy */}\n710:             <div style={rv(roiRef.inView, 0)}>\n711:               <SectionBadge>The Economics</SectionBadge>\n712:               <h2 className=\"text-[clamp(2rem,4.5vw,3.25rem)] font-semibold tracking-[-0.035em] leading-[1.07] mb-6\">\n713:                 Turn operational risk.\n714:                 <br />\n715:                 <span className=\"text-white/30\">Into clear action.</span>\n716:               </h2>\n717:               <p className=\"text-[14px] text-white/40 leading-relaxed mb-8 max-w-sm\">\n718:                 Atlas makes failure risk, maintenance work, dispatch queues, and policy decisions\n719:                 visible in one operating layer, so teams can act before small signals become major\n720:                 incidents.\n721:               </p>\n722:               <button\n723:                 type=\"button\"\n724:                 onClick={() => navigate(\"/login\")}\n725:                 className=\"flex items-center gap-2.5 bg-white text-black text-[13px] font-semibold px-5 py-3 rounded-full hover:bg-zinc-100 active:scale-[0.97] transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group w-fit\"\n726:               >\n727:                 Calculate your ROI\n728:                 <span className=\"w-6 h-6 rounded-full bg-black/10 flex items-center justify-center group-hover:translate-x-0.5 group-hover:-translate-y-px transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]\">\n729:                   <ArrowRight size={11} weight=\"bold\" />\n730:                 </span>\n731:               </button>\n732:             </div>\n733: \n734:             {/* right value cards */}\n735:             <div className=\"grid grid-cols-1 sm:grid-cols-2 gap-3\">\n736:               {ECONOMIC_VALUE.map((item, i) => (\n737:                 <div key={item.title} style={rv(roiRef.inView, i + 1)}>\n738:                   <BezelCard className=\"p-6 h-full\">\n739:                     <p className=\"text-[15px] font-semibold text-white/65 mb-2 leading-snug\">\n740:                       {item.title}\n741:                     </p>\n742:                     <p className=\"text-[12px] text-white/32 leading-relaxed\">{item.body}</p>\n743:                   </BezelCard>\n744:                 </div>\n745:               ))}\n746:             </div>\n747:           </div>\n748: \n749:           {/* invisible cost grid */}\n750:           <div className=\"mt-20 grid grid-cols-1 md:grid-cols-5 gap-3\" style={rv(roiRef.inView, 5)}>\n751:             {[\n752:               {\n753:                 label: \"Over-provisioned redundancy\",\n754:                 desc: \"N+2 instead of N+1 because you don't trust your predictions\",\n755:               },\n756:               {\n757:                 label: \"Conservative maintenance\",\n758:                 desc: \"Replacing healthy parts on schedule because you can't tell which are failing\",\n759:               },\n760:               { label: \"SLA penalties\", desc: \"When something slips through the cracks\" },\n761:               { label: \"Insurance premiums\", desc: \"Priced for opacity, not actual risk\" },\n762:               { label: \"Senior engineer hours\", desc: \"Triaging alerts a system should triage\" },\n763:             ].map((item) => (\n764:               <BezelCard key={item.label} className=\"p-5\">\n765:                 <p className=\"text-[11px] font-semibold text-white/50 mb-1.5 leading-snug\">\n766:                   {item.label}\n767:                 </p>\n768:                 <p className=\"text-[11px] text-white/25 leading-relaxed\">{item.desc}</p>\n769:               </BezelCard>\n770:             ))}\n771:           </div>\n772:           <p className=\"text-center text-[12px] text-white/25 mt-4 italic\">\n773:             Atlas gives operators a shared picture of risk, work, and policy before an incident\n774:             escalates.\n775:           </p>\n776:         </div>\n777:       </section>\n778: \n779:       {/* ══════════════════════════════════════════════════════════════\n780:           GOVERNANCE\n781:       ══════════════════════════════════════════════════════════════ */}\n782:       <section ref={govRef.ref} className=\"py-32 lg:py-44 border-t border-white/5\">\n783:         <div className=\"max-w-6xl mx-auto px-6\">\n784:           <div style={rv(govRef.inView, 0)} className=\"mb-20\">\n785:             <SectionBadge>Governance</SectionBadge>\n786:             <h2 className=\"text-[clamp(2rem,4.5vw,3.25rem)] font-semibold tracking-[-0.035em] leading-[1.07] max-w-lg\">\n787:               Autonomous, but never\n788:               <br />\n789:               <span className=\"text-white/30\">unaccountable.</span>\n790:             </h2>\n791:           </div>\n792: \n793:           <div className=\"grid grid-cols-1 md:grid-cols-3 gap-3 mb-6\">\n794:             {GOVERNANCE.map((g, i) => {\n795:               const Icon = g.Icon;\n796:               return (\n797:                 <div key={g.title} style={rv(govRef.inView, i + 1)}>\n798:                   <BezelCard className=\"p-7 flex flex-col gap-5 h-full group hover:bg-[#0d0d0d] transition-colors duration-500\">\n799:                     <div className=\"w-9 h-9 rounded-xl bg-emerald-500/8 ring-1 ring-emerald-500/15 flex items-center justify-center shrink-0\">\n800:                       <Icon size={17} weight=\"light\" className=\"text-emerald-400/80\" />\n801:                     </div>\n802:                     <div>\n803:                       <h3 className=\"text-[16px] font-semibold tracking-tight mb-2\">{g.title}</h3>\n804:                       <p className=\"text-[13px] text-white/38 leading-relaxed\">{g.body}</p>\n805:                     </div>\n806:                   </BezelCard>\n807:                 </div>\n808:               );\n809:             })}\n810:           </div>\n811: \n812:           {/* compliance strip */}\n813:           <div style={rv(govRef.inView, 4)}>\n814:             <BezelCard\n815:               outerClass=\"rounded-2xl\"\n816:               className=\"rounded-[calc(1rem)] px-6 py-4 flex flex-wrap items-center justify-between gap-4\"\n817:             >\n818:               <p className=\"text-[10px] uppercase tracking-[0.18em] font-semibold text-white/25\">\n819:                 Compliance frameworks\n820:               </p>\n821:               <div className=\"flex flex-wrap gap-2\">\n822:                 {COMPLIANCE.map((c) => (\n823:                   <span\n824:                     key={c}\n825:                     className=\"px-3 py-1 rounded-full bg-white/4 ring-1 ring-white/8 text-[11px] text-white/35 font-medium\"\n826:                   >\n827:                     {c}\n828:                   </span>\n829:                 ))}\n830:               </div>\n831:             </BezelCard>\n832:           </div>\n833:         </div>\n834:       </section>\n835: \n836:       {/* ══════════════════════════════════════════════════════════════\n837:           FINAL CTA\n838:       ══════════════════════════════════════════════════════════════ */}\n839:       <section\n840:         ref={ctaRef.ref}\n841:         className=\"py-36 lg:py-48 border-t border-white/5 relative overflow-hidden\"\n842:       >\n843:         <Orb className=\"top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-700/5 blur-[160px] drift-slow\" />\n844: \n845:         <div className=\"relative z-10 max-w-3xl mx-auto px-6 text-center\">\n846:           <div style={rv(ctaRef.inView, 0)}>\n847:             <SectionBadge>Get started</SectionBadge>\n848:             <h2 className=\"text-[clamp(2.5rem,6vw,4.5rem)] font-semibold tracking-[-0.04em] leading-[0.95] mb-6\">\n849:               Ready to eliminate\n850:               <br />\n851:               <span className=\"text-white/25\">unplanned downtime?</span>\n852:             </h2>\n853:             <p className=\"text-[15px] text-white/38 leading-relaxed mb-10 max-w-md mx-auto\">\n854:               The setup isn't overhead. It's encoding tribal knowledge you're about to lose and\n855:               earning an autonomous system you can actually trust.\n856:             </p>\n857:             <div className=\"flex flex-wrap justify-center gap-3\">\n858:               <button\n859:                 type=\"button\"\n860:                 onClick={() => navigate(\"/login\")}\n861:                 className=\"flex items-center gap-2.5 bg-white text-black text-[13px] font-semibold px-6 py-3.5 rounded-full hover:bg-zinc-100 active:scale-[0.97] transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group\"\n862:               >\n863:                 Enter platform\n864:                 <span className=\"w-6 h-6 rounded-full bg-black/10 flex items-center justify-center group-hover:translate-x-0.5 group-hover:-translate-y-px group-hover:scale-105 transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]\">\n865:                   <ArrowRight size={11} weight=\"bold\" />\n866:                 </span>\n867:               </button>\n868:               <button\n869:                 type=\"button\"\n870:                 className=\"flex items-center gap-2.5 bg-white/5 ring-1 ring-white/10 text-white text-[13px] font-medium px-6 py-3.5 rounded-full hover:bg-white/8 active:scale-[0.97] transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]\"\n871:               >\n872:                 Talk to sales\n873:                 <span className=\"w-6 h-6 rounded-full bg-white/8 flex items-center justify-center\">\n874:                   <ArrowUpRight size={11} weight=\"light\" />\n875:                 </span>\n876:               </button>\n877:             </div>\n878:           </div>\n879:         </div>\n880:       </section>\n881: \n882:       {/* ══════════════════════════════════════════════════════════════\n883:           FOOTER\n884:       ══════════════════════════════════════════════════════════════ */}\n885:       <footer className=\"border-t border-white/5 py-10\">\n886:         <div className=\"max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-5\">\n887:           <div className=\"flex items-center gap-2\">\n888:             <div className=\"w-5 h-5 rounded-[6px] bg-white flex items-center justify-center\">\n889:               <div className=\"w-2 h-2 bg-black rounded-[2px]\" />\n890:             </div>\n891:             <span className=\"text-[13px] font-semibold\">Atlas</span>\n892:           </div>\n893:           <p className=\"text-[11px] text-white/18\">\n894:             Infrastructure OS for AI era data centers. © 2026 Atlas Systems, Inc.\n895:           </p>\n896:           <div className=\"flex gap-6\">\n897:             {[\"Privacy\", \"Terms\", \"Security\", \"Status\"].map((link) => (\n898:               <a\n899:                 key={link}\n900:                 href={navLinkHref(link)}\n901:                 className=\"text-[11px] text-white/22 hover:text-white/55 transition-colors duration-300\"\n902:               >\n903:                 {link}\n904:               </a>\n905:             ))}\n906:           </div>\n907:         </div>\n908:       </footer>\n909:     </div>\n910:   );\n911: }\n\n(End of file - total 911 lines)\n</content>",
+            "metadata": {
+              "preview": "import type { IconProps } from \"@phosphor-icons/react\";\nimport {\n  ArrowRight,\n  ArrowUpRight,\n  Brain,\n  ChartBar,\n  CheckCircle,\n  GitBranch,\n  Lock,\n  Package,\n  Shield,\n  Truck,\n  Warning,\n} from \"@phosphor-icons/react\";\nimport { useEffect, useRef, useState } from \"react\";\nimport { useNavigate } from \"react-router-dom\";\n\n// ─── open-source video & photos (Pexels / Unsplash CC0) ──────────────\nconst HERO_VIDEO =\n  \"https://d8j0ntlcm91z4.cloudfront.net/REDACTED/hf_20260403_050628_c4e32401-fab4-4a27-b7a8-6e9291cd5959.mp4\";",
+              "truncated": false,
+              "loaded": []
+            },
+            "title": "projects/frontend/src/pages/Hero.tsx",
+            "time": {
+              "start": 1779975513190,
+              "end": 1779975513197
+            }
+          },
+          "id": "prt_e6ecee4630012tVxnyjSftCsS2",
+          "sessionID": "ses_19131401affeTH6xULYEAJPy3O",
+          "messageID": "msg_e6eced5ad001mHcNizTa0Bsxj1"
+        },
+        {
+          "type": "tool",
+          "tool": "read",
+          "callID": "toolu_bdrk_01YPrHYbNQSNWoNwQGNRgNdA",
+          "state": {
+            "status": "completed",
+            "input": {
+              "filePath": "/Users/pantelis/Desktop/project-atlas/projects/frontend/src/components"
+            },
+            "output": "<path>/Users/pantelis/Desktop/project-atlas/projects/frontend/src/components</path>\n<type>directory</type>\n<entries>\nAnimatedHeading.tsx\natlas-3d/\natlas-map/\nFadeIn.tsx\nnodes/\nops/\nSidebar.tsx\nStatusBadge.tsx\nui/\n\n(9 entries)\n</entries>",
+            "metadata": {
+              "preview": "AnimatedHeading.tsx\natlas-3d/\natlas-map/\nFadeIn.tsx\nnodes/\nops/\nSidebar.tsx\nStatusBadge.tsx\nui/",
+              "truncated": false,
+              "loaded": []
+            },
+            "title": "projects/frontend/src/components",
+            "time": {
+              "start": 1779975513258,
+              "end": 1779975513261
+            }
+          },
+          "id": "prt_e6ecee468001jsArch5uJsEyln",
+          "sessionID": "ses_19131401affeTH6xULYEAJPy3O",
+          "messageID": "msg_e6eced5ad001mHcNizTa0Bsxj1"
+        },
+        {
+          "reason": "tool-calls",
+          "snapshot": "0cea105c6b0e5855107954a49ce1241c10c19109",
+          "type": "step-finish",
+          "tokens": {
+            "total": 4878,
+            "input": 1,
+            "output": 129,
+            "reasoning": 0,
+            "cache": {
+              "write": 441,
+              "read": 4307
+            }
+          },
+          "cost": 0,
+          "id": "prt_e6ecee4ec001EgFIY0n4T1PCSx",
+          "sessionID": "ses_19131401affeTH6xULYEAJPy3O",
+          "messageID": "msg_e6eced5ad001mHcNizTa0Bsxj1"
+        }
+      ]
+    },
+    {
+      "info": {
+        "parentID": "msg_e6ecebfea001Qo29G0lGFfxZzo",
+        "role": "assistant",
+        "mode": "explore",
+        "agent": "explore",
+        "path": {
+          "cwd": "/Users/pantelis/Desktop/project-atlas",
+          "root": "/Users/pantelis/Desktop/project-atlas"
+        },
+        "cost": 0,
+        "tokens": {
+          "total": 20098,
+          "input": 1,
+          "output": 770,
+          "reasoning": 0,
+          "cache": {
+            "write": 14579,
+            "read": 4748
+          }
+        },
+        "modelID": "claude-sonnet-4.6",
+        "providerID": "github-copilot",
+        "time": {
+          "created": 1779975513384,
+          "completed": 1779975529928
+        },
+        "finish": "stop",
+        "id": "msg_e6ecee528001TEcvHNLftBcfCK",
+        "sessionID": "ses_19131401affeTH6xULYEAJPy3O"
+      },
+      "parts": [
+        {
+          "snapshot": "0cea105c6b0e5855107954a49ce1241c10c19109",
+          "type": "step-start",
+          "id": "prt_e6ecef6e2001BUeEdjWhVYo5wL",
+          "sessionID": "ses_19131401affeTH6xULYEAJPy3O",
+          "messageID": "msg_e6ecee528001TEcvHNLftBcfCK"
+        },
+        {
+          "type": "text",
+          "text": "Here is a complete breakdown of everything found in `/Users/pantelis/Desktop/project-atlas/projects/frontend/src/pages/Hero.tsx`.\n\n---\n\n## File: `/Users/pantelis/Desktop/project-atlas/projects/frontend/src/pages/Hero.tsx`\n\nThe Hero page is a self-contained, single-file landing page (911 lines). There is **no external logo image or SVG file** — the logo/icon is rendered entirely with **pure HTML `<div>` elements using Tailwind CSS classes**, and it appears in **two places**: the navbar and the footer.\n\n---\n\n## The Logo/Icon — Exact Code\n\n### 1. Navbar Logo (lines 307–313)\n\n```tsx\n{/* Logo */}\n<div className=\"flex items-center gap-2.5\">\n  <div className=\"w-6 h-6 rounded-[7px] bg-white flex items-center justify-center shrink-0\">\n    <div className=\"w-2.5 h-2.5 bg-black rounded-[3px]\" />\n  </div>\n  <span className=\"text-[15px] font-semibold tracking-tight\">Atlas</span>\n</div>\n```\n\n### 2. Footer Logo (lines 887–891)\n\n```tsx\n<div className=\"flex items-center gap-2\">\n  <div className=\"w-5 h-5 rounded-[6px] bg-white flex items-center justify-center\">\n    <div className=\"w-2 h-2 bg-black rounded-[2px]\" />\n  </div>\n  <span className=\"text-[13px] font-semibold\">Atlas</span>\n</div>\n```\n\n---\n\n## What the Logo Looks Like\n\nThe logo is a **purely CSS geometric mark** — no SVG paths, no image files, no icon library involved. It consists of:\n\n| Element | Navbar | Footer |\n|---|---|---|\n| **Outer container** | `24×24px`, white background, `7px` border-radius (rounded square) | `20×20px`, white background, `6px` border-radius |\n| **Inner dot/square** | `10×10px`, black background, `3px` border-radius | `8×8px`, black background, `2px` border-radius |\n| **Wordmark** | `\"Atlas\"` — 15px, semibold, tight tracking | `\"Atlas\"` — 13px, semibold |\n\nIn other words: a **white rounded square containing a smaller black rounded square**, paired with the text **\"Atlas\"**. It is a minimal, pill-like geometric logomark built entirely from nested `<div>` elements styled with Tailwind — no `<img>`, no `<svg>`, no third-party icon component is used for the brand mark itself.\n\nThe icon library **`@phosphor-icons/react`** is imported at the top of the file, but it is only used for UI action icons (`ArrowRight`, `ArrowUpRight`, `Brain`, `ChartBar`, `CheckCircle`, `GitBranch`, `Lock`, `Package`, `Shield`, `Truck`, `Warning`) inside agent cards, governance cards, and CTA buttons — **not** for the brand logo.",
+          "time": {
+            "start": 1779975517923,
+            "end": 1779975529800
+          },
+          "id": "prt_e6ecef6e300132UQnAYiSu4rXU",
+          "sessionID": "ses_19131401affeTH6xULYEAJPy3O",
+          "messageID": "msg_e6ecee528001TEcvHNLftBcfCK"
+        },
+        {
+          "reason": "stop",
+          "snapshot": "0cea105c6b0e5855107954a49ce1241c10c19109",
+          "type": "step-finish",
+          "tokens": {
+            "total": 20098,
+            "input": 1,
+            "output": 770,
+            "reasoning": 0,
+            "cache": {
+              "write": 14579,
+              "read": 4748
+            }
+          },
+          "cost": 0,
+          "id": "prt_e6ecf25890016DbvY5lvZyptBO",
+          "sessionID": "ses_19131401affeTH6xULYEAJPy3O",
+          "messageID": "msg_e6ecee528001TEcvHNLftBcfCK"
+        }
+      ]
+    }
+  ]
+}
