@@ -1,0 +1,13 @@
+i need you to create seperate floors in floor plan to visualize them in 3d
+
+---
+
+run this
+
+---
+
+undo the changes in the /ops/floor-plan
+
+---
+
+in /ops/floor-plan i need you to create 2 more floors copy paste and name them differenlty
