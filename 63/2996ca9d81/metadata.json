@@ -3,7 +3,7 @@
   "checkpoint_id": "632996ca9d81",
   "strategy": "manual-commit",
   "branch": "main",
-  "checkpoints_count": 1,
+  "checkpoints_count": 2,
   "files_touched": [
     "projects/frontend/src/components/ops/CommandCenterZoneView.tsx",
     "projects/frontend/src/pages/ops/AnomalyPanel.tsx",
@@ -16,13 +16,19 @@
       "transcript": "/63/2996ca9d81/0/full.jsonl",
       "content_hash": "/63/2996ca9d81/0/content_hash.txt",
       "prompt": "/63/2996ca9d81/0/prompt.txt"
+    },
+    {
+      "metadata": "/63/2996ca9d81/1/metadata.json",
+      "transcript": "/63/2996ca9d81/1/full.jsonl",
+      "content_hash": "/63/2996ca9d81/1/content_hash.txt",
+      "prompt": "/63/2996ca9d81/1/prompt.txt"
     }
   ],
   "token_usage": {
-    "input_tokens": 6,
-    "cache_creation_tokens": 30760,
-    "cache_read_tokens": 26159,
-    "output_tokens": 3031,
-    "api_call_count": 4
+    "input_tokens": 14,
+    "cache_creation_tokens": 99446,
+    "cache_read_tokens": 137561,
+    "output_tokens": 8331,
+    "api_call_count": 10
   }
 }

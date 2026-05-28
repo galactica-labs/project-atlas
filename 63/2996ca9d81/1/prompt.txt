@@ -1,0 +1,8 @@
+Explore the project at /Users/pantelis/Desktop/project-atlas and find everything related to the /ops route/page. I need:
+1. The file(s) that make up the /ops page (page.tsx, layout.tsx, any components used)
+2. The full content of those files
+3. Any related components or hooks specifically used by /ops
+4. The overall project structure (app router or pages router, styling approach - tailwind/css modules/etc, component library used)
+5. Any existing design tokens or theme files
+
+Return file paths with line numbers and full content of the key files.

@@ -1,0 +1,62 @@
+{
+  "cli_version": "0.6.3",
+  "checkpoint_id": "632996ca9d81",
+  "session_id": "ses_1915d6e8fffe3mt7uLMZYvu6V3",
+  "strategy": "manual-commit",
+  "created_at": "2026-05-28T13:23:00.163807Z",
+  "branch": "main",
+  "checkpoints_count": 1,
+  "files_touched": [
+    "projects/frontend/src/components/ops/CommandCenterZoneView.tsx",
+    "projects/frontend/src/pages/ops/FloorPlan.tsx"
+  ],
+  "agent": "OpenCode",
+  "model": "claude-sonnet-4.6",
+  "turn_id": "5f6ef4812380",
+  "token_usage": {
+    "input_tokens": 8,
+    "cache_creation_tokens": 68686,
+    "cache_read_tokens": 111402,
+    "output_tokens": 5300,
+    "api_call_count": 6
+  },
+  "session_metrics": {
+    "turn_count": 1
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-05-28T13:23:00.15664Z",
+    "agent_lines": 0,
+    "agent_removed": 26,
+    "human_added": 2306,
+    "human_modified": 407,
+    "human_removed": 0,
+    "total_committed": 2374,
+    "total_lines_changed": 3020,
+    "agent_percentage": 0.8609271523178808,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 163,
+      "user_lines_removed": 407,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0,
+      "user_added_per_file": {
+        "projects/frontend/src/components/ops/CommandCenterZoneView.tsx": 161,
+        "projects/frontend/src/pages/ops/FloorPlan.tsx": 2
+      },
+      "user_removed_per_file": {
+        "projects/frontend/src/components/ops/CommandCenterZoneView.tsx": 255,
+        "projects/frontend/src/pages/ops/FloorPlan.tsx": 152
+      }
+    },
+    {
+      "checkpoint_number": 2,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 163,
+      "agent_lines_removed": 407
+    }
+  ]
+}
