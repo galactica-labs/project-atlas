@@ -100,6 +100,22 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  "/api/import-flows/{batchId}/items/{itemId}/documents": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations["ImportFlowController_uploadDocument"];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   "/api/import-flows/{batchId}/commit": {
     parameters: {
       query?: never;
@@ -110,6 +126,198 @@ export interface paths {
     get?: never;
     put?: never;
     post: operations["ImportFlowController_commitBatch"];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/pipeline/assets": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations["PipelineController_listAssets"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/pipeline/assets/{id}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations["PipelineController_getAsset"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/pipeline/assets/{id}/blast-radius": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations["PipelineController_blastRadius"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/pipeline/assets/{id}/dependencies": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations["PipelineController_dependencies"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/pipeline/incidents/simulate": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations["PipelineController_simulateIncident"];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/pipeline/incidents": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations["PipelineController_listIncidents"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/pipeline/incidents/{signalId}/action": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations["PipelineController_decideAction"];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/pipeline/incidents/{signalId}/dispatch": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations["PipelineController_dispatch"];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/pipeline/incidents/{signalId}/approval": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations["PipelineController_submitApproval"];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/pipeline/approvals/{requestId}/resolve": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations["PipelineController_resolveApproval"];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/pipeline/audit/verify": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations["PipelineController_auditVerify"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/pipeline/audit/report": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations["PipelineController_auditReport"];
+    put?: never;
+    post?: never;
     delete?: never;
     options?: never;
     head?: never;
@@ -128,7 +336,10 @@ export interface components {
     ImportDocumentResponseDto: {
       id: string;
       title: string;
-      url?: Record<string, never> | null;
+      fileName: string;
+      contentType: string;
+      sizeBytes: number;
+      createdAt: string;
     };
     ImportItemResponseDto: {
       id: string;
@@ -163,10 +374,6 @@ export interface components {
       updatedAt: string;
       items: components["schemas"]["ImportItemResponseDto"][];
     };
-    ImportDocumentDto: {
-      title: string;
-      url?: string;
-    };
     ImportItemReviewDto: {
       /** Format: uuid */
       itemId: string;
@@ -175,7 +382,6 @@ export interface components {
       technicianNotes?: string;
       normalizedName?: string;
       category?: string;
-      documents: components["schemas"]["ImportDocumentDto"][];
     };
     ReviewImportBatchDto: {
       items: components["schemas"]["ImportItemReviewDto"][];
@@ -196,6 +402,185 @@ export interface components {
     CommitImportBatchResponseDto: {
       batch: components["schemas"]["ImportBatchResponseDto"];
       catalogEntries: components["schemas"]["ComponentCatalogEntryResponseDto"][];
+    };
+    AssetDto: {
+      id: string;
+      asset_type: string;
+      model: string;
+      /** @enum {string} */
+      criticality: "low" | "medium" | "high" | "critical";
+      location: {
+        [key: string]: unknown;
+      };
+      manual_ids: string[];
+    };
+    AssetListDto: {
+      assets: components["schemas"]["AssetDto"][];
+    };
+    BlastRadiusNodeDto: {
+      asset_id: string;
+      hops_from_source: number;
+      estimated_impact_at: string;
+      /** @enum {string} */
+      impact_type: "loss_of_cooling" | "loss_of_power" | "loss_of_capacity" | "degraded";
+    };
+    BlastRadiusDto: {
+      asset_id: string;
+      nodes: components["schemas"]["BlastRadiusNodeDto"][];
+    };
+    DependenciesDto: {
+      asset_id: string;
+      dependencies: string[];
+      dependents: string[];
+    };
+    SimulateIncidentDto: {
+      /** @example CHILLER-A-03 */
+      asset_id: string;
+      /**
+       * @default supply_temperature
+       * @example supply_temperature
+       */
+      metric: string;
+    };
+    AnomalySignalDto: {
+      id: string;
+      asset_id: string;
+      metric: string;
+      current_value: number;
+      baseline_mean: number;
+      baseline_std: number;
+      z_score: number;
+      /** @enum {string} */
+      severity: "info" | "warn" | "critical";
+      detected_at: string;
+    };
+    QuantileForecastDto: {
+      metric: string;
+      horizon_seconds: number;
+      q05: number[];
+      q50: number[];
+      q95: number[];
+      threshold: number;
+      /** @enum {string} */
+      threshold_direction: "above" | "below";
+      time_to_q50_crosses_threshold?: number | null;
+      time_to_q95_crosses_threshold?: number | null;
+      uncertainty_band_width: number;
+    };
+    TriageReportDto: {
+      signal_id: string;
+      failure_mode_hypothesis: string;
+      time_to_failure_seconds: number;
+      confidence: number;
+      quantile_forecast: components["schemas"]["QuantileForecastDto"];
+      blast_radius: components["schemas"]["BlastRadiusNodeDto"][];
+      reasoning: string;
+    };
+    IncidentDto: {
+      signal: components["schemas"]["AnomalySignalDto"];
+      triage: components["schemas"]["TriageReportDto"];
+    };
+    IncidentSummaryDto: {
+      signal_id: string;
+      asset_id: string;
+      metric: string;
+      z_score: number;
+      severity: string;
+      failure_mode: string;
+      confidence: number;
+      time_to_failure_seconds: number;
+      detected_at: string;
+    };
+    IncidentListDto: {
+      incidents: components["schemas"]["IncidentSummaryDto"][];
+    };
+    ProposedActionDto: {
+      id: string;
+      triage_id: string;
+      /** @enum {string} */
+      action_type: "dispatch_tech" | "shutdown" | "throttle" | "wait" | "schedule_maintenance";
+      action_tags: string[];
+      target_asset_id: string;
+      rationale: string;
+      cited_manual_sections: string[];
+      agent_confidence: number;
+      requires_approval: boolean;
+      approval_reason?: string | null;
+    };
+    ActionResultDto: {
+      action: components["schemas"]["ProposedActionDto"];
+      /** @enum {string} */
+      policy_effect: "auto_execute" | "require_approval" | "block";
+      policy_rule?: string | null;
+      approvers: string[];
+    };
+    DispatchDto: {
+      id: string;
+      action_id: string;
+      chosen_tech_id: string;
+      rag_candidates: string[];
+      milp_alternatives: Record<string, never>[];
+      explanation: string;
+      eta_minutes: number;
+      parts_needed: string[];
+      /** @enum {string} */
+      parts_status: "in_van" | "in_warehouse" | "to_order";
+      /** @enum {string} */
+      milp_status: "optimal" | "fallback_rag" | "infeasible";
+    };
+    ApprovalRequestDto: {
+      id: string;
+      action: components["schemas"]["ProposedActionDto"];
+      triage: components["schemas"]["TriageReportDto"];
+      dispatch?: components["schemas"]["DispatchDto"] | null;
+      sent_to: string[];
+      sent_at: string;
+      expires_at: string;
+    };
+    ResolveApprovalDto: {
+      /**
+       * @default ops_manager
+       * @example ops_manager
+       */
+      approver_id: string;
+      /**
+       * @example approve
+       * @enum {string}
+       */
+      decision: "approve" | "reject" | "modify";
+      reason?: string | null;
+    };
+    ApprovalDecisionDto: {
+      request_id: string;
+      approver_id: string;
+      /** @enum {string} */
+      decision: "approve" | "reject" | "modify";
+      reason?: string | null;
+      modified_action?: {
+        [key: string]: unknown;
+      } | null;
+      signature: string;
+      decided_at: string;
+    };
+    AuditVerifyDto: {
+      valid: boolean;
+      n_records: number;
+      issues: Record<string, never>[];
+    };
+    ComplianceReportDto: {
+      generated_at: string;
+      window_start?: string | null;
+      window_end?: string | null;
+      total_events: number;
+      by_action: {
+        [key: string]: unknown;
+      };
+      approval_decisions: Record<string, never>[];
+      /** @enum {string} */
+      chain_integrity: "VERIFIED" | "COMPROMISED";
+      integrity_issues: Record<string, never>[];
+      html_path?: string | null;
+      pdf_path?: string | null;
     };
   };
   responses: never;
@@ -326,6 +711,35 @@ export interface operations {
       };
     };
   };
+  ImportFlowController_uploadDocument: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        batchId: string;
+        itemId: string;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        "multipart/form-data": {
+          /** Format: binary */
+          file: string;
+        };
+      };
+    };
+    responses: {
+      201: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["ImportBatchResponseDto"];
+        };
+      };
+    };
+  };
   ImportFlowController_commitBatch: {
     parameters: {
       query?: never;
@@ -343,6 +757,258 @@ export interface operations {
         };
         content: {
           "application/json": components["schemas"]["CommitImportBatchResponseDto"];
+        };
+      };
+    };
+  };
+  PipelineController_listAssets: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["AssetListDto"];
+        };
+      };
+    };
+  };
+  PipelineController_getAsset: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["AssetDto"];
+        };
+      };
+    };
+  };
+  PipelineController_blastRadius: {
+    parameters: {
+      query: {
+        hops: string;
+      };
+      header?: never;
+      path: {
+        id: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["BlastRadiusDto"];
+        };
+      };
+    };
+  };
+  PipelineController_dependencies: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["DependenciesDto"];
+        };
+      };
+    };
+  };
+  PipelineController_simulateIncident: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["SimulateIncidentDto"];
+      };
+    };
+    responses: {
+      201: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["IncidentDto"];
+        };
+      };
+    };
+  };
+  PipelineController_listIncidents: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["IncidentListDto"];
+        };
+      };
+    };
+  };
+  PipelineController_decideAction: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        signalId: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      201: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["ActionResultDto"];
+        };
+      };
+    };
+  };
+  PipelineController_dispatch: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        signalId: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      201: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["DispatchDto"];
+        };
+      };
+    };
+  };
+  PipelineController_submitApproval: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        signalId: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      201: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["ApprovalRequestDto"];
+        };
+      };
+    };
+  };
+  PipelineController_resolveApproval: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        requestId: string;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["ResolveApprovalDto"];
+      };
+    };
+    responses: {
+      201: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["ApprovalDecisionDto"];
+        };
+      };
+    };
+  };
+  PipelineController_auditVerify: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["AuditVerifyDto"];
+        };
+      };
+    };
+  };
+  PipelineController_auditReport: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["ComplianceReportDto"];
         };
       };
     };
