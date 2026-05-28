@@ -1,0 +1,6 @@
+> git fetch --all
+error: cannot lock ref 'refs/remotes/origin/main': is at eeec78e68b09c8da38d61ddffecba997cfefa608 but expected 5b9162439cd2abde13a97da1cc7b23636d8391d1
+From https://github.com/galactica-labs/project-atlas
+ ! 5b91624..eeec78e  main                  -> origin/main  (unable to update local ref)
+error: cannot lock ref 'refs/remotes/origin/entire/checkpoints/v1': is at c1f8bf7817faca6fef2e18a34249d811f15d03c5 but expected 98b4426894ff6f360165736841e18e0e8c127fa5
+ ! 98b4426..c1f8bf7  entire/checkpoints/v1 -> origin/entire/checkpoints/v1  (unable to update local ref)
