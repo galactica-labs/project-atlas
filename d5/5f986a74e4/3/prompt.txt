@@ -1,0 +1,18 @@
+Look at these specific files in detail and return their full content (or key sections):
+
+1. /Users/pantelis/Desktop/project-atlas/python/atlas_ml/atlas_ml/synthetic.py - Full file
+2. /Users/pantelis/Desktop/project-atlas/python/atlas_ml/atlas_ml/main.py - All FastAPI endpoints, especially any streaming/SSE endpoints
+3. /Users/pantelis/Desktop/project-atlas/python/atlas_ml/atlas_ml/ - List all files in this directory
+4. /Users/pantelis/Desktop/project-atlas/projects/backend/src/pipeline/ - List all files and read each one fully
+5. /Users/pantelis/Desktop/project-atlas/projects/frontend/src/data/mock.ts - First 200 lines only
+6. /Users/pantelis/Desktop/project-atlas/projects/frontend/src/store/appStore.ts - Full file
+7. /Users/pantelis/Desktop/project-atlas/projects/frontend/src/lib/atlasApi.ts - Full file
+
+Look specifically for:
+- Any SSE (Server-Sent Events) endpoints in FastAPI or NestJS
+- Any streaming endpoints (text/event-stream)
+- Log stream endpoints
+- Telemetry stream endpoints
+- Any /stream, /logs, /telemetry, /events routes
+
+Return FULL file contents for each file listed above.

@@ -1,0 +1,88 @@
+{
+  "cli_version": "0.6.3",
+  "checkpoint_id": "d55f986a74e4",
+  "session_id": "ses_190da9933ffed2C9CuXv7ynkga",
+  "strategy": "manual-commit",
+  "created_at": "2026-05-28T15:40:42.933496Z",
+  "branch": "main",
+  "checkpoints_count": 1,
+  "files_touched": [
+    "projects/frontend/src/pages/ops/AnomalyPanel.tsx",
+    "projects/frontend/src/pages/ops/CommandCenter.tsx",
+    "projects/frontend/src/pages/ops/DispatchPlan.tsx",
+    "projects/frontend/src/pages/ops/IngressViz.tsx",
+    "projects/frontend/src/pages/ops/NLQuery.tsx",
+    "projects/frontend/src/pages/ops/Reports.tsx",
+    "projects/frontend/src/pages/tech/ActiveJob.tsx",
+    "projects/frontend/src/pages/tech/JobsList.tsx",
+    "projects/frontend/src/store/appStore.ts"
+  ],
+  "agent": "OpenCode",
+  "model": "claude-sonnet-4.6",
+  "turn_id": "f25b61e0bedd",
+  "token_usage": {
+    "input_tokens": 6,
+    "cache_creation_tokens": 18093,
+    "cache_read_tokens": 34135,
+    "output_tokens": 4192,
+    "api_call_count": 4
+  },
+  "session_metrics": {
+    "turn_count": 1
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-05-28T15:40:42.926708Z",
+    "agent_lines": 0,
+    "agent_removed": 10,
+    "human_added": 278,
+    "human_modified": 147,
+    "human_removed": 0,
+    "total_committed": 405,
+    "total_lines_changed": 439,
+    "agent_percentage": 2.277904328018223,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 620,
+      "user_lines_removed": 138,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0,
+      "user_added_per_file": {
+        "projects/frontend/src/models/hephaestus.ts": 58,
+        "projects/frontend/src/models/hermes.ts": 149,
+        "projects/frontend/src/models/pipeline.ts": 79,
+        "projects/frontend/src/models/sentinel.ts": 121,
+        "projects/frontend/src/models/triton.ts": 75,
+        "projects/frontend/src/pages/ops/AnomalyPanel.tsx": 38,
+        "projects/frontend/src/pages/ops/CommandCenter.tsx": 7,
+        "projects/frontend/src/pages/ops/DispatchPlan.tsx": 18,
+        "projects/frontend/src/pages/ops/IngressViz.tsx": 4,
+        "projects/frontend/src/pages/ops/NLQuery.tsx": 8,
+        "projects/frontend/src/pages/ops/Reports.tsx": 30,
+        "projects/frontend/src/pages/tech/ActiveJob.tsx": 5,
+        "projects/frontend/src/pages/tech/JobsList.tsx": 2,
+        "projects/frontend/src/store/appStore.ts": 26
+      },
+      "user_removed_per_file": {
+        "projects/frontend/src/pages/ops/AnomalyPanel.tsx": 67,
+        "projects/frontend/src/pages/ops/CommandCenter.tsx": 31,
+        "projects/frontend/src/pages/ops/DispatchPlan.tsx": 11,
+        "projects/frontend/src/pages/ops/IngressViz.tsx": 4,
+        "projects/frontend/src/pages/ops/NLQuery.tsx": 7,
+        "projects/frontend/src/pages/ops/Reports.tsx": 6,
+        "projects/frontend/src/pages/tech/ActiveJob.tsx": 3,
+        "projects/frontend/src/pages/tech/JobsList.tsx": 2,
+        "projects/frontend/src/store/appStore.ts": 7
+      }
+    },
+    {
+      "checkpoint_number": 2,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 620,
+      "agent_lines_removed": 138
+    }
+  ]
+}
