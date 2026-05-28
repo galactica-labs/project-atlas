@@ -1,0 +1,58 @@
+{
+  "cli_version": "0.6.3",
+  "checkpoint_id": "4ec05fd949fc",
+  "session_id": "d9549642-4b4c-47ff-80f2-05ef0ef29a37",
+  "strategy": "manual-commit",
+  "created_at": "2026-05-28T16:17:14.181677Z",
+  "branch": "main",
+  "checkpoints_count": 1,
+  "files_touched": [
+    "bun.lock",
+    "projects/backend/package.json",
+    "projects/frontend/src/components/atlas-3d/CommandCenter.tsx"
+  ],
+  "agent": "Claude Code",
+  "model": "claude-sonnet-4-6",
+  "turn_id": "a5e458100240",
+  "token_usage": {
+    "input_tokens": 21,
+    "cache_creation_tokens": 67967,
+    "cache_read_tokens": 670147,
+    "output_tokens": 8346,
+    "api_call_count": 20
+  },
+  "session_metrics": {
+    "turn_count": 1
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-05-28T16:17:14.162867Z",
+    "agent_lines": 0,
+    "agent_removed": 0,
+    "human_added": 0,
+    "human_modified": 1,
+    "human_removed": 29,
+    "total_committed": 0,
+    "total_lines_changed": 30,
+    "agent_percentage": 0,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 9,
+      "user_lines_removed": 29,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0,
+      "user_added_per_file": {
+        "bun.lock": 7,
+        "projects/backend/package.json": 1,
+        "projects/frontend/src/components/atlas-3d/CommandCenter.tsx": 1
+      },
+      "user_removed_per_file": {
+        "bun.lock": 27,
+        "projects/backend/package.json": 1,
+        "projects/frontend/src/components/atlas-3d/CommandCenter.tsx": 1
+      }
+    }
+  ]
+}

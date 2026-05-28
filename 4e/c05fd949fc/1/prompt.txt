@@ -1,0 +1,393 @@
+pantelis@172 project-atlas % ./start.sh          
+Starting database (atlas-postgres via Docker Compose)...
+[+] up 1/1
+ ✔ Container atlas-postgres Running                                                                                                                                                  0.0s
+Starting backend (@atlas/backend:start:dev)...
+Starting frontend (@atlas/frontend:dev)...
+
+Atlas dev services are starting. Press Ctrl+C to stop backend and frontend.
+
+ NX   Running target start:dev for project @atlas/backend and 2 tasks it depends on:
+
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+> nx run @atlas/frontend:dev
+
+
+> nx run @atlas/backend:"db:migrate"
+
+@atlas/frontend: $ vite
+@atlas/backend: No config path provided, using default 'drizzle.config.ts'
+@atlas/backend: Reading config file '/Users/pantelis/Desktop/project-atlas/projects/backend/drizzle.config.ts'
+@atlas/frontend:   VITE v8.0.14  ready in 139 ms
+@atlas/frontend:   ➜  Local:   http://localhost:3000/
+@atlas/frontend:   ➜  Network: http://172.16.19.147:3000/
+@atlas/backend: Using 'postgres' driver for database querying
+@atlas/backend: [⣷] applying migrations...
+@atlas/backend: {
+@atlas/backend:   severity_local: 'NOTICE',
+@atlas/backend:   severity: 'NOTICE',
+@atlas/backend:   code: '42P06',
+@atlas/backend:   message: 'schema "drizzle" already exists, skipping',
+@atlas/backend:   file: 'schemacmds.c',
+@atlas/backend:   line: '132',
+@atlas/backend:   routine: 'CreateSchemaCommand'
+@atlas/backend: }
+@atlas/backend: {
+@atlas/backend:   severity_local: 'NOTICE',
+@atlas/backend:   severity: 'NOTICE',
+@atlas/backend:   code: '42P07',
+@atlas/backend:   message: 'relation "__drizzle_migrations" already exists, skipping',
+@atlas/backend:   file: 'parse_utilcmd.c',
+@atlas/backend:   line: '208',
+@atlas/backend:   routine: 'transformCreateStmt'
+@atlas/backend: }
+[✓] migrations applied successfully!
+
+> nx run @atlas/backend:"build:dev"
+
+@atlas/backend: Compiling with SWC for @atlas/backend...
+@atlas/backend: projects/backend/src/scripts/generate-task-embeddings.ts:3:20 - error TS2307: Cannot find module 'openai' or its corresponding type declarations.
+@atlas/backend:   1 | import { mkdirSync, writeFileSync } from "node:fs";
+@atlas/backend:   2 | import { dirname, join } from "node:path";
+@atlas/backend: > 3 | import OpenAI from "openai";
+@atlas/backend:     |                    ^
+@atlas/backend:   4 | import { loadTaskDocs, toEmbeddingInput, toManualTaskView } from "../technician-assist/task-docs";
+@atlas/backend:   5 | 
+@atlas/backend:   6 | const model = process.env.OPENAI_EMBEDDING_MODEL || "text-embedding-3-small";
+@atlas/backend: projects/backend/src/technician-assist/technician-assist.service.ts:3:20 - error TS2307: Cannot find module 'openai' or its corresponding type declarations.
+@atlas/backend:   1 | import { Injectable, InternalServerErrorException, Logger } from "@nestjs/common";
+@atlas/backend:   2 | import { ConfigService } from "@nestjs/config";
+@atlas/backend: > 3 | import OpenAI from "openai";
+@atlas/backend:     |                    ^
+@atlas/backend:   4 | import type {
+@atlas/backend:   5 |   CreateTranscriptEntryDto,
+@atlas/backend:   6 |   ManualTaskSearchResponseDto,
+@atlas/backend: projects/backend/src/scripts/generate-task-embeddings.ts:3:20 - error TS2307: Cannot find module 'openai' or its corresponding type declarations.
+@atlas/backend:   1 | import { mkdirSync, writeFileSync } from "node:fs";
+@atlas/backend:   2 | import { dirname, join } from "node:path";
+@atlas/backend: > 3 | import OpenAI from "openai";
+@atlas/backend:     |                    ^
+@atlas/backend:   4 | import { loadTaskDocs, toEmbeddingInput, toManualTaskView } from "../technician-assist/task-docs";
+@atlas/backend:   5 | 
+@atlas/backend:   6 | const model = process.env.OPENAI_EMBEDDING_MODEL || "text-embedding-3-small";
+@atlas/backend: projects/backend/src/technician-assist/technician-assist.service.ts:3:20 - error TS2307: Cannot find module 'openai' or its corresponding type declarations.
+@atlas/backend:   1 | import { Injectable, InternalServerErrorException, Logger } from "@nestjs/common";
+@atlas/backend:   2 | import { ConfigService } from "@nestjs/config";
+@atlas/backend: > 3 | import OpenAI from "openai";
+@atlas/backend:     |                    ^
+@atlas/backend:   4 | import type {
+@atlas/backend:   5 |   CreateTranscriptEntryDto,
+@atlas/backend:   6 |   ManualTaskSearchResponseDto,
+@atlas/backend: Found 4 errors.
+
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+ NX   Running target start:dev for project @atlas/backend and 2 tasks it depends on failed
+
+Failed tasks:
+
+- @atlas/backend:build:dev
+
+Hint: run the command with --verbose for more details.
+
+Your AI agent configuration is outdated. Run "nx configure-ai-agents" to update.
+
+error: "nx" exited with code 1
+
+Stopping services...
+
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+ NX   Successfully ran target dev for project @atlas/frontend
+
+
+Your AI agent configuration is outdated. Run "nx configure-ai-agents" to update.
+
+error: Failed to run "nx" due to exit code 130
+pantelis@172 project-atlas % 
+pantelis@172 project-atlas % 
+pantelis@172 project-atlas % ./start.sh
+Starting database (atlas-postgres via Docker Compose)...
+[+] up 1/1
+ ✔ Container atlas-postgres Running                                                                                                                                                  0.0s
+Starting backend (@atlas/backend:start:dev)...
+Starting frontend (@atlas/frontend:dev)...
+
+Atlas dev services are starting. Press Ctrl+C to stop backend and frontend.
+
+ NX   Running target start:dev for project @atlas/backend and 2 tasks it depends on:
+
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+> nx run @atlas/frontend:dev
+
+
+> nx run @atlas/backend:"db:migrate"
+
+@atlas/frontend: $ vite
+@atlas/backend: No config path provided, using default 'drizzle.config.ts'
+@atlas/backend: Reading config file '/Users/pantelis/Desktop/project-atlas/projects/backend/drizzle.config.ts'
+@atlas/frontend:   VITE v8.0.14  ready in 144 ms
+@atlas/frontend:   ➜  Local:   http://localhost:3000/
+@atlas/frontend:   ➜  Network: http://172.16.19.147:3000/
+@atlas/backend: Using 'postgres' driver for database querying
+@atlas/backend: [⣷] applying migrations...
+@atlas/backend: {
+@atlas/backend:   severity_local: 'NOTICE',
+@atlas/backend:   severity: 'NOTICE',
+@atlas/backend:   code: '42P06',
+@atlas/backend:   message: 'schema "drizzle" already exists, skipping',
+@atlas/backend:   file: 'schemacmds.c',
+@atlas/backend:   line: '132',
+@atlas/backend:   routine: 'CreateSchemaCommand'
+@atlas/backend: }
+@atlas/backend: {
+@atlas/backend:   severity_local: 'NOTICE',
+@atlas/backend:   severity: 'NOTICE',
+@atlas/backend:   code: '42P07',
+@atlas/backend:   message: 'relation "__drizzle_migrations" already exists, skipping',
+@atlas/backend:   file: 'parse_utilcmd.c',
+@atlas/backend:   line: '208',
+@atlas/backend:   routine: 'transformCreateStmt'
+@atlas/backend: }
+[✓] migrations applied successfully!
+
+> nx run @atlas/backend:"build:dev"
+
+@atlas/backend: Compiling with SWC for @atlas/backend...
+@atlas/backend: projects/backend/src/scripts/generate-task-embeddings.ts:3:20 - error TS2307: Cannot find module 'openai' or its corresponding type declarations.
+@atlas/backend:   1 | import { mkdirSync, writeFileSync } from "node:fs";
+@atlas/backend:   2 | import { dirname, join } from "node:path";
+@atlas/backend: > 3 | import OpenAI from "openai";
+@atlas/backend:     |                    ^
+@atlas/backend:   4 | import { loadTaskDocs, toEmbeddingInput, toManualTaskView } from "../technician-assist/task-docs";
+@atlas/backend:   5 | 
+@atlas/backend:   6 | const model = process.env.OPENAI_EMBEDDING_MODEL || "text-embedding-3-small";
+@atlas/backend: projects/backend/src/technician-assist/technician-assist.service.ts:3:20 - error TS2307: Cannot find module 'openai' or its corresponding type declarations.
+@atlas/backend:   1 | import { Injectable, InternalServerErrorException, Logger } from "@nestjs/common";
+@atlas/backend:   2 | import { ConfigService } from "@nestjs/config";
+@atlas/backend: > 3 | import OpenAI from "openai";
+@atlas/backend:     |                    ^
+@atlas/backend:   4 | import type {
+@atlas/backend:   5 |   CreateTranscriptEntryDto,
+@atlas/backend:   6 |   ManualTaskSearchResponseDto,
+@atlas/backend: projects/backend/src/scripts/generate-task-embeddings.ts:3:20 - error TS2307: Cannot find module 'openai' or its corresponding type declarations.
+@atlas/backend:   1 | import { mkdirSync, writeFileSync } from "node:fs";
+@atlas/backend:   2 | import { dirname, join } from "node:path";
+@atlas/backend: > 3 | import OpenAI from "openai";
+@atlas/backend:     |                    ^
+@atlas/backend:   4 | import { loadTaskDocs, toEmbeddingInput, toManualTaskView } from "../technician-assist/task-docs";
+@atlas/backend:   5 | 
+@atlas/backend:   6 | const model = process.env.OPENAI_EMBEDDING_MODEL || "text-embedding-3-small";
+@atlas/backend: projects/backend/src/technician-assist/technician-assist.service.ts:3:20 - error TS2307: Cannot find module 'openai' or its corresponding type declarations.
+@atlas/backend:   1 | import { Injectable, InternalServerErrorException, Logger } from "@nestjs/common";
+@atlas/backend:   2 | import { ConfigService } from "@nestjs/config";
+@atlas/backend: > 3 | import OpenAI from "openai";
+@atlas/backend:     |                    ^
+@atlas/backend:   4 | import type {
+@atlas/backend:   5 |   CreateTranscriptEntryDto,
+@atlas/backend:   6 |   ManualTaskSearchResponseDto,
+@atlas/backend: Found 4 errors.
+
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+ NX   Running target start:dev for project @atlas/backend and 2 tasks it depends on failed
+
+Failed tasks:
+
+- @atlas/backend:build:dev
+
+Hint: run the command with --verbose for more details.
+
+Your AI agent configuration is outdated. Run "nx configure-ai-agents" to update.
+
+error: "nx" exited with code 1
+
+Stopping services...
+
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+ NX   Successfully ran target dev for project @atlas/frontend
+
+
+Your AI agent configuration is outdated. Run "nx configure-ai-agents" to update.
+
+error: Failed to run "nx" due to exit code 130
+pantelis@172 project-atlas % ./start.sh          
+Starting database (atlas-postgres via Docker Compose)...
+[+] up 1/1
+ ✔ Container atlas-postgres Running                                                                                                                                                  0.0s
+Starting backend (@atlas/backend:start:dev)...
+Starting frontend (@atlas/frontend:dev)...
+
+Atlas dev services are starting. Press Ctrl+C to stop backend and frontend.
+
+ NX   Running target start:dev for project @atlas/backend and 2 tasks it depends on:
+
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+Waiting for @atlas/frontend:dev in another nx process
+
+> nx run @atlas/backend:"db:migrate"
+
+@atlas/backend: No config path provided, using default 'drizzle.config.ts'
+@atlas/backend: Reading config file '/Users/pantelis/Desktop/project-atlas/projects/backend/drizzle.config.ts'
+@atlas/backend: Using 'postgres' driver for database querying
+@atlas/backend: [⣷] applying migrations...
+@atlas/backend: {
+@atlas/backend:   severity_local: 'NOTICE',
+@atlas/backend:   severity: 'NOTICE',
+@atlas/backend:   code: '42P06',
+@atlas/backend:   message: 'schema "drizzle" already exists, skipping',
+@atlas/backend:   file: 'schemacmds.c',
+@atlas/backend:   line: '132',
+@atlas/backend:   routine: 'CreateSchemaCommand'
+@atlas/backend: }
+@atlas/backend: {
+@atlas/backend:   severity_local: 'NOTICE',
+@atlas/backend:   severity: 'NOTICE',
+@atlas/backend:   code: '42P07',
+@atlas/backend:   message: 'relation "__drizzle_migrations" already exists, skipping',
+@atlas/backend:   file: 'parse_utilcmd.c',
+@atlas/backend:   line: '208',
+@atlas/backend:   routine: 'transformCreateStmt'
+@atlas/backend: }
+[✓] migrations applied successfully!
+
+> nx run @atlas/backend:"build:dev"
+
+@atlas/backend: Compiling with SWC for @atlas/backend...
+Task "@atlas/frontend:dev" is continuous but exited with code 0
+
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+ NX   Running target dev for project @atlas/frontend failed
+
+Failed tasks:
+
+- @atlas/frontend:dev
+
+Hint: run the command with --verbose for more details.
+
+Your AI agent configuration is outdated. Run "nx configure-ai-agents" to update.
+
+error: "nx" exited with code 1
+
+Stopping services...
+
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+ NX   Successfully ran target start:dev for project @atlas/backend and 2 tasks it depends on
+
+
+Your AI agent configuration is outdated. Run "nx configure-ai-agents" to update.
+
+error: Failed to run "nx" due to exit code 130
+pantelis@172 project-atlas % ./start.sh
+Starting database (atlas-postgres via Docker Compose)...
+[+] up 1/1
+ ✔ Container atlas-postgres Running                                                                                                                                                  0.0s
+Starting backend (@atlas/backend:start:dev)...
+Starting frontend (@atlas/frontend:dev)...
+
+Atlas dev services are starting. Press Ctrl+C to stop backend and frontend.
+
+ NX   Running target start:dev for project @atlas/backend and 2 tasks it depends on:
+
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+Waiting for @atlas/frontend:dev in another nx process
+
+> nx run @atlas/backend:"db:migrate"
+
+@atlas/backend: No config path provided, using default 'drizzle.config.ts'
+@atlas/backend: Reading config file '/Users/pantelis/Desktop/project-atlas/projects/backend/drizzle.config.ts'
+@atlas/backend: Using 'postgres' driver for database querying
+@atlas/backend: [⣷] applying migrations...
+@atlas/backend: {
+@atlas/backend:   severity_local: 'NOTICE',
+@atlas/backend:   severity: 'NOTICE',
+@atlas/backend:   code: '42P06',
+@atlas/backend:   message: 'schema "drizzle" already exists, skipping',
+@atlas/backend:   file: 'schemacmds.c',
+@atlas/backend:   line: '132',
+@atlas/backend:   routine: 'CreateSchemaCommand'
+@atlas/backend: }
+@atlas/backend: {
+@atlas/backend:   severity_local: 'NOTICE',
+@atlas/backend:   severity: 'NOTICE',
+@atlas/backend:   code: '42P07',
+@atlas/backend:   message: 'relation "__drizzle_migrations" already exists, skipping',
+@atlas/backend:   file: 'parse_utilcmd.c',
+@atlas/backend:   line: '208',
+@atlas/backend:   routine: 'transformCreateStmt'
+@atlas/backend: }
+[✓] migrations applied successfully!
+
+> nx run @atlas/backend:"build:dev"
+
+@atlas/backend: Compiling with SWC for @atlas/backend...
+
+> nx run @atlas/backend:"start:dev"
+
+@atlas/backend: Successfully compiled: 39 files, copied 2 files with swc (43.38ms)
+@atlas/backend: Watching for file changes.
+@atlas/backend: [Nest] 4119  - 05/28/2026, 7:13:19 PM     LOG [NestFactory] Starting Nest application...
+@atlas/backend: [Nest] 4119  - 05/28/2026, 7:13:19 PM     LOG [InstanceLoader] AppModule dependencies initialized +11ms
+@atlas/backend: [Nest] 4119  - 05/28/2026, 7:13:19 PM     LOG [InstanceLoader] ConfigHostModule dependencies initialized +1ms
+@atlas/backend: [Nest] 4119  - 05/28/2026, 7:13:19 PM     LOG [InstanceLoader] DocsModule dependencies initialized +0ms
+@atlas/backend: [Nest] 4119  - 05/28/2026, 7:13:19 PM     LOG [InstanceLoader] ConfigModule dependencies initialized +0ms
+@atlas/backend: [Nest] 4119  - 05/28/2026, 7:13:19 PM     LOG [InstanceLoader] PipelineModule dependencies initialized +0ms
+@atlas/backend: [Nest] 4119  - 05/28/2026, 7:13:19 PM     LOG [InstanceLoader] DatabaseModule dependencies initialized +0ms
+@atlas/backend: [Nest] 4119  - 05/28/2026, 7:13:19 PM     LOG [InstanceLoader] TechnicianAssistModule dependencies initialized +1ms
+@atlas/backend: [Nest] 4119  - 05/28/2026, 7:13:19 PM     LOG [InstanceLoader] ImportFlowModule dependencies initialized +0ms
+@atlas/backend: [Nest] 4119  - 05/28/2026, 7:13:19 PM     LOG [RoutesResolver] DocsController {/api}: +22ms
+@atlas/backend: [Nest] 4119  - 05/28/2026, 7:13:19 PM     LOG [RouterExplorer] Mapped {/api/openapi, GET} route +1ms
+@atlas/backend: [Nest] 4119  - 05/28/2026, 7:13:19 PM     LOG [RouterExplorer] Mapped {/api/reference, GET} route +1ms
+@atlas/backend: [Nest] 4119  - 05/28/2026, 7:13:19 PM     LOG [RoutesResolver] ImportFlowController {/api/import-flows}: +0ms
+@atlas/backend: [Nest] 4119  - 05/28/2026, 7:13:19 PM     LOG [RouterExplorer] Mapped {/api/import-flows/ingress/pull, POST} route +0ms
+@atlas/backend: [Nest] 4119  - 05/28/2026, 7:13:19 PM     LOG [RouterExplorer] Mapped {/api/import-flows/:batchId, GET} route +0ms
+@atlas/backend: [Nest] 4119  - 05/28/2026, 7:13:19 PM     LOG [RouterExplorer] Mapped {/api/import-flows/:batchId/match, POST} route +0ms
+@atlas/backend: [Nest] 4119  - 05/28/2026, 7:13:19 PM     LOG [RouterExplorer] Mapped {/api/import-flows/:batchId/review, POST} route +0ms
+@atlas/backend: [Nest] 4119  - 05/28/2026, 7:13:19 PM     LOG [RouterExplorer] Mapped {/api/import-flows/:batchId/items/:itemId/documents, POST} route +1ms
+@atlas/backend: [Nest] 4119  - 05/28/2026, 7:13:19 PM     LOG [RouterExplorer] Mapped {/api/import-flows/:batchId/commit, POST} route +0ms
+@atlas/backend: [Nest] 4119  - 05/28/2026, 7:13:19 PM     LOG [RoutesResolver] PipelineController {/api/pipeline}: +0ms
+@atlas/backend: [Nest] 4119  - 05/28/2026, 7:13:19 PM     LOG [RouterExplorer] Mapped {/api/pipeline/assets, GET} route +0ms
+@atlas/backend: [Nest] 4119  - 05/28/2026, 7:13:19 PM     LOG [RouterExplorer] Mapped {/api/pipeline/assets/:id, GET} route +0ms
+@atlas/backend: [Nest] 4119  - 05/28/2026, 7:13:19 PM     LOG [RouterExplorer] Mapped {/api/pipeline/assets/:id/blast-radius, GET} route +0ms
+@atlas/backend: [Nest] 4119  - 05/28/2026, 7:13:19 PM     LOG [RouterExplorer] Mapped {/api/pipeline/assets/:id/dependencies, GET} route +0ms
+@atlas/backend: [Nest] 4119  - 05/28/2026, 7:13:19 PM     LOG [RouterExplorer] Mapped {/api/pipeline/incidents/simulate, POST} route +0ms
+@atlas/backend: [Nest] 4119  - 05/28/2026, 7:13:19 PM     LOG [RouterExplorer] Mapped {/api/pipeline/incidents, GET} route +0ms
+@atlas/backend: [Nest] 4119  - 05/28/2026, 7:13:19 PM     LOG [RouterExplorer] Mapped {/api/pipeline/incidents/:signalId/action, POST} route +0ms
+@atlas/backend: [Nest] 4119  - 05/28/2026, 7:13:19 PM     LOG [RouterExplorer] Mapped {/api/pipeline/incidents/:signalId/dispatch, POST} route +1ms
+@atlas/backend: [Nest] 4119  - 05/28/2026, 7:13:19 PM     LOG [RouterExplorer] Mapped {/api/pipeline/incidents/:signalId/approval, POST} route +0ms
+@atlas/backend: [Nest] 4119  - 05/28/2026, 7:13:19 PM     LOG [RouterExplorer] Mapped {/api/pipeline/approvals/:requestId/resolve, POST} route +0ms
+@atlas/backend: [Nest] 4119  - 05/28/2026, 7:13:19 PM     LOG [RouterExplorer] Mapped {/api/pipeline/audit/verify, GET} route +0ms
+@atlas/backend: [Nest] 4119  - 05/28/2026, 7:13:19 PM     LOG [RouterExplorer] Mapped {/api/pipeline/audit/report, GET} route +0ms
+@atlas/backend: [Nest] 4119  - 05/28/2026, 7:13:19 PM     LOG [RouterExplorer] Mapped {/api/pipeline/telemetry/stream, GET} route +0ms
+@atlas/backend: [Nest] 4119  - 05/28/2026, 7:13:19 PM     LOG [RouterExplorer] Mapped {/api/pipeline/logs/stream, GET} route +0ms
+@atlas/backend: [Nest] 4119  - 05/28/2026, 7:13:19 PM     LOG [RoutesResolver] TechnicianAssistController {/api/technician-assist}: +0ms
+@atlas/backend: [Nest] 4119  - 05/28/2026, 7:13:19 PM     LOG [RouterExplorer] Mapped {/api/technician-assist/manual/tasks, GET} route +0ms
+@atlas/backend: [Nest] 4119  - 05/28/2026, 7:13:19 PM     LOG [RouterExplorer] Mapped {/api/technician-assist/manual/search, POST} route +1ms
+@atlas/backend: [Nest] 4119  - 05/28/2026, 7:13:19 PM     LOG [RouterExplorer] Mapped {/api/technician-assist/realtime/session, POST} route +0ms
+@atlas/backend: [Nest] 4119  - 05/28/2026, 7:13:19 PM     LOG [RouterExplorer] Mapped {/api/technician-assist/transcripts, POST} route +0ms
+@atlas/backend: [Nest] 4119  - 05/28/2026, 7:13:19 PM     LOG [RouterExplorer] Mapped {/api/technician-assist/transcripts, GET} route +0ms
+@atlas/backend: [Nest] 4119  - 05/28/2026, 7:13:19 PM     LOG [NestApplication] Nest application successfully started +1ms
+@atlas/backend: [Nest] 4119  - 05/28/2026, 7:13:19 PM   ERROR [NestApplication] Error: Failed to start server. Is port 3001 in use? +16ms
+@atlas/backend: 185 |             this.httpServer.once('error', errorHandler);
+@atlas/backend: 186 |             const isCallbackInOriginalArgs = (0, shared_utils_1.isFunction)(args[args.length - 1]);
+@atlas/backend: 187 |             const listenFnArgs = isCallbackInOriginalArgs
+@atlas/backend: 188 |                 ? args.slice(0, args.length - 1)
+@atlas/backend: 189 |                 : args;
+@atlas/backend: 190 |             this.httpAdapter.listen(port, ...listenFnArgs, (...originalCallbackArgs) => {
+@atlas/backend:       ^
+@atlas/backend: error: Failed to start server. Is port 3001 in use?
+@atlas/backend:  syscall: "listen",
+@atlas/backend:    errno: 0,
+@atlas/backend:     code: "EADDRINUSE"
+@atlas/backend:       at serve (unknown:1:1)
+@atlas/backend:       at node:_http_server:281:39
+@atlas/backend:       at node:_http_server:258:33
+@atlas/backend:       at /Users/pantelis/Desktop/project-atlas/node_modules/.bun/@nestjs+core@11.1.24+cdd10d70b7ff3152/node_modules/@nestjs/core/nest-application.js:190:30
+@atlas/backend:       at Promise (unknown:1:11)
+@atlas/backend:       at listen (/Users/pantelis/Desktop/project-atlas/node_modules/.bun/@nestjs+core@11.1.24+cdd10d70b7ff3152/node_modules/@nestjs/core/nest-application.js:202:21)
+@atlas/backend:       at processTicksAndRejections (unknown:7:39)
