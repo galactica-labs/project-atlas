@@ -3,8 +3,11 @@
   "checkpoint_id": "d55f986a74e4",
   "strategy": "manual-commit",
   "branch": "main",
-  "checkpoints_count": 4,
+  "checkpoints_count": 6,
   "files_touched": [
+    "projects/backend/src/pipeline/pipeline.controller.ts",
+    "projects/backend/src/pipeline/pipeline.service.ts",
+    "projects/frontend/src/lib/streams.ts",
     "projects/frontend/src/models/hephaestus.ts",
     "projects/frontend/src/models/hermes.ts",
     "projects/frontend/src/models/pipeline.ts",
@@ -18,7 +21,11 @@
     "projects/frontend/src/pages/ops/Reports.tsx",
     "projects/frontend/src/pages/tech/ActiveJob.tsx",
     "projects/frontend/src/pages/tech/JobsList.tsx",
-    "projects/frontend/src/store/appStore.ts"
+    "projects/frontend/src/store/appStore.ts",
+    "projects/frontend/tsconfig.json",
+    "projects/frontend/vite.config.ts",
+    "python/atlas_ml/atlas_ml/service/app.py",
+    "tsconfig.json"
   ],
   "sessions": [
     {
@@ -32,13 +39,19 @@
       "transcript": "/d5/5f986a74e4/1/full.jsonl",
       "content_hash": "/d5/5f986a74e4/1/content_hash.txt",
       "prompt": "/d5/5f986a74e4/1/prompt.txt"
+    },
+    {
+      "metadata": "/d5/5f986a74e4/2/metadata.json",
+      "transcript": "/d5/5f986a74e4/2/full.jsonl",
+      "content_hash": "/d5/5f986a74e4/2/content_hash.txt",
+      "prompt": "/d5/5f986a74e4/2/prompt.txt"
     }
   ],
   "token_usage": {
-    "input_tokens": 364,
-    "cache_creation_tokens": 278414,
-    "cache_read_tokens": 12231333,
-    "output_tokens": 91792,
-    "api_call_count": 108
+    "input_tokens": 6065,
+    "cache_creation_tokens": 397616,
+    "cache_read_tokens": 15451807,
+    "output_tokens": 114684,
+    "api_call_count": 141
   }
 }

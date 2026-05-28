@@ -1,0 +1,158 @@
+make the whole website compatible with phones too
+
+---
+
+> git -c user.useConfigOnly=true commit --quiet --allow-empty-message --file -
+[STARTED] Backing up original state...
+[COMPLETED] Backed up original state in git stash (89924cb)
+[STARTED] Running tasks for staged files...
+[STARTED] package.json — 21 files
+[STARTED] projects/backend/**/*.{ts,js,json} — 2 files
+[STARTED] projects/frontend/**/*.{ts,tsx,js,jsx,json} — 17 files
+[STARTED] packages/**/*.{ts,tsx,js,jsx,json} — 0 files
+[STARTED] tools/**/*.{ts,js,json} — 0 files
+[SKIPPED] packages/**/*.{ts,tsx,js,jsx,json} — no files
+[SKIPPED] tools/**/*.{ts,js,json} — no files
+[STARTED] biome check --write --no-errors-on-unmatched
+[STARTED] biome check --write --no-errors-on-unmatched
+[COMPLETED] biome check --write --no-errors-on-unmatched
+[COMPLETED] projects/backend/**/*.{ts,js,json} — 2 files
+[FAILED] biome check --write --no-errors-on-unmatched [FAILED]
+[FAILED] biome check --write --no-errors-on-unmatched [FAILED]
+[COMPLETED] Running tasks for staged files...
+[STARTED] Updating Git index again...
+[SKIPPED] Skipped because of errors from tasks.
+[STARTED] Reverting to original state because of errors...
+[COMPLETED] Reverting to original state because of errors...
+[STARTED] Cleaning up temporary files...
+[COMPLETED] Cleaning up temporary files...
+
+✖ biome check --write --no-errors-on-unmatched:
+projects/frontend/vite.config.ts:34:32 lint/complexity/useLiteralKeys  FIXABLE  ━━━━━━━━━━━━━━━━━━━━
+
+  i The computed expression can be simplified without the use of a string literal.
+  
+    32 │               proxyRes.headers["cache-control"] = "no-cache";
+    33 │               proxyRes.headers["x-accel-buffering"] = "no";
+  > 34 │               proxyRes.headers["connection"] = "keep-alive";
+       │                                ^^^^^^^^^^^^
+    35 │             }
+    36 │           });
+  
+  i Unsafe fix: Use a literal key instead.
+  
+    32 32 │                 proxyRes.headers["cache-control"] = "no-cache";
+    33 33 │                 proxyRes.headers["x-accel-buffering"] = "no";
+    34    │ - ··············proxyRes.headers["connection"]·=·"keep-alive";
+       34 │ + ··············proxyRes.headers.connection·=·"keep-alive";
+    35 35 │               }
+    36 36 │             });
+  
+
+projects/frontend/src/models/hephaestus.ts:12:7 lint/style/noNonNullAssertion  FIXABLE  ━━━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    10 │     for (const dep of asset.dependsOn) {
+    11 │       if (!dependents.has(dep)) dependents.set(dep, []);
+  > 12 │       dependents.get(dep)!.push(asset.id);
+       │       ^^^^^^^^^^^^^^^^^^^^
+    13 │     }
+    14 │   }
+  
+  i Unsafe fix: Replace with optional chain operator ?. This operator includes runtime checks, so it is safer than the compile-only non-null assertion operator
+  
+    10 10 │       for (const dep of asset.dependsOn) {
+    11 11 │         if (!dependents.has(dep)) dependents.set(dep, []);
+    12    │ - ······dependents.get(dep)!.push(asset.id);
+       12 │ + ······dependents.get(dep)?.push(asset.id);
+    13 13 │       }
+    14 14 │     }
+  
+
+projects/frontend/src/models/hephaestus.ts:27:27 lint/style/noNonNullAssertion ━━━━━━━━━━━━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    26 │   while (queue.length > 0) {
+  > 27 │     const { id, depth } = queue.shift()!;
+       │                           ^^^^^^^^^^^^^^
+    28 │     for (const childId of dependents.get(id) ?? []) {
+    29 │       if (visited.has(childId)) continue;
+  
+
+projects/frontend/src/models/hermes.ts:76:3 lint/correctness/noUnusedFunctionParameters  FIXABLE  ━━━━━━━━━━
+
+  ! This parameter is unused.
+  
+    74 │   asset: Asset,
+    75 │   blastRadius: string[],
+  > 76 │   tech: Technician,
+       │   ^^^^
+    77 │   allAssets: Asset[]
+    78 │ ): string {
+  
+  i Unused parameters might be the result of an incomplete refactoring.
+  
+  i Unsafe fix: If this is intentional, prepend tech with an underscore.
+  
+     74  74 │     asset: Asset,
+     75  75 │     blastRadius: string[],
+     76     │ - ··tech:·Technician,
+         76 │ + ··_tech:·Technician,
+     77  77 │     allAssets: Asset[]
+     78  78 │   ): string {
+  
+
+projects/frontend/src/models/pipeline.ts:29:19 lint/style/noNonNullAssertion ━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    28 │   for (const { incident: stub, meta } of sentinelResults) {
+  > 29 │     const asset = assets.find((a) => a.id === stub.assetId)!;
+       │                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    30 │ 
+    31 │     // Hephaestus: compute blast radius + cascade delays from dependency graph
+  
+
+projects/frontend/src/pages/ops/CommandCenter.tsx:66:3 lint/correctness/useExhaustiveDependencies  FIXABLE  ━━━━━━━━━━
+
+  × This hook does not specify its dependency on cascadeDelays.
+  
+    64 │   }, []);
+    65 │ 
+  > 66 │   useEffect(() => {
+       │   ^^^^^^^^^
+    67 │     if (!incident) {
+    68 │       setLitNodes(new Set());
+  
+  i This dependency is being used here, but is not specified in the hook dependency list.
+  
+    74 │         setTimeout(
+    75 │           () => setLitNodes((prev) => new Set([...prev, id])),
+  > 76 │           (cascadeDelays[id] ?? 5) * 400
+       │            ^^^^^^^^^^^^^
+    77 │         )
+    78 │       );
+  
+  i React relies on hook dependencies to determine when to re-compute Effects.
+    Failing to specify dependencies can result in Effects not updating correctly when state changes.
+    These "stale closures" are a common source of surprising bugs.
+  
+  i Unsafe fix: Add the missing dependency cascadeDelays to the list.
+  
+    84 │ ··},·[incident,·cascadeDelays]);
+       │               +++++++++++++++   
+
+Skipped 4 suggested fixes.
+If you wish to apply the suggested (unsafe) fixes, use the command biome check --write --unsafe
+
+Checked 17 files in 59ms. Fixed 11 files.
+Found 1 error.
+Found 4 warnings.
+Found 1 info.
+check ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Some errors were emitted while applying fixes.
+error: "lint-staged" exited with code 1
+husky - pre-commit script failed (code 1)
