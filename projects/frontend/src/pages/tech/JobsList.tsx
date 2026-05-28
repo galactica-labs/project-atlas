@@ -1,6 +1,6 @@
 import { CaretRight, CheckCircle, Clock, MapPin, Warning } from "@phosphor-icons/react";
 import { useNavigate } from "react-router-dom";
-import { assets, jobs } from "../../data/mock";
+import { assets } from "../../data/mock";
 import { useApp } from "../../store/appStore";
 
 const priorityConfig = {
@@ -44,7 +44,7 @@ const priorityConfig = {
 
 export default function JobsList() {
   const navigate = useNavigate();
-  const { hitlApproved } = useApp();
+  const { hitlApproved, jobs } = useApp();
 
   return (
     <div className="max-w-lg mx-auto px-5 py-8 min-h-full">

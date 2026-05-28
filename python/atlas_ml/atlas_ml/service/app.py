@@ -7,10 +7,13 @@ signal id); swap for Postgres/Redis when the DB lands.
 """
 from __future__ import annotations
 
+import asyncio
+import json
 from datetime import timezone
 
 import pandas as pd
 from fastapi import FastAPI, HTTPException
+from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 
 from atlas_ml.assets import _EDGES, catalog, graph
@@ -28,7 +31,15 @@ from atlas_ml.synthetic import generate, seed_baselines
 from atlas_ml.triton import Triton, TritonForecaster
 
 TICK = 300
+# Tick seconds for the live SSE stream (finer granularity than training ticks)
+STREAM_TICK = 30
 LEDGER_PATH = "data/engine_audit.jsonl"
+
+# ── pre-generated stream data (populated at startup) ────────────────────────
+# Each element: {ts, asset_id, asset_type, metric, value}
+_STREAM_ROWS: list[dict] = []
+# Grouped by timestamp for batch emission: [(ts_str, [tick_dicts])]
+_STREAM_GROUPS: list[tuple[str, list[dict]]] = []
 
 
 # ── request / response models ───────────────────────────────────────────────
@@ -194,7 +205,32 @@ app = FastAPI(title="Atlas Engine", version="0.1.0")
 
 @app.on_event("startup")
 def _startup():
+    global _STREAM_ROWS, _STREAM_GROUPS
     engine.warmup()
+
+    # Pre-generate 1 day of 30-second tick stream data with CHILLER-A-03 drift.
+    # Drift starts at 70 % into the series (≈ 16.8 h) and rises at 12 °F/hr so
+    # the anomaly fires roughly 20 min after drift onset — a compact demo cycle.
+    stream_df = generate(
+        days=1, tick_seconds=STREAM_TICK, seed=42,
+        drift_asset="CHILLER-A-03", drift_per_hour=12.0,
+    )
+    _STREAM_ROWS = [
+        {
+            "ts": row.ts.isoformat(),
+            "asset_id": row.asset_id,
+            "asset_type": row.asset_type,
+            "metric": row.metric,
+            "value": round(float(row.value), 3),
+        }
+        for row in stream_df.itertuples()
+    ]
+
+    # Group by timestamp so one SSE event carries all assets for that tick.
+    _groups: dict[str, list[dict]] = {}
+    for row in _STREAM_ROWS:
+        _groups.setdefault(row["ts"], []).append(row)
+    _STREAM_GROUPS = list(_groups.items())  # [(ts_str, [tick_dicts])]
 
 
 @app.get("/health")
@@ -281,3 +317,115 @@ def audit_verify() -> dict:
 @app.get("/audit/report")
 def audit_report() -> dict:
     return compliance_report(out_path="reports/engine_compliance", ledger_path=LEDGER_PATH)
+
+
+# ── SSE streams ──────────────────────────────────────────────────────────────
+
+_SSE_HEADERS = {
+    "Cache-Control": "no-cache",
+    "X-Accel-Buffering": "no",
+    "Connection": "keep-alive",
+}
+
+
+@app.get("/telemetry/stream")
+async def telemetry_stream():
+    """SSE stream — emits one batch of synthetic telemetry per second.
+
+    Each event is a JSON object::
+
+        {"ts": "<iso>", "ticks": [{"asset_id": …, "asset_type": …,
+                                   "metric": …, "value": …}, …]}
+
+    The batch covers all seven simulated assets at the same timestamp.
+    The series includes a linear drift fault on CHILLER-A-03 that starts at
+    70 % of the one-day window, causing supply_temperature to climb ~12 °F/hr
+    until it crosses the critical z-score threshold.  The series loops so
+    the anomaly scenario repeats indefinitely.
+    """
+    async def _gen():
+        n = len(_STREAM_GROUPS)
+        idx = 0
+        while True:
+            ts, ticks = _STREAM_GROUPS[idx % n]
+            payload = {
+                "ts": ts,
+                "ticks": [
+                    {k: v for k, v in t.items() if k != "ts"}
+                    for t in ticks
+                ],
+            }
+            yield f"data: {json.dumps(payload)}\n\n"
+            idx += 1
+            await asyncio.sleep(1.0)
+
+    return StreamingResponse(_gen(), media_type="text/event-stream",
+                             headers=_SSE_HEADERS)
+
+
+@app.get("/logs/stream")
+async def logs_stream():
+    """SSE stream — emits Sentinel log events derived from the same synthetic
+    telemetry used by /telemetry/stream.
+
+    Each event is a JSON object::
+
+        {"seq": <int>, "ts": "<iso>", "agent": "sentinel",
+         "asset_id": …, "metric": …, "value": …,
+         "z_score": …, "severity": "info|warn|critical",
+         "message": "…"}
+
+    Every CHILLER-A-03 tick is logged (so the rising drift is visible).
+    For all other assets only warn/critical signals are emitted — this keeps
+    the log focused while still surfacing any cascade anomalies.
+    """
+    async def _gen():
+        # Each SSE connection gets its own Sentinel instance seeded from the
+        # engine baselines so z-scores are meaningful from the first tick.
+        sentinel = Sentinel(seeds=engine._baselines)
+        n = len(_STREAM_GROUPS)
+        idx = 0
+        seq = 0
+        while True:
+            ts, ticks = _STREAM_GROUPS[idx % n]
+            for tick in ticks:
+                signal = sentinel.tick(
+                    tick["asset_id"], tick["metric"], tick["value"]
+                )
+                is_chiller = tick["asset_id"] == "CHILLER-A-03"
+                if signal:
+                    severity = signal.severity
+                    z = round(signal.z_score, 2)
+                    msg = (
+                        f"[SENTINEL] {tick['asset_id']} {tick['metric']}"
+                        f"={tick['value']:.2f}  z={z:+.2f}  {severity.upper()}"
+                    )
+                elif is_chiller:
+                    severity = "info"
+                    z = 0.0
+                    msg = (
+                        f"[SENTINEL] {tick['asset_id']} {tick['metric']}"
+                        f"={tick['value']:.2f}  nominal"
+                    )
+                else:
+                    continue  # skip normal ticks for non-featured assets
+
+                entry = {
+                    "seq": seq,
+                    "ts": ts,
+                    "agent": "sentinel",
+                    "asset_id": tick["asset_id"],
+                    "metric": tick["metric"],
+                    "value": tick["value"],
+                    "z_score": z,
+                    "severity": severity,
+                    "message": msg,
+                }
+                yield f"data: {json.dumps(entry)}\n\n"
+                seq += 1
+
+            idx += 1
+            await asyncio.sleep(0.5)
+
+    return StreamingResponse(_gen(), media_type="text/event-stream",
+                             headers=_SSE_HEADERS)

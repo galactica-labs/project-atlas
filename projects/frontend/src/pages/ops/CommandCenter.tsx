@@ -11,12 +11,7 @@ import {
   XAxis,
 } from "recharts";
 import CommandCenterZoneView from "../../components/ops/CommandCenterZoneView";
-import {
-  DATACENTER_FLOORS,
-  type FloorKey,
-  ZONE_INDICATOR_COLORS,
-} from "../../components/ops/commandCenterLayout";
-import { cascadeDelays, telemetryHistory } from "../../data/mock";
+import { DATACENTER_FLOORS, type FloorKey } from "../../components/ops/commandCenterLayout";
 import { useApp } from "../../store/appStore";
 import AnomalyPanel from "./AnomalyPanel";
 
@@ -52,10 +47,9 @@ function useCountUp(target: number, d = 900) {
   return count;
 }
 
-const chartData = telemetryHistory.slice(18);
-
 export default function CommandCenter() {
-  const { assets, incidents, activeIncidentId, setActiveIncident } = useApp();
+  const { assets, incidents, activeIncidentId, setActiveIncident, cascadeDelays, liveChart } =
+    useApp();
   const navigate = useNavigate();
   const [litNodes, setLitNodes] = useState<Set<string>>(new Set());
   const [tick, setTick] = useState(0);
@@ -87,7 +81,7 @@ export default function CommandCenter() {
       timers.forEach(clearTimeout);
       setLitNodes(new Set());
     };
-  }, [incident]);
+  }, [incident, cascadeDelays]);
 
   const online = assets.filter((a) => a.status !== "offline").length;
   const activeInc = incidents.filter((i) => i.status !== "resolved").length;
@@ -128,11 +122,9 @@ export default function CommandCenter() {
     },
   ];
 
-  const floorZones = Object.entries(DATACENTER_FLOORS[activeFloor].zones);
-
   return (
-    <div className="flex h-full bg-[#050505] overflow-hidden">
-      <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
+    <div className="flex md:h-full bg-[#050505] md:overflow-hidden">
+      <div className="flex-1 flex flex-col min-w-0 md:overflow-hidden">
         {/* ── Header ────────────────────────────────────────────── */}
         <div className="px-5 pt-3.5 pb-3 border-b border-white/[0.05] flex-shrink-0">
           {/* Top row */}
@@ -292,7 +284,7 @@ export default function CommandCenter() {
 
         {/* ── Main canvas + right panel ─────────────────────────── */}
         <div
-          className="flex-1 flex flex-col lg:grid min-h-0 mt-2.5 mx-5 mb-5 gap-3 overflow-hidden"
+          className="flex flex-col lg:grid md:flex-1 md:min-h-0 mt-2.5 mx-5 mb-5 gap-3 md:overflow-hidden"
           style={{ gridTemplateColumns: "1fr 306px" }}
         >
           {/* Zone visualization */}
@@ -316,31 +308,10 @@ export default function CommandCenter() {
                 if (inc) setActiveIncident(inc.id);
               }}
             />
-
-            {/* Floor label */}
-            <div className="absolute top-4 left-5 pointer-events-none z-10">
-              <span className="text-[8px] font-mono font-bold text-zinc-600 uppercase tracking-[0.22em]">
-                {DATACENTER_FLOORS[activeFloor].label}
-              </span>
-            </div>
-
-            {/* Zone legend */}
-            <div className="absolute bottom-4 left-5 flex flex-col gap-1.5 pointer-events-none z-10">
-              {floorZones.map(([zoneName, zoneCfg]) => (
-                <div key={zoneName} className="flex items-center gap-1.5">
-                  <div
-                    className={`w-1 h-1 rounded-full ${ZONE_INDICATOR_COLORS[zoneCfg.zone] ?? "bg-zinc-500"} opacity-50`}
-                  />
-                  <span className="text-[7px] font-mono text-zinc-700 tracking-wide">
-                    {zoneName}
-                  </span>
-                </div>
-              ))}
-            </div>
           </div>
 
           {/* ── Right panel ───────────────────────────────────── */}
-          <div className="flex flex-col gap-2.5 min-h-0 overflow-hidden">
+          <div className="flex flex-col gap-2.5 md:min-h-0 md:overflow-hidden">
             {/* Telemetry chart */}
             <div
               className="rounded-2xl border border-white/[0.05] bg-[#060607] flex-shrink-0 overflow-hidden"
@@ -355,12 +326,17 @@ export default function CommandCenter() {
                     </p>
                   </div>
                   <span className="text-[11px] text-red-400 font-mono font-bold tabular-nums">
-                    {assets.find((a) => a.id === "chiller-a-03")?.telemetry[0].value.toFixed(1)}°C
+                    {(
+                      liveChart[liveChart.length - 1]?.chwTemp ??
+                      assets.find((a) => a.id === "chiller-a-03")?.telemetry[0].value ??
+                      0
+                    ).toFixed(1)}
+                    °C
                   </span>
                 </div>
               </div>
               <ResponsiveContainer width="100%" height={152}>
-                <AreaChart data={chartData} margin={{ top: 8, right: 0, left: 0, bottom: 0 }}>
+                <AreaChart data={liveChart} margin={{ top: 8, right: 0, left: 0, bottom: 0 }}>
                   <defs>
                     <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
                       <stop offset="0%" stopColor="#ef4444" stopOpacity={0.25} />
@@ -383,7 +359,7 @@ export default function CommandCenter() {
                     }}
                   />
                   <ReferenceLine
-                    x={chartData[18]?.time}
+                    x={liveChart[Math.floor(liveChart.length / 2)]?.time}
                     stroke="rgba(239,68,68,0.22)"
                     strokeDasharray="3 3"
                   />
@@ -413,7 +389,7 @@ export default function CommandCenter() {
               </div>
 
               <div
-                className="flex-1 overflow-y-auto p-3 space-y-2"
+                className="md:flex-1 max-h-72 md:max-h-none overflow-y-auto p-3 space-y-2"
                 style={{ scrollbarWidth: "none" }}
               >
                 <AnimatePresence>

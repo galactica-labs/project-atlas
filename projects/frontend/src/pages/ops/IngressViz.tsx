@@ -245,7 +245,7 @@ export default function IngressViz() {
               return (
                 <div
                   key={s.label}
-                  className="bg-white/[0.02] rounded-xl p-3.5 ring-1 ring-white/[0.06]"
+                  className="bg-white/[0.02] rounded-xl p-3.5 border border-white/[0.06]"
                 >
                   <Icon size={13} weight="light" className="text-zinc-600 mb-2" />
                   <p
@@ -266,7 +266,7 @@ export default function IngressViz() {
           style={{ scrollbarWidth: "none" }}
         >
           {/* Rate chart */}
-          <div className="rounded-2xl ring-1 ring-white/[0.06] bg-[#0a0a0a] p-4">
+          <div className="rounded-2xl border border-white/[0.06] bg-[#0a0a0a] p-4">
             <div className="flex items-center justify-between mb-3">
               <p className="text-[11px] font-semibold text-zinc-300">Message Rate</p>
               <span className="text-[10px] text-zinc-600 font-mono">/s</span>
@@ -308,7 +308,7 @@ export default function IngressViz() {
           </div>
 
           {/* Error rate chart */}
-          <div className="rounded-2xl ring-1 ring-white/[0.06] bg-[#0a0a0a] p-4">
+          <div className="rounded-2xl border border-white/[0.06] bg-[#0a0a0a] p-4">
             <div className="flex items-center justify-between mb-3">
               <p className="text-[11px] font-semibold text-zinc-300">Error Rate</p>
               <span className="text-[10px] text-emerald-500 font-mono">0.03% avg</span>
@@ -349,7 +349,7 @@ export default function IngressViz() {
           </div>
 
           {/* Source breakdown */}
-          <div className="rounded-2xl ring-1 ring-white/[0.06] bg-[#0a0a0a] p-4">
+          <div className="rounded-2xl border border-white/[0.06] bg-[#0a0a0a] p-4">
             <p className="text-[11px] font-semibold text-zinc-300 mb-3">Source Breakdown</p>
             <div className="space-y-2">
               {SOURCES.map((src) => {

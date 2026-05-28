@@ -1,5 +1,7 @@
-import { Body, Controller, Get, Param, Post, Query } from "@nestjs/common";
+import type { MessageEvent } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Query, Sse } from "@nestjs/common";
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from "@nestjs/swagger";
+import type { Observable } from "rxjs";
 import {
   ActionResultDto,
   ApprovalDecisionDto,
@@ -93,5 +95,17 @@ export class PipelineController {
   @ApiOkResponse({ type: ComplianceReportDto })
   auditReport() {
     return this.pipeline.auditReport();
+  }
+
+  // ── SSE streams ──────────────────────────────────────────────────────────
+
+  @Sse("telemetry/stream")
+  streamTelemetry(): Observable<MessageEvent> {
+    return this.pipeline.streamTelemetry();
+  }
+
+  @Sse("logs/stream")
+  streamLogs(): Observable<MessageEvent> {
+    return this.pipeline.streamLogs();
   }
 }

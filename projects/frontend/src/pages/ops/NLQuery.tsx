@@ -12,7 +12,7 @@ import {
   Warning,
 } from "@phosphor-icons/react";
 import { AnimatePresence, motion } from "framer-motion";
-import { useRef, useState } from "react";
+import { Fragment, useRef, useState } from "react";
 import { assets, incidents, jobs, technicians } from "../../data/mock";
 
 // ── Types ─────────────────────────────────────────────────────────────────
@@ -439,19 +439,20 @@ function PipelineBar({ state }: { state: PipelineState }) {
         : STEP_ORDER.indexOf(state.step as PipelineStep);
 
   return (
-    <div className="flex items-center gap-0">
+    <div className="flex items-center">
       {PIPELINE_AGENTS.map((agent, i) => {
         const done = currentIdx > i || state.step === "done";
         const active = currentIdx === i;
         return (
-          <div key={agent.id} className="flex items-center flex-1 min-w-0">
+          <Fragment key={agent.id}>
             {i > 0 && (
               <div
                 className="flex-1 h-px transition-all duration-500"
                 style={{
-                  background: done
-                    ? `linear-gradient(90deg, ${PIPELINE_AGENTS[i - 1].color}60, ${agent.color}40)`
-                    : "rgba(255,255,255,0.05)",
+                  background:
+                    done || active
+                      ? `linear-gradient(90deg, ${PIPELINE_AGENTS[i - 1].color}60, ${agent.color}40)`
+                      : "rgba(255,255,255,0.05)",
                 }}
               />
             )}
@@ -488,7 +489,7 @@ function PipelineBar({ state }: { state: PipelineState }) {
                 </p>
               </div>
             </div>
-          </div>
+          </Fragment>
         );
       })}
     </div>

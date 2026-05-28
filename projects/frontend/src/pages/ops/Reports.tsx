@@ -844,9 +844,9 @@ export default function Reports() {
   const activeReport = REPORTS.find((r) => r.id === activeId) ?? REPORTS[0];
 
   return (
-    <div className="flex h-full bg-[#050505] overflow-hidden">
-      {/* ── Left sidebar ─────────────────────────────────────────── */}
-      <div className="w-[220px] flex-shrink-0 flex flex-col border-r border-white/[0.05] py-4 overflow-hidden">
+    <div className="flex flex-col md:flex-row h-full bg-[#050505] overflow-hidden">
+      {/* ── Left sidebar — desktop only ──────────────────────────── */}
+      <div className="hidden md:flex w-[220px] flex-shrink-0 flex-col border-r border-white/[0.05] py-4 overflow-hidden">
         <div className="px-3 mb-3 flex-shrink-0">
           <div className="flex items-center gap-1.5">
             <div className="w-[2px] h-3.5 rounded-full bg-violet-500/70" />
@@ -864,7 +864,7 @@ export default function Reports() {
                 key={report.id}
                 type="button"
                 onClick={() => setActiveId(report.id)}
-                className={`w-full text-left rounded-xl border px-3 py-2.5 mb-1.5 transition-all duration-200 ${
+                className={`relative w-full text-left rounded-xl border px-3 py-2.5 mb-1.5 transition-all duration-200 ${
                   isActive
                     ? "border-white/[0.10] bg-white/[0.04]"
                     : "border-transparent hover:border-white/[0.05] hover:bg-white/[0.02]"
@@ -898,8 +898,32 @@ export default function Reports() {
 
       {/* ── Report content ────────────────────────────────────────── */}
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
+        {/* Mobile-only horizontal tab bar */}
+        <div
+          className="md:hidden flex-shrink-0 border-b border-white/[0.05] overflow-x-auto"
+          style={{ scrollbarWidth: "none" }}
+        >
+          <div className="flex items-center gap-1.5 px-3 py-2.5 w-max">
+            {REPORTS.map((report) => (
+              <button
+                key={report.id}
+                type="button"
+                onClick={() => setActiveId(report.id)}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-[11px] font-semibold whitespace-nowrap transition-all duration-200 ${
+                  activeId === report.id
+                    ? "border-white/[0.10] bg-white/[0.06] text-white"
+                    : "border-transparent text-zinc-600 active:text-zinc-300"
+                }`}
+              >
+                {report.icon}
+                {report.tag}
+              </button>
+            ))}
+          </div>
+        </div>
+
         {/* report header */}
-        <div className="px-5 pt-4 pb-3.5 border-b border-white/[0.05] flex-shrink-0">
+        <div className="px-4 md:px-5 pt-3.5 md:pt-4 pb-3 md:pb-3.5 border-b border-white/[0.05] flex-shrink-0">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2.5">
               {activeReport.icon}
@@ -917,7 +941,10 @@ export default function Reports() {
         </div>
 
         {/* scrollable content */}
-        <div className="flex-1 overflow-y-auto px-5 py-5" style={{ scrollbarWidth: "none" }}>
+        <div
+          className="flex-1 overflow-y-auto px-4 md:px-5 py-4 md:py-5"
+          style={{ scrollbarWidth: "none" }}
+        >
           <AnimatePresence mode="wait">
             <motion.div
               key={activeId}
