@@ -46,6 +46,7 @@ export const SCENE_ASSETS: Asset3D[] = [
     type: "rack" as const,
     status: "normal" as const,
     position: [x, RACK_Y, ROW_D_Z] as [number, number, number],
+    rotation: [0, Math.PI, 0] as [number, number, number],
     dimensions: RACK_DIM,
     zoneId: "row-d",
     criticality: 7,
@@ -80,6 +81,7 @@ export const SCENE_ASSETS: Asset3D[] = [
     type: "crac",
     status: "normal",
     position: [11, CRAC_DIM.height / 2, 3],
+    rotation: [0, Math.PI, 0] as [number, number, number],
     dimensions: CRAC_DIM,
     zoneId: "cooling-zone",
     criticality: 9,
@@ -286,38 +288,51 @@ export const SCENE_ZONES: Zone3D[] = [
   {
     id: "hall-b",
     name: "Hall B",
+    type: "data_hall",
     color: "#334155",
     bounds: { minX: -15, maxX: 15, minZ: -10, maxZ: 10 },
   },
   {
     id: "row-c",
     name: "Row C",
+    type: "rack_row",
     color: "#1e3a5f",
     bounds: { minX: -12, maxX: 2, minZ: -5, maxZ: -2 },
   },
   {
     id: "row-d",
     name: "Row D",
+    type: "rack_row",
     color: "#1e3a5f",
     bounds: { minX: -12, maxX: 2, minZ: 2, maxZ: 5 },
   },
   {
     id: "cooling-zone",
     name: "Cooling Zone",
+    type: "cooling",
     color: "#083344",
     bounds: { minX: 9, maxX: 14, minZ: -6, maxZ: 6 },
   },
   {
     id: "electrical-zone",
     name: "Electrical Zone",
+    type: "electrical",
     color: "#32200a",
     bounds: { minX: -15, maxX: -10, minZ: -6, maxZ: 6 },
   },
   {
     id: "network-zone",
     name: "Network Zone",
+    type: "network",
     color: "#1a0a3a",
     bounds: { minX: -5, maxX: 5, minZ: -10, maxZ: -6.5 },
+  },
+  {
+    id: "service-corridor",
+    name: "Service Corridor",
+    type: "corridor",
+    color: "#1c1c1c",
+    bounds: { minX: 3, maxX: 9, minZ: -10, maxZ: 10 },
   },
 ];
 
@@ -358,6 +373,18 @@ export const CRAC07_BLAST_RADIUS = [
     assetName: "Rack C17",
     impact: "Elevated temperature — monitoring",
     minutesToImpact: 42,
+  },
+  {
+    assetId: "rack-c18",
+    assetName: "Rack C18",
+    impact: "Elevated temperature — monitoring",
+    minutesToImpact: 47,
+  },
+  {
+    assetId: "rack-c19",
+    assetName: "Rack C19",
+    impact: "Distal — minimal impact expected",
+    minutesToImpact: 55,
   },
 ];
 

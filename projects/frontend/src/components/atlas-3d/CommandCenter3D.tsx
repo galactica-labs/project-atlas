@@ -1,6 +1,7 @@
 import {
   ArrowCounterClockwise,
   ArrowsOut,
+  Buildings,
   Eye,
   House,
   ScanSmiley,
@@ -14,6 +15,7 @@ import { BottomTimeline } from "./BottomTimeline";
 import { useCommandCenterStore } from "./commandCenterStore";
 import { FacilityScene } from "./FacilityScene";
 import { LayerControls } from "./LayerControls";
+import { SCENE_ASSETS } from "./sceneData";
 
 function LiveClock() {
   const [t, setT] = useState(new Date());
@@ -33,22 +35,29 @@ function StatusBar() {
   const { viewMode, activeIncidentId, assetStatuses } = useCommandCenterStore();
   const critical = Object.values(assetStatuses).filter((s) => s === "critical").length;
   const warning = Object.values(assetStatuses).filter((s) => s === "warning").length;
+  const offline = Object.values(assetStatuses).filter((s) => s === "offline").length;
+  const totalAssets = SCENE_ASSETS.length;
 
   return (
-    <div className="flex items-center gap-3 px-4 py-2.5 border-b border-white/[0.05] flex-shrink-0 bg-[#070707]">
-      <div className="flex items-center gap-2">
-        <div className="w-5 h-5 rounded-md bg-white flex items-center justify-center flex-shrink-0">
+    <div className="flex items-center gap-3 px-4 py-2 border-b border-white/[0.05] flex-shrink-0 bg-[#070707]">
+      {/* Brand */}
+      <div className="flex items-center gap-2 flex-shrink-0">
+        <div className="w-5 h-5 rounded-md bg-white flex items-center justify-center">
           <div className="w-2 h-2 bg-black rounded-[2px]" />
         </div>
         <span className="text-[13px] font-semibold tracking-tight">ATLAS</span>
-        <span className="hidden sm:block text-[10px] text-zinc-700">·</span>
-        <span className="hidden sm:block text-[10px] text-zinc-500">
-          Data Center Alpha / Hall B
-        </span>
+        <span className="hidden sm:block w-px h-3 bg-white/[0.08]" />
+        <div className="hidden sm:flex items-center gap-1 text-[10px] text-zinc-500">
+          <Buildings size={9} weight="light" className="text-zinc-600" />
+          <span>Data Center Alpha</span>
+          <span className="text-zinc-700">·</span>
+          <span className="font-mono text-zinc-600">Hall B</span>
+        </div>
       </div>
 
-      <div className="w-px h-3 bg-white/[0.08] hidden sm:block" />
+      <div className="w-px h-3 bg-white/[0.06] hidden sm:block" />
 
+      {/* Live / Incident mode badge */}
       {viewMode === "incident" ? (
         <motion.div
           initial={{ opacity: 0, x: -4 }}
@@ -59,11 +68,10 @@ function StatusBar() {
           <span className="text-[9px] font-bold tracking-wider uppercase text-red-400">
             Incident Active
           </span>
-          {critical > 0 && (
-            <span className="text-[9px] text-red-400 font-mono">{critical} critical</span>
-          )}
-          {warning > 0 && (
-            <span className="text-[9px] text-amber-400 font-mono">{warning} warning</span>
+          {activeIncidentId && (
+            <span className="text-[9px] font-mono text-red-500/70 ml-0.5">
+              #{activeIncidentId.slice(0, 8).toUpperCase()}
+            </span>
           )}
         </motion.div>
       ) : (
@@ -75,19 +83,32 @@ function StatusBar() {
         </div>
       )}
 
-      <div className="flex items-center gap-3 ml-auto">
-        <AnimatePresence>
-          {activeIncidentId && (
-            <motion.span
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="text-[9px] font-mono text-red-400"
-            >
-              INC-{activeIncidentId.toUpperCase().slice(0, 8)}
-            </motion.span>
-          )}
-        </AnimatePresence>
+      {/* Global status counts */}
+      <div className="hidden md:flex items-center gap-2 ml-1">
+        {critical > 0 && (
+          <div className="flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-red-950/40 ring-1 ring-red-500/30">
+            <Warning size={8} weight="fill" className="text-red-400" />
+            <span className="text-[9px] font-mono font-bold text-red-400">{critical} critical</span>
+          </div>
+        )}
+        {warning > 0 && (
+          <div className="flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-amber-950/30 ring-1 ring-amber-500/20">
+            <Warning size={8} weight="fill" className="text-amber-400" />
+            <span className="text-[9px] font-mono text-amber-400">{warning} warning</span>
+          </div>
+        )}
+        {offline > 0 && (
+          <span className="text-[9px] font-mono text-zinc-600">{offline} offline</span>
+        )}
+        {critical === 0 && warning === 0 && (
+          <span className="text-[9px] font-mono text-zinc-700">
+            {totalAssets} assets · all nominal
+          </span>
+        )}
+      </div>
+
+      {/* Clock — right side */}
+      <div className="ml-auto">
         <LiveClock />
       </div>
     </div>
@@ -134,6 +155,8 @@ function CameraButtons() {
                 "rack-c15",
                 "rack-c16",
                 "rack-c17",
+                "rack-c18",
+                "rack-c19",
               ],
             })
           }
@@ -172,14 +195,6 @@ function SimulationControls() {
           Reset Simulation
         </button>
       )}
-      <button
-        type="button"
-        onClick={() => {
-          if (viewMode === "incident") return;
-          // Just a visual hint
-        }}
-        className="hidden"
-      />
     </div>
   );
 }
@@ -200,7 +215,21 @@ function SceneLoadingFallback() {
   );
 }
 
+// Incident mode overlay — dims scene edges
+function IncidentVignette() {
+  return (
+    <div
+      className="absolute inset-0 pointer-events-none"
+      style={{
+        background: "radial-gradient(ellipse at 40% 50%, transparent 40%, rgba(60,0,0,0.25) 100%)",
+      }}
+    />
+  );
+}
+
 export function CommandCenter3D() {
+  const viewMode = useCommandCenterStore((s) => s.viewMode);
+
   return (
     <div className="flex flex-col h-full overflow-hidden bg-[#060606]">
       {/* Top status bar */}
@@ -215,11 +244,27 @@ export function CommandCenter3D() {
               camera={{ position: [-4, 22, 19], fov: 45, near: 0.1, far: 200 }}
               style={{ background: "#060606" }}
               gl={{ antialias: true, alpha: false }}
+              shadows={false}
               onPointerMissed={() => useCommandCenterStore.getState().selectAsset(null)}
             >
               <FacilityScene />
             </Canvas>
           </Suspense>
+
+          {/* Incident vignette overlay */}
+          <AnimatePresence>
+            {viewMode === "incident" && (
+              <motion.div
+                key="vignette"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.8 }}
+              >
+                <IncidentVignette />
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* Layer controls — top left */}
           <div className="absolute top-3 left-3 z-10">
@@ -236,12 +281,12 @@ export function CommandCenter3D() {
             <SimulationControls />
           </div>
 
-          {/* Crosshair overlay */}
+          {/* Scene edge gradient (frame) */}
           <div
             className="absolute inset-0 pointer-events-none"
             style={{
               background:
-                "radial-gradient(ellipse at 50% 30%, transparent 60%, rgba(0,0,0,0.5) 100%)",
+                "radial-gradient(ellipse at 50% 30%, transparent 55%, rgba(0,0,0,0.45) 100%)",
             }}
           />
         </div>

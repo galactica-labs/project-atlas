@@ -5,6 +5,7 @@ import { CameraController } from "./CameraController";
 import { useCommandCenterStore } from "./commandCenterStore";
 import { DependencyPath } from "./DependencyPath";
 import { FacilityFloor } from "./FacilityFloor";
+import { FacilityWalls } from "./FacilityWalls";
 import { SceneLighting } from "./SceneLighting";
 import { SCENE_ASSETS, SCENE_EDGES, SCENE_ZONES } from "./sceneData";
 import { ZoneBlock } from "./ZoneBlock";
@@ -38,6 +39,9 @@ export function FacilityScene() {
 
       {/* Floor */}
       <FacilityFloor showGrid={visibleLayers.grid} />
+
+      {/* Perimeter walls and zone dividers */}
+      <FacilityWalls />
 
       {/* Zone boundaries */}
       {SCENE_ZONES.map((zone) => (
@@ -73,8 +77,14 @@ export function FacilityScene() {
               isSelected={isSelected}
               isHovered={isHovered}
               onClick={() => handleClick(asset.id)}
-              onPointerOver={() => hoverAsset(asset.id)}
-              onPointerOut={() => hoverAsset(null)}
+              onPointerOver={() => {
+                hoverAsset(asset.id);
+                document.body.style.cursor = "pointer";
+              }}
+              onPointerOut={() => {
+                hoverAsset(null);
+                document.body.style.cursor = "default";
+              }}
             />
             {visibleLayers.labels && (
               <AssetLabel asset={asset} status={status} isSelected={isSelected} />

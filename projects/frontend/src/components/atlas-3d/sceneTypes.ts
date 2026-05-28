@@ -10,6 +10,15 @@ export type AssetType =
   | "generator"
   | "cooling_unit";
 
+export type ZoneType =
+  | "data_hall"
+  | "rack_row"
+  | "cooling"
+  | "electrical"
+  | "network"
+  | "restricted"
+  | "corridor";
+
 export type DependencyResource = "power" | "cooling" | "network" | "dependency";
 
 export type ViewMode = "overview" | "focus" | "incident";
@@ -45,6 +54,7 @@ export type DependencyEdge3D = {
 export type Zone3D = {
   id: string;
   name: string;
+  type?: ZoneType;
   color: string;
   bounds: { minX: number; maxX: number; minZ: number; maxZ: number };
 };
