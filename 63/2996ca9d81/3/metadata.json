@@ -1,0 +1,70 @@
+{
+  "cli_version": "0.6.3",
+  "checkpoint_id": "632996ca9d81",
+  "session_id": "ses_191a912c3ffemrMYvS8nHtKKeJ",
+  "strategy": "manual-commit",
+  "created_at": "2026-05-28T13:23:08.898762Z",
+  "branch": "main",
+  "checkpoints_count": 4,
+  "files_touched": [
+    "projects/frontend/src/components/ops/CommandCenterZoneView.tsx",
+    "projects/frontend/src/pages/ops/FloorPlan.tsx"
+  ],
+  "agent": "OpenCode",
+  "model": "gpt-5.4",
+  "turn_id": "18c0460eb635",
+  "checkpoint_transcript_start": 55,
+  "transcript_lines_at_start": 55,
+  "token_usage": {
+    "input_tokens": 19459,
+    "cache_creation_tokens": 0,
+    "cache_read_tokens": 3972992,
+    "output_tokens": 11040,
+    "api_call_count": 24
+  },
+  "session_metrics": {
+    "turn_count": 8
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-05-28T13:23:08.869208Z",
+    "agent_lines": 231,
+    "agent_removed": 433,
+    "human_added": 2713,
+    "human_modified": 0,
+    "human_removed": 0,
+    "total_committed": 2944,
+    "total_lines_changed": 3658,
+    "agent_percentage": 18.15199562602515,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0
+    },
+    {
+      "checkpoint_number": 2,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 2,
+      "agent_lines_removed": 152
+    },
+    {
+      "checkpoint_number": 3,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 8,
+      "agent_lines_removed": 375
+    },
+    {
+      "checkpoint_number": 4,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 113,
+      "agent_lines_removed": 406
+    }
+  ]
+}
