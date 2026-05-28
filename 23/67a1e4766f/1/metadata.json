@@ -1,0 +1,173 @@
+{
+  "cli_version": "0.6.3",
+  "checkpoint_id": "2367a1e4766f",
+  "session_id": "ses_19108d31affeLMe69S3pVQ4MYv",
+  "strategy": "manual-commit",
+  "created_at": "2026-05-28T14:53:08.620344Z",
+  "branch": "main",
+  "checkpoints_count": 11,
+  "files_touched": [
+    "bun.lock",
+    "c05386798.pdf",
+    "packages/api-types/src/api.d.ts",
+    "packages/api-types/tsconfig.tsbuildinfo",
+    "projects/backend/.env.example",
+    "projects/backend/openapi.json",
+    "projects/backend/package.json",
+    "projects/backend/project.json",
+    "projects/backend/rag/text/c05386798.txt",
+    "projects/backend/scripts/pdf-to-text.sh",
+    "projects/backend/src/app.module.ts",
+    "projects/backend/src/config/configuration.ts",
+    "projects/backend/src/scripts/generate-task-docs-from-text.ts",
+    "projects/backend/src/scripts/generate-task-embeddings.ts",
+    "projects/backend/src/technician-assist/data/tasks.json",
+    "projects/backend/src/technician-assist/dto/technician-assist.dto.ts",
+    "projects/backend/src/technician-assist/index.ts",
+    "projects/backend/src/technician-assist/manual-tasks.ts",
+    "projects/backend/src/technician-assist/task-docs.ts",
+    "projects/backend/src/technician-assist/technician-assist.controller.ts",
+    "projects/backend/src/technician-assist/technician-assist.module.ts",
+    "projects/backend/src/technician-assist/technician-assist.service.ts",
+    "projects/frontend/src/hooks/useTechnicianRealtime.ts",
+    "projects/frontend/src/pages/tech/ActiveJob.tsx",
+    "projects/frontend/tsconfig.json",
+    "tsconfig.json"
+  ],
+  "agent": "OpenCode",
+  "model": "gpt-5.4",
+  "turn_id": "1a6096a6cd36",
+  "token_usage": {
+    "input_tokens": 147206,
+    "cache_creation_tokens": 0,
+    "cache_read_tokens": 1927296,
+    "output_tokens": 20439,
+    "api_call_count": 42
+  },
+  "session_metrics": {
+    "turn_count": 12
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-05-28T14:53:08.568219Z",
+    "agent_lines": 5781,
+    "agent_removed": 7,
+    "human_added": 38564,
+    "human_modified": 610,
+    "human_removed": 0,
+    "total_committed": 44945,
+    "total_lines_changed": 44962,
+    "agent_percentage": 12.873092833948668,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 2656,
+      "user_lines_removed": 600,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0,
+      "user_added_per_file": {
+        "packages/api-types/src/api.d.ts": 572,
+        "packages/api-types/tsconfig.tsbuildinfo": 1,
+        "projects/backend/openapi.json": 354,
+        "projects/backend/src/app.module.ts": 2,
+        "projects/backend/src/config/configuration.ts": 3,
+        "projects/backend/src/technician-assist/dto/technician-assist.dto.ts": 130,
+        "projects/backend/src/technician-assist/index.ts": 1,
+        "projects/backend/src/technician-assist/manual-tasks.ts": 276,
+        "projects/backend/src/technician-assist/technician-assist.controller.ts": 59,
+        "projects/backend/src/technician-assist/technician-assist.module.ts": 9,
+        "projects/backend/src/technician-assist/technician-assist.service.ts": 232,
+        "projects/frontend/src/hooks/useTechnicianRealtime.ts": 523,
+        "projects/frontend/src/pages/tech/ActiveJob.tsx": 477,
+        "projects/frontend/tsconfig.json": 11,
+        "tsconfig.json": 6
+      },
+      "user_removed_per_file": {
+        "packages/api-types/src/api.d.ts": 302,
+        "projects/frontend/src/pages/tech/ActiveJob.tsx": 294,
+        "projects/frontend/tsconfig.json": 1,
+        "tsconfig.json": 3
+      }
+    },
+    {
+      "checkpoint_number": 2,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0
+    },
+    {
+      "checkpoint_number": 3,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 2656,
+      "agent_lines_removed": 600
+    },
+    {
+      "checkpoint_number": 4,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0
+    },
+    {
+      "checkpoint_number": 5,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 2656,
+      "agent_lines_removed": 600
+    },
+    {
+      "checkpoint_number": 6,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0
+    },
+    {
+      "checkpoint_number": 7,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 2656,
+      "agent_lines_removed": 600
+    },
+    {
+      "checkpoint_number": 8,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 3155,
+      "agent_lines_removed": 607
+    },
+    {
+      "checkpoint_number": 9,
+      "user_lines_added": 10992,
+      "user_lines_removed": 0,
+      "agent_lines_added": 3155,
+      "agent_lines_removed": 607,
+      "user_added_per_file": {
+        "projects/backend/src/technician-assist/data/task-embeddings.generated.json": 10992
+      }
+    },
+    {
+      "checkpoint_number": 10,
+      "user_lines_added": 10992,
+      "user_lines_removed": 0,
+      "agent_lines_added": 3155,
+      "agent_lines_removed": 607,
+      "user_added_per_file": {
+        "projects/backend/src/technician-assist/data/task-embeddings.generated.json": 10992
+      }
+    },
+    {
+      "checkpoint_number": 11,
+      "user_lines_added": 17189,
+      "user_lines_removed": 0,
+      "agent_lines_added": 8786,
+      "agent_lines_removed": 607,
+      "user_added_per_file": {
+        "projects/backend/src/technician-assist/data/task-embeddings.generated.json": 17189
+      }
+    }
+  ]
+}

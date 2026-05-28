@@ -1,0 +1,3 @@
+Create the generation script that will make the PDF to text using Bash and also create the actual TypeScript thing that will use the OpenAI package which will install on the backend project that will make sure that the... that the embeddings are generated and are accessible for the rag we have built for the task search. 
+
+that script will be used for the rag on the realtime agent made for the technician support
