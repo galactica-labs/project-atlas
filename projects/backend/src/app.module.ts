@@ -4,6 +4,7 @@ import configurations from "./config";
 import { DatabaseModule } from "./db";
 import { DocsModule } from "./docs";
 import { ImportFlowModule } from "./import-flow";
+import { PipelineModule } from "./pipeline";
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { ImportFlowModule } from "./import-flow";
     DatabaseModule,
     DocsModule,
     ImportFlowModule,
+    PipelineModule,
   ],
   controllers: [],
   providers: [],
