@@ -13,6 +13,7 @@ import ImportFlow from "./pages/ops/ImportFlow";
 import IncidentQueue from "./pages/ops/IncidentQueue";
 import IngressViz from "./pages/ops/IngressViz";
 import NLQuery from "./pages/ops/NLQuery";
+import PipelineConsole from "./pages/ops/PipelineConsole";
 import Reports from "./pages/ops/Reports";
 import ApprovalDetail from "./pages/supervisor/ApprovalDetail";
 import ApprovalInbox from "./pages/supervisor/ApprovalInbox";
@@ -86,7 +87,7 @@ function AppRoutes() {
             <Route path="/ops/assets" element={<AssetRegistry />} />
             <Route path="/ops/query" element={<NLQuery />} />
             <Route path="/ops/reports" element={<Reports />} />
-            <Route path="/ops/approvals" element={<Placeholder title="Pending Approvals" />} />
+            <Route path="/ops/approvals" element={<PipelineConsole />} />
             <Route path="/supervisor" element={<ApprovalInbox />} />
             <Route path="/supervisor/approve/:id" element={<ApprovalDetail />} />
             <Route path="/supervisor/history" element={<Placeholder title="Approval History" />} />
