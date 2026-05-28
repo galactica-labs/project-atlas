@@ -7,10 +7,14 @@ const workspaceRoot = path.resolve(__dirname, "../..");
 export default defineConfig({
   plugins: [react()],
   resolve: {
+    // Force a single React instance across all packages (prevents R3F "invalid hook" error in monorepos)
+    dedupe: ["react", "react-dom", "react/jsx-runtime"],
     alias: {
       "@": path.resolve(__dirname, "./src"),
       "@atlas/api-types": path.resolve(workspaceRoot, "packages/api-types/src/index.ts"),
       "@atlas/api-client": path.resolve(workspaceRoot, "packages/api-client/src/index.ts"),
+      react: path.resolve(__dirname, "node_modules/react"),
+      "react-dom": path.resolve(__dirname, "node_modules/react-dom"),
     },
   },
   server: {
