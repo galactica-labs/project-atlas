@@ -1,0 +1,556 @@
+{
+  "info": {
+    "id": "ses_1914dc843ffemYYpjLTL3AECz3",
+    "slug": "jolly-panda",
+    "projectID": "76ffef64c3ed1947b143b31b559a8124e45b9857",
+    "directory": "/Users/pantelis/Desktop/project-atlas",
+    "path": "",
+    "parentID": "ses_191616431ffeJ7D4iCvVagkE1H",
+    "title": "Find assets/query/reports pages (@explore subagent)",
+    "agent": "explore",
+    "model": {
+      "id": "claude-sonnet-4.6",
+      "providerID": "github-copilot",
+      "variant": "default"
+    },
+    "version": "1.15.11",
+    "summary": {
+      "additions": 0,
+      "deletions": 0,
+      "files": 0
+    },
+    "cost": 0,
+    "tokens": {
+      "input": 6,
+      "output": 3031,
+      "reasoning": 0,
+      "cache": {
+        "read": 26159,
+        "write": 30760
+      }
+    },
+    "permission": [
+      {
+        "permission": "todowrite",
+        "action": "deny",
+        "pattern": "*"
+      },
+      {
+        "permission": "task",
+        "action": "deny",
+        "pattern": "*"
+      }
+    ],
+    "time": {
+      "created": 1779973633980,
+      "updated": 1779973697700
+    }
+  },
+  "messages": [
+    {
+      "info": {
+        "role": "user",
+        "time": {
+          "created": 1779973633987
+        },
+        "tools": {
+          "todowrite": false,
+          "task": false
+        },
+        "agent": "explore",
+        "model": {
+          "providerID": "github-copilot",
+          "modelID": "claude-sonnet-4.6"
+        },
+        "summary": {
+          "diffs": []
+        },
+        "id": "msg_e6eb237c2001i5Ex1fhKQvQe5p",
+        "sessionID": "ses_1914dc843ffemYYpjLTL3AECz3"
+      },
+      "parts": [
+        {
+          "type": "text",
+          "text": "In the project at /Users/pantelis/Desktop/project-atlas/projects/frontend/src, find the files for these three routes:\n- /ops/assets\n- /ops/query  \n- /ops/reports\n\nCheck App.tsx for where they're registered, find the actual component files, read their full content, and also check how the sidebar/nav works (what file defines the nav items and how pages are laid out). Return:\n1. The route registrations from App.tsx\n2. Full content of the assets, query, and reports component files\n3. Full content of the sidebar/nav file\n4. The layout wrapper for /ops if any\n\nAlso look at src/data/mock.ts to understand what data is available (assets array structure, incidents, jobs, technicians).",
+          "id": "prt_e6eb237c700185iq3pCFms4NwA",
+          "sessionID": "ses_1914dc843ffemYYpjLTL3AECz3",
+          "messageID": "msg_e6eb237c2001i5Ex1fhKQvQe5p"
+        }
+      ]
+    },
+    {
+      "info": {
+        "parentID": "msg_e6eb237c2001i5Ex1fhKQvQe5p",
+        "role": "assistant",
+        "mode": "explore",
+        "agent": "explore",
+        "path": {
+          "cwd": "/Users/pantelis/Desktop/project-atlas",
+          "root": "/Users/pantelis/Desktop/project-atlas"
+        },
+        "cost": 0,
+        "tokens": {
+          "total": 4513,
+          "input": 3,
+          "output": 173,
+          "reasoning": 0,
+          "cache": {
+            "write": 4337,
+            "read": 0
+          }
+        },
+        "modelID": "claude-sonnet-4.6",
+        "providerID": "github-copilot",
+        "time": {
+          "created": 1779973634302,
+          "completed": 1779973638609
+        },
+        "finish": "tool-calls",
+        "id": "msg_e6eb238fe0012Wyw51Ui7ZzbwX",
+        "sessionID": "ses_1914dc843ffemYYpjLTL3AECz3"
+      },
+      "parts": [
+        {
+          "snapshot": "d45e4e4178dbb12dfa16b0fa9b6c6e5179ee1d23",
+          "type": "step-start",
+          "id": "prt_e6eb24664001CU279Yr63cJjUk",
+          "sessionID": "ses_1914dc843ffemYYpjLTL3AECz3",
+          "messageID": "msg_e6eb238fe0012Wyw51Ui7ZzbwX"
+        },
+        {
+          "type": "text",
+          "text": "I'll search everything in parallel to be efficient.",
+          "time": {
+            "start": 1779973637733,
+            "end": 1779973637735
+          },
+          "id": "prt_e6eb24665001uVV0Zoh8ilOr3y",
+          "sessionID": "ses_1914dc843ffemYYpjLTL3AECz3",
+          "messageID": "msg_e6eb238fe0012Wyw51Ui7ZzbwX"
+        },
+        {
+          "type": "tool",
+          "tool": "read",
+          "callID": "toolu_bdrk_01XX5F3mUHFmzQ56ofSNXYoF",
+          "state": {
+            "status": "completed",
+            "input": {
+              "filePath": "/Users/pantelis/Desktop/project-atlas/projects/frontend/src"
+            },
+            "output": "<path>/Users/pantelis/Desktop/project-atlas/projects/frontend/src</path>\n<type>directory</type>\n<entries>\nApp.tsx\ncomponents/\ndata/\nindex.css\nlib/\nmain.tsx\npages/\nstore/\nvite-env.d.ts\n\n(9 entries)\n</entries>",
+            "metadata": {
+              "preview": "App.tsx\ncomponents/\ndata/\nindex.css\nlib/\nmain.tsx\npages/\nstore/\nvite-env.d.ts",
+              "truncated": false,
+              "loaded": []
+            },
+            "title": "projects/frontend/src",
+            "time": {
+              "start": 1779973637740,
+              "end": 1779973637745
+            }
+          },
+          "id": "prt_e6eb24668002E9ynS2UObUs8Ar",
+          "sessionID": "ses_1914dc843ffemYYpjLTL3AECz3",
+          "messageID": "msg_e6eb238fe0012Wyw51Ui7ZzbwX"
+        },
+        {
+          "type": "tool",
+          "tool": "grep",
+          "callID": "toolu_bdrk_017PsC6XuDvoZnJW7de584Qm",
+          "state": {
+            "status": "completed",
+            "input": {
+              "pattern": "ops|assets|query|reports",
+              "path": "/Users/pantelis/Desktop/project-atlas/projects/frontend/src",
+              "include": "App.tsx"
+            },
+            "output": "Found 19 matches\n/Users/pantelis/Desktop/project-atlas/projects/frontend/src/App.tsx:\n  Line 8: import CommandCenter from \"./pages/ops/CommandCenter\";\n\n  Line 9: import DispatchPlan from \"./pages/ops/DispatchPlan\";\n\n  Line 10: import FloorPlan from \"./pages/ops/FloorPlan\";\n\n  Line 11: import ImportFlow from \"./pages/ops/ImportFlow\";\n\n  Line 12: import IncidentQueue from \"./pages/ops/IncidentQueue\";\n\n  Line 13: import IngressViz from \"./pages/ops/IngressViz\";\n\n  Line 24:   const roleLabel = { ops: \"Ops Manager\", supervisor: \"Supervisor\", tech: \"Technician\" }[role];\n\n  Line 25:   const roleDot = { ops: \"bg-blue-400\", supervisor: \"bg-amber-400\", tech: \"bg-emerald-400\" }[role];\n\n  Line 77:             <Route path=\"/ops\" element={<CommandCenter />} />\n\n  Line 78:             <Route path=\"/ops/floor-plan\" element={<FloorPlan />} />\n\n  Line 79:             <Route path=\"/ops/incidents\" element={<IncidentQueue />} />\n\n  Line 80:             <Route path=\"/ops/dispatch\" element={<DispatchPlan />} />\n\n  Line 81:             <Route path=\"/ops/import\" element={<ImportFlow />} />\n\n  Line 82:             <Route path=\"/ops/ingress\" element={<IngressViz />} />\n\n  Line 83:             <Route path=\"/ops/assets\" element={<Placeholder title=\"Asset Registry\" />} />\n\n  Line 84:             <Route path=\"/ops/query\" element={<Placeholder title=\"Natural Language Query\" />} />\n\n  Line 85:             <Route path=\"/ops/reports\" element={<Placeholder title=\"Risk Profile Reports\" />} />\n\n  Line 86:             <Route path=\"/ops/approvals\" element={<Placeholder title=\"Pending Approvals\" />} />\n\n  Line 96:             <Route path=\"*\" element={<Navigate to=\"/ops\" replace />} />\n",
+            "metadata": {
+              "matches": 19,
+              "truncated": false
+            },
+            "title": "ops|assets|query|reports",
+            "time": {
+              "start": 1779973638469,
+              "end": 1779973638483
+            }
+          },
+          "id": "prt_e6eb2466e001nRNUaTnT5nnov1",
+          "sessionID": "ses_1914dc843ffemYYpjLTL3AECz3",
+          "messageID": "msg_e6eb238fe0012Wyw51Ui7ZzbwX"
+        },
+        {
+          "reason": "tool-calls",
+          "snapshot": "d45e4e4178dbb12dfa16b0fa9b6c6e5179ee1d23",
+          "type": "step-finish",
+          "tokens": {
+            "total": 4513,
+            "input": 3,
+            "output": 173,
+            "reasoning": 0,
+            "cache": {
+              "write": 4337,
+              "read": 0
+            }
+          },
+          "cost": 0,
+          "id": "prt_e6eb249950015Xgg9XnEA2XCg0",
+          "sessionID": "ses_1914dc843ffemYYpjLTL3AECz3",
+          "messageID": "msg_e6eb238fe0012Wyw51Ui7ZzbwX"
+        }
+      ]
+    },
+    {
+      "info": {
+        "parentID": "msg_e6eb237c2001i5Ex1fhKQvQe5p",
+        "role": "assistant",
+        "mode": "explore",
+        "agent": "explore",
+        "path": {
+          "cwd": "/Users/pantelis/Desktop/project-atlas",
+          "root": "/Users/pantelis/Desktop/project-atlas"
+        },
+        "cost": 0,
+        "tokens": {
+          "total": 5418,
+          "input": 1,
+          "output": 239,
+          "reasoning": 0,
+          "cache": {
+            "write": 841,
+            "read": 4337
+          }
+        },
+        "modelID": "claude-sonnet-4.6",
+        "providerID": "github-copilot",
+        "time": {
+          "created": 1779973638611,
+          "completed": 1779973643770
+        },
+        "finish": "tool-calls",
+        "id": "msg_e6eb249d3001PDm4kxPDRBQyja",
+        "sessionID": "ses_1914dc843ffemYYpjLTL3AECz3"
+      },
+      "parts": [
+        {
+          "snapshot": "d45e4e4178dbb12dfa16b0fa9b6c6e5179ee1d23",
+          "type": "step-start",
+          "id": "prt_e6eb25a83001mkpA7geH5vZ6Uo",
+          "sessionID": "ses_1914dc843ffemYYpjLTL3AECz3",
+          "messageID": "msg_e6eb249d3001PDm4kxPDRBQyja"
+        },
+        {
+          "type": "tool",
+          "tool": "read",
+          "callID": "toolu_bdrk_015KCjMrbnemTWo1mXHrXPBZ",
+          "state": {
+            "status": "completed",
+            "input": {
+              "filePath": "/Users/pantelis/Desktop/project-atlas/projects/frontend/src/App.tsx"
+            },
+            "output": "<path>/Users/pantelis/Desktop/project-atlas/projects/frontend/src/App.tsx</path>\n<type>file</type>\n<content>\n1: import { List } from \"@phosphor-icons/react\";\n2: import { useState } from \"react\";\n3: import { BrowserRouter, Navigate, Route, Routes, useLocation } from \"react-router-dom\";\n4: import { TooltipProvider } from \"@/components/ui/tooltip\";\n5: import Sidebar from \"./components/Sidebar\";\n6: import Hero from \"./pages/Hero\";\n7: import Login from \"./pages/Login\";\n8: import CommandCenter from \"./pages/ops/CommandCenter\";\n9: import DispatchPlan from \"./pages/ops/DispatchPlan\";\n10: import FloorPlan from \"./pages/ops/FloorPlan\";\n11: import ImportFlow from \"./pages/ops/ImportFlow\";\n12: import IncidentQueue from \"./pages/ops/IncidentQueue\";\n13: import IngressViz from \"./pages/ops/IngressViz\";\n14: import ApprovalDetail from \"./pages/supervisor/ApprovalDetail\";\n15: import ApprovalInbox from \"./pages/supervisor/ApprovalInbox\";\n16: import ActiveJob from \"./pages/tech/ActiveJob\";\n17: import CloseOut from \"./pages/tech/CloseOut\";\n18: import JobsList from \"./pages/tech/JobsList\";\n19: import { AppProvider, useApp } from \"./store/appStore\";\n20: \n21: // Mobile top bar — only shown on small screens\n22: function MobileHeader({ onOpen }: { onOpen: () => void }) {\n23:   const { role } = useApp();\n24:   const roleLabel = { ops: \"Ops Manager\", supervisor: \"Supervisor\", tech: \"Technician\" }[role];\n25:   const roleDot = { ops: \"bg-blue-400\", supervisor: \"bg-amber-400\", tech: \"bg-emerald-400\" }[role];\n26: \n27:   return (\n28:     <header className=\"md:hidden flex items-center gap-3 px-4 py-3 border-b border-white/[0.05] bg-[#050505] flex-shrink-0\">\n29:       <button\n30:         type=\"button\"\n31:         onClick={onOpen}\n32:         className=\"w-8 h-8 flex items-center justify-center rounded-xl bg-white/[0.04] ring-1 ring-white/[0.07] text-zinc-400 active:scale-95 transition-transform duration-150\"\n33:         aria-label=\"Open navigation\"\n34:       >\n35:         <List size={16} weight=\"light\" />\n36:       </button>\n37: \n38:       <div className=\"flex items-center gap-2\">\n39:         <div className=\"w-5 h-5 rounded-md bg-white flex items-center justify-center flex-shrink-0\">\n40:           <div className=\"w-2 h-2 bg-black rounded-[2px]\" />\n41:         </div>\n42:         <span className=\"text-[13px] font-semibold tracking-tight\">Atlas</span>\n43:       </div>\n44: \n45:       <div className=\"ml-auto flex items-center gap-1.5\">\n46:         <span className={`w-1.5 h-1.5 rounded-full ${roleDot}`} />\n47:         <span className=\"text-[11px] text-zinc-500 font-medium\">{roleLabel}</span>\n48:       </div>\n49:     </header>\n50:   );\n51: }\n52: \n53: function AppRoutes() {\n54:   const location = useLocation();\n55:   const [drawerOpen, setDrawerOpen] = useState(false);\n56:   const isFullPage = [\"/\", \"/login\"].includes(location.pathname);\n57: \n58:   if (isFullPage) {\n59:     return (\n60:       <Routes>\n61:         <Route path=\"/\" element={<Hero />} />\n62:         <Route path=\"/login\" element={<Login />} />\n63:         <Route path=\"*\" element={<Navigate to=\"/\" replace />} />\n64:       </Routes>\n65:     );\n66:   }\n67: \n68:   return (\n69:     <div className=\"flex h-[100dvh] overflow-hidden bg-[#050505]\">\n70:       <Sidebar mobileOpen={drawerOpen} onMobileClose={() => setDrawerOpen(false)} />\n71: \n72:       <div className=\"flex-1 flex flex-col min-w-0 overflow-hidden\">\n73:         <MobileHeader onOpen={() => setDrawerOpen(true)} />\n74: \n75:         <main className=\"flex-1 overflow-y-auto overflow-x-hidden min-h-0\">\n76:           <Routes>\n77:             <Route path=\"/ops\" element={<CommandCenter />} />\n78:             <Route path=\"/ops/floor-plan\" element={<FloorPlan />} />\n79:             <Route path=\"/ops/incidents\" element={<IncidentQueue />} />\n80:             <Route path=\"/ops/dispatch\" element={<DispatchPlan />} />\n81:             <Route path=\"/ops/import\" element={<ImportFlow />} />\n82:             <Route path=\"/ops/ingress\" element={<IngressViz />} />\n83:             <Route path=\"/ops/assets\" element={<Placeholder title=\"Asset Registry\" />} />\n84:             <Route path=\"/ops/query\" element={<Placeholder title=\"Natural Language Query\" />} />\n85:             <Route path=\"/ops/reports\" element={<Placeholder title=\"Risk Profile Reports\" />} />\n86:             <Route path=\"/ops/approvals\" element={<Placeholder title=\"Pending Approvals\" />} />\n87:             <Route path=\"/supervisor\" element={<ApprovalInbox />} />\n88:             <Route path=\"/supervisor/approve/:id\" element={<ApprovalDetail />} />\n89:             <Route path=\"/supervisor/history\" element={<Placeholder title=\"Approval History\" />} />\n90:             <Route path=\"/supervisor/team\" element={<Placeholder title=\"Team\" />} />\n91:             <Route path=\"/tech\" element={<JobsList />} />\n92:             <Route path=\"/tech/job\" element={<ActiveJob />} />\n93:             <Route path=\"/tech/active\" element={<ActiveJob />} />\n94:             <Route path=\"/tech/closeout\" element={<CloseOut />} />\n95:             <Route path=\"/tech/settings\" element={<Placeholder title=\"Settings\" />} />\n96:             <Route path=\"*\" element={<Navigate to=\"/ops\" replace />} />\n97:           </Routes>\n98:         </main>\n99:       </div>\n100:     </div>\n101:   );\n102: }\n103: \n104: function Placeholder({ title }: { title: string }) {\n105:   return (\n106:     <div className=\"flex items-center justify-center h-full min-h-[50dvh]\">\n107:       <div className=\"text-center\">\n108:         <p className=\"text-sm font-medium text-zinc-500\">{title}</p>\n109:         <p className=\"text-xs text-zinc-700 mt-1\">Coming soon</p>\n110:       </div>\n111:     </div>\n112:   );\n113: }\n114: \n115: export default function App() {\n116:   return (\n117:     <AppProvider>\n118:       <TooltipProvider>\n119:         <BrowserRouter>\n120:           <div className=\"grain\" aria-hidden />\n121:           <AppRoutes />\n122:         </BrowserRouter>\n123:       </TooltipProvider>\n124:     </AppProvider>\n125:   );\n126: }\n\n(End of file - total 126 lines)\n</content>",
+            "metadata": {
+              "preview": "import { List } from \"@phosphor-icons/react\";\nimport { useState } from \"react\";\nimport { BrowserRouter, Navigate, Route, Routes, useLocation } from \"react-router-dom\";\nimport { TooltipProvider } from \"@/components/ui/tooltip\";\nimport Sidebar from \"./components/Sidebar\";\nimport Hero from \"./pages/Hero\";\nimport Login from \"./pages/Login\";\nimport CommandCenter from \"./pages/ops/CommandCenter\";\nimport DispatchPlan from \"./pages/ops/DispatchPlan\";\nimport FloorPlan from \"./pages/ops/FloorPlan\";\nimport ImportFlow from \"./pages/ops/ImportFlow\";\nimport IncidentQueue from \"./pages/ops/IncidentQueue\";\nimport IngressViz from \"./pages/ops/IngressViz\";\nimport ApprovalDetail from \"./pages/supervisor/ApprovalDetail\";\nimport ApprovalInbox from \"./pages/supervisor/ApprovalInbox\";\nimport ActiveJob from \"./pages/tech/ActiveJob\";\nimport CloseOut from \"./pages/tech/CloseOut\";\nimport JobsList from \"./pages/tech/JobsList\";\nimport { AppProvider, useApp } from \"./store/appStore\";\n",
+              "truncated": false,
+              "loaded": []
+            },
+            "title": "projects/frontend/src/App.tsx",
+            "time": {
+              "start": 1779973642890,
+              "end": 1779973642901
+            }
+          },
+          "id": "prt_e6eb25a86001PgC9HzcbDJIdkV",
+          "sessionID": "ses_1914dc843ffemYYpjLTL3AECz3",
+          "messageID": "msg_e6eb249d3001PDm4kxPDRBQyja"
+        },
+        {
+          "type": "tool",
+          "tool": "read",
+          "callID": "toolu_bdrk_01TvMsgqY7xanYxLVkKXQjwK",
+          "state": {
+            "status": "completed",
+            "input": {
+              "filePath": "/Users/pantelis/Desktop/project-atlas/projects/frontend/src/pages"
+            },
+            "output": "<path>/Users/pantelis/Desktop/project-atlas/projects/frontend/src/pages</path>\n<type>directory</type>\n<entries>\nHero.tsx\nLogin.tsx\nops/\nsupervisor/\ntech/\n\n(5 entries)\n</entries>",
+            "metadata": {
+              "preview": "Hero.tsx\nLogin.tsx\nops/\nsupervisor/\ntech/",
+              "truncated": false,
+              "loaded": []
+            },
+            "title": "projects/frontend/src/pages",
+            "time": {
+              "start": 1779973643482,
+              "end": 1779973643492
+            }
+          },
+          "id": "prt_e6eb25a8c001LT57h8AqvmcDTd",
+          "sessionID": "ses_1914dc843ffemYYpjLTL3AECz3",
+          "messageID": "msg_e6eb249d3001PDm4kxPDRBQyja"
+        },
+        {
+          "type": "tool",
+          "tool": "read",
+          "callID": "toolu_bdrk_01YEWS7YbW8EfWut18cUfnL9",
+          "state": {
+            "status": "completed",
+            "input": {
+              "filePath": "/Users/pantelis/Desktop/project-atlas/projects/frontend/src/components"
+            },
+            "output": "<path>/Users/pantelis/Desktop/project-atlas/projects/frontend/src/components</path>\n<type>directory</type>\n<entries>\nAnimatedHeading.tsx\natlas-3d/\natlas-map/\nFadeIn.tsx\nnodes/\nops/\nSidebar.tsx\nStatusBadge.tsx\nui/\n\n(9 entries)\n</entries>",
+            "metadata": {
+              "preview": "AnimatedHeading.tsx\natlas-3d/\natlas-map/\nFadeIn.tsx\nnodes/\nops/\nSidebar.tsx\nStatusBadge.tsx\nui/",
+              "truncated": false,
+              "loaded": []
+            },
+            "title": "projects/frontend/src/components",
+            "time": {
+              "start": 1779973643488,
+              "end": 1779973643495
+            }
+          },
+          "id": "prt_e6eb25cdc001l5MqdmcF1HOEgY",
+          "sessionID": "ses_1914dc843ffemYYpjLTL3AECz3",
+          "messageID": "msg_e6eb249d3001PDm4kxPDRBQyja"
+        },
+        {
+          "type": "tool",
+          "tool": "read",
+          "callID": "toolu_bdrk_01DW6e64LQtaDYBhgmjvYxH7",
+          "state": {
+            "status": "completed",
+            "input": {
+              "filePath": "/Users/pantelis/Desktop/project-atlas/projects/frontend/src/data/mock.ts"
+            },
+            "output": "<path>/Users/pantelis/Desktop/project-atlas/projects/frontend/src/data/mock.ts</path>\n<type>file</type>\n<content>\n1: export type AssetStatus = \"normal\" | \"warning\" | \"critical\" | \"offline\";\n2: \n3: export interface Asset {\n4:   id: string;\n5:   name: string;\n6:   type: string;\n7:   status: AssetStatus;\n8:   x: number;\n9:   y: number;\n10:   criticality: \"high\" | \"medium\" | \"low\";\n11:   floor: \"Mechanical\" | \"Hall A\" | \"Hall B\";\n12:   zone: string;\n13:   telemetry: { metric: string; value: number; unit: string; trend: \"up\" | \"down\" | \"stable\" }[];\n14:   dependsOn: string[];\n15: }\n16: \n17: export interface Technician {\n18:   id: string;\n19:   name: string;\n20:   avatar: string;\n21:   status: \"available\" | \"on-site\" | \"transit\";\n22:   certifications: string[];\n23:   location: string;\n24:   eta?: string;\n25: }\n26: \n27: export interface Incident {\n28:   id: string;\n29:   assetId: string;\n30:   severity: \"critical\" | \"high\" | \"medium\";\n31:   detectedAt: string;\n32:   prediction: string;\n33:   confidence: number;\n34:   ttf: number;\n35:   blastRadius: string[];\n36:   recommendedAction: string;\n37:   status: \"open\" | \"dispatched\" | \"hitl-pending\" | \"resolved\";\n38: }\n39: \n40: export interface Job {\n41:   id: string;\n42:   incidentId: string;\n43:   technicianId: string;\n44:   assetId: string;\n45:   status: \"assigned\" | \"en-route\" | \"on-site\" | \"closed\";\n46:   priority: \"critical\" | \"high\" | \"medium\";\n47:   title: string;\n48:   description: string;\n49:   steps: { id: string; label: string; completed: boolean }[];\n50:   assignedAt: string;\n51:   eta: string;\n52:   partsRequired: string[];\n53: }\n54: \n55: // ────────────────────────────────────────────────────────────────\n56: // FLOOR: Mechanical  (B1 – Basement Plant Room)\n57: // ────────────────────────────────────────────────────────────────\n58: \n59: // Zone: Electrical — Switchgear & Transformers\n60: // Zone: Backup Power — UPS, Generators, Batteries\n61: // Zone: Chiller Plant — Chillers, Cooling Towers, CHW Pumps\n62: \n63: export const assets: Asset[] = [\n64:   // ── Electrical ────────────────────────────────────────────────\n65:   {\n66:     id: \"swg-main\",\n67:     name: \"SWG-MAIN\",\n68:     type: \"Power\",\n69:     status: \"normal\",\n70:     x: 12,\n71:     y: 50,\n72:     criticality: \"high\",\n73:     floor: \"Mechanical\",\n74:     zone: \"Electrical\",\n75:     dependsOn: [],\n76:     telemetry: [{ metric: \"Voltage\", value: 480, unit: \"V\", trend: \"stable\" }],\n77:   },\n78:   {\n79:     id: \"swg-backup\",\n80:     name: \"SWG-BACKUP\",\n81:     type: \"Power\",\n82:     status: \"normal\",\n83:     x: 32,\n84:     y: 50,\n85:     criticality: \"high\",\n86:     floor: \"Mechanical\",\n87:     zone: \"Electrical\",\n88:     dependsOn: [],\n89:     telemetry: [{ metric: \"Voltage\", value: 480, unit: \"V\", trend: \"stable\" }],\n90:   },\n91:   {\n92:     id: \"xfmr-01\",\n93:     name: \"XFMR-01\",\n94:     type: \"Power\",\n95:     status: \"normal\",\n96:     x: 56,\n97:     y: 50,\n98:     criticality: \"high\",\n99:     floor: \"Mechanical\",\n100:     zone: \"Electrical\",\n101:     dependsOn: [\"swg-main\"],\n102:     telemetry: [\n103:       { metric: \"Primary V\", value: 13800, unit: \"V\", trend: \"stable\" },\n104:       { metric: \"Load\", value: 64, unit: \"%\", trend: \"stable\" },\n105:     ],\n106:   },\n107:   {\n108:     id: \"xfmr-02\",\n109:     name: \"XFMR-02\",\n110:     type: \"Power\",\n111:     status: \"normal\",\n112:     x: 80,\n113:     y: 50,\n114:     criticality: \"high\",\n115:     floor: \"Mechanical\",\n116:     zone: \"Electrical\",\n117:     dependsOn: [\"swg-backup\"],\n118:     telemetry: [\n119:       { metric: \"Primary V\", value: 13800, unit: \"V\", trend: \"stable\" },\n120:       { metric: \"Load\", value: 22, unit: \"%\", trend: \"stable\" },\n121:     ],\n122:   },\n123: \n124:   // ── Backup Power ──────────────────────────────────────────────\n125:   {\n126:     id: \"gen-01\",\n127:     name: \"GEN-01\",\n128:     type: \"Power\",\n129:     status: \"normal\",\n130:     x: 10,\n131:     y: 50,\n132:     criticality: \"high\",\n133:     floor: \"Mechanical\",\n134:     zone: \"Backup Power\",\n135:     dependsOn: [],\n136:     telemetry: [\n137:       { metric: \"Fuel Level\", value: 88, unit: \"%\", trend: \"stable\" },\n138:       { metric: \"Last Test\", value: 3, unit: \"d ago\", trend: \"stable\" },\n139:     ],\n140:   },\n141:   {\n142:     id: \"gen-02\",\n143:     name: \"GEN-02\",\n144:     type: \"Power\",\n145:     status: \"normal\",\n146:     x: 26,\n147:     y: 50,\n148:     criticality: \"high\",\n149:     floor: \"Mechanical\",\n150:     zone: \"Backup Power\",\n151:     dependsOn: [],\n152:     telemetry: [\n153:       { metric: \"Fuel Level\", value: 91, unit: \"%\", trend: \"stable\" },\n154:       { metric: \"Last Test\", value: 3, unit: \"d ago\", trend: \"stable\" },\n155:     ],\n156:   },\n157:   {\n158:     id: \"ups-main\",\n159:     name: \"UPS-MAIN\",\n160:     type: \"Power\",\n161:     status: \"normal\",\n162:     x: 48,\n163:     y: 50,\n164:     criticality: \"high\",\n165:     floor: \"Mechanical\",\n166:     zone: \"Backup Power\",\n167:     dependsOn: [\"swg-main\"],\n168:     telemetry: [\n169:       { metric: \"Load\", value: 71, unit: \"%\", trend: \"stable\" },\n170:       { metric: \"Battery\", value: 100, unit: \"%\", trend: \"stable\" },\n171:     ],\n172:   },\n173:   {\n174:     id: \"ups-backup\",\n175:     name: \"UPS-BACKUP\",\n176:     type: \"Power\",\n177:     status: \"normal\",\n178:     x: 65,\n179:     y: 50,\n180:     criticality: \"high\",\n181:     floor: \"Mechanical\",\n182:     zone: \"Backup Power\",\n183:     dependsOn: [\"swg-backup\"],\n184:     telemetry: [{ metric: \"Load\", value: 18, unit: \"%\", trend: \"stable\" }],\n185:   },\n186:   {\n187:     id: \"batt-01\",\n188:     name: \"BATT-BANK-01\",\n189:     type: \"Power\",\n190:     status: \"normal\",\n191:     x: 82,\n192:     y: 50,\n193:     criticality: \"high\",\n194:     floor: \"Mechanical\",\n195:     zone: \"Backup Power\",\n196:     dependsOn: [\"ups-main\"],\n197:     telemetry: [\n198:       { metric: \"Capacity\", value: 100, unit: \"%\", trend: \"stable\" },\n199:       { metric: \"Cell Temp\", value: 22.4, unit: \"°C\", trend: \"stable\" },\n200:     ],\n201:   },\n202: \n203:   // ── Chiller Plant — Cooling Towers ────────────────────────────\n204:   {\n205:     id: \"ct-01\",\n206:     name: \"COOL-TWR-01\",\n207:     type: \"Cooling\",\n208:     status: \"normal\",\n209:     x: 10,\n210:     y: 25,\n211:     criticality: \"high\",\n212:     floor: \"Mechanical\",\n213:     zone: \"Chiller Plant\",\n214:     dependsOn: [],\n215:     telemetry: [\n216:       { metric: \"Leaving Water\", value: 24.1, unit: \"°C\", trend: \"stable\" },\n217:       { metric: \"Fan Speed\", value: 55, unit: \"%\", trend: \"stable\" },\n218:     ],\n219:   },\n220:   {\n221:     id: \"ct-02\",\n222:     name: \"COOL-TWR-02\",\n223:     type: \"Cooling\",\n224:     status: \"normal\",\n225:     x: 28,\n226:     y: 25,\n227:     criticality: \"high\",\n228:     floor: \"Mechanical\",\n229:     zone: \"Chiller Plant\",\n230:     dependsOn: [],\n231:     telemetry: [\n232:       { metric: \"Leaving Water\", value: 24.3, unit: \"°C\", trend: \"stable\" },\n233:       { metric: \"Fan Speed\", value: 52, unit: \"%\", trend: \"stable\" },\n234:     ],\n235:   },\n236: \n237:   // ── Chiller Plant — Chillers ──────────────────────────────────\n238:   {\n239:     id: \"chiller-a-01\",\n240:     name: \"CHILLER-A-01\",\n241:     type: \"Cooling\",\n242:     status: \"normal\",\n243:     x: 10,\n244:     y: 60,\n245:     criticality: \"high\",\n246:     floor: \"Mechanical\",\n247:     zone: \"Chiller Plant\",\n248:     dependsOn: [\"ct-01\"],\n249:     telemetry: [\n250:       { metric: \"CHW Supply Temp\", value: 6.8, unit: \"°C\", trend: \"stable\" },\n251:       { metric: \"Flow Rate\", value: 148, unit: \"GPM\", trend: \"stable\" },\n252:     ],\n253:   },\n254:   {\n255:     id: \"chiller-a-02\",\n256:     name: \"CHILLER-A-02\",\n257:     type: \"Cooling\",\n258:     status: \"normal\",\n259:     x: 26,\n260:     y: 60,\n261:     criticality: \"high\",\n262:     floor: \"Mechanical\",\n263:     zone: \"Chiller Plant\",\n264:     dependsOn: [\"ct-01\"],\n265:     telemetry: [\n266:       { metric: \"CHW Supply Temp\", value: 7.1, unit: \"°C\", trend: \"stable\" },\n267:       { metric: \"Flow Rate\", value: 152, unit: \"GPM\", trend: \"stable\" },\n268:     ],\n269:   },\n270:   {\n271:     id: \"chiller-a-03\",\n272:     name: \"CHILLER-A-03\",\n273:     type: \"Cooling\",\n274:     status: \"critical\",\n275:     x: 44,\n276:     y: 60,\n277:     criticality: \"high\",\n278:     floor: \"Mechanical\",\n279:     zone: \"Chiller Plant\",\n280:     dependsOn: [\"ct-02\"],\n281:     telemetry: [\n282:       { metric: \"CHW Supply Temp\", value: 11.2, unit: \"°C\", trend: \"up\" },\n283:       { metric: \"Flow Rate\", value: 89, unit: \"GPM\", trend: \"down\" },\n284:       { metric: \"Compressor Load\", value: 97, unit: \"%\", trend: \"up\" },\n285:     ],\n286:   },\n287:   {\n288:     id: \"chiller-b-01\",\n289:     name: \"CHILLER-B-01\",\n290:     type: \"Cooling\",\n291:     status: \"normal\",\n292:     x: 62,\n293:     y: 60,\n294:     criticality: \"high\",\n295:     floor: \"Mechanical\",\n296:     zone: \"Chiller Plant\",\n297:     dependsOn: [\"ct-02\"],\n298:     telemetry: [\n299:       { metric: \"CHW Supply Temp\", value: 7.3, unit: \"°C\", trend: \"stable\" },\n300:       { metric: \"Flow Rate\", value: 138, unit: \"GPM\", trend: \"stable\" },\n301:     ],\n302:   },\n303:   {\n304:     id: \"chiller-b-02\",\n305:     name: \"CHILLER-B-02\",\n306:     type: \"Cooling\",\n307:     status: \"normal\",\n308:     x: 80,\n309:     y: 60,\n310:     criticality: \"high\",\n311:     floor: \"Mechanical\",\n312:     zone: \"Chiller Plant\",\n313:     dependsOn: [\"ct-02\"],\n314:     telemetry: [\n315:       { metric: \"CHW Supply Temp\", value: 7.0, unit: \"°C\", trend: \"stable\" },\n316:       { metric: \"Flow Rate\", value: 144, unit: \"GPM\", trend: \"stable\" },\n317:     ],\n318:   },\n319: \n320:   // ── Chiller Plant — CHW Pumps ─────────────────────────────────\n321:   {\n322:     id: \"pump-chw-01\",\n323:     name: \"PUMP-CHW-01\",\n324:     type: \"Cooling\",\n325:     status: \"normal\",\n326:     x: 13,\n327:     y: 88,\n328:     criticality: \"high\",\n329:     floor: \"Mechanical\",\n330:     zone: \"Chiller Plant\",\n331:     dependsOn: [\"chiller-a-01\"],\n332:     telemetry: [{ metric: \"Flow Rate\", value: 144, unit: \"GPM\", trend: \"stable\" }],\n333:   },\n334:   {\n335:     id: \"pump-chw-02\",\n336:     name: \"PUMP-CHW-02\",\n337:     type: \"Cooling\",\n338:     status: \"normal\",\n339:     x: 30,\n340:     y: 88,\n341:     criticality: \"high\",\n342:     floor: \"Mechanical\",\n343:     zone: \"Chiller Plant\",\n344:     dependsOn: [\"chiller-a-02\"],\n345:     telemetry: [{ metric: \"Flow Rate\", value: 149, unit: \"GPM\", trend: \"stable\" }],\n346:   },\n347:   {\n348:     id: \"pump-chw-03\",\n349:     name: \"PUMP-CHW-03\",\n350:     type: \"Cooling\",\n351:     status: \"warning\",\n352:     x: 48,\n353:     y: 88,\n354:     criticality: \"high\",\n355:     floor: \"Mechanical\",\n356:     zone: \"Chiller Plant\",\n357:     dependsOn: [\"chiller-a-03\"],\n358:     telemetry: [{ metric: \"Flow Rate\", value: 61, unit: \"GPM\", trend: \"down\" }],\n359:   },\n360:   {\n361:     id: \"pump-chw-04\",\n362:     name: \"PUMP-CHW-04\",\n363:     type: \"Cooling\",\n364:     status: \"warning\",\n365:     x: 65,\n366:     y: 88,\n367:     criticality: \"high\",\n368:     floor: \"Mechanical\",\n369:     zone: \"Chiller Plant\",\n370:     dependsOn: [\"chiller-a-03\"],\n371:     telemetry: [{ metric: \"Flow Rate\", value: 58, unit: \"GPM\", trend: \"down\" }],\n372:   },\n373: \n374:   // ────────────────────────────────────────────────────────────────\n375:   // FLOOR: Hall A  (F1 – Primary Compute / CPU Cluster)\n376:   // ────────────────────────────────────────────────────────────────\n377: \n378:   // Zone: Cooling Bay A — CRAH units\n379:   // Zone: Compute Row A — CPU server racks\n380:   // Zone: Compute Row B — GPU pods + overflow racks\n381:   // Zone: Power & Network A — PDUs & core switches\n382: \n383:   // ── Cooling Bay A — CRAH Units ───────────────────────────────\n384:   {\n385:     id: \"crah-a-01\",\n386:     name: \"CRAH-A-01\",\n387:     type: \"Cooling\",\n388:     status: \"normal\",\n389:     x: 10,\n390:     y: 50,\n391:     criticality: \"high\",\n392:     floor: \"Hall A\",\n393:     zone: \"Cooling Bay A\",\n394:     dependsOn: [\"chiller-a-01\"],\n395:     telemetry: [\n396:       { metric: \"Supply Air Temp\", value: 18.1, unit: \"°C\", trend: \"stable\" },\n397:       { metric: \"Return Air Temp\", value: 26.4, unit: \"°C\", trend: \"stable\" },\n398:       { metric: \"Fan Speed\", value: 68, unit: \"%\", trend: \"stable\" },\n399:     ],\n400:   },\n401:   {\n402:     id: \"crah-a-02\",\n403:     name: \"CRAH-A-02\",\n404:     type: \"Cooling\",\n405:     status: \"normal\",\n406:     x: 26,\n407:     y: 50,\n408:     criticality: \"high\",\n409:     floor: \"Hall A\",\n410:     zone: \"Cooling Bay A\",\n411:     dependsOn: [\"chiller-a-01\"],\n412:     telemetry: [\n413:       { metric: \"Supply Air Temp\", value: 18.3, unit: \"°C\", trend: \"stable\" },\n414:       { metric: \"Return Air Temp\", value: 26.7, unit: \"°C\", trend: \"stable\" },\n415:     ],\n416:   },\n417:   {\n418:     id: \"crah-a-03\",\n419:     name: \"CRAH-A-03\",\n420:     type: \"Cooling\",\n421:     status: \"normal\",\n422:     x: 42,\n423:     y: 50,\n424:     criticality: \"high\",\n425:     floor: \"Hall A\",\n426:     zone: \"Cooling Bay A\",\n427:     dependsOn: [\"chiller-a-02\"],\n428:     telemetry: [\n429:       { metric: \"Supply Air Temp\", value: 18.0, unit: \"°C\", trend: \"stable\" },\n430:       { metric: \"Return Air Temp\", value: 26.2, unit: \"°C\", trend: \"stable\" },\n431:     ],\n432:   },\n433:   {\n434:     id: \"crah-a-04\",\n435:     name: \"CRAH-A-04\",\n436:     type: \"Cooling\",\n437:     status: \"normal\",\n438:     x: 58,\n439:     y: 50,\n440:     criticality: \"high\",\n441:     floor: \"Hall A\",\n442:     zone: \"Cooling Bay A\",\n443:     dependsOn: [\"chiller-a-02\"],\n444:     telemetry: [{ metric: \"Supply Air Temp\", value: 17.9, unit: \"°C\", trend: \"stable\" }],\n445:   },\n446:   {\n447:     id: \"crah-a-05\",\n448:     name: \"CRAH-A-05\",\n449:     type: \"Cooling\",\n450:     status: \"normal\",\n451:     x: 74,\n452:     y: 50,\n453:     criticality: \"high\",\n454:     floor: \"Hall A\",\n455:     zone: \"Cooling Bay A\",\n456:     dependsOn: [\"chiller-b-01\"],\n457:     telemetry: [\n458:       { metric: \"Supply Air Temp\", value: 18.2, unit: \"°C\", trend: \"stable\" },\n459:       { metric: \"Fan Speed\", value: 62, unit: \"%\", trend: \"stable\" },\n460:     ],\n461:   },\n462: \n463:   // ── Compute Row A — CPU Server Racks ─────────────────────────\n464:   {\n465:     id: \"rack-a01\",\n466:     name: \"RACK-A01\",\n467:     type: \"Compute\",\n468:     status: \"normal\",\n469:     x: 8,\n470:     y: 50,\n471:     criticality: \"high\",\n472:     floor: \"Hall A\",\n473:     zone: \"Compute Row A\",\n474:     dependsOn: [\"crah-a-01\", \"pdu-a\"],\n475:     telemetry: [\n476:       { metric: \"Inlet Temp\", value: 21.2, unit: \"°C\", trend: \"stable\" },\n477:       { metric: \"Power Draw\", value: 6.8, unit: \"kW\", trend: \"stable\" },\n478:     ],\n479:   },\n480:   {\n481:     id: \"rack-a02\",\n482:     name: \"RACK-A02\",\n483:     type: \"Compute\",\n484:     status: \"normal\",\n485:     x: 19,\n486:     y: 50,\n487:     criticality: \"high\",\n488:     floor: \"Hall A\",\n489:     zone: \"Compute Row A\",\n490:     dependsOn: [\"crah-a-01\", \"pdu-a\"],\n491:     telemetry: [{ metric: \"Inlet Temp\", value: 21.5, unit: \"°C\", trend: \"stable\" }],\n492:   },\n493:   {\n494:     id: \"rack-a03\",\n495:     name: \"RACK-A03\",\n496:     type: \"Compute\",\n497:     status: \"normal\",\n498:     x: 30,\n499:     y: 50,\n500:     criticality: \"high\",\n501:     floor: \"Hall A\",\n502:     zone: \"Compute Row A\",\n503:     dependsOn: [\"crah-a-02\", \"pdu-a\"],\n504:     telemetry: [{ metric: \"Inlet Temp\", value: 21.9, unit: \"°C\", trend: \"stable\" }],\n505:   },\n506:   {\n507:     id: \"rack-a04\",\n508:     name: \"RACK-A04\",\n509:     type: \"Compute\",\n510:     status: \"normal\",\n511:     x: 41,\n512:     y: 50,\n513:     criticality: \"high\",\n514:     floor: \"Hall A\",\n515:     zone: \"Compute Row A\",\n516:     dependsOn: [\"crah-a-02\", \"pdu-a\"],\n517:     telemetry: [{ metric: \"Inlet Temp\", value: 22.1, unit: \"°C\", trend: \"stable\" }],\n518:   },\n519:   {\n520:     id: \"rack-a05\",\n521:     name: \"RACK-A05\",\n522:     type: \"Compute\",\n523:     status: \"normal\",\n524:     x: 52,\n525:     y: 50,\n526:     criticality: \"high\",\n527:     floor: \"Hall A\",\n528:     zone: \"Compute Row A\",\n529:     dependsOn: [\"crah-a-03\", \"pdu-b\"],\n530:     telemetry: [{ metric: \"Inlet Temp\", value: 21.4, unit: \"°C\", trend: \"stable\" }],\n531:   },\n532:   {\n533:     id: \"rack-a06\",\n534:     name: \"RACK-A06\",\n535:     type: \"Compute\",\n536:     status: \"normal\",\n537:     x: 63,\n538:     y: 50,\n539:     criticality: \"high\",\n540:     floor: \"Hall A\",\n541:     zone: \"Compute Row A\",\n542:     dependsOn: [\"crah-a-03\", \"pdu-b\"],\n543:     telemetry: [{ metric: \"Inlet Temp\", value: 21.8, unit: \"°C\", trend: \"stable\" }],\n544:   },\n545:   {\n546:     id: \"rack-a07\",\n547:     name: \"RACK-A07\",\n548:     type: \"Compute\",\n549:     status: \"normal\",\n550:     x: 74,\n551:     y: 50,\n552:     criticality: \"medium\",\n553:     floor: \"Hall A\",\n554:     zone: \"Compute Row A\",\n555:     dependsOn: [\"crah-a-04\", \"pdu-b\"],\n556:     telemetry: [{ metric: \"Inlet Temp\", value: 20.9, unit: \"°C\", trend: \"stable\" }],\n557:   },\n558:   {\n559:     id: \"rack-a08\",\n560:     name: \"RACK-A08\",\n561:     type: \"Compute\",\n562:     status: \"normal\",\n563:     x: 85,\n564:     y: 50,\n565:     criticality: \"medium\",\n566:     floor: \"Hall A\",\n567:     zone: \"Compute Row A\",\n568:     dependsOn: [\"crah-a-04\", \"pdu-b\"],\n569:     telemetry: [{ metric: \"Inlet Temp\", value: 20.7, unit: \"°C\", trend: \"stable\" }],\n570:   },\n571: \n572:   // ── Compute Row B — GPU Pods & Racks ─────────────────────────\n573:   {\n574:     id: \"pod-01\",\n575:     name: \"POD-01\",\n576:     type: \"Compute\",\n577:     status: \"normal\",\n578:     x: 8,\n579:     y: 50,\n580:     criticality: \"high\",\n581:     floor: \"Hall A\",\n582:     zone: \"Compute Row B\",\n583:     dependsOn: [\"crah-a-01\", \"pdu-a\"],\n584:     telemetry: [\n585:       { metric: \"GPU Inlet Temp\", value: 24.1, unit: \"°C\", trend: \"stable\" },\n586:       { metric: \"Power Draw\", value: 142, unit: \"kW\", trend: \"stable\" },\n587:     ],\n588:   },\n589:   {\n590:     id: \"pod-02\",\n591:     name: \"POD-02\",\n592:     type: \"Compute\",\n593:     status: \"normal\",\n594:     x: 24,\n595:     y: 50,\n596:     criticality: \"high\",\n597:     floor: \"Hall A\",\n598:     zone: \"Compute Row B\",\n599:     dependsOn: [\"crah-a-02\", \"pdu-a\"],\n600:     telemetry: [{ metric: \"GPU Inlet Temp\", value: 23.8, unit: \"°C\", trend: \"stable\" }],\n601:   },\n602:   {\n603:     id: \"pod-03\",\n604:     name: \"POD-03\",\n605:     type: \"Compute\",\n606:     status: \"normal\",\n607:     x: 40,\n608:     y: 50,\n609:     criticality: \"medium\",\n610:     floor: \"Hall A\",\n611:     zone: \"Compute Row B\",\n612:     dependsOn: [\"crah-a-03\", \"pdu-b\"],\n613:     telemetry: [{ metric: \"GPU Inlet Temp\", value: 24.3, unit: \"°C\", trend: \"stable\" }],\n614:   },\n615:   {\n616:     id: \"rack-b01\",\n617:     name: \"RACK-B01\",\n618:     type: \"Compute\",\n619:     status: \"normal\",\n620:     x: 58,\n621:     y: 50,\n622:     criticality: \"medium\",\n623:     floor: \"Hall A\",\n624:     zone: \"Compute Row B\",\n625:     dependsOn: [\"crah-a-04\", \"pdu-b\"],\n626:     telemetry: [{ metric: \"Inlet Temp\", value: 21.1, unit: \"°C\", trend: \"stable\" }],\n627:   },\n628:   {\n629:     id: \"rack-b02\",\n630:     name: \"RACK-B02\",\n631:     type: \"Compute\",\n632:     status: \"normal\",\n633:     x: 72,\n634:     y: 50,\n635:     criticality: \"medium\",\n636:     floor: \"Hall A\",\n637:     zone: \"Compute Row B\",\n638:     dependsOn: [\"crah-a-05\", \"pdu-b\"],\n639:     telemetry: [{ metric: \"Inlet Temp\", value: 21.4, unit: \"°C\", trend: \"stable\" }],\n640:   },\n641:   {\n642:     id: \"rack-b03\",\n643:     name: \"RACK-B03\",\n644:     type: \"Compute\",\n645:     status: \"normal\",\n646:     x: 86,\n647:     y: 50,\n648:     criticality: \"medium\",\n649:     floor: \"Hall A\",\n650:     zone: \"Compute Row B\",\n651:     dependsOn: [\"crah-a-05\", \"pdu-b\"],\n652:     telemetry: [{ metric: \"Inlet Temp\", value: 21.7, unit: \"°C\", trend: \"stable\" }],\n653:   },\n654: \n655:   // ── Power & Network A — PDUs & Core Switches ──────────────────\n656:   {\n657:     id: \"pdu-a\",\n658:     name: \"PDU-A\",\n659:     type: \"Power\",\n660:     status: \"normal\",\n661:     x: 12,\n662:     y: 50,\n663:     criticality: \"high\",\n664:     floor: \"Hall A\",\n665:     zone: \"Power & Network A\",\n666:     dependsOn: [\"ups-main\"],\n667:     telemetry: [{ metric: \"Current\", value: 38, unit: \"A\", trend: \"stable\" }],\n668:   },\n669:   {\n670:     id: \"pdu-b\",\n671:     name: \"PDU-B\",\n672:     type: \"Power\",\n673:     status: \"normal\",\n674:     x: 30,\n675:     y: 50,\n676:     criticality: \"high\",\n677:     floor: \"Hall A\",\n678:     zone: \"Power & Network A\",\n679:     dependsOn: [\"ups-main\"],\n680:     telemetry: [{ metric: \"Current\", value: 41, unit: \"A\", trend: \"stable\" }],\n681:   },\n682:   {\n683:     id: \"core-sw-01\",\n684:     name: \"CORE-SW-01\",\n685:     type: \"Network\",\n686:     status: \"normal\",\n687:     x: 60,\n688:     y: 50,\n689:     criticality: \"high\",\n690:     floor: \"Hall A\",\n691:     zone: \"Power & Network A\",\n692:     dependsOn: [\"ups-main\"],\n693:     telemetry: [\n694:       { metric: \"Throughput\", value: 84, unit: \"Gbps\", trend: \"stable\" },\n695:       { metric: \"CPU\", value: 12, unit: \"%\", trend: \"stable\" },\n696:     ],\n697:   },\n698:   {\n699:     id: \"core-sw-02\",\n700:     name: \"CORE-SW-02\",\n701:     type: \"Network\",\n702:     status: \"normal\",\n703:     x: 78,\n704:     y: 50,\n705:     criticality: \"high\",\n706:     floor: \"Hall A\",\n707:     zone: \"Power & Network A\",\n708:     dependsOn: [\"ups-main\"],\n709:     telemetry: [\n710:       { metric: \"Throughput\", value: 71, unit: \"Gbps\", trend: \"stable\" },\n711:       { metric: \"CPU\", value: 9, unit: \"%\", trend: \"stable\" },\n712:     ],\n713:   },\n714: \n715:   // ────────────────────────────────────────────────────────────────\n716:   // FLOOR: Hall B  (F2 – HPC / GPU Cluster)\n717:   // ────────────────────────────────────────────────────────────────\n718: \n719:   // Zone: Cooling Bay B — CRAH units (blast-radius affected)\n720:   // Zone: Compute Row C — GPU pods (blast-radius affected)\n721:   // Zone: Compute Row D — Rack compute\n722:   // Zone: Power & Network B — PDUs & distribution switches\n723: \n724:   // ── Cooling Bay B — CRAH Units (warning: blast radius) ────────\n725:   {\n726:     id: \"crah-b-01\",\n727:     name: \"CRAH-B-01\",\n728:     type: \"Cooling\",\n729:     status: \"warning\",\n730:     x: 12,\n731:     y: 50,\n732:     criticality: \"high\",\n733:     floor: \"Hall B\",\n734:     zone: \"Cooling Bay B\",\n735:     dependsOn: [\"chiller-a-03\", \"pump-chw-03\"],\n736:     telemetry: [\n737:       { metric: \"Supply Air Temp\", value: 21.4, unit: \"°C\", trend: \"up\" },\n738:       { metric: \"Return Air Temp\", value: 29.8, unit: \"°C\", trend: \"up\" },\n739:       { metric: \"Fan Speed\", value: 88, unit: \"%\", trend: \"up\" },\n740:     ],\n741:   },\n742:   {\n743:     id: \"crah-b-02\",\n744:     name: \"CRAH-B-02\",\n745:     type: \"Cooling\",\n746:     status: \"warning\",\n747:     x: 30,\n748:     y: 50,\n749:     criticality: \"high\",\n750:     floor: \"Hall B\",\n751:     zone: \"Cooling Bay B\",\n752:     dependsOn: [\"chiller-a-03\", \"pump-chw-03\"],\n753:     telemetry: [{ metric: \"Supply Air Temp\", value: 22.1, unit: \"°C\", trend: \"up\" }],\n754:   },\n755:   {\n756:     id: \"crah-b-03\",\n757:     name: \"CRAH-B-03\",\n758:     type: \"Cooling\",\n759:     status: \"warning\",\n760:     x: 48,\n761:     y: 50,\n762:     criticality: \"high\",\n763:     floor: \"Hall B\",\n764:     zone: \"Cooling Bay B\",\n765:     dependsOn: [\"chiller-a-03\", \"pump-chw-04\"],\n766:     telemetry: [{ metric: \"Supply Air Temp\", value: 21.9, unit: \"°C\", trend: \"up\" }],\n767:   },\n768:   {\n769:     id: \"crah-b-04\",\n770:     name: \"CRAH-B-04\",\n771:     type: \"Cooling\",\n772:     status: \"warning\",\n773:     x: 66,\n774:     y: 50,\n775:     criticality: \"high\",\n776:     floor: \"Hall B\",\n777:     zone: \"Cooling Bay B\",\n778:     dependsOn: [\"chiller-a-03\", \"pump-chw-04\"],\n779:     telemetry: [{ metric: \"Supply Air Temp\", value: 21.7, unit: \"°C\", trend: \"up\" }],\n780:   },\n781: \n782:   // ── Compute Row C — GPU Pods (warning: blast radius) ──────────\n783:   {\n784:     id: \"pod-04\",\n785:     name: \"POD-04\",\n786:     type: \"Compute\",\n787:     status: \"normal\",\n788:     x: 12,\n789:     y: 50,\n790:     criticality: \"high\",\n791:     floor: \"Hall B\",\n792:     zone: \"Compute Row C\",\n793:     dependsOn: [\"crah-b-01\", \"pdu-c\"],\n794:     telemetry: [{ metric: \"GPU Inlet Temp\", value: 25.2, unit: \"°C\", trend: \"stable\" }],\n795:   },\n796:   {\n797:     id: \"pod-05\",\n798:     name: \"POD-05\",\n799:     type: \"Compute\",\n800:     status: \"warning\",\n801:     x: 32,\n802:     y: 50,\n803:     criticality: \"high\",\n804:     floor: \"Hall B\",\n805:     zone: \"Compute Row C\",\n806:     dependsOn: [\"crah-b-02\", \"pdu-c\"],\n807:     telemetry: [\n808:       { metric: \"GPU Inlet Temp\", value: 28.6, unit: \"°C\", trend: \"up\" },\n809:       { metric: \"Power Draw\", value: 187, unit: \"kW\", trend: \"up\" },\n810:     ],\n811:   },\n812:   {\n813:     id: \"pod-06\",\n814:     name: \"POD-06\",\n815:     type: \"Compute\",\n816:     status: \"warning\",\n817:     x: 52,\n818:     y: 50,\n819:     criticality: \"high\",\n820:     floor: \"Hall B\",\n821:     zone: \"Compute Row C\",\n822:     dependsOn: [\"crah-b-03\", \"pdu-d\"],\n823:     telemetry: [{ metric: \"GPU Inlet Temp\", value: 27.9, unit: \"°C\", trend: \"up\" }],\n824:   },\n825: \n826:   // ── Compute Row D — Rack Compute ──────────────────────────────\n827:   {\n828:     id: \"rack-c01\",\n829:     name: \"RACK-C01\",\n830:     type: \"Compute\",\n831:     status: \"normal\",\n832:     x: 8,\n833:     y: 50,\n834:     criticality: \"medium\",\n835:     floor: \"Hall B\",\n836:     zone: \"Compute Row D\",\n837:     dependsOn: [\"crah-b-04\", \"pdu-c\"],\n838:     telemetry: [{ metric: \"Inlet Temp\", value: 22.3, unit: \"°C\", trend: \"stable\" }],\n839:   },\n840:   {\n841:     id: \"rack-c02\",\n842:     name: \"RACK-C02\",\n843:     type: \"Compute\",\n844:     status: \"normal\",\n845:     x: 22,\n846:     y: 50,\n847:     criticality: \"medium\",\n848:     floor: \"Hall B\",\n849:     zone: \"Compute Row D\",\n850:     dependsOn: [\"crah-b-04\", \"pdu-c\"],\n851:     telemetry: [{ metric: \"Inlet Temp\", value: 22.7, unit: \"°C\", trend: \"stable\" }],\n852:   },\n853:   {\n854:     id: \"rack-c03\",\n855:     name: \"RACK-C03\",\n856:     type: \"Compute\",\n857:     status: \"normal\",\n858:     x: 36,\n859:     y: 50,\n860:     criticality: \"medium\",\n861:     floor: \"Hall B\",\n862:     zone: \"Compute Row D\",\n863:     dependsOn: [\"crah-b-04\", \"pdu-d\"],\n864:     telemetry: [{ metric: \"Inlet Temp\", value: 22.5, unit: \"°C\", trend: \"stable\" }],\n865:   },\n866:   {\n867:     id: \"rack-c04\",\n868:     name: \"RACK-C04\",\n869:     type: \"Compute\",\n870:     status: \"normal\",\n871:     x: 50,\n872:     y: 50,\n873:     criticality: \"medium\",\n874:     floor: \"Hall B\",\n875:     zone: \"Compute Row D\",\n876:     dependsOn: [\"crah-b-04\", \"pdu-d\"],\n877:     telemetry: [{ metric: \"Inlet Temp\", value: 22.1, unit: \"°C\", trend: \"stable\" }],\n878:   },\n879:   {\n880:     id: \"rack-c05\",\n881:     name: \"RACK-C05\",\n882:     type: \"Compute\",\n883:     status: \"normal\",\n884:     x: 64,\n885:     y: 50,\n886:     criticality: \"medium\",\n887:     floor: \"Hall B\",\n888:     zone: \"Compute Row D\",\n889:     dependsOn: [\"crah-b-03\", \"pdu-d\"],\n890:     telemetry: [{ metric: \"Inlet Temp\", value: 21.8, unit: \"°C\", trend: \"stable\" }],\n891:   },\n892:   {\n893:     id: \"rack-c06\",\n894:     name: \"RACK-C06\",\n895:     type: \"Compute\",\n896:     status: \"normal\",\n897:     x: 78,\n898:     y: 50,\n899:     criticality: \"medium\",\n900:     floor: \"Hall B\",\n901:     zone: \"Compute Row D\",\n902:     dependsOn: [\"crah-b-03\", \"pdu-d\"],\n903:     telemetry: [{ metric: \"Inlet Temp\", value: 21.6, unit: \"°C\", trend: \"stable\" }],\n904:   },\n905: \n906:   // ── Power & Network B — PDUs & Distribution Switches ─────────\n907:   {\n908:     id: \"pdu-c\",\n909:     name: \"PDU-C\",\n910:     type: \"Power\",\n911:     status: \"normal\",\n912:     x: 12,\n913:     y: 50,\n914:     criticality: \"high\",\n915:     floor: \"Hall B\",\n916:     zone: \"Power & Network B\",\n917:     dependsOn: [\"ups-backup\"],\n918:     telemetry: [{ metric: \"Current\", value: 44, unit: \"A\", trend: \"stable\" }],\n919:   },\n920:   {\n921:     id: \"pdu-d\",\n922:     name: \"PDU-D\",\n923:     type: \"Power\",\n924:     status: \"normal\",\n925:     x: 30,\n926:     y: 50,\n927:     criticality: \"high\",\n928:     floor: \"Hall B\",\n929:     zone: \"Power & Network B\",\n930:     dependsOn: [\"ups-backup\"],\n931:     telemetry: [{ metric: \"Current\", value: 39, unit: \"A\", trend: \"stable\" }],\n932:   },\n933:   {\n934:     id: \"dist-sw-01\",\n935:     name: \"DIST-SW-01\",\n936:     type: \"Network\",\n937:     status: \"normal\",\n938:     x: 60,\n939:     y: 50,\n940:     criticality: \"high\",\n941:     floor: \"Hall B\",\n942:     zone: \"Power & Network B\",\n943:     dependsOn: [\"core-sw-01\"],\n944:     telemetry: [\n945:       { metric: \"Throughput\", value: 48, unit: \"Gbps\", trend: \"stable\" },\n946:       { metric: \"CPU\", value: 8, unit: \"%\", trend: \"stable\" },\n947:     ],\n948:   },\n949:   {\n950:     id: \"dist-sw-02\",\n951:     name: \"DIST-SW-02\",\n952:     type: \"Network\",\n953:     status: \"normal\",\n954:     x: 78,\n955:     y: 50,\n956:     criticality: \"high\",\n957:     floor: \"Hall B\",\n958:     zone: \"Power & Network B\",\n959:     dependsOn: [\"core-sw-02\"],\n960:     telemetry: [\n961:       { metric: \"Throughput\", value: 41, unit: \"Gbps\", trend: \"stable\" },\n962:       { metric: \"CPU\", value: 7, unit: \"%\", trend: \"stable\" },\n963:     ],\n964:   },\n965: ];\n966: \n967: export const technicians: Technician[] = [\n968:   {\n969:     id: \"t1\",\n970:     name: \"Marcus Chen\",\n971:     avatar: \"MC\",\n972:     status: \"available\",\n973:     certifications: [\"HVAC-R\", \"NFPA-70E\", \"EPA-608\", \"Chiller-Certified\"],\n974:     location: \"On-site Depot\",\n975:     eta: \"8 min\",\n976:   },\n977:   {\n978:     id: \"t2\",\n979:     name: \"Sarah Okafor\",\n980:     avatar: \"SO\",\n981:     status: \"transit\",\n982:     certifications: [\"HVAC-R\", \"CRAC-Certified\", \"BMS\"],\n983:     location: \"4.2 km away\",\n984:     eta: \"14 min\",\n985:   },\n986:   {\n987:     id: \"t3\",\n988:     name: \"Javier Ruiz\",\n989:     avatar: \"JR\",\n990:     status: \"on-site\",\n991:     certifications: [\"NFPA-70E\", \"UPS-Certified\"],\n992:     location: \"Hall B\",\n993:     eta: undefined,\n994:   },\n995: ];\n996: \n997: export const incidents: Incident[] = [\n998:   {\n999:     id: \"inc-001\",\n1000:     assetId: \"chiller-a-03\",\n1001:     severity: \"critical\",\n1002:     detectedAt: \"14:32:18\",\n1003:     prediction:\n1004:       \"Chilled water supply temperature at 11.2°C (+4.1σ above 30-day baseline). Compressor load 97%. Flow rate dropped 39% in 14 min — pattern matches refrigerant loss in 94 prior cases. q50 forecast crosses 12°C threshold in 18 min.\",\n1005:     confidence: 0.94,\n1006:     ttf: 23,\n1007:     blastRadius: [\n1008:       \"pump-chw-03\",\n1009:       \"pump-chw-04\",\n1010:       \"crah-b-01\",\n1011:       \"crah-b-02\",\n1012:       \"crah-b-03\",\n1013:       \"crah-b-04\",\n1014:       \"pod-05\",\n1015:       \"pod-06\",\n1016:     ],\n1017:     recommendedAction:\n1018:       \"Dispatch HVAC-certified technician to inspect CHILLER-A-03 refrigerant circuit and compressor. Activate CHILLER-A-01/02 to absorb Zone B cooling load. PUMP-CHW-03/04 bypass valves to engage standby loop.\",\n1019:     status: \"hitl-pending\",\n1020:   },\n1021: ];\n1022: \n1023: export const jobs: Job[] = [\n1024:   {\n1025:     id: \"job-001\",\n1026:     incidentId: \"inc-001\",\n1027:     technicianId: \"t1\",\n1028:     assetId: \"chiller-a-03\",\n1029:     status: \"on-site\",\n1030:     priority: \"critical\",\n1031:     title: \"CHILLER-A-03 — Refrigerant Circuit Inspection\",\n1032:     description:\n1033:       \"Anomaly detected by Sentinel agent. Triton quantile forecast predicts thermal threshold breach in 18 min (q50). Hephaestus dispatched via RAG→MILP. Inspect refrigerant circuit, CHW pump isolation, compressor motor health.\",\n1034:     steps: [\n1035:       { id: \"s1\", label: \"Confirm site arrival — scan CHILLER-A-03 asset tag\", completed: true },\n1036:       { id: \"s2\", label: \"Verify LOTO applied — electrical and CHW isolation\", completed: true },\n1037:       {\n1038:         id: \"s3\",\n1039:         label: \"Check refrigerant pressure — high-side and low-side gauges\",\n1040:         completed: false,\n1041:       },\n1042:       { id: \"s4\", label: \"Inspect compressor motor amperage draw\", completed: false },\n1043:       { id: \"s5\", label: \"Verify PUMP-CHW-03/04 bypass valve engagement\", completed: false },\n1044:       {\n1045:         id: \"s6\",\n1046:         label: \"Confirm CHILLER-A-01/02 have absorbed Hall B cooling load\",\n1047:         completed: false,\n1048:       },\n1049:       { id: \"s7\", label: \"Log findings — root cause + parts used\", completed: false },\n1050:     ],\n1051:     assignedAt: \"14:34:00\",\n1052:     eta: \"14:42:00\",\n1053:     partsRequired: [\n1054:       \"Refrigerant R-410A (3 lbs)\",\n1055:       \"TXV Expansion Valve (Carrier 38HDC)\",\n1056:       \"Compressor contactor 3P-40A\",\n1057:     ],\n1058:   },\n1059: ];\n1060: \n1061: // Cascade delay in minutes from CHILLER-A-03 failure\n1062: export const cascadeDelays: Record<string, number> = {\n1063:   \"pump-chw-03\": 4,\n1064:   \"pump-chw-04\": 6,\n1065:   \"crah-b-01\": 11,\n1066:   \"crah-b-02\": 12,\n1067:   \"crah-b-03\": 13,\n1068:   \"crah-b-04\": 14,\n1069:   \"pod-05\": 18,\n1070:   \"pod-06\": 22,\n1071: };\n1072: \n1073: // Historical telemetry for CHILLER-A-03 chilled water supply temp\n1074: export const telemetryHistory = Array.from({ length: 48 }, (_, i) => {\n1075:   const anomalyStart = 36;\n1076:   const base = 7.0 + Math.sin(i * 0.25) * 0.4;\n1077:   const anomaly = i > anomalyStart ? (i - anomalyStart) * 0.37 : 0;\n1078:   return {\n1079:     time: `${String(Math.floor(i / 2)).padStart(2, \"0\")}:${i % 2 === 0 ? \"00\" : \"30\"}`,\n1080:     chwTemp: parseFloat((base + anomaly).toFixed(2)),\n1081:     baseline: 7.2,\n1082:     q05: null as number | null,\n1083:     q50: null as number | null,\n1084:     q95: null as number | null,\n1085:   };\n1086: });\n1087: \n1088: // Quantile forecast from LightGBM forecaster\n1089: export const forecastData = [\n1090:   { time: \"now\", actual: 11.2, q05: 11.2, q50: 11.2, q95: 11.2, threshold: 12.0 },\n1091:   { time: \"+5m\", actual: null, q05: 11.1, q50: 11.7, q95: 12.3, threshold: 12.0 },\n1092:   { time: \"+10m\", actual: null, q05: 11.3, q50: 12.0, q95: 12.9, threshold: 12.0 },\n1093:   { time: \"+11m\", actual: null, q05: 11.4, q50: 12.1, q95: 13.1, threshold: 12.0 },\n1094:   { time: \"+15m\", actual: null, q05: 11.6, q50: 12.6, q95: 14.0, threshold: 12.0 },\n1095:   { time: \"+18m\", actual: null, q05: 11.9, q50: 13.2, q95: 14.8, threshold: 12.0 },\n1096:   { time: \"+20m\", actual: null, q05: 12.1, q50: 13.7, q95: 15.6, threshold: 12.0 },\n1097:   { time: \"+25m\", actual: null, q05: 12.4, q50: 14.4, q95: 16.7, threshold: 12.0 },\n1098:   { time: \"+30m\", actual: null, q05: 12.9, q50: 15.3, q95: 17.9, threshold: 12.0 },\n1099: ];\n\n(End of file - total 1099 lines)\n</content>",
+            "metadata": {
+              "preview": "export type AssetStatus = \"normal\" | \"warning\" | \"critical\" | \"offline\";\n\nexport interface Asset {\n  id: string;\n  name: string;\n  type: string;\n  status: AssetStatus;\n  x: number;\n  y: number;\n  criticality: \"high\" | \"medium\" | \"low\";\n  floor: \"Mechanical\" | \"Hall A\" | \"Hall B\";\n  zone: string;\n  telemetry: { metric: string; value: number; unit: string; trend: \"up\" | \"down\" | \"stable\" }[];\n  dependsOn: string[];\n}\n\nexport interface Technician {\n  id: string;\n  name: string;\n  avatar: string;",
+              "truncated": false,
+              "loaded": []
+            },
+            "title": "projects/frontend/src/data/mock.ts",
+            "time": {
+              "start": 1779973643611,
+              "end": 1779973643617
+            }
+          },
+          "id": "prt_e6eb25ce20016CqRF9nhXFeGaO",
+          "sessionID": "ses_1914dc843ffemYYpjLTL3AECz3",
+          "messageID": "msg_e6eb249d3001PDm4kxPDRBQyja"
+        },
+        {
+          "reason": "tool-calls",
+          "snapshot": "d45e4e4178dbb12dfa16b0fa9b6c6e5179ee1d23",
+          "type": "step-finish",
+          "tokens": {
+            "total": 5418,
+            "input": 1,
+            "output": 239,
+            "reasoning": 0,
+            "cache": {
+              "write": 841,
+              "read": 4337
+            }
+          },
+          "cost": 0,
+          "id": "prt_e6eb25dc0001hmieV625aPkOSQ",
+          "sessionID": "ses_1914dc843ffemYYpjLTL3AECz3",
+          "messageID": "msg_e6eb249d3001PDm4kxPDRBQyja"
+        }
+      ]
+    },
+    {
+      "info": {
+        "parentID": "msg_e6eb237c2001i5Ex1fhKQvQe5p",
+        "role": "assistant",
+        "mode": "explore",
+        "agent": "explore",
+        "path": {
+          "cwd": "/Users/pantelis/Desktop/project-atlas",
+          "root": "/Users/pantelis/Desktop/project-atlas"
+        },
+        "cost": 0,
+        "tokens": {
+          "total": 21973,
+          "input": 1,
+          "output": 150,
+          "reasoning": 0,
+          "cache": {
+            "write": 21822,
+            "read": 0
+          }
+        },
+        "modelID": "claude-sonnet-4.6",
+        "providerID": "github-copilot",
+        "time": {
+          "created": 1779973643773,
+          "completed": 1779973648055
+        },
+        "finish": "tool-calls",
+        "id": "msg_e6eb25dfd001euehBQApNE5N7M",
+        "sessionID": "ses_1914dc843ffemYYpjLTL3AECz3"
+      },
+      "parts": [
+        {
+          "snapshot": "d45e4e4178dbb12dfa16b0fa9b6c6e5179ee1d23",
+          "type": "step-start",
+          "id": "prt_e6eb26c660016A5fX23QSQIjlA",
+          "sessionID": "ses_1914dc843ffemYYpjLTL3AECz3",
+          "messageID": "msg_e6eb25dfd001euehBQApNE5N7M"
+        },
+        {
+          "type": "text",
+          "text": "Now read the Sidebar and check for any ops-specific layout wrappers:",
+          "time": {
+            "start": 1779973647464,
+            "end": 1779973647467
+          },
+          "id": "prt_e6eb26c68001SORnirplp7AdNl",
+          "sessionID": "ses_1914dc843ffemYYpjLTL3AECz3",
+          "messageID": "msg_e6eb25dfd001euehBQApNE5N7M"
+        },
+        {
+          "type": "tool",
+          "tool": "read",
+          "callID": "toolu_bdrk_018PnNmWu8SeB97m7DELNfk1",
+          "state": {
+            "status": "completed",
+            "input": {
+              "filePath": "/Users/pantelis/Desktop/project-atlas/projects/frontend/src/components/Sidebar.tsx"
+            },
+            "output": "<path>/Users/pantelis/Desktop/project-atlas/projects/frontend/src/components/Sidebar.tsx</path>\n<type>file</type>\n<content>\n1: import {\n2:   ArrowsClockwise,\n3:   ChartBar,\n4:   ClipboardText,\n5:   Desktop,\n6:   Gear,\n7:   List,\n8:   MagnifyingGlass,\n9:   MapTrifold,\n10:   Microphone,\n11:   Pulse,\n12:   SignOut,\n13:   SquaresFour,\n14:   Users,\n15:   Warning,\n16:   X,\n17: } from \"@phosphor-icons/react\";\n18: import { AnimatePresence, motion } from \"framer-motion\";\n19: import { useEffect } from \"react\";\n20: import { NavLink, useLocation, useNavigate } from \"react-router-dom\";\n21: import { useApp } from \"../store/appStore\";\n22: \n23: const opLinks = [\n24:   { to: \"/ops\", icon: SquaresFour, label: \"Command Center\" },\n25:   { to: \"/ops/floor-plan\", icon: MapTrifold, label: \"Floor Plan\" },\n26:   { to: \"/ops/incidents\", icon: Warning, label: \"Incidents\" },\n27:   { to: \"/ops/import\", icon: ArrowsClockwise, label: \"Import Pipeline\" },\n28:   { to: \"/ops/ingress\", icon: Pulse, label: \"Ingress Data\" },\n29:   { to: \"/ops/assets\", icon: Desktop, label: \"Assets\" },\n30:   { to: \"/ops/query\", icon: MagnifyingGlass, label: \"NL Query\" },\n31:   { to: \"/ops/reports\", icon: ChartBar, label: \"Reports\" },\n32: ];\n33: const supLinks = [\n34:   { to: \"/supervisor\", icon: List, label: \"Approval Inbox\" },\n35:   { to: \"/supervisor/history\", icon: ClipboardText, label: \"History\" },\n36:   { to: \"/supervisor/team\", icon: Users, label: \"Team\" },\n37: ];\n38: const techLinks = [\n39:   { to: \"/tech\", icon: List, label: \"My Jobs\" },\n40:   { to: \"/tech/active\", icon: Microphone, label: \"Active Job\" },\n41:   { to: \"/tech/settings\", icon: Gear, label: \"Settings\" },\n42: ];\n43: \n44: const roleConfig = {\n45:   ops: {\n46:     label: \"Ops Manager\",\n47:     color: \"text-blue-400\",\n48:     dot: \"bg-blue-400\",\n49:     initials: \"OM\",\n50:     name: \"Ops Manager\",\n51:     abbr: \"OPS\",\n52:   },\n53:   supervisor: {\n54:     label: \"Supervisor\",\n55:     color: \"text-amber-400\",\n56:     dot: \"bg-amber-400\",\n57:     initials: \"JR\",\n58:     name: \"J. Rivera\",\n59:     abbr: \"SUP\",\n60:   },\n61:   tech: {\n62:     label: \"Technician\",\n63:     color: \"text-emerald-400\",\n64:     dot: \"bg-emerald-400\",\n65:     initials: \"MC\",\n66:     name: \"Marcus Chen\",\n67:     abbr: \"TECH\",\n68:   },\n69: };\n70: \n71: interface SidebarProps {\n72:   mobileOpen?: boolean;\n73:   onMobileClose?: () => void;\n74: }\n75: \n76: function SidebarContent({ onClose }: { onClose?: () => void }) {\n77:   const { role, setRole } = useApp();\n78:   const navigate = useNavigate();\n79:   const links = role === \"ops\" ? opLinks : role === \"supervisor\" ? supLinks : techLinks;\n80:   const rc = roleConfig[role];\n81: \n82:   function handleNav(path: string) {\n83:     navigate(path);\n84:     onClose?.();\n85:   }\n86: \n87:   return (\n88:     <div className=\"flex flex-col h-full\">\n89:       {/* Brand */}\n90:       <div className=\"px-5 pt-5 pb-4 border-b border-white/[0.05] flex items-center justify-between\">\n91:         <div className=\"flex items-center gap-2.5\">\n92:           <div className=\"w-6 h-6 rounded-lg bg-white flex items-center justify-center flex-shrink-0\">\n93:             <div className=\"w-2.5 h-2.5 bg-black rounded-[3px]\" />\n94:           </div>\n95:           <span className=\"text-[14px] font-semibold tracking-tight\">Atlas</span>\n96:           <span className=\"text-[9px] font-mono text-zinc-700 uppercase tracking-wider ml-1\">\n97:             {rc.abbr}\n98:           </span>\n99:         </div>\n100:         {/* Close button — mobile only */}\n101:         {onClose && (\n102:           <button\n103:             type=\"button\"\n104:             onClick={onClose}\n105:             className=\"md:hidden w-7 h-7 flex items-center justify-center rounded-lg text-zinc-600 hover:text-zinc-300 hover:bg-white/[0.06] transition-colors duration-200\"\n106:           >\n107:             <X size={14} weight=\"light\" />\n108:           </button>\n109:         )}\n110:       </div>\n111: \n112:       {/* Role switcher */}\n113:       <div className=\"px-3 py-3 border-b border-white/[0.05]\">\n114:         <div className=\"p-[1.5px] bg-white/[0.02] rounded-xl ring-1 ring-white/[0.06]\">\n115:           <div className=\"bg-zinc-950 rounded-[10px]\">\n116:             <select\n117:               value={role}\n118:               onChange={(e) => {\n119:                 const r = e.target.value as \"ops\" | \"supervisor\" | \"tech\";\n120:                 setRole(r);\n121:                 handleNav(r === \"ops\" ? \"/ops\" : r === \"supervisor\" ? \"/supervisor\" : \"/tech\");\n122:               }}\n123:               className=\"w-full bg-transparent px-3 py-2.5 text-[12px] font-medium text-zinc-300 focus:outline-none appearance-none cursor-pointer\"\n124:             >\n125:               <option value=\"ops\">Ops Manager</option>\n126:               <option value=\"supervisor\">Supervisor</option>\n127:               <option value=\"tech\">Technician</option>\n128:             </select>\n129:           </div>\n130:         </div>\n131:         <div className=\"flex items-center gap-1.5 px-1 mt-2\">\n132:           <span className={`w-1.5 h-1.5 rounded-full ${rc.dot}`} />\n133:           <span className={`text-[10px] font-medium ${rc.color}`}>{rc.label}</span>\n134:         </div>\n135:       </div>\n136: \n137:       {/* Nav */}\n138:       <nav\n139:         className=\"flex-1 px-2 py-2 space-y-0.5 overflow-y-auto\"\n140:         style={{ scrollbarWidth: \"none\" }}\n141:       >\n142:         {links.map(({ to, icon: Icon, label }) => (\n143:           <NavLink\n144:             key={to}\n145:             to={to}\n146:             end={to === \"/ops\" || to === \"/supervisor\" || to === \"/tech\"}\n147:             onClick={() => onClose?.()}\n148:             className={({ isActive }) =>\n149:               `flex items-center gap-2.5 px-3 py-[9px] rounded-[10px] text-[13px] font-medium transition-all duration-200 ease-[cubic-bezier(0.32,0.72,0,1)] group md:text-[12px] md:py-[7px] ${\n150:                 isActive\n151:                   ? \"bg-white/[0.07] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]\"\n152:                   : \"text-zinc-600 hover:text-zinc-200 hover:bg-white/[0.03]\"\n153:               }`\n154:             }\n155:           >\n156:             {({ isActive }) => (\n157:               <>\n158:                 <Icon\n159:                   size={15}\n160:                   weight={isActive ? \"fill\" : \"light\"}\n161:                   className={isActive ? \"text-white\" : \"text-zinc-600 group-hover:text-zinc-300\"}\n162:                 />\n163:                 {label}\n164:               </>\n165:             )}\n166:           </NavLink>\n167:         ))}\n168:       </nav>\n169: \n170:       {/* User */}\n171:       <div className=\"px-3 pb-4 pt-2 border-t border-white/[0.05]\">\n172:         <div className=\"flex items-center gap-2.5 px-2 py-2\">\n173:           <div className=\"w-7 h-7 rounded-full bg-zinc-800 ring-1 ring-white/[0.08] flex items-center justify-center text-[10px] font-bold text-zinc-300 flex-shrink-0\">\n174:             {rc.initials}\n175:           </div>\n176:           <div className=\"flex-1 min-w-0\">\n177:             <p className=\"text-[12px] font-medium text-zinc-300 truncate\">{rc.name}</p>\n178:             <p className=\"text-[10px] text-zinc-600\">{rc.label}</p>\n179:           </div>\n180:         </div>\n181:         <button\n182:           type=\"button\"\n183:           onClick={() => {\n184:             navigate(\"/\");\n185:             onClose?.();\n186:           }}\n187:           className=\"w-full flex items-center gap-2 px-2 py-2 rounded-[10px] text-[12px] font-medium text-zinc-700 hover:text-zinc-300 hover:bg-white/[0.04] transition-all duration-200 group\"\n188:         >\n189:           <SignOut size={13} weight=\"light\" className=\"group-hover:text-zinc-400\" />\n190:           Sign out\n191:         </button>\n192:       </div>\n193:     </div>\n194:   );\n195: }\n196: \n197: export default function Sidebar({ mobileOpen = false, onMobileClose }: SidebarProps) {\n198:   // Close on route change (mobile)\n199:   const _location = useLocation();\n200:   useEffect(() => {\n201:     onMobileClose?.();\n202:   }, [onMobileClose]);\n203: \n204:   // Lock body scroll when drawer open\n205:   useEffect(() => {\n206:     if (mobileOpen) document.body.style.overflow = \"hidden\";\n207:     else document.body.style.overflow = \"\";\n208:     return () => {\n209:       document.body.style.overflow = \"\";\n210:     };\n211:   }, [mobileOpen]);\n212: \n213:   return (\n214:     <>\n215:       {/* Desktop: static sidebar */}\n216:       <aside className=\"hidden md:flex w-[216px] min-h-screen bg-[#050505] border-r border-white/[0.05] flex-col flex-shrink-0\">\n217:         <SidebarContent />\n218:       </aside>\n219: \n220:       {/* Mobile: slide-in drawer */}\n221:       <AnimatePresence>\n222:         {mobileOpen && (\n223:           <>\n224:             {/* Backdrop */}\n225:             <motion.div\n226:               key=\"backdrop\"\n227:               initial={{ opacity: 0 }}\n228:               animate={{ opacity: 1 }}\n229:               exit={{ opacity: 0 }}\n230:               transition={{ duration: 0.2 }}\n231:               className=\"md:hidden fixed inset-0 z-40 bg-black/60 backdrop-blur-sm\"\n232:               onClick={onMobileClose}\n233:             />\n234:             {/* Drawer */}\n235:             <motion.aside\n236:               key=\"drawer\"\n237:               initial={{ x: \"-100%\" }}\n238:               animate={{ x: 0 }}\n239:               exit={{ x: \"-100%\" }}\n240:               transition={{ duration: 0.28, ease: [0.32, 0.72, 0, 1] }}\n241:               className=\"md:hidden fixed inset-y-0 left-0 z-50 w-[280px] bg-[#070707] border-r border-white/[0.06] flex flex-col\"\n242:             >\n243:               <SidebarContent onClose={onMobileClose} />\n244:             </motion.aside>\n245:           </>\n246:         )}\n247:       </AnimatePresence>\n248:     </>\n249:   );\n250: }\n\n(End of file - total 250 lines)\n</content>",
+            "metadata": {
+              "preview": "import {\n  ArrowsClockwise,\n  ChartBar,\n  ClipboardText,\n  Desktop,\n  Gear,\n  List,\n  MagnifyingGlass,\n  MapTrifold,\n  Microphone,\n  Pulse,\n  SignOut,\n  SquaresFour,\n  Users,\n  Warning,\n  X,\n} from \"@phosphor-icons/react\";\nimport { AnimatePresence, motion } from \"framer-motion\";\nimport { useEffect } from \"react\";\nimport { NavLink, useLocation, useNavigate } from \"react-router-dom\";",
+              "truncated": false,
+              "loaded": []
+            },
+            "title": "projects/frontend/src/components/Sidebar.tsx",
+            "time": {
+              "start": 1779973647927,
+              "end": 1779973647941
+            }
+          },
+          "id": "prt_e6eb26c6c001PW69EKvFZAsWNi",
+          "sessionID": "ses_1914dc843ffemYYpjLTL3AECz3",
+          "messageID": "msg_e6eb25dfd001euehBQApNE5N7M"
+        },
+        {
+          "type": "tool",
+          "tool": "read",
+          "callID": "toolu_bdrk_019pVVFmrerisYiLPBthSMVj",
+          "state": {
+            "status": "completed",
+            "input": {
+              "filePath": "/Users/pantelis/Desktop/project-atlas/projects/frontend/src/pages/ops"
+            },
+            "output": "<path>/Users/pantelis/Desktop/project-atlas/projects/frontend/src/pages/ops</path>\n<type>directory</type>\n<entries>\nAnomalyPanel.tsx\nCommandCenter.tsx\nDispatchPlan.tsx\nFloorPlan.tsx\nImportFlow.tsx\nIncidentQueue.tsx\nIngressViz.tsx\n\n(7 entries)\n</entries>",
+            "metadata": {
+              "preview": "AnomalyPanel.tsx\nCommandCenter.tsx\nDispatchPlan.tsx\nFloorPlan.tsx\nImportFlow.tsx\nIncidentQueue.tsx\nIngressViz.tsx",
+              "truncated": false,
+              "loaded": []
+            },
+            "title": "projects/frontend/src/pages/ops",
+            "time": {
+              "start": 1779973647933,
+              "end": 1779973647937
+            }
+          },
+          "id": "prt_e6eb26e39001z4KqU0s8o3bF5e",
+          "sessionID": "ses_1914dc843ffemYYpjLTL3AECz3",
+          "messageID": "msg_e6eb25dfd001euehBQApNE5N7M"
+        },
+        {
+          "reason": "tool-calls",
+          "snapshot": "d45e4e4178dbb12dfa16b0fa9b6c6e5179ee1d23",
+          "type": "step-finish",
+          "tokens": {
+            "total": 21973,
+            "input": 1,
+            "output": 150,
+            "reasoning": 0,
+            "cache": {
+              "write": 21822,
+              "read": 0
+            }
+          },
+          "cost": 0,
+          "id": "prt_e6eb26e820016og7bvkzEh21kw",
+          "sessionID": "ses_1914dc843ffemYYpjLTL3AECz3",
+          "messageID": "msg_e6eb25dfd001euehBQApNE5N7M"
+        }
+      ]
+    },
+    {
+      "info": {
+        "parentID": "msg_e6eb237c2001i5Ex1fhKQvQe5p",
+        "role": "assistant",
+        "mode": "explore",
+        "agent": "explore",
+        "path": {
+          "cwd": "/Users/pantelis/Desktop/project-atlas",
+          "root": "/Users/pantelis/Desktop/project-atlas"
+        },
+        "cost": 0,
+        "tokens": {
+          "total": 28052,
+          "input": 1,
+          "output": 2469,
+          "reasoning": 0,
+          "cache": {
+            "write": 3760,
+            "read": 21822
+          }
+        },
+        "modelID": "claude-sonnet-4.6",
+        "providerID": "github-copilot",
+        "time": {
+          "created": 1779973648058,
+          "completed": 1779973695714
+        },
+        "finish": "stop",
+        "id": "msg_e6eb26eba001DQR7rmUGIrxVYV",
+        "sessionID": "ses_1914dc843ffemYYpjLTL3AECz3"
+      },
+      "parts": [
+        {
+          "snapshot": "d45e4e4178dbb12dfa16b0fa9b6c6e5179ee1d23",
+          "type": "step-start",
+          "id": "prt_e6eb27e02001wZO6z4kgtoyTYD",
+          "sessionID": "ses_1914dc843ffemYYpjLTL3AECz3",
+          "messageID": "msg_e6eb26eba001DQR7rmUGIrxVYV"
+        },
+        {
+          "type": "text",
+          "text": "Everything is now fully mapped. Here is the complete breakdown:\n\n---\n\n## 1. Route Registrations from App.tsx (lines 83–85)\n\n```tsx\n<Route path=\"/ops/assets\"  element={<Placeholder title=\"Asset Registry\" />} />\n<Route path=\"/ops/query\"   element={<Placeholder title=\"Natural Language Query\" />} />\n<Route path=\"/ops/reports\" element={<Placeholder title=\"Risk Profile Reports\" />} />\n```\n\nAll three routes currently render the same inline `Placeholder` component defined at the bottom of `App.tsx` (lines 104–113):\n\n```tsx\nfunction Placeholder({ title }: { title: string }) {\n  return (\n    <div className=\"flex items-center justify-center h-full min-h-[50dvh]\">\n      <div className=\"text-center\">\n        <p className=\"text-sm font-medium text-zinc-500\">{title}</p>\n        <p className=\"text-xs text-zinc-700 mt-1\">Coming soon</p>\n      </div>\n    </div>\n  );\n}\n```\n\n**There are no dedicated component files for any of these three routes.** The entire pages/ ops directory contains only: `AnomalyPanel.tsx`, `CommandCenter.tsx`, `DispatchPlan.tsx`, `FloorPlan.tsx`, `ImportFlow.tsx`, `IncidentQueue.tsx`, and `IngressViz.tsx`. No `Assets.tsx`, `Query.tsx`, or `Reports.tsx` exist.\n\n---\n\n## 2. Component Files for /ops/assets, /ops/query, /ops/reports\n\n**None exist.** These are stub routes — they do not import any component files and instead share the generic `Placeholder` inline function in `App.tsx`. The titles passed are:\n- `/ops/assets` → `\"Asset Registry\"`\n- `/ops/query` → `\"Natural Language Query\"`\n- `/ops/reports` → `\"Risk Profile Reports\"`\n\n---\n\n## 3. Sidebar/Nav File — `/src/components/Sidebar.tsx` (full content read above)\n\nKey structural points:\n\n**Nav items are defined as three static arrays at the top (lines 23–42):**\n\n```ts\nconst opLinks = [\n  { to: \"/ops\",            icon: SquaresFour,     label: \"Command Center\" },\n  { to: \"/ops/floor-plan\", icon: MapTrifold,       label: \"Floor Plan\" },\n  { to: \"/ops/incidents\",  icon: Warning,          label: \"Incidents\" },\n  { to: \"/ops/import\",     icon: ArrowsClockwise,  label: \"Import Pipeline\" },\n  { to: \"/ops/ingress\",    icon: Pulse,            label: \"Ingress Data\" },\n  { to: \"/ops/assets\",     icon: Desktop,          label: \"Assets\" },       // ← stub\n  { to: \"/ops/query\",      icon: MagnifyingGlass,  label: \"NL Query\" },     // ← stub\n  { to: \"/ops/reports\",    icon: ChartBar,         label: \"Reports\" },      // ← stub\n];\nconst supLinks = [ ... ];  // supervisor links\nconst techLinks = [ ... ]; // tech links\n```\n\n**Link selection** is role-driven (line 79):\n```ts\nconst links = role === \"ops\" ? opLinks : role === \"supervisor\" ? supLinks : techLinks;\n```\n\n**Active state** uses `NavLink` with `end` set only on root paths (`/ops`, `/supervisor`, `/tech`), so child routes like `/ops/assets` match without `end`. Active items get `bg-white/[0.07]` background, filled icon weight, and white text.\n\n**Responsive behavior:**\n- Desktop (`md:`): static `<aside>` at `w-[216px]`, always visible\n- Mobile: slide-in drawer triggered by `MobileHeader`'s hamburger button in `App.tsx`; uses `framer-motion` for `x: \"-100%\"` → `x: 0` animation with a backdrop overlay\n\nIcons are from `@phosphor-icons/react`.\n\n---\n\n## 4. Layout Wrapper for /ops\n\n**There is no dedicated layout component for `/ops`.** The layout is applied directly in `App.tsx`'s `AppRoutes` function (lines 68–101):\n\n```tsx\n<div className=\"flex h-[100dvh] overflow-hidden bg-[#050505]\">\n  <Sidebar mobileOpen={drawerOpen} onMobileClose={() => setDrawerOpen(false)} />\n\n  <div className=\"flex-1 flex flex-col min-w-0 overflow-hidden\">\n    <MobileHeader onOpen={() => setDrawerOpen(true)} />\n\n    <main className=\"flex-1 overflow-y-auto overflow-x-hidden min-h-0\">\n      <Routes>\n        {/* all /ops routes render directly inside this <main> */}\n      </Routes>\n    </main>\n  </div>\n</div>\n```\n\nAll `/ops/*` routes render directly into this `<main>` scroll container. There is no React Router `<Outlet>`-based nested layout — each page component is fully responsible for its own internal padding and structure.\n\n---\n\n## 5. Data Available in `src/data/mock.ts`\n\n### `assets: Asset[]` — 58 assets total across 3 floors\n\n**Structure:**\n```ts\ninterface Asset {\n  id: string;          // e.g. \"chiller-a-03\", \"rack-a01\"\n  name: string;        // e.g. \"CHILLER-A-03\", \"RACK-A01\"\n  type: string;        // \"Power\" | \"Cooling\" | \"Compute\" | \"Network\"\n  status: \"normal\" | \"warning\" | \"critical\" | \"offline\";\n  x: number;           // floor-plan percentage position\n  y: number;\n  criticality: \"high\" | \"medium\" | \"low\";\n  floor: \"Mechanical\" | \"Hall A\" | \"Hall B\";\n  zone: string;        // e.g. \"Electrical\", \"Chiller Plant\", \"Cooling Bay A\"\n  telemetry: { metric: string; value: number; unit: string; trend: \"up\"|\"down\"|\"stable\" }[];\n  dependsOn: string[]; // IDs of upstream assets\n}\n```\n\n**By floor and zone:**\n| Floor | Zones | Notable |\n|---|---|---|\n| Mechanical | Electrical, Backup Power, Chiller Plant | `chiller-a-03` is **critical**, `pump-chw-03/04` are **warning** |\n| Hall A | Cooling Bay A, Compute Row A, Compute Row B, Power & Network A | All normal |\n| Hall B | Cooling Bay B, Compute Row C, Compute Row D, Power & Network B | `crah-b-01..04` and `pod-05/06` are **warning** (blast radius) |\n\n### `incidents: Incident[]` — 1 incident\n```ts\ninterface Incident {\n  id: string;           // \"inc-001\"\n  assetId: string;      // \"chiller-a-03\"\n  severity: \"critical\" | \"high\" | \"medium\";\n  detectedAt: string;   // \"14:32:18\"\n  prediction: string;   // full narrative text\n  confidence: number;   // 0.94\n  ttf: number;          // 23 (minutes to failure)\n  blastRadius: string[];// 8 downstream asset IDs\n  recommendedAction: string;\n  status: \"open\" | \"dispatched\" | \"hitl-pending\" | \"resolved\"; // currently \"hitl-pending\"\n}\n```\n\n### `technicians: Technician[]` — 3 technicians\n| id | Name | Status | Certifications |\n|---|---|---|---|\n| t1 | Marcus Chen | available | HVAC-R, NFPA-70E, EPA-608, Chiller-Certified |\n| t2 | Sarah Okafor | transit | HVAC-R, CRAC-Certified, BMS |\n| t3 | Javier Ruiz | on-site | NFPA-70E, UPS-Certified |\n\n### `jobs: Job[]` — 1 job\n```ts\ninterface Job {\n  id: string;           // \"job-001\"\n  incidentId: string;   // \"inc-001\"\n  technicianId: string; // \"t1\" (Marcus Chen)\n  assetId: string;      // \"chiller-a-03\"\n  status: \"assigned\" | \"en-route\" | \"on-site\" | \"closed\";  // currently \"on-site\"\n  priority: \"critical\" | \"high\" | \"medium\";\n  title: string;\n  description: string;\n  steps: { id: string; label: string; completed: boolean }[]; // 7 steps, 2 completed\n  assignedAt: string;   // \"14:34:00\"\n  eta: string;          // \"14:42:00\"\n  partsRequired: string[];\n}\n```\n\n### Additional exports\n- `cascadeDelays: Record<string, number>` — minutes from `chiller-a-03` failure until each downstream asset is affected (4–22 min range)\n- `telemetryHistory` — 48 data points of CHW supply temp (30-min intervals) for `chiller-a-03`, with an anomaly starting at index 36\n- `forecastData` — 9 quantile forecast points (q05/q50/q95) from \"now\" to \"+30m\", with a `12.0°C` threshold line\n\n---\n\n**Summary for the three target routes:** `/ops/assets`, `/ops/query`, and `/ops/reports` are all unimplemented stubs. No dedicated page files exist — they render a simple \"Coming soon\" placeholder directly from `App.tsx`. The sidebar does list all three as nav items (Desktop icon, Magnifying glass icon, Bar chart icon respectively). The layout wrapper is `AppRoutes` in `App.tsx` itself — a flex container with the `Sidebar` + a `<main>` scroll area, with no nested React Router layout component.",
+          "time": {
+            "start": 1779973651971,
+            "end": 1779973695585
+          },
+          "id": "prt_e6eb27e03002FlgNZcMc5Y3tTn",
+          "sessionID": "ses_1914dc843ffemYYpjLTL3AECz3",
+          "messageID": "msg_e6eb26eba001DQR7rmUGIrxVYV"
+        },
+        {
+          "reason": "stop",
+          "snapshot": "d45e4e4178dbb12dfa16b0fa9b6c6e5179ee1d23",
+          "type": "step-finish",
+          "tokens": {
+            "total": 28052,
+            "input": 1,
+            "output": 2469,
+            "reasoning": 0,
+            "cache": {
+              "write": 3760,
+              "read": 21822
+            }
+          },
+          "cost": 0,
+          "id": "prt_e6eb328a3001VvNMtUBwyOH41p",
+          "sessionID": "ses_1914dc843ffemYYpjLTL3AECz3",
+          "messageID": "msg_e6eb26eba001DQR7rmUGIrxVYV"
+        }
+      ]
+    }
+  ]
+}

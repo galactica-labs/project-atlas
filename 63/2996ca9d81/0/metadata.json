@@ -1,0 +1,68 @@
+{
+  "cli_version": "0.6.3",
+  "checkpoint_id": "632996ca9d81",
+  "session_id": "ses_1914dc843ffemYYpjLTL3AECz3",
+  "strategy": "manual-commit",
+  "created_at": "2026-05-28T13:22:58.919794Z",
+  "branch": "main",
+  "checkpoints_count": 1,
+  "files_touched": [
+    "projects/frontend/src/components/ops/CommandCenterZoneView.tsx",
+    "projects/frontend/src/pages/ops/AnomalyPanel.tsx",
+    "projects/frontend/src/pages/ops/CommandCenter.tsx",
+    "projects/frontend/src/pages/ops/FloorPlan.tsx"
+  ],
+  "agent": "OpenCode",
+  "model": "claude-sonnet-4.6",
+  "turn_id": "5eb1c3e45da3",
+  "token_usage": {
+    "input_tokens": 6,
+    "cache_creation_tokens": 30760,
+    "cache_read_tokens": 26159,
+    "output_tokens": 3031,
+    "api_call_count": 4
+  },
+  "session_metrics": {
+    "turn_count": 1
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-05-28T13:22:58.915401Z",
+    "agent_lines": 0,
+    "agent_removed": 0,
+    "human_added": 1564,
+    "human_modified": 729,
+    "human_removed": 0,
+    "total_committed": 1564,
+    "total_lines_changed": 2293,
+    "agent_percentage": 0,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 666,
+      "user_lines_removed": 718,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0,
+      "user_added_per_file": {
+        "projects/frontend/src/components/ops/CommandCenterZoneView.tsx": 229,
+        "projects/frontend/src/pages/ops/AnomalyPanel.tsx": 223,
+        "projects/frontend/src/pages/ops/CommandCenter.tsx": 212,
+        "projects/frontend/src/pages/ops/FloorPlan.tsx": 2
+      },
+      "user_removed_per_file": {
+        "projects/frontend/src/components/ops/CommandCenterZoneView.tsx": 281,
+        "projects/frontend/src/pages/ops/AnomalyPanel.tsx": 174,
+        "projects/frontend/src/pages/ops/CommandCenter.tsx": 111,
+        "projects/frontend/src/pages/ops/FloorPlan.tsx": 152
+      }
+    },
+    {
+      "checkpoint_number": 2,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 666,
+      "agent_lines_removed": 718
+    }
+  ]
+}

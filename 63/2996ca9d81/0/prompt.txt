@@ -1,0 +1,12 @@
+In the project at /Users/pantelis/Desktop/project-atlas/projects/frontend/src, find the files for these three routes:
+- /ops/assets
+- /ops/query  
+- /ops/reports
+
+Check App.tsx for where they're registered, find the actual component files, read their full content, and also check how the sidebar/nav works (what file defines the nav items and how pages are laid out). Return:
+1. The route registrations from App.tsx
+2. Full content of the assets, query, and reports component files
+3. Full content of the sidebar/nav file
+4. The layout wrapper for /ops if any
+
+Also look at src/data/mock.ts to understand what data is available (assets array structure, incidents, jobs, technicians).
