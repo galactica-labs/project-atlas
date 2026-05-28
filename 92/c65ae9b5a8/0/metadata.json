@@ -1,0 +1,46 @@
+{
+  "cli_version": "0.6.3",
+  "checkpoint_id": "92c65ae9b5a8",
+  "session_id": "ses_190c8ffbfffei1KPJTro7tb7bH",
+  "strategy": "manual-commit",
+  "created_at": "2026-05-28T15:53:59.710851Z",
+  "branch": "main",
+  "checkpoints_count": 1,
+  "files_touched": [
+    "README.md"
+  ],
+  "agent": "OpenCode",
+  "model": "gemini-3.5-flash",
+  "turn_id": "d3f1e95f3cbe",
+  "token_usage": {
+    "input_tokens": 238039,
+    "cache_creation_tokens": 0,
+    "cache_read_tokens": 567996,
+    "output_tokens": 3406,
+    "api_call_count": 26
+  },
+  "session_metrics": {
+    "turn_count": 1
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-05-28T15:53:59.706823Z",
+    "agent_lines": 155,
+    "agent_removed": 64,
+    "human_added": 0,
+    "human_modified": 0,
+    "human_removed": 0,
+    "total_committed": 155,
+    "total_lines_changed": 219,
+    "agent_percentage": 100,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0
+    }
+  ]
+}

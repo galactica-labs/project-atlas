@@ -1,0 +1,1 @@
+Analyze the project structure, check out the scopes and create a detailed readme.md that clarifies the scope of the project.
